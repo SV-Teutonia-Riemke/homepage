@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "module": "esnext",
+        "target": "esnext",
+        "allowJs": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "strict": true,
+        "baseUrl": "./assets/",
+        "typeRoots": [
+            "./assets/ts/typings",
+            "./node_modules/@types",
+        ],
+        "paths": {
+            "public/*": [
+                "../public/*"
+            ],
+            "vendor/*": [
+                "../vendor/*"
+            ],
+        }
+    },
+    "exclude": [
+        "public",
+        "vendor",
+    ]
+}
