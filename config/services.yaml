@@ -7,5 +7,8 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            - '../src/Storage/Entity/'
             - '../src/Kernel.php'
+
+    StellaMaris\Clock\ClockInterface:
+        factory: '@App\Infrastructure\Clock\ClockFactory'

@@ -966,6 +966,11 @@
     error-stack-parser "^2.0.0"
     string-width "^4.2.3"
 
+"@popperjs/core@^2.11.2":
+  version "2.11.5"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.5.tgz#db5a11bf66bdab39569719555b0f76e138d7bd64"
+  integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
+
 "@symfony/webpack-encore@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@symfony/webpack-encore/-/webpack-encore-3.0.0.tgz#e3ee8d8258e6412b0adbce471e3ae35acc3b9236"
@@ -995,6 +1000,20 @@
     webpack-cli "^4.9.1"
     webpack-dev-server "^4.8.0"
     yargs-parser "^21.0.0"
+
+"@tabler/core@^1.0.0-beta9":
+  version "1.0.0-beta9"
+  resolved "https://registry.yarnpkg.com/@tabler/core/-/core-1.0.0-beta9.tgz#5ec33675a63bf8eb562b8d7ff26684e6e53d869b"
+  integrity sha512-4+QYkL+s0IXZUlJc6oNpugVIFgwXOW5HfcxSO08SKCIaa8uGBZ9OqFq5duX+IpG/PWKroEnIQO8XAGELigvK7A==
+  dependencies:
+    "@popperjs/core" "^2.11.2"
+    "@tabler/icons" "^1.53.0"
+    bootstrap "5.1.3"
+
+"@tabler/icons@^1.53.0":
+  version "1.76.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.76.0.tgz#b47d44c1be0884bd0303d6b6830e087a474d8f7b"
+  integrity sha512-MEN8cWpnYoY0BcPgrtwnkA+U3y5uP6haMqsX1jq5xbej9KZK9EnWc+J2Xi3X3y5HUtTsSeQry+qEOxCzrxw9EQ==
 
 "@trysound/sax@0.2.0":
   version "0.2.0"
@@ -1524,6 +1543,11 @@ boolbase@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
+
+bootstrap@5.1.3:
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.1.3.tgz#ba081b0c130f810fa70900acbc1c6d3c28fa8f34"
+  integrity sha512-fcQztozJ8jToQWXxVuEyXWW+dSo8AiXWKwiSSrKWsRB/Qt+Ewwza+JWoLKiTuQLaEPhdNAJ7+Dosc9DOIqNy7Q==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
