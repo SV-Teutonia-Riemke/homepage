@@ -61,6 +61,18 @@
             "tests/bootstrap.php"
         ]
     },
+    "sensio/framework-extra-bundle": {
+        "version": "6.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.2",
+            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
+        },
+        "files": [
+            "config/packages/sensio_framework_extra.yaml"
+        ]
+    },
     "shapecode/doctrine-session-handler-bundle": {
         "version": "5.1.0"
     },
@@ -72,6 +84,18 @@
             "version": "3.6",
             "ref": "1019e5c08d4821cb9b77f4891f8e9c31ff20ac6f"
         }
+    },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "9d254a22efca7264203eea98b866f16f944b2f09"
+        },
+        "files": [
+            "public/.htaccess"
+        ]
     },
     "symfony/console": {
         "version": "6.1",
@@ -150,6 +174,18 @@
             "config/routes.yaml"
         ]
     },
+    "symfony/security-bundle": {
+        "version": "6.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "6.0",
+            "ref": "8a5b112826f7d3d5b07027f93786ae11a1c7de48"
+        },
+        "files": [
+            "config/packages/security.yaml"
+        ]
+    },
     "symfony/translation": {
         "version": "6.1",
         "recipe": {
@@ -174,6 +210,18 @@
         "files": [
             "config/packages/twig.yaml",
             "templates/base.html.twig"
+        ]
+    },
+    "symfony/validator": {
+        "version": "6.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "c32cfd98f714894c4f128bb99aa2530c1227603c"
+        },
+        "files": [
+            "config/packages/validator.yaml"
         ]
     },
     "symfony/webpack-encore-bundle": {

@@ -9,3 +9,8 @@ member:
 admin:
     resource: ../src/Module/Admin/Controller/
     type: attribute
+    prefix: admin
+
+app_admin_logout:
+    path: /admin/logout
+    methods: GET

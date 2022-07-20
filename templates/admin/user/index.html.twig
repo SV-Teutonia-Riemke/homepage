@@ -1,0 +1,64 @@
+{% extends 'admin/_layout/layout.html.twig' %}
+
+{% set pagePreTitle = 'List' %}
+{% set pageTitle = 'Users' %}
+
+{% block pageTitleActionsButtons %}
+    <a class="btn btn-primary" href="{{ path('app_admin_user_create') }}">Create</a>
+{% endblock %}
+
+{% block pageBody %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Users</h3>
+        </div>
+        <table class="table card-table table-vcenter text-nowrap">
+            <thead>
+            <tr>
+                <th class="w-1">Id</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td class="text-end">
+                        <div class="btn-group btn-group-sm">
+                            <a class="btn btn-primary" href="{{ path('app_admin_user_edit', { user: user.id }) }}">
+                                <span class="iconify" data-icon="fa6-solid:pencil"></span>
+                            </a>
+                            <a class="btn btn-danger" href="{{ path('app_admin_user_remove', { user: user.id }) }}">
+                                <span class="iconify" data-icon="fa6-solid:trash"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="card-footer d-flex align-items-center">
+            <ul class="pagination m-0 ms-auto">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                        <span class="iconify-inline" data-icon="fa6-solid:chevron-left"></span>
+                        prev
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">
+                        next
+                        <span class="iconify-inline" data-icon="fa6-solid:chevron-right"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
