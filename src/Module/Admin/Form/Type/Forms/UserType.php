@@ -18,17 +18,9 @@ final class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'required'    => false,
                 'constraints' => [
                     new NotBlank(),
                 ],
-                'setter'      => static function (User $user, ?string $email): void {
-                    if ($email === null) {
-                        return;
-                    }
-
-                    $user->setEmail($email);
-                },
             ]);
     }
 

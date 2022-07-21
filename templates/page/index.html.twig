@@ -4,27 +4,14 @@
     <div class="row row-cards">
         <div class="col-lg-9">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">Spielplanerstellung</div>
+                {% for article in articles %}
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">{{ article.title }}</div>
+                        </div>
+                        <div class="card-body">{{ article.content|raw }}</div>
                     </div>
-                    <div class="card-body">
-                        Wir suchen zum nächstmöglichen Zeitpunkt eine ehrenamtliche Stellvertretung in der Spielplanerstellung und Spielverlegung für den Spielbetrieb!
-
-                        Du brauchst keine Vorkenntnisse und wirst Schritt für Schritt angelernt. Zu deinen Aufgaben gehören das Erstellen von Spielplänen und die dazugehörige Buchung von Hallenzeiten im Austausch mit der Stadt. Außerdem sorgst du für das Durchführen und Koordinieren von Spielverlegungen mit den jeweiligen Mannschaftsverantwortlichen und Vereinen sowie Schiedsrichtern.📝
-
-                        In der Regel umfasst der Arbeitsaufwand für das Erstellen der Spielpläne ca. 8-10 Stunden vor der Saison und während des Spielbetriebs kommt es zu einer Hand voll Verlegungen.👩🏻‍💻
-
-                        Corona hat uns allerdings gezeigt, dass der Aufwand sich schnell verdoppeln kann, weshalb wir unser Team nun mit dir verstärken und für alle Vorkommnisse wappnen wollen!💪🏻
-
-                        Wenn du Interesse hast in einem dynamischen Team ehrenamtlich tätig zu werden und Spaß an Organisation und Sport hast, melde dich gerne unter der folgenden Emailadresse oder direkt an unsere Social-Media Profile:
-
-                        info@teutonia-riemke.de
-
-                        Wir freuen uns auf dich!🥳
-                        (Stand 18.07.2022)
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="col-md-3">

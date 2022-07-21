@@ -1,36 +1,36 @@
 {% extends 'admin/_layout/layout.html.twig' %}
 
 {% set pagePreTitle = 'List' %}
-{% set pageTitle = 'User' %}
+{% set pageTitle = 'Article' %}
 
 {% block pageTitleActionsButtons %}
-    <a class="btn btn-primary" href="{{ path('app_admin_user_create') }}">Create</a>
+    <a class="btn btn-primary" href="{{ path('app_admin_article_create') }}">Create</a>
 {% endblock %}
 
 {% block pageBody %}
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Users</h3>
+            <h3 class="card-title">Articles</h3>
         </div>
         <table class="table card-table table-vcenter text-nowrap">
             <thead>
             <tr>
                 <th class="w-1">Id</th>
-                <th>Email</th>
+                <th>Title</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-            {% for user in users %}
+            {% for object in pagination %}
                 <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.email }}</td>
+                    <td>{{ object.id }}</td>
+                    <td>{{ object.title }}</td>
                     <td class="text-end">
                         <div class="btn-group btn-group-sm">
-                            <a class="btn btn-primary" href="{{ path('app_admin_user_edit', { user: user.id }) }}">
+                            <a class="btn btn-primary" href="{{ path('app_admin_article_edit', { article: object.id }) }}">
                                 <span class="iconify" data-icon="fa6-solid:pencil"></span>
                             </a>
-                            <a class="btn btn-danger" href="{{ path('app_admin_user_remove', { user: user.id }) }}">
+                            <a class="btn btn-danger" href="{{ path('app_admin_article_remove', { article: object.id }) }}">
                                 <span class="iconify" data-icon="fa6-solid:trash"></span>
                             </a>
                         </div>
