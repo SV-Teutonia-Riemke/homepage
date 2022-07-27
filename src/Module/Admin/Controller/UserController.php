@@ -8,6 +8,7 @@ use App\Module\Admin\Form\Type\Forms\UserType;
 use App\Storage\Entity\User;
 use App\Storage\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,14 +24,18 @@ final class UserController extends AbstractController
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly EntityManagerInterface $entityManager,
+        private readonly PaginatorInterface $paginator,
     ) {
     }
 
     #[Route('', name: 'index')]
     public function index(): Response
     {
+        $query      = $this->userRepository->createQueryBuilder('p');
+        $pagination = $this->paginator->paginate($query);
+
         return $this->render('admin/user/index.html.twig', [
-            'users' => $this->userRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 

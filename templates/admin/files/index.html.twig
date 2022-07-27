@@ -1,0 +1,67 @@
+{% extends 'admin/_layout/layout.html.twig' %}
+
+{% set pagePreTitle = 'List' %}
+{% set pageTitle = 'Files' %}
+
+{% block pageTitleActionsButtons %}
+    <a class="btn btn-primary" href="{{ path('app_admin_files_directory_create') }}">Create directory</a>
+    <a class="btn btn-primary" href="{{ path('app_admin_user_create') }}">Upload file</a>
+{% endblock %}
+
+{% block pageBody %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <span class="badge">{{ directories|length + files|length }}</span>
+                Files
+            </h3>
+        </div>
+        <table class="table card-table table-vcenter text-nowrap">
+            <thead>
+            <tr>
+                <th class="w-1">Id</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for directory in directories %}
+                <tr>
+                    <td>{{ directory.id }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_files_directory', { directory: directory.id }) }}">
+                            {{ directory.name }}
+                        </a>
+                    </td>
+                    <td class="text-end">
+                        <div class="btn-group btn-group-sm">
+                            <a class="btn btn-primary" href="{{ path('app_admin_user_edit', { user: directory.id }) }}">
+                                <span class="iconify" data-icon="fa6-solid:pencil"></span>
+                            </a>
+                            <a class="btn btn-danger" href="{{ path('app_admin_files_directory_remove', { directory: directory.id }) }}">
+                                <span class="iconify" data-icon="fa6-solid:trash"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% for file in files %}
+                <tr>
+                    <td>{{ file.id }}</td>
+                    <td>{{ file.name }}</td>
+                    <td class="text-end">
+                        <div class="btn-group btn-group-sm">
+                            <a class="btn btn-primary" href="{{ path('app_admin_user_edit', { user: file.id }) }}">
+                                <span class="iconify" data-icon="fa6-solid:pencil"></span>
+                            </a>
+                            <a class="btn btn-danger" href="{{ path('app_admin_user_remove', { user: file.id }) }}">
+                                <span class="iconify" data-icon="fa6-solid:trash"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

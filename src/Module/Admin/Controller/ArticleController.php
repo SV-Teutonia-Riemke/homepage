@@ -8,6 +8,7 @@ use App\Module\Admin\Form\Type\Forms\ArticleType;
 use App\Storage\Entity\Article;
 use App\Storage\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,14 +24,18 @@ final class ArticleController extends AbstractController
     public function __construct(
         private readonly ArticleRepository $articleRepository,
         private readonly EntityManagerInterface $entityManager,
+        private readonly PaginatorInterface $paginator,
     ) {
     }
 
     #[Route('', name: 'index')]
     public function index(): Response
     {
+        $query      = $this->articleRepository->createQueryBuilder('p');
+        $pagination = $this->paginator->paginate($query);
+
         return $this->render('admin/article/index.html.twig', [
-            'pagination' => $this->articleRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 
