@@ -3,7 +3,7 @@ oneup_flysystem:
     adapters:
         default_adapter:
             local:
-                location: '%kernel.project_dir%%/var/flysystem'
+                location: '%kernel.project_dir%/var/flysystem'
 
     filesystems:
         default_filesystem:

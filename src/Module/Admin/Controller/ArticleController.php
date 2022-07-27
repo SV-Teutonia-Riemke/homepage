@@ -55,8 +55,8 @@ final class ArticleController extends AbstractController
             return $this->redirectToRoute('app_admin_article_index');
         }
 
-        return $this->render('admin/article/create.html.twig', [
-            'form' => $form->createView(),
+        return $this->renderForm('admin/article/create.html.twig', [
+            'form' => $form,
         ]);
     }
 
@@ -73,8 +73,8 @@ final class ArticleController extends AbstractController
             return $this->redirectToRoute('app_admin_article_index');
         }
 
-        return $this->render('admin/article/edit.html.twig', [
-            'form' => $form->createView(),
+        return $this->renderForm('admin/article/edit.html.twig', [
+            'form' => $form,
         ]);
     }
 

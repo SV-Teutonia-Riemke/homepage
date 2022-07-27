@@ -1,0 +1,16 @@
+{% extends 'admin/_layout/simple_form.html.twig' %}
+
+{% set pagePreTitle = 'Upload' %}
+{% set pageTitle = 'Files' %}
+{% set formCancelLink = path('app_admin_files_index') %}
+
+{% block pageBody %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Upload</h3>
+        </div>
+        <div class="card-body">
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}

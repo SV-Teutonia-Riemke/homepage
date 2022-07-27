@@ -55,8 +55,8 @@ final class UserController extends AbstractController
             return $this->redirectToRoute('app_admin_user_index');
         }
 
-        return $this->render('admin/user/create.html.twig', [
-            'form' => $form->createView(),
+        return $this->renderForm('admin/user/create.html.twig', [
+            'form' => $form,
         ]);
     }
 
@@ -73,8 +73,8 @@ final class UserController extends AbstractController
             return $this->redirectToRoute('app_admin_user_index');
         }
 
-        return $this->render('admin/user/edit.html.twig', [
-            'form' => $form->createView(),
+        return $this->renderForm('admin/user/edit.html.twig', [
+            'form' => $form,
         ]);
     }
 
