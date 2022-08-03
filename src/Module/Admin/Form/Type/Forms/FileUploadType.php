@@ -10,7 +10,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class FileUploadType extends AbstractType
 {
@@ -18,10 +17,8 @@ final class FileUploadType extends AbstractType
     {
         $builder
             ->add('directory', EntityType::class, [
-                'class'       => Directory::class,
-                'constraints' => [
-                    new NotBlank(),
-                ],
+                'class'    => Directory::class,
+                'required' => false,
             ])
             ->add('file', FileType::class, [
                 'label'       => 'File',

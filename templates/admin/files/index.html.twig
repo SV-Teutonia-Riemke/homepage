@@ -49,11 +49,11 @@
                     </td>
                     <td class="text-end">
                         <div class="btn-group btn-group-sm">
-                            <a class="btn btn-primary" href="{{ path('app_admin_files_directory_edit', { directory: directory.id }) }}">
-                                <span class="iconify" data-icon="fa6-solid:pencil"></span>
+                            <a class="btn btn-outline-primary" href="{{ path('app_admin_files_directory_edit', { directory: directory.id }) }}">
+                                <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
                             </a>
-                            <a class="btn btn-danger" href="{{ path('app_admin_files_directory_remove', { directory: directory.id }) }}">
-                                <span class="iconify" data-icon="fa6-solid:trash"></span>
+                            <a class="btn btn-outline-danger" href="{{ path('app_admin_files_directory_remove', { directory: directory.id }) }}">
+                                <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
                             </a>
                         </div>
                     </td>
@@ -64,14 +64,17 @@
                     <td>{{ file }}</td>
                     <td class="text-end">
                         <div class="btn-group btn-group-sm">
-                            <a class="btn btn-primary" href="{{ path('app_file', { uuid: file.uuid, extension: file.extension }) }}" target="_blank">
-                                <span class="iconify" data-icon="fa6-solid:arrow-up-right-from-square"></span>
+                            <span class="btn btn-outline-primary copy-to-clipboard" data-clipboard-text="{{ url('app_file', { uuid: file.uuid, extension: file.extension }) }}">
+                                <span class="iconify-inline" data-icon="fa6-solid:copy"></span>
+                            </span>
+                            <a class="btn btn-outline-primary" href="{{ path('app_file', { uuid: file.uuid, extension: file.extension }) }}" target="_blank">
+                                <span class="iconify-inline" data-icon="fa6-solid:arrow-up-right-from-square"></span>
                             </a>
-                            <a class="btn btn-primary" href="{{ path('app_admin_user_edit', { user: file.id }) }}">
-                                <span class="iconify" data-icon="fa6-solid:pencil"></span>
+                            <a class="btn btn-outline-primary" href="{{ path('app_admin_user_edit', { user: file.id }) }}">
+                                <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
                             </a>
-                            <a class="btn btn-danger" href="{{ path('app_admin_files_file_remove', { file: file.id }) }}">
-                                <span class="iconify" data-icon="fa6-solid:trash"></span>
+                            <a class="btn btn-outline-danger" href="{{ path('app_admin_files_file_remove', { file: file.id }) }}">
+                                <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
                             </a>
                         </div>
                     </td>

@@ -5,8 +5,8 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href=".">
-                {#                        <span class="iconify" data-icon="tabler:brand-tabler"></span> #}
-                <img src="https://preview.tabler.io/static/logo-white.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                {#                        <span class="iconify-inline" data-icon="tabler:brand-tabler"></span> #}
+                <img src="{{ asset('build/images/logo.png') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </h1>
         <div class="collapse navbar-collapse" id="navbar-menu">
@@ -15,9 +15,41 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_index') }}">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <span class="iconify" data-icon="tabler:home"></span>
+                                <span class="iconify-inline" data-icon="tabler:home"></span>
                             </span>
                             <span class="nav-link-title">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_index') }}">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <span class="iconify-inline" data-icon="tabler:home"></span>
+                            </span>
+                            <span class="nav-link-title">Senioren</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_index') }}">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <span class="iconify-inline" data-icon="tabler:home"></span>
+                            </span>
+                            <span class="nav-link-title">Junioren</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_index') }}">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <span class="iconify-inline" data-icon="tabler:home"></span>
+                            </span>
+                            <span class="nav-link-title">Sponsoren</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_index') }}">
+                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                <span class="iconify-inline" data-icon="tabler:home"></span>
+                            </span>
+                            <span class="nav-link-title">Infos</span>
                         </a>
                     </li>
                 </ul>

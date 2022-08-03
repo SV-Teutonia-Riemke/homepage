@@ -1,0 +1,27 @@
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">
+            <span class="badge">{{ pagination.getTotalItemCount }}</span>
+            {% block paginationTitle %}
+                {{ title|default('') }}
+            {% endblock %}
+        </h3>
+    </div>
+    <table class="table card-table table-vcenter text-nowrap">
+        <thead>
+        <tr>
+            {% block paginationHeader %}{% endblock %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in pagination %}
+            <tr>
+                {% block paginationRow %}{% endblock %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="card-footer d-flex align-items-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</div>

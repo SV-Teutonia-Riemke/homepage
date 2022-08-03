@@ -8,42 +8,25 @@
 {% endblock %}
 
 {% block pageBody %}
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">
-                <span class="badge">{{ pagination.getTotalItemCount }}</span>
-                Users
-            </h3>
-        </div>
-        <table class="table card-table table-vcenter text-nowrap">
-            <thead>
-            <tr>
-                <th class="w-1">Id</th>
-                <th>Email</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for object in pagination %}
-                <tr>
-                    <td>{{ object.id }}</td>
-                    <td>{{ object.email }}</td>
-                    <td class="text-end">
-                        <div class="btn-group btn-group-sm">
-                            <a class="btn btn-primary" href="{{ path('app_admin_user_edit', { user: object.id }) }}">
-                                <span class="iconify" data-icon="fa6-solid:pencil"></span>
-                            </a>
-                            <a class="btn btn-danger" href="{{ path('app_admin_user_remove', { user: object.id }) }}">
-                                <span class="iconify" data-icon="fa6-solid:trash"></span>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <div class="card-footer d-flex align-items-center">
-            {{ knp_pagination_render(pagination) }}
-        </div>
-    </div>
+    {% embed '_partials/pagination_table.html.twig' with { title: 'Users'} %}
+        {% block paginationHeader %}
+            <th class="w-1">Id</th>
+            <th>Email</th>
+            <th></th>
+        {% endblock %}
+        {% block paginationRow %}
+            <td>{{ object.id }}</td>
+            <td>{{ object.email }}</td>
+            <td class="text-end">
+                <div class="btn-group btn-group-sm">
+                    <a class="btn btn-outline-primary" href="{{ path('app_admin_user_edit', { user: object.id }) }}">
+                        <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
+                    </a>
+                    <a class="btn btn-outline-danger" href="{{ path('app_admin_user_remove', { user: object.id }) }}">
+                        <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
+                    </a>
+                </div>
+            </td>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
