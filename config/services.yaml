@@ -12,3 +12,21 @@ services:
 
     StellaMaris\Clock\ClockInterface:
         factory: '@App\Infrastructure\Clock\ClockFactory'
+
+    App\Menu\Navbar:
+        tags:
+            - { name: knp_menu.menu_builder, method: main, alias: main }
+
+    App\Infrastructure\Menu\Extension\DropdownExtension:
+        tags: ['knp_menu.factory_extension']
+
+    App\Infrastructure\Menu\Extension\IconifyExtension:
+        tags: [ 'knp_menu.factory_extension' ]
+
+    App\Infrastructure\Menu\Extension\EventDispatcherExtension:
+        tags:
+            - { name: knp_menu.factory_extension, priority: -1000 }
+
+    App\Infrastructure\Menu\Extension\OrderExtension:
+        tags:
+            - { name: knp_menu.factory_extension, priority: -1001 }
