@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Menu;
+namespace App\Module\Page\Menu;
 
 use App\Storage\Repository\TeamRepository;
 use Knp\Menu\FactoryInterface;
@@ -35,7 +35,10 @@ final class Navbar
 
         foreach ($seniorTeams as $team) {
             $teamSeniors->addChild($team->getName(), [
-                'route' => 'app_index',
+                'route'       => 'app_team',
+                'routeParameters' => [
+                    'team' => $team->getId(),
+                ],
             ]);
         }
 
@@ -43,12 +46,15 @@ final class Navbar
 
         $teamJuniors = $this->factory->createItem('Junioren', [
             'dropdown' => true,
-            'icon'  => 'tabler:home',
+            'icon'     => 'tabler:home',
         ]);
 
         foreach ($juniorTeams as $team) {
             $teamJuniors->addChild($team->getName(), [
-                'route' => 'app_index',
+                'route'       => 'app_team',
+                'routeParameters' => [
+                    'team' => $team->getId(),
+                ],
             ]);
         }
 

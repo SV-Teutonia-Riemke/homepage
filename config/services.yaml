@@ -1,32 +1,32 @@
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
+  _defaults:
+    autowire: true
+    autoconfigure: true
 
-    App\:
-        resource: '../src/'
-        exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Storage/Entity/'
-            - '../src/Kernel.php'
+  App\:
+    resource: '../src/'
+    exclude:
+      - '../src/DependencyInjection/'
+      - '../src/Storage/Entity/'
+      - '../src/Kernel.php'
 
-    StellaMaris\Clock\ClockInterface:
-        factory: '@App\Infrastructure\Clock\ClockFactory'
+  StellaMaris\Clock\ClockInterface:
+    factory: '@App\Infrastructure\Clock\ClockFactory'
 
-    App\Menu\Navbar:
-        tags:
-            - { name: knp_menu.menu_builder, method: main, alias: main }
+  App\Module\Page\Menu\Navbar:
+    tags:
+      - { name: knp_menu.menu_builder, method: main, alias: main }
 
-    App\Infrastructure\Menu\Extension\DropdownExtension:
-        tags: ['knp_menu.factory_extension']
+  App\Infrastructure\Menu\Extension\DropdownExtension:
+    tags: [ 'knp_menu.factory_extension' ]
 
-    App\Infrastructure\Menu\Extension\IconifyExtension:
-        tags: [ 'knp_menu.factory_extension' ]
+  App\Infrastructure\Menu\Extension\IconifyExtension:
+    tags: [ 'knp_menu.factory_extension' ]
 
-    App\Infrastructure\Menu\Extension\EventDispatcherExtension:
-        tags:
-            - { name: knp_menu.factory_extension, priority: -1000 }
+  App\Infrastructure\Menu\Extension\EventDispatcherExtension:
+    tags:
+      - { name: knp_menu.factory_extension, priority: -1000 }
 
-    App\Infrastructure\Menu\Extension\OrderExtension:
-        tags:
-            - { name: knp_menu.factory_extension, priority: -1001 }
+  App\Infrastructure\Menu\Extension\OrderExtension:
+    tags:
+      - { name: knp_menu.factory_extension, priority: -1001 }

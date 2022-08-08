@@ -1,0 +1,90 @@
+{% extends '_layout/layout.html.twig' %}
+
+{% set pagePreTitle = 'Mannschaft' %}
+{% set pageTitle = team.name %}
+
+{%- block pageTitleActionsButtons -%}
+    <div class="btn btn-link btn-icon text-instagram">
+        <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+    </div>
+    <div class="btn btn-link btn-icon text-facebook">
+        <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+    </div>
+{%- endblock -%}
+
+{% block pageSubBody %}
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Links</h3>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="#" class="list-group-item list-group-item-action">Aktueller Spieltag</a>
+                    <a href="#" class="list-group-item list-group-item-action">Trainingszeiten</a>
+                    <a href="#" class="list-group-item list-group-item-action">Facebook</a>
+                    <a href="#" class="list-group-item list-group-item-action">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="space-y">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">2022/2023</h5>
+                    </div>
+                    <div class="card-img-bottom img-responsive img-responsive-21x9" style="background-image: url(https://preview.tabler.io/static/photos/56614e12b2a7bd68.jpg)"></div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Kader</h5>
+                    </div>
+                    <table class="table card-table table-vcenter text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>Nr.</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>2</td>
+                            <td>Nikita L.</td>
+                            <td>RM</td>
+                            <td class="text-end">
+                                    <div class="btn btn-sm btn-icon btn-link text-instagram">
+                                        <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+                                    </div>
+                                    <div class="btn btn-sm btn-icon btn-link text-facebook">
+                                        <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+                                    </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Trainerstab</h5>
+                    </div>
+                    <table class="table card-table table-vcenter text-nowrap">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Funktion</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>Trainer</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

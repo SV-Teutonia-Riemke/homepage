@@ -23,7 +23,7 @@
 {% block pageHeader %}
     <div class="container-xl">
         <!-- Page title -->
-        <div class="page-header d-print-none text-white">
+        <div class="page-header d-print-none">
             <div class="row g-2 align-items-center">
                 <div class="col">
                     {{- block('pagePreTitle') -}}
@@ -73,6 +73,32 @@
 {%- endblock -%}
 
 {% block pageBody %}
+    <div class="row row-cards">
+        <div class="col-9">
+            {% block pageSubBody %}{% endblock %}
+        </div>
+        <div class="col-3">
+            <div class="row row-cards">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <div class="card-title">Sponsoren</div>
+                            <div class="card-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <div class="card-title">Spenden</div>
+                            <div class="card-body"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block pageFooter %}
