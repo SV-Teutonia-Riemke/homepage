@@ -20,4 +20,5 @@ return [
     Symfony\UX\Turbo\TurboBundle::class => ['all' => true],
     FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
     Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
+    Craue\ConfigBundle\CraueConfigBundle::class => ['all' => true],
 ];
