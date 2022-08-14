@@ -1,0 +1,22 @@
+{% extends 'admin/_layout/simple_form.html.twig' %}
+
+{% set pagePreTitle = 'Edit' %}
+{% set pageTitle = 'Configs' %}
+
+{% block pageTitleActionsButtons %}
+    <a class="btn btn-primary" href="{{ path('app_admin_config_add') }}">Create</a>
+    {{ parent() }}
+{% endblock %}
+
+{% block pageBody %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Settings</h3>
+        </div>
+        <div class="card-body">
+            {% for setting in form.settings %}
+                {{ form_row(setting.value) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

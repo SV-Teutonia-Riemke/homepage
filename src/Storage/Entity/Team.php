@@ -29,6 +29,12 @@ class Team extends AbstractEntity
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?File $image = null;
 
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $facebook = null;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $instagram = null;
+
     public function __construct(
         string $name,
         Gender $gender,
@@ -87,5 +93,25 @@ class Team extends AbstractEntity
     public function setImage(?File $image): void
     {
         $this->image = $image;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): void
+    {
+        $this->facebook = $facebook;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): void
+    {
+        $this->instagram = $instagram;
     }
 }

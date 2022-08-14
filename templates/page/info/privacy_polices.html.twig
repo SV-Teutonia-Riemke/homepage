@@ -1,0 +1,39 @@
+{% extends '_layout/layout.html.twig' %}
+
+{% set pagePreTitle = 'Info' %}
+{% set pageTitle = 'Datenschutz' %}
+
+{% block pageSubBody %}
+    <div class="space-y">
+        {% if privacyPolicies is not empty %}
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Datenschutz</h3>
+                </div>
+                <div class="card-body">
+                    {{ privacyPolicies|raw }}
+                </div>
+            </div>
+        {% endif %}
+        {% if copyright is not empty %}
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Urheberrecht</h3>
+                </div>
+                <div class="card-body">
+                    {{ copyright|raw }}
+                </div>
+            </div>
+        {% endif %}
+        {% if disclaimer is not empty %}
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Disclaimer</h3>
+                </div>
+                <div class="card-body">
+                    {{ disclaimer|raw }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{%- endblock -%}

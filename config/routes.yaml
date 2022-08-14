@@ -14,7 +14,3 @@ admin:
 app_admin_logout:
     path: /admin/logout
     methods: GET
-
-craue_config_settings:
-    resource: "@CraueConfigBundle/Resources/config/routing/settings.xml"
-    prefix: /settings
