@@ -7,6 +7,8 @@ namespace App\Storage\Entity;
 use App\Domain\Gender;
 use App\Domain\TeamAgeCategory;
 use App\Domain\TeamJuniorAge;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,6 +31,9 @@ class Team extends AbstractEntity
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?File $image = null;
 
+    #[ORM\OneToMany(mappedBy: 'team', targetEntity: Player::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $players;
+
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $facebook = null;
 
@@ -36,13 +41,15 @@ class Team extends AbstractEntity
     private ?string $instagram = null;
 
     public function __construct(
-        string $name,
-        Gender $gender,
-        TeamAgeCategory $ageCategory,
+//        string $name,
+//        Gender $gender,
+//        TeamAgeCategory $ageCategory,
     ) {
-        $this->name        = $name;
-        $this->gender      = $gender;
-        $this->ageCategory = $ageCategory;
+//        $this->name        = $name;
+//        $this->gender      = $gender;
+//        $this->ageCategory = $ageCategory;
+
+        $this->players = new ArrayCollection();
     }
 
     public function getName(): string
@@ -113,5 +120,29 @@ class Team extends AbstractEntity
     public function setInstagram(?string $instagram): void
     {
         $this->instagram = $instagram;
+    }
+
+    public function getPlayers(): Collection
+    {
+        return $this->players;
+    }
+
+    public function addPlayer(Player $player): void
+    {
+        if ($this->players->contains($player)) {
+            return;
+        }
+
+        $player->setTeam($this);
+        $this->players->add($player);
+    }
+
+    public function removePlayer(Player $player): void
+    {
+        if (! $this->players->contains($player)) {
+            return;
+        }
+
+        $this->players->removeElement($player);
     }
 }

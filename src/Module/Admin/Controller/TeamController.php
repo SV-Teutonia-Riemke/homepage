@@ -75,6 +75,7 @@ final class TeamController extends AbstractController
 
         return $this->renderForm('admin/team/edit.html.twig', [
             'form' => $form,
+            'team' => $team,
         ]);
     }
 

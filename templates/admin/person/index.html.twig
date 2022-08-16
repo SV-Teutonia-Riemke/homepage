@@ -1,0 +1,38 @@
+{% extends 'admin/_layout/layout.html.twig' %}
+
+{% set pagePreTitle = 'List' %}
+{% set pageTitle = 'Person' %}
+
+{% block pageTitleActionsButtons %}
+    <a class="btn btn-primary" href="{{ path('app_admin_person_create') }}">Create</a>
+{% endblock %}
+
+{% block pageBody %}
+    {% embed '_partials/pagination_table.html.twig' with { title: 'Persons'} %}
+        {% block paginationHeader %}
+            <th class="w-1">Id</th>
+            <th>Vorname</th>
+            <th>Nachname</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th></th>
+        {% endblock %}
+        {% block paginationRow %}
+            <td>{{ object.id }}</td>
+            <td>{{ object.firstName }}</td>
+            <td>{{ object.lastName }}</td>
+            <td>{{ object.emailAddress }}</td>
+            <td>{{ object.phoneNumber }}</td>
+            <td class="text-end">
+                <div class="btn-group btn-group-sm">
+                    <a class="btn btn-outline-primary" href="{{ path('app_admin_person_edit', { person: object.id }) }}">
+                        <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
+                    </a>
+                    <a class="btn btn-outline-danger" href="{{ path('app_admin_person_remove', { person: object.id }) }}">
+                        <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
+                    </a>
+                </div>
+            </td>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

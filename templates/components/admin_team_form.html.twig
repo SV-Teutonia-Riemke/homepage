@@ -1,0 +1,49 @@
+<div {{ attributes }}>
+
+    <div class="space-y">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Team</h3>
+            </div>
+            <div class="card-body">
+                {{ form_row(form.name) }}
+                {{ form_row(form.gender) }}
+                {{ form_row(form.ageCategory) }}
+                {{ form_row(form.image) }}
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Players</h3>
+                <div class="card-actions">
+                    <button data-action="live#action" data-action-name="addItem" type="button" class="btn btn-outline-primary">Add Player</button>
+                </div>
+            </div>
+            <table class="table card-table text-nowrap table-borderless">
+                <thead>
+                <tr>
+                    <th>Person</th>
+                    <th>Number</th>
+                    <th>Position</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, itemForm in form.players %}
+                    <tr>
+                        <td>{{ form_row(itemForm.person, { label: false }) }}</td>
+                        <td>{{ form_row(itemForm.number, { label: false }) }}</td>
+                        <td>{{ form_row(itemForm.position, { label: false }) }}</td>
+                        <td class="text-end">
+                            <button data-action="live#action" data-action-name="removeItem(index={{ key }})" type="button" class="btn btn-outline-danger">X</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% do form.players.setRendered %}
+</div>

@@ -7,6 +7,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 use App\Domain\Gender;
 use App\Domain\TeamAgeCategory;
 use App\Form\Type\Entities\FileEntityType;
+use App\Module\Admin\Form\Type\Widgets\PlayerCollectionType;
 use App\Storage\Entity\Team;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
@@ -40,6 +41,10 @@ final class TeamType extends AbstractType
             ])
             ->add('image', FileEntityType::class, [
                 'required' => false,
+            ])
+            ->add('players', PlayerCollectionType::class, [
+                'required'     => false,
+                'by_reference' => false,
             ]);
     }
 

@@ -4,12 +4,10 @@
 {% set formCancelLink = path('app_admin_team_index') %}
 
 {% block pageBody %}
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Team</h3>
-        </div>
-        <div class="card-body">
-            {{ form(form) }}
-        </div>
-    </div>
+
+
+    {{ component('admin_team_form', {
+        team: team|default(null),
+        form: form
+    }) }}
 {% endblock %}
