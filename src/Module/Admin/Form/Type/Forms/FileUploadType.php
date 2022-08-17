@@ -7,9 +7,9 @@ namespace App\Module\Admin\Form\Type\Forms;
 use App\Storage\Entity\Directory;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 final class FileUploadType extends AbstractType
 {
@@ -20,13 +20,13 @@ final class FileUploadType extends AbstractType
                 'class'    => Directory::class,
                 'required' => false,
             ])
-            ->add('file', FileType::class, [
+            ->add('file', DropzoneType::class, [
                 'label'       => 'File',
                 'mapped'      => false,
                 'required'    => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
+                        'maxSize' => '20M',
                     ]),
                 ],
             ]);

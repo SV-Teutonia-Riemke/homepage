@@ -6,6 +6,7 @@ namespace App\Storage\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use function Symfony\Component\String\u;
 
 #[ORM\Entity]
 class Person extends AbstractEntity implements \Stringable
@@ -106,6 +107,14 @@ class Person extends AbstractEntity implements \Stringable
      */
     public function __toString(): string
     {
+        if($this->firstName !== null && $this->lastName !== null) {
+            if($this->anonymizeLastName) {
+                return sprintf('%s %s.', $this->firstName, u($this->lastName)->truncate(1)->toString());
+            }
+
+            return sprintf('%s %s', $this->firstName, $this->lastName);
+        }
+
         return $this->firstName;
     }
 }

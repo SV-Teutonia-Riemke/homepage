@@ -8,12 +8,12 @@ use App\Domain\Gender;
 use App\Domain\TeamAgeCategory;
 use App\Form\Type\Entities\FileEntityType;
 use App\Module\Admin\Form\Type\Widgets\PlayerCollectionType;
+use App\Module\Admin\Form\Type\Widgets\StaffCollectionType;
 use App\Storage\Entity\Team;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -45,6 +45,10 @@ final class TeamType extends AbstractType
             ->add('players', PlayerCollectionType::class, [
                 'required'     => false,
                 'by_reference' => false,
+            ])
+            ->add('staffs', StaffCollectionType::class, [
+                'required'     => false,
+                'by_reference' => false,
             ]);
     }
 
@@ -52,13 +56,6 @@ final class TeamType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Team::class,
-            'empty_data' => static function (FormInterface $form): Team {
-                return new Team(
-                    $form->get('name')->getData() ?? '',
-                    $form->get('gender')->getData() ?? Gender::MIXED,
-                    $form->get('ageCategory')->getData() ?? TeamAgeCategory::JUNIOR,
-                );
-            },
         ]);
     }
 }

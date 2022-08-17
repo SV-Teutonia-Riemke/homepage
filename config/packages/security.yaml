@@ -9,7 +9,7 @@ security:
                 class: App\Storage\Entity\User
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(_(profiler|wdt)|css|images|js|media)/
             security: false
 
         main:

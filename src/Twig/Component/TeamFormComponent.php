@@ -33,15 +33,28 @@ final class TeamFormComponent extends AbstractController
     }
 
     #[LiveAction]
-    public function addItem(): void
+    public function addPlayer(): void
     {
         $this->formValues['players'][] = [];
     }
 
     #[LiveAction]
-    public function removeItem(
+    public function removePlayer(
         #[LiveArg] int $index
     ): void {
         unset($this->formValues['players'][$index]);
+    }
+
+    #[LiveAction]
+    public function addStaff(): void
+    {
+        $this->formValues['staffs'][] = [];
+    }
+
+    #[LiveAction]
+    public function removeStaff(
+        #[LiveArg] int $index
+    ): void {
+        unset($this->formValues['staffs'][$index]);
     }
 }

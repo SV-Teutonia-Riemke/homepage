@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Admin\Controller;
 
 use App\Module\Admin\Form\Type\Forms\DirectoryType;
+use App\Module\Admin\Form\Type\Forms\FileEditType;
 use App\Module\Admin\Form\Type\Forms\FileUploadType;
 use App\Storage\Entity\Directory;
 use App\Storage\Entity\File;
@@ -22,7 +23,6 @@ use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Uid\Uuid;
 
-use function assert;
 use function pathinfo;
 use function sha1;
 use function sprintf;
@@ -63,20 +63,25 @@ final class FilesController extends AbstractController
     }
 
     #[Route('/directory/create', name: 'directory_create')]
+    #[Route('/directory/{directory}/create', name: 'directory_create_parent')]
     public function directoryCreate(
         Request $request,
+        ?Directory $directory
     ): Response {
-        $form = $this->createForm(DirectoryType::class);
+        $newDirectory = new Directory('', $directory);
+
+        $form = $this->createForm(DirectoryType::class, $newDirectory);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $directory = $form->getData();
-            assert($directory instanceof Directory);
-
-            $this->entityManager->persist($directory);
+            $this->entityManager->persist($newDirectory);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_files_index');
+            return $directory === null
+                ? $this->redirectToRoute('app_admin_files_index')
+                : $this->redirectToRoute('app_admin_files_directory', [
+                    'directory' => $directory->getId(),
+                ]);
         }
 
         return $this->render('admin/files/directory_create.html.twig', [
@@ -96,7 +101,11 @@ final class FilesController extends AbstractController
             $this->entityManager->persist($directory);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_files_index');
+            return $directory->getParent() === null
+                ? $this->redirectToRoute('app_admin_files_index')
+                : $this->redirectToRoute('app_admin_files_directory', [
+                    'directory' => $directory->getParent()->getId(),
+                ]);
         }
 
         return $this->render('admin/files/directory_create.html.twig', [
@@ -121,9 +130,14 @@ final class FilesController extends AbstractController
     }
 
     #[Route('/upload', name: 'upload')]
-    public function fileUpload(Request $request): Response
-    {
-        $form = $this->createForm(FileUploadType::class);
+    #[Route('/upload/{directory}', name: 'upload_directory')]
+    public function fileUpload(
+        Request $request,
+        ?Directory $directory,
+    ): Response {
+        $form = $this->createForm(FileUploadType::class, [
+            'directory' => $directory,
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -164,11 +178,42 @@ final class FilesController extends AbstractController
                 $this->entityManager->flush();
             }
 
-            return $this->redirectToRoute('app_admin_files_index');
+            return $directory === null
+                ? $this->redirectToRoute('app_admin_files_index')
+                : $this->redirectToRoute('app_admin_files_directory', [
+                    'directory' => $directory->getId(),
+                ]);
         }
 
         return $this->renderForm('admin/files/upload.html.twig', [
-            'form' => $form,
+            'directory' => $directory,
+            'form'      => $form,
+        ]);
+    }
+
+    #[Route('/file/{file}/edit', name: 'file_edit')]
+    public function fileEdit(
+        Request $request,
+        File $file
+    ): Response {
+        $form = $this->createForm(FileEditType::class, $file);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file->setSafeName($this->slugger->slug($file->getName())->toString());
+
+            $this->entityManager->flush();
+
+            return $file->getDirectory() === null
+                ? $this->redirectToRoute('app_admin_files_index')
+                : $this->redirectToRoute('app_admin_files_directory', [
+                    'directory' => $file->getDirectory()->getId(),
+                ]);
+        }
+
+        return $this->render('admin/files/directory_create.html.twig', [
+            'file' => $file,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -186,6 +231,6 @@ final class FilesController extends AbstractController
             ]);
         }
 
-         return $this->redirectToRoute('app_admin_files_index');
+        return $this->redirectToRoute('app_admin_files_index');
     }
 }

@@ -1,13 +1,13 @@
 {% extends 'admin/_layout/simple_form.html.twig' %}
 
-{% set pagePreTitle = 'Upload' %}
+{% set pagePreTitle = 'Edit' %}
 {% set pageTitle = 'Files' %}
-{% set formCancelLink = directory is null ? path('app_admin_files_index') : path('app_admin_files_directory', { directory: directory.id }) %}
+{% set formCancelLink = file.directory is null ? path('app_admin_files_index') : path('app_admin_files_directory', { directory: file.directory.id }) %}
 
 {% block pageBody %}
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Upload</h3>
+            <h3 class="card-title">Edit</h3>
         </div>
         <div class="card-body">
             {{ form(form) }}

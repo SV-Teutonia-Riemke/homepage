@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
-use App\Domain\GamePosition;
+use App\Domain\StaffPosition;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-class Player extends AbstractEntity
+class Staff extends AbstractEntity
 {
     #[ORM\ManyToOne(targetEntity: Person::class)]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Person $person = null;
 
-    #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'players')]
+    #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'staffs')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Team $team = null;
 
@@ -23,11 +23,8 @@ class Player extends AbstractEntity
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?File $image = null;
 
-    #[ORM\Column(type: Types::INTEGER, nullable: true, options: ['unsigned' => true])]
-    private ?int $number = null;
-
-    #[ORM\Column(type: Types::STRING, nullable: true, enumType: GamePosition::class)]
-    private ?GamePosition $position = null;
+    #[ORM\Column(type: Types::STRING, nullable: true, enumType: StaffPosition::class)]
+    private ?StaffPosition $position = null;
 
     public function getPerson(): ?Person
     {
@@ -59,22 +56,12 @@ class Player extends AbstractEntity
         $this->image = $image;
     }
 
-    public function getNumber(): ?int
-    {
-        return $this->number;
-    }
-
-    public function setNumber(?int $number): void
-    {
-        $this->number = $number;
-    }
-
-    public function getPosition(): ?GamePosition
+    public function getPosition(): ?StaffPosition
     {
         return $this->position;
     }
 
-    public function setPosition(?GamePosition $position): void
+    public function setPosition(?StaffPosition $position): void
     {
         $this->position = $position;
     }

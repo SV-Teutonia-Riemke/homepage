@@ -11,6 +11,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Stringable;
 
+use function array_reverse;
+use function implode;
+
 #[ORM\Entity(repositoryClass: DirectoryRepository::class)]
 class Directory extends AbstractEntity implements Stringable
 {
@@ -62,6 +65,31 @@ class Directory extends AbstractEntity implements Stringable
     public function getFiles(): Collection
     {
         return $this->files;
+    }
+
+    public function getPathName(string $separator = ' / '): string
+    {
+        return implode($separator, $this->getPathArray());
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function getPathArray(): array
+    {
+        $names = [];
+
+        $parent = $this->getParent();
+        while ($parent !== null) {
+            $names[] = $parent->getName();
+
+            $parent = $parent->getParent();
+        }
+
+        $names   = array_reverse($names);
+        $names[] = $this->getName();
+
+        return $names;
     }
 
     public function __toString(): string

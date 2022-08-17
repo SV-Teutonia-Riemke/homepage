@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Stringable;
 use Symfony\Component\Uid\Uuid;
 
+use function implode;
 use function sprintf;
 
 #[ORM\Entity(repositoryClass: FileRepository::class)]
@@ -74,6 +75,11 @@ class File extends AbstractEntity implements Stringable
         return $this->safeName;
     }
 
+    public function setSafeName(string $safeName): void
+    {
+        $this->safeName = $safeName;
+    }
+
     public function getExtension(): ?string
     {
         return $this->extension;
@@ -102,6 +108,22 @@ class File extends AbstractEntity implements Stringable
     public function setDirectory(?Directory $directory): void
     {
         $this->directory = $directory;
+    }
+
+    public function getPathName(string $separator = ' / '): string
+    {
+        return implode($separator, $this->getPathArray());
+    }
+
+    /**
+     * @return list<string>
+     */
+    public function getPathArray(): array
+    {
+        $names   = $this->directory === null ? [] : $this->directory->getPathArray();
+        $names[] = $this->getFileName();
+
+        return $names;
     }
 
     public function __toString(): string

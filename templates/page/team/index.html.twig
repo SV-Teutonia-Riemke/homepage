@@ -33,57 +33,77 @@
                     <div class="card-header">
                         <h5 class="card-title">2022/2023</h5>
                     </div>
-                    <div class="card-img-bottom img-responsive img-responsive-21x9" style="background-image: url(https://preview.tabler.io/static/photos/56614e12b2a7bd68.jpg)"></div>
+                    {% if team.image is not null %}
+                        <div class="card-img-bottom">
+                            <img src="{{ team.image.filePath|imagine_filter('team_image') }}"/>
+                        </div>
+                    {% endif %}
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Kader</h5>
+
+                {% if team.players|length > 0 %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Kader</h5>
+                        </div>
+                        <table class="table card-table table-vcenter text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>Nr.</th>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for player in team.players %}
+                                <tr>
+                                    <td>{{ player.number }}</td>
+                                    <td>{{ player.person }}</td>
+                                    <td>{{ player.position is null ? '' : player.position.value }}</td>
+                                    <td class="text-end">
+                                        <div class="btn btn-sm btn-icon btn-link text-instagram">
+                                            <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+                                        </div>
+                                        <div class="btn btn-sm btn-icon btn-link text-facebook">
+                                            <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-                    <table class="table card-table table-vcenter text-nowrap">
-                        <thead>
-                        <tr>
-                            <th>Nr.</th>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>2</td>
-                            <td>Nikita L.</td>
-                            <td>RM</td>
-                            <td class="text-end">
-                                    <div class="btn btn-sm btn-icon btn-link text-instagram">
-                                        <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
-                                    </div>
-                                    <div class="btn btn-sm btn-icon btn-link text-facebook">
-                                        <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
-                                    </div>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="card-title">Trainerstab</h5>
+                {% endif %}
+
+                {% if team.staffs|length > 0 %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Trainerstab</h5>
+                        </div>
+                        <table class="table card-table table-vcenter text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Funktion</th>
+                                <th>E-Mail</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for staff in team.staffs %}
+                                <tr>
+                                    <td>{{ staff.person }}</td>
+                                    <td>{{ staff.position is null ? '' : staff.position.value }}</td>
+                                    <td>
+                                        {% if staff.person.emailAddress is not null %}
+                                            <a href="mailto:{{ staff.person.emailAddress }}">{{ staff.person.emailAddress }}</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
-                    <table class="table card-table table-vcenter text-nowrap">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Funktion</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Name</td>
-                            <td>Trainer</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>

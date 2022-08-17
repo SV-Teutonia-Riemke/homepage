@@ -17,7 +17,10 @@
             <div class="card-header">
                 <h3 class="card-title">Players</h3>
                 <div class="card-actions">
-                    <button data-action="live#action" data-action-name="addItem" type="button" class="btn btn-outline-primary">Add Player</button>
+                    <button data-action="live#action" data-action-name="addPlayer" type="button" class="btn btn-outline-primary">
+                        <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
+                        Add Player
+                    </button>
                 </div>
             </div>
             <table class="table card-table text-nowrap table-borderless">
@@ -26,6 +29,7 @@
                     <th>Person</th>
                     <th>Number</th>
                     <th>Position</th>
+                    <th>Image</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -35,8 +39,47 @@
                         <td>{{ form_row(itemForm.person, { label: false }) }}</td>
                         <td>{{ form_row(itemForm.number, { label: false }) }}</td>
                         <td>{{ form_row(itemForm.position, { label: false }) }}</td>
+                        <td>{{ form_row(itemForm.image, { label: false }) }}</td>
                         <td class="text-end">
-                            <button data-action="live#action" data-action-name="removeItem(index={{ key }})" type="button" class="btn btn-outline-danger">X</button>
+                            <button data-action="live#action" data-action-name="removePlayer(index={{ key }})" type="button" class="btn btn-icon btn-outline-danger">
+                                <span class="iconify icon" data-icon="fa6-solid:trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Staff</h3>
+                <div class="card-actions">
+                    <button data-action="live#action" data-action-name="addStaff" type="button" class="btn btn-outline-primary">
+                        <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
+                        Add Staff
+                    </button>
+                </div>
+            </div>
+            <table class="table card-table text-nowrap table-borderless">
+                <thead>
+                <tr>
+                    <th>Person</th>
+                    <th>Position</th>
+                    <th>Image</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key, itemForm in form.staffs %}
+                    <tr>
+                        <td>{{ form_row(itemForm.person, { label: false }) }}</td>
+                        <td>{{ form_row(itemForm.position, { label: false }) }}</td>
+                        <td>{{ form_row(itemForm.image, { label: false }) }}</td>
+                        <td class="text-end">
+                            <button data-action="live#action" data-action-name="removeStaff(index={{ key }})" type="button" class="btn btn-icon btn-outline-danger">
+                                <span class="iconify icon" data-icon="fa6-solid:trash"></span>
+                            </button>
                         </td>
                     </tr>
                 {% endfor %}
@@ -46,4 +89,5 @@
     </div>
 
     {% do form.players.setRendered %}
+    {% do form.staffs.setRendered %}
 </div>

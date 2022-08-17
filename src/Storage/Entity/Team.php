@@ -34,6 +34,9 @@ class Team extends AbstractEntity
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Player::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $players;
 
+    #[ORM\OneToMany(mappedBy: 'team', targetEntity: Staff::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $staffs;
+
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $facebook = null;
 
@@ -41,15 +44,16 @@ class Team extends AbstractEntity
     private ?string $instagram = null;
 
     public function __construct(
-//        string $name,
-//        Gender $gender,
-//        TeamAgeCategory $ageCategory,
+        //        string $name,
+        //        Gender $gender,
+        //        TeamAgeCategory $ageCategory,
     ) {
 //        $this->name        = $name;
 //        $this->gender      = $gender;
 //        $this->ageCategory = $ageCategory;
 
         $this->players = new ArrayCollection();
+        $this->staffs  = new ArrayCollection();
     }
 
     public function getName(): string
@@ -144,5 +148,29 @@ class Team extends AbstractEntity
         }
 
         $this->players->removeElement($player);
+    }
+
+    public function getStaffs(): Collection
+    {
+        return $this->staffs;
+    }
+
+    public function addStaff(Staff $staff): void
+    {
+        if ($this->staffs->contains($staff)) {
+            return;
+        }
+
+        $staff->setTeam($this);
+        $this->staffs->add($staff);
+    }
+
+    public function removeStaff(Staff $staff): void
+    {
+        if (! $this->staffs->contains($staff)) {
+            return;
+        }
+
+        $this->staffs->removeElement($staff);
     }
 }
