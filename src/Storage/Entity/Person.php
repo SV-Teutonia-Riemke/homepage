@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Repository\PersonRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Stringable;
+
+use function sprintf;
 use function Symfony\Component\String\u;
 
-#[ORM\Entity]
-class Person extends AbstractEntity implements \Stringable
+#[ORM\Entity(repositoryClass: PersonRepository::class)]
+class Person extends AbstractEntity implements Stringable
 {
     #[ORM\Column(type: Types::STRING)]
     private ?string $firstName = null;
@@ -102,13 +106,10 @@ class Person extends AbstractEntity implements \Stringable
         $this->instagram = $instagram;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function __toString(): string
     {
-        if($this->firstName !== null && $this->lastName !== null) {
-            if($this->anonymizeLastName) {
+        if ($this->firstName !== null && $this->lastName !== null) {
+            if ($this->anonymizeLastName) {
                 return sprintf('%s %s.', $this->firstName, u($this->lastName)->truncate(1)->toString());
             }
 

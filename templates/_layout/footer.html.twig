@@ -1,20 +1,46 @@
-<footer class="footer footer-transparent d-print-none">
-    <div class="container-xl">
-        <div class="row text-center align-items-center flex-row-reverse">
-            <div class="col-lg-auto ms-lg-auto">
-                <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item"><a href="{{ path('app_imprint') }}" class="link-secondary">Impressum</a></li>
-                    <li class="list-inline-item"><a href="{{ path('app_privacy_policies') }}" class="link-secondary">Datenschutz</a></li>
-                </ul>
-            </div>
-            <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item">
-                        Copyright &copy; {{ 'now'|date('Y') }}.
-                        All rights reserved.
-                    </li>
-                </ul>
-            </div>
+<div class="container">
+    <footer class="row py-4 my-4 border-top">
+        <div class="col-4 mb-3">
+            <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+                <img src="{{ asset('build/images/logo.png') }}" width="40" height="32" alt="Tabler" class="navbar-brand-image">
+            </a>
+            <p class="text-muted">
+                © {{ 'now'|date('Y') }} www.teutonia-riemke.de<br>
+                Alle Rechte vorbehalten.
+            </p>
+            <p class="text-muted">
+                info@teutonia-riemke.de
+            </p>
         </div>
-    </div>
-</footer>
+
+        <div class="col mb-3">
+            <h3>Links</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="https://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=78&clubID=1393" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Handball4all Teutonia Riemke</a></li>
+                <li class="nav-item mb-2"><a href="https://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=78&gymID=2197&gymnasium=608877" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Handball4all Böll-Halle</a></li>
+                <li class="nav-item mb-2"><a href="https://www.dhb.de/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Deutscher Handballbund</a></li>
+                <li class="nav-item mb-2"><a href="https://www.westdeutscher-handball-verband.de/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Westdeutscher Handballverband</a></li>
+                <li class="nav-item mb-2"><a href="https://www.sport-in-bochum.de/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Stadtsportbund Bochum</a></li>
+                <li class="nav-item mb-2"><a href="https://handballkreis-industrie.de/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Handballkreis Industrie</a></li>
+                <li class="nav-item mb-2"><a href="https://www.handballwestfalen.de/aktuelles/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Handballverband Westfalen</a></li>
+                <li class="nav-item mb-2"><a href="https://www.handballwestfalen.de/qualifizierung/seminare-und-lehrgaenge/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Seminaranmeldung HVW</a></li>
+            </ul>
+        </div>
+
+        <div class="col mb-3">
+            <h3>Social Media</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="https://www.facebook.com/teutonia.riemke" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Facebook</a></li>
+                <li class="nav-item mb-2"><a href="https://www.instagram.com/svthandball/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Instagram</a></li>
+            </ul>
+        </div>
+
+        <div class="col mb-3">
+            <h3>Rechtliches</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="{{ path('app_imprint') }}" class="nav-link p-0 text-muted">Impressum</a></li>
+                <li class="nav-item mb-2"><a href="{{ path('app_privacy_policies') }}" class="nav-link p-0 text-muted">Datenschutz</a></li>
+            </ul>
+        </div>
+    </footer>
+</div>

@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Url;
 
 final class TeamType extends AbstractType
 {
@@ -38,6 +39,21 @@ final class TeamType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                 ],
+            ])
+            ->add('currentMatchday', TextType::class, [
+                'required'    => false,
+                'constraints' => [
+                    new Url(protocols: ['https']),
+                ],
+            ])
+            ->add('handballNetId', TextType::class, [
+                'required'    => false,
+            ])
+            ->add('facebook', TextType::class, [
+                'required' => false,
+            ])
+            ->add('instagram', TextType::class, [
+                'required' => false,
             ])
             ->add('image', FileEntityType::class, [
                 'required' => false,

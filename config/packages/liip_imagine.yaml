@@ -13,10 +13,5 @@ liip_imagine:
     filter_sets :
         cache : ~
 
-        team_image :
+        optimized :
             quality : 90
-
-            # list of transformations to apply (the "filters")
-            filters :
-                relative_resize  :
-                    widen: 780

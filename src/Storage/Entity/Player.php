@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace App\Storage\Entity;
 
 use App\Domain\GamePosition;
+use App\Storage\Repository\PlayerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: PlayerRepository::class)]
 class Player extends AbstractEntity
 {
     #[ORM\ManyToOne(targetEntity: Person::class)]

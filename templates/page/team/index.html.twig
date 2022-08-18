@@ -3,31 +3,89 @@
 {% set pagePreTitle = 'Mannschaft' %}
 {% set pageTitle = team.name %}
 
+{%- block javascripts -%}
+    {{ parent() }}
+
+    {% if team.handballNetId is not null %}
+        <script type="text/javascript">
+            (function (e, t, n, r, i, s, o) {
+                e[i] = e[i] || function () {
+                    (e[i].q = e[i].q || []).push(arguments)
+                }, e[i].l = 1 * new Date;
+                s = t.createElement(n), o = t.getElementsByTagName(n)[0];
+                s.async = 1;
+                s.src = r;
+                o.parentNode.insertBefore(s, o)
+            })(window, document, "script", 'https://www.handball.net/widgets/embed/v1.js', "_hb");
+
+            _hb({
+                widget: 'tabelle',
+                teamId: '{{ team.handballNetId }}',
+                container: 'handball-tabelle'
+            });
+
+            _hb({
+                widget: 'spielplan',
+                teamId: '{{ team.handballNetId }}',
+                container: 'handball-spielplan'
+            });
+        </script>
+    {% endif %}
+{%- endblock -%}
+
 {%- block pageTitleActionsButtons -%}
-    <div class="btn btn-link btn-icon text-instagram">
-        <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
-    </div>
-    <div class="btn btn-link btn-icon text-facebook">
-        <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
-    </div>
+    {% if team.instagram is not null %}
+        <a class="btn btn-ghost-instagram btn-icon" href="https://instagram.com/{{ team.instagram }}" target="_blank" rel="nofollow">
+            <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+        </a>
+    {% endif %}
+    {% if team.facebook is not null %}
+        <a class="btn btn-ghost-facebook btn-icon" href="https://facebook.com/{{ team.facebook }}" target="_blank" rel="nofollow">
+            <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+        </a>
+    {% endif %}
 {%- endblock -%}
 
 {% block pageSubBody %}
     <div class="row">
-        <div class="col-3">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Links</h3>
+        <div class="col-4">
+            <div class="space-y">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Links</h3>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        {% if team.currentMatchday is not null %}
+                            <a href="{{ team.currentMatchday }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Aktueller Spieltag</a>
+                        {% endif %}
+{#                        <a href="#" class="list-group-item list-group-item-action">Trainingszeiten</a>#}
+{#                        {% if team.facebook is not null %}#}
+{#                            <a href="https://facebook.com/{{ team.facebook }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Facebook</a>#}
+{#                        {% endif %}#}
+{#                        {% if team.instagram is not null %}#}
+{#                            <a href="https://instagram.com/{{ team.instagram }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Instagram</a>#}
+{#                        {% endif %}#}
+                    </div>
                 </div>
-                <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item list-group-item-action">Aktueller Spieltag</a>
-                    <a href="#" class="list-group-item list-group-item-action">Trainingszeiten</a>
-                    <a href="#" class="list-group-item list-group-item-action">Facebook</a>
-                    <a href="#" class="list-group-item list-group-item-action">Instagram</a>
-                </div>
+
+                {% if team.handballNetId is not null %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Tabelle</h3>
+                        </div>
+                        <div class="card-body p-2" id="handball-tabelle"></div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Spielplan</h3>
+                        </div>
+                        <div class="card-body p-2" id="handball-spielplan"></div>
+                    </div>
+                {% endif %}
             </div>
         </div>
-        <div class="col-9">
+        <div class="col-8">
             <div class="space-y">
                 <div class="card">
                     <div class="card-header">
@@ -35,7 +93,7 @@
                     </div>
                     {% if team.image is not null %}
                         <div class="card-img-bottom">
-                            <img src="{{ team.image.filePath|imagine_filter('team_image') }}"/>
+                            <img src="{{ team.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 950 } }) }}"/>
                         </div>
                     {% endif %}
                 </div>

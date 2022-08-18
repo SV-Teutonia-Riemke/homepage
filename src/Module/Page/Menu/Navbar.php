@@ -35,7 +35,7 @@ final class Navbar
 
         foreach ($seniorTeams as $team) {
             $teamSeniors->addChild($team->getName(), [
-                'route'       => 'app_team',
+                'route'           => 'app_team',
                 'routeParameters' => [
                     'team' => $team->getId(),
                 ],
@@ -51,7 +51,7 @@ final class Navbar
 
         foreach ($juniorTeams as $team) {
             $teamJuniors->addChild($team->getName(), [
-                'route'       => 'app_team',
+                'route'           => 'app_team',
                 'routeParameters' => [
                     'team' => $team->getId(),
                 ],
@@ -60,20 +60,20 @@ final class Navbar
 
         $menu->addChild($teamJuniors);
 
-        $menu->addChild('Sponsoren', [
+//        $menu->addChild('Sponsoren', [
+//            'route' => 'app_index',
+//            'icon'  => 'tabler:home',
+//        ]);
+
+        $menu->addChild('Teams', [
             'route' => 'app_index',
             'icon'  => 'tabler:home',
         ]);
 
-        $menu->addChild('Vorstände', [
-            'route' => 'app_index',
-            'icon'  => 'tabler:home',
-        ]);
-
-        $menu->addChild('Infos', [
-            'route' => 'app_index',
-            'icon'  => 'tabler:home',
-        ]);
+//        $menu->addChild('Infos', [
+//            'route' => 'app_index',
+//            'icon'  => 'tabler:home',
+//        ]);
 
         return $menu;
     }

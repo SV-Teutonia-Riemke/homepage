@@ -7,12 +7,13 @@ namespace App\Storage\Entity;
 use App\Domain\Gender;
 use App\Domain\TeamAgeCategory;
 use App\Domain\TeamJuniorAge;
+use App\Storage\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: TeamRepository::class)]
 class Team extends AbstractEntity
 {
     #[ORM\Column(type: Types::STRING)]
@@ -42,6 +43,12 @@ class Team extends AbstractEntity
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $instagram = null;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $currentMatchday = null;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private ?string $handballNetId = null;
 
     public function __construct(
         //        string $name,
@@ -124,6 +131,26 @@ class Team extends AbstractEntity
     public function setInstagram(?string $instagram): void
     {
         $this->instagram = $instagram;
+    }
+
+    public function getCurrentMatchday(): ?string
+    {
+        return $this->currentMatchday;
+    }
+
+    public function setCurrentMatchday(?string $currentMatchday): void
+    {
+        $this->currentMatchday = $currentMatchday;
+    }
+
+    public function getHandballNetId(): ?string
+    {
+        return $this->handballNetId;
+    }
+
+    public function setHandballNetId(?string $handballNetId): void
+    {
+        $this->handballNetId = $handballNetId;
     }
 
     public function getPlayers(): Collection

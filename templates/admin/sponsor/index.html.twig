@@ -1,0 +1,49 @@
+{% extends 'admin/_layout/layout.html.twig' %}
+
+{% set pagePreTitle = 'List' %}
+{% set pageTitle = 'Sponsor' %}
+
+{% block pageTitleActionsButtons %}
+    <a class="btn btn-primary" href="{{ path('app_admin_sponsor_create') }}">Create</a>
+{% endblock %}
+
+{% block pageBody %}
+    {% embed '_partials/pagination_table.html.twig' with { title: 'Sponsors'} %}
+        {% block paginationHeader %}
+            <th class="w-1"></th>
+            <th class="w-1">Id</th>
+            <th>Name</th>
+            <th>Url</th>
+            <th>Logo</th>
+            <th class="w-1"></th>
+        {% endblock %}
+        {% block paginationRow %}
+            <td>
+                <span class="iconify-inline text-{% if object.enabled %}success{% else %}danger{% endif %}" data-icon="fa6-solid:circle"></span>
+            </td>
+            <td>{{ object.id }}</td>
+            <td>{{ object.name }}</td>
+            <td>{{ object.url }}</td>
+            <td>{{ object.image is null ? '' : object.image.pathName }}</td>
+            <td class="text-end">
+                <div class="btn-group btn-group-sm">
+                    {% if object.enabled %}
+                        <a class="btn btn-outline-success" href="{{ path('app_admin_sponsor_disable', { sponsor: object.id }) }}">
+                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
+                        </a>
+                    {% else %}
+                        <a class="btn btn-outline-danger" href="{{ path('app_admin_sponsor_enable', { sponsor: object.id }) }}">
+                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
+                        </a>
+                    {% endif %}
+                    <a class="btn btn-outline-primary" href="{{ path('app_admin_sponsor_edit', { sponsor: object.id }) }}">
+                        <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
+                    </a>
+                    <a class="btn btn-outline-danger" href="{{ path('app_admin_sponsor_remove', { sponsor: object.id }) }}">
+                        <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
+                    </a>
+                </div>
+            </td>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

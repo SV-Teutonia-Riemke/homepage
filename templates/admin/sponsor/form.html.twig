@@ -1,0 +1,15 @@
+{% extends 'admin/_layout/simple_form.html.twig' %}
+
+{% set pageTitle = 'Sponsor' %}
+{% set formCancelLink = path('app_admin_sponsor_index') %}
+
+{% block pageBody %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Sponsor</h3>
+        </div>
+        <div class="card-body">
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}
