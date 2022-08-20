@@ -24,7 +24,7 @@ final class IndexController extends AbstractController
     public function __invoke(): Response
     {
         return $this->render('page/index.html.twig', [
-            'articles' => $this->articleRepository->findAll(),
+            'articles' => $this->articleRepository->findNewestEnabled(),
             'sponsors' => $this->sponsorRepository->findEnabled(),
         ]);
     }

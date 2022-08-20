@@ -11,6 +11,7 @@ use App\Module\Admin\Form\Type\Widgets\PlayerCollectionType;
 use App\Module\Admin\Form\Type\Widgets\StaffCollectionType;
 use App\Storage\Entity\Team;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,6 +28,9 @@ final class TeamType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                 ],
+            ])
+            ->add('enabled', CheckboxType::class, [
+                'required' => false,
             ])
             ->add('gender', EnumType::class, [
                 'class'       => Gender::class,

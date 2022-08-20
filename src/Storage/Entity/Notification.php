@@ -14,10 +14,8 @@ class Notification extends AbstractEntity
     #[ORM\Column(type: Types::TEXT)]
     private string $content;
 
-    public function __construct(string $content)
-    {
-        $this->content = $content;
-    }
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
+    private bool $enabled = true;
 
     public function getContent(): string
     {
@@ -27,5 +25,15 @@ class Notification extends AbstractEntity
     public function setContent(string $content): void
     {
         $this->content = $content;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
     }
 }

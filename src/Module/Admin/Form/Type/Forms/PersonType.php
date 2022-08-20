@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Storage\Entity\Person;
+use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -30,7 +30,7 @@ final class PersonType extends AbstractType
             ->add('anonymizeLastName', CheckboxType::class, [
                 'required' => false,
             ])
-            ->add('phoneNumber', TextType::class, [
+            ->add('phoneNumber', PhoneNumberType::class, [
                 'required' => false,
             ])
             ->add('emailAddress', EmailType::class, [
@@ -48,11 +48,6 @@ final class PersonType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Person::class,
-            'empty_data' => static function (FormInterface $form): Person {
-                return new Person(
-                    $form->get('firstName')->getData() ?? ''
-                );
-            },
         ]);
     }
 }

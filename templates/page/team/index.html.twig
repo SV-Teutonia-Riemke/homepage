@@ -144,6 +144,7 @@
                                 <th>Name</th>
                                 <th>Funktion</th>
                                 <th>E-Mail</th>
+                                <th>Telefon</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -156,6 +157,7 @@
                                             <a href="mailto:{{ staff.person.emailAddress }}">{{ staff.person.emailAddress }}</a>
                                         {% endif %}
                                     </td>
+                                    <td>{{ staff.person.phoneNumber is null ? '' : staff.person.phoneNumber|phone_number_format }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

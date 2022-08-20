@@ -4,17 +4,15 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Form\Type\Forms;
 
-use App\Form\Type\Entities\FileEntityType;
-use App\Storage\Entity\Sponsor;
+use App\Form\Type\Entities\PersonEntityType;
+use App\Storage\Entity\PersonGroup;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Url;
 
-final class SponsorType extends AbstractType
+final class PersonGroupType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -24,27 +22,18 @@ final class SponsorType extends AbstractType
                     new NotBlank(),
                 ],
             ])
-            ->add('url', TextType::class, [
-                'required'    => false,
-                'constraints' => [
-                    new Url(),
-                ],
-            ])
-            ->add('enabled', CheckboxType::class, [
-                'required' => false,
-            ])
-            ->add('image', FileEntityType::class, [
-                'required'    => true,
-                'constraints' => [
-                    new NotBlank(),
-                ],
+            ->add('persons', PersonEntityType::class, [
+                'multiple'     => true,
+                'expanded'     => true,
+                'required'     => false,
+                'by_reference' => false,
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Sponsor::class,
+            'data_class' => PersonGroup::class,
         ]);
     }
 }

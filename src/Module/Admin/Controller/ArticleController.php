@@ -32,7 +32,10 @@ final class ArticleController extends AbstractController
     public function index(): Response
     {
         $query      = $this->articleRepository->createQueryBuilder('p');
-        $pagination = $this->paginator->paginate($query);
+        $pagination = $this->paginator->paginate($query, options: [
+            'defaultSortFieldName' => 'p.id',
+            'defaultSortDirection' => 'desc',
+        ]);
 
         return $this->render('admin/article/index.html.twig', [
             'pagination' => $pagination,
@@ -82,6 +85,17 @@ final class ArticleController extends AbstractController
     public function remove(Article $article): Response
     {
         $this->entityManager->remove($article);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_article_index');
+    }
+
+    #[Route('/{article}/enable', name: 'enable', defaults: ['enabled' => true])]
+    #[Route('/{article}/disable', name: 'disable', defaults: ['enabled' => false])]
+    public function changeEnabled(Article $article, bool $enabled): Response
+    {
+        $article->setEnabled($enabled);
+
         $this->entityManager->flush();
 
         return $this->redirectToRoute('app_admin_article_index');

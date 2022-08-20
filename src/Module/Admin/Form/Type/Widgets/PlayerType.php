@@ -12,7 +12,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -22,7 +21,7 @@ final class PlayerType extends AbstractType
     {
         $builder
             ->add('person', PersonEntityType::class, [
-                'required' => false,
+                'required'    => false,
                 'constraints' => [
                     new NotBlank(),
                 ],
@@ -43,11 +42,6 @@ final class PlayerType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Player::class,
-            'empty_data' => static function (FormInterface $form): Player {
-                return new Player(
-                    $form->get('person')->getData()
-                );
-            },
         ]);
     }
 }

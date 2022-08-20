@@ -50,6 +50,9 @@ class Team extends AbstractEntity
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $handballNetId = null;
 
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
+    private bool $enabled = true;
+
     public function __construct(
         //        string $name,
         //        Gender $gender,
@@ -151,6 +154,16 @@ class Team extends AbstractEntity
     public function setHandballNetId(?string $handballNetId): void
     {
         $this->handballNetId = $handballNetId;
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(bool $enabled): void
+    {
+        $this->enabled = $enabled;
     }
 
     public function getPlayers(): Collection

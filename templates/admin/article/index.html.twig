@@ -19,6 +19,15 @@
             <td>{{ object.title }}</td>
             <td class="text-end">
                 <div class="btn-group btn-group-sm">
+                    {% if object.enabled %}
+                        <a class="btn btn-outline-success" href="{{ path('app_admin_article_disable', { article: object.id }) }}">
+                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
+                        </a>
+                    {% else %}
+                        <a class="btn btn-outline-danger" href="{{ path('app_admin_article_enable', { article: object.id }) }}">
+                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
+                        </a>
+                    {% endif %}
                     <a class="btn btn-outline-primary" href="{{ path('app_admin_article_edit', { article: object.id }) }}">
                         <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
                     </a>
