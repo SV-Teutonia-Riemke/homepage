@@ -17,6 +17,9 @@ final class FileExtension extends AbstractExtension
     ) {
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getFilters(): array
     {
         return [
@@ -24,6 +27,9 @@ final class FileExtension extends AbstractExtension
         ];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getFunctions(): array
     {
         return [

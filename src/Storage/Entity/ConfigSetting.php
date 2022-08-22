@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ConfigSettingRepository::class)]
-final class ConfigSetting extends AbstractEntity
+class ConfigSetting extends AbstractEntity
 {
     #[ORM\Column(type: Types::STRING)]
     private string $name;

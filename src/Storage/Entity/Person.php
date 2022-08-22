@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Storage\Entity;
 
 use App\Storage\Repository\PersonRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use libphonenumber\PhoneNumber;
@@ -28,6 +26,10 @@ class Person extends AbstractEntity implements Stringable
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $anonymizeLastName = true;
 
+    #[ORM\OneToOne(targetEntity: File::class)]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?File $image = null;
+
     #[ORM\Column(type: PhoneNumberType::NAME, nullable: true)]
     private ?PhoneNumber $phoneNumber = null;
 
@@ -39,14 +41,6 @@ class Person extends AbstractEntity implements Stringable
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $instagram = null;
-
-    #[ORM\ManyToMany(targetEntity: PersonGroup::class, mappedBy: 'persons', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    private Collection $groups;
-
-    public function __construct()
-    {
-        $this->groups = new ArrayCollection();
-    }
 
     public function getFirstName(): ?string
     {
@@ -76,6 +70,16 @@ class Person extends AbstractEntity implements Stringable
     public function setAnonymizeLastName(bool $anonymizeLastName): void
     {
         $this->anonymizeLastName = $anonymizeLastName;
+    }
+
+    public function getImage(): ?File
+    {
+        return $this->image;
+    }
+
+    public function setImage(?File $image): void
+    {
+        $this->image = $image;
     }
 
     public function getPhoneNumber(): ?PhoneNumber
@@ -116,29 +120,6 @@ class Person extends AbstractEntity implements Stringable
     public function setInstagram(?string $instagram): void
     {
         $this->instagram = $instagram;
-    }
-
-    public function getGroups(): Collection
-    {
-        return $this->persons;
-    }
-
-    public function addGroup(PersonGroup $group): void
-    {
-        if ($this->groups->contains($group)) {
-            return;
-        }
-
-        $this->groups->add($group);
-    }
-
-    public function removeGroup(PersonGroup $group): void
-    {
-        if (! $this->groups->contains($group)) {
-            return;
-        }
-
-        $this->groups->removeElement($group);
     }
 
     public function __toString(): string

@@ -23,9 +23,11 @@ class Directory extends AbstractEntity implements Stringable
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
     private ?self $parent;
 
+    /** @var Collection<self> */
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private Collection $children;
 
+    /** @var Collection<File> */
     #[ORM\OneToMany(mappedBy: 'directory', targetEntity: File::class)]
     private Collection $files;
 
@@ -57,11 +59,17 @@ class Directory extends AbstractEntity implements Stringable
         $this->parent = $parent;
     }
 
+    /**
+     * @return Collection<self>
+     */
     public function getChildren(): Collection
     {
         return $this->children;
     }
 
+    /**
+     * @return Collection<File>
+     */
     public function getFiles(): Collection
     {
         return $this->files;

@@ -2,19 +2,17 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Form\Type\Forms;
+namespace App\Module\Admin\Form\Type\Widgets;
 
-use App\Form\Type\Entities\FileEntityType;
-use App\Storage\Entity\Article;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use App\Form\Type\Entities\PersonEntityType;
+use App\Storage\Entity\PersonGroupMember;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-final class ArticleType extends AbstractType
+final class PersonGroupMemberType extends AbstractType
 {
     /**
      * @inheritDoc
@@ -22,28 +20,21 @@ final class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class, [
+            ->add('person', PersonEntityType::class, [
+                'required'    => false,
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
-            ->add('enabled', CheckboxType::class, [
+            ->add('position', TextType::class, [
                 'required' => false,
-            ])
-            ->add('image', FileEntityType::class, [
-                'required' => false,
-            ])
-            ->add('content', CKEditorType::class, [
-                'constraints' => [
-                    new NotBlank(),
-                ],
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Article::class,
+            'data_class' => PersonGroupMember::class,
         ]);
     }
 }

@@ -13,6 +13,9 @@ use Symfony\UX\Dropzone\Form\DropzoneType;
 
 final class FileUploadType extends AbstractType
 {
+    /**
+     * @inheritDoc
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

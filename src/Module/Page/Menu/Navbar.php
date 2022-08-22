@@ -66,7 +66,7 @@ final class Navbar
 //        ]);
 
         $menu->addChild('Teams', [
-            'route' => 'app_index',
+            'route' => 'app_person_groups',
             'icon'  => 'tabler:home',
         ]);
 

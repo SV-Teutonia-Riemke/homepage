@@ -16,15 +16,16 @@ class PersonGroup extends AbstractEntity
     #[ORM\Column(type: Types::STRING)]
     private string $name;
 
-    #[ORM\ManyToMany(targetEntity: Person::class, inversedBy: 'groups', cascade: ['persist', 'remove'], orphanRemoval: true)]
-    private Collection $persons;
+    /** @var Collection<PersonGroupMember> */
+    #[ORM\OneToMany(mappedBy: 'group', targetEntity: PersonGroupMember::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $members;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
 
     public function __construct()
     {
-        $this->persons = new ArrayCollection();
+        $this->members = new ArrayCollection();
     }
 
     public function getName(): string
@@ -47,28 +48,34 @@ class PersonGroup extends AbstractEntity
         $this->enabled = $enabled;
     }
 
-    public function getPersons(): Collection
+    /**
+     * @return Collection<PersonGroupMember>
+     */
+    public function getMembers(): Collection
     {
-        return $this->persons;
+        return $this->members;
     }
 
-    public function addPerson(Person $person): void
+    public function addMember(?PersonGroupMember $member): void
     {
-        if ($this->persons->contains($person)) {
+        if ($member === null) {
             return;
         }
 
-        $person->addGroup($this);
-        $this->persons->add($person);
-    }
-
-    public function removePerson(Person $person): void
-    {
-        if (! $this->persons->contains($person)) {
+        if ($this->members->contains($member)) {
             return;
         }
 
-        $person->removeGroup($this);
-        $this->persons->removeElement($person);
+        $member->setGroup($this);
+        $this->members->add($member);
+    }
+
+    public function removeMember(PersonGroupMember $member): void
+    {
+        if (! $this->members->contains($member)) {
+            return;
+        }
+
+        $this->members->removeElement($member);
     }
 }

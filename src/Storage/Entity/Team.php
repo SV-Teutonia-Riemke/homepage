@@ -32,9 +32,11 @@ class Team extends AbstractEntity
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?File $image = null;
 
+    /** @var Collection<Player> */
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Player::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $players;
 
+    /** @var Collection<Staff> */
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Staff::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $staffs;
 
@@ -53,15 +55,8 @@ class Team extends AbstractEntity
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
 
-    public function __construct(
-        //        string $name,
-        //        Gender $gender,
-        //        TeamAgeCategory $ageCategory,
-    ) {
-//        $this->name        = $name;
-//        $this->gender      = $gender;
-//        $this->ageCategory = $ageCategory;
-
+    public function __construct()
+    {
         $this->players = new ArrayCollection();
         $this->staffs  = new ArrayCollection();
     }
@@ -166,13 +161,20 @@ class Team extends AbstractEntity
         $this->enabled = $enabled;
     }
 
+    /**
+     * @return Collection<Player>
+     */
     public function getPlayers(): Collection
     {
         return $this->players;
     }
 
-    public function addPlayer(Player $player): void
+    public function addPlayer(?Player $player): void
     {
+        if ($player === null) {
+            return;
+        }
+
         if ($this->players->contains($player)) {
             return;
         }
@@ -190,13 +192,20 @@ class Team extends AbstractEntity
         $this->players->removeElement($player);
     }
 
+    /**
+     * @return Collection<Staff>
+     */
     public function getStaffs(): Collection
     {
         return $this->staffs;
     }
 
-    public function addStaff(Staff $staff): void
+    public function addStaff(?Staff $staff): void
     {
+        if ($staff === null) {
+            return;
+        }
+
         if ($this->staffs->contains($staff)) {
             return;
         }

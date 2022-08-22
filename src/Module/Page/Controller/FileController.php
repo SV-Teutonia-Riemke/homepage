@@ -44,9 +44,13 @@ final class FileController extends AbstractController
 
         $mimeType = $this->defaultFilesystem->mimeType($file->getFilePath());
 
-        $response = new StreamedResponse(function () use ($file): void {
-            $outputStream = fopen('php://output', 'wb');
-            $fileStream   = $this->defaultFilesystem->readStream($file->getFilePath());
+        $outputStream = fopen('php://output', 'wb');
+        if ($outputStream === false) {
+            throw $this->createNotFoundException();
+        }
+
+        $response = new StreamedResponse(function () use ($file, $outputStream): void {
+            $fileStream = $this->defaultFilesystem->readStream($file->getFilePath());
             stream_copy_to_stream($fileStream, $outputStream);
         });
 

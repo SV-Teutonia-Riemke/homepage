@@ -45,6 +45,9 @@ class User extends AbstractEntity implements PasswordAuthenticatedUserInterface,
         $this->password = $password;
     }
 
+    /**
+     * @return list<string>
+     */
     public function getRoles(): array
     {
         return [

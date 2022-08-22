@@ -7,6 +7,8 @@ namespace App\Infrastructure\Menu\Extension;
 use Knp\Menu\Factory\ExtensionInterface;
 use Knp\Menu\ItemInterface;
 
+use function array_merge;
+
 final class IconifyExtension implements ExtensionInterface
 {
     private const KEY_NAME = 'icon';
@@ -16,10 +18,12 @@ final class IconifyExtension implements ExtensionInterface
      */
     public function buildOptions(array $options): array
     {
-        return [...[
-            self::KEY_NAME => null,
-        ], ...$options,
-        ];
+        return array_merge(
+            [
+                self::KEY_NAME => null,
+            ],
+            $options
+        );
     }
 
     /**

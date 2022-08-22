@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Form\Type\Forms;
 
-use App\Form\Type\Entities\PersonEntityType;
+use App\Module\Admin\Form\Type\Widgets\PersonGroupMemberCollectionType;
 use App\Storage\Entity\PersonGroup;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,6 +14,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class PersonGroupType extends AbstractType
 {
+    /**
+     * @inheritDoc
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -22,9 +25,7 @@ final class PersonGroupType extends AbstractType
                     new NotBlank(),
                 ],
             ])
-            ->add('persons', PersonEntityType::class, [
-                'multiple'     => true,
-                'expanded'     => true,
+            ->add('members', PersonGroupMemberCollectionType::class, [
                 'required'     => false,
                 'by_reference' => false,
             ]);

@@ -47,8 +47,8 @@
 {%- endblock -%}
 
 {% block pageSubBody %}
-    <div class="row">
-        <div class="col-4">
+    <div class="row row-cards">
+        <div class="col-12 col-md-4 order-2 order-md-1">
             <div class="space-y">
                 <div class="card">
                     <div class="card-header">
@@ -58,13 +58,13 @@
                         {% if team.currentMatchday is not null %}
                             <a href="{{ team.currentMatchday }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Aktueller Spieltag</a>
                         {% endif %}
-{#                        <a href="#" class="list-group-item list-group-item-action">Trainingszeiten</a>#}
-{#                        {% if team.facebook is not null %}#}
-{#                            <a href="https://facebook.com/{{ team.facebook }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Facebook</a>#}
-{#                        {% endif %}#}
-{#                        {% if team.instagram is not null %}#}
-{#                            <a href="https://instagram.com/{{ team.instagram }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Instagram</a>#}
-{#                        {% endif %}#}
+                        {#                        <a href="#" class="list-group-item list-group-item-action">Trainingszeiten</a> #}
+                        {#                        {% if team.facebook is not null %} #}
+                        {#                            <a href="https://facebook.com/{{ team.facebook }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Facebook</a> #}
+                        {#                        {% endif %} #}
+                        {#                        {% if team.instagram is not null %} #}
+                        {#                            <a href="https://instagram.com/{{ team.instagram }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Instagram</a> #}
+                        {#                        {% endif %} #}
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-12 col-md-8 order-1 order-md-2">
             <div class="space-y">
                 <div class="card">
                     <div class="card-header">
@@ -115,16 +115,20 @@
                             <tbody>
                             {% for player in team.players %}
                                 <tr>
-                                    <td>{{ player.number }}</td>
+                                    <td>{{ player.number|default('-') }}</td>
                                     <td>{{ player.person }}</td>
-                                    <td>{{ player.position is null ? '' : player.position.value }}</td>
+                                    <td>{{ player.position is null ? '-' : player.position.value }}</td>
                                     <td class="text-end">
-                                        <div class="btn btn-sm btn-icon btn-link text-instagram">
-                                            <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
-                                        </div>
-                                        <div class="btn btn-sm btn-icon btn-link text-facebook">
-                                            <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
-                                        </div>
+                                        {% if player.person.instagram is not null %}
+                                            <a href="{{ player.person.instagram }}" class="btn btn-sm btn-icon btn-link text-instagram">
+                                                <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+                                            </a>
+                                        {% endif %}
+                                        {% if player.person.facebook is not null %}
+                                            <a href="{{ player.person.facebook }}" class="btn btn-sm btn-icon btn-link text-facebook">
+                                                <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+                                            </a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}

@@ -1,0 +1,58 @@
+{% extends '_layout/layout.html.twig' %}
+
+{% set pageTitle = 'Teams' %}
+
+{% block pageSubBody %}
+    <div class="card">
+        <div class="accordion" id="person-groups">
+            {% for group in personGroups %}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading-{{ group.id }}">
+                        <button class="accordion-button{% if loop.first == false %} collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#person-group-{{ group.id }}">
+                            {{ group.name }}
+                        </button>
+                    </h2>
+                    <div id="person-group-{{ group.id }}" class="accordion-collapse collapse{% if loop.first %} show{% endif %}" data-bs-parent="#person-groups">
+                        <div class="accordion-body pt-0">
+                            <div class="row row-cards">
+                                {% for member in group.members %}
+                                    <div class="col-12 col-md-6 col-lg-3">
+                                        <div class="card h-100">
+                                            <div class="card-body p-4 text-center">
+                                                {% set imagePath = member.person.image is null
+                                                    ? 'https://via.placeholder.com/160x160.png?text=Nicht+vorhanden'
+                                                    : member.person.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 160 } }) %}
+                                                <img src="{{ imagePath }}" class="rounded mb-3"/>
+                                                <h3 class="m-0 mb-1">{{ member.person }}</h3>
+                                                {% if member.position is not null %}
+                                                    <div class="mt-3">
+                                                        <span class="badge bg-green-lt">{{ member.position }}</span>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="d-flex">
+                                                {% if member.person.emailAddress is not null %}
+                                                    <a href="mailto:{{ member.person.emailAddress }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.emailAddress }}" data-bs-placement="top">
+                                                        <span class="iconify icon me-2" data-icon="fa6-solid:at"></span>
+                                                        E-Mail
+                                                    </a>
+                                                {% endif %}
+                                                {% if member.person.phoneNumber is not null %}
+                                                    <a href="tel:{{ member.person.phoneNumber|phone_number_format }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.phoneNumber|phone_number_format }}" data-bs-placement="top">
+                                                        <span class="iconify icon me-2" data-icon="fa6-solid:phone"></span>
+                                                        Anrufen
+                                                    </a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+{% endblock %}
