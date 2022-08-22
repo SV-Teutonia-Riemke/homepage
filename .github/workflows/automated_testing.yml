@@ -1,0 +1,83 @@
+name: Automated Testing
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  automatic_test:
+    env:
+      DATABASE_URL: mysql://test:test@127.0.0.1:3306/test
+
+    services:
+      mariadb:
+        image: mariadb:latest
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_USER: test
+          MYSQL_PASSWORD: test
+          MYSQL_DATABASE: test
+          MYSQL_ROOT_PASSWORD: test
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+
+    strategy:
+      matrix:
+        php-versions: [ '8.1' ]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          coverage: none
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict -n
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+#      - name: Run Migration
+#        run: |
+#          php bin/console doctrine:database:drop --if-exists --force --no-interaction
+#          php bin/console doctrine:database:create --if-not-exists --no-interaction
+#          php bin/console doctrine:migrations:migrate --no-interaction
+#
+#      - name: Validate Schema
+#        run: php bin/console doctrine:schema:validate
+
+      - name: Composer Require Checker
+        run: composer crc
+
+      - name: Composer Unused
+        run: php vendor/bin/composer-unused
+
+      - name: CS Check
+        run: composer cs-check-all
+
+      - name: Prepare cache
+        run: composer prepare-test
+#
+      - name: PHPStan
+        run: composer phpstan
+
+#      - name: PHPUnit
+#        run: composer phpunit
