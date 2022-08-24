@@ -1,0 +1,36 @@
+{% extends '@admin/_layout/layout.html.twig' %}
+
+{% set pagePreTitle = 'List' %}
+{% set pageTitle = 'Teams' %}
+
+{% block pageTitleActionsButtons %}
+    <a class="btn btn-primary" href="{{ path('app_admin_team_create') }}">Create</a>
+{% endblock %}
+
+{% block pageBody %}
+    {% embed '_partials/pagination_table.html.twig' with { title: 'Teams'} %}
+        {% block paginationHeader %}
+            <th class="w-1">Id</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Type</th>
+            <th></th>
+        {% endblock %}
+        {% block paginationRow %}
+            <td>{{ object.id }}</td>
+            <td>{{ object.name }}</td>
+            <td>{{ object.gender.value }}</td>
+            <td>{{ object.ageCategory.value }}</td>
+            <td class="text-end">
+                <div class="btn-group btn-group-sm">
+                    <a class="btn btn-outline-primary" href="{{ path('app_admin_team_edit', { team: object.id }) }}">
+                        <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
+                    </a>
+                    <a class="btn btn-outline-danger" href="{{ path('app_admin_team_remove', { team: object.id }) }}">
+                        <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
+                    </a>
+                </div>
+            </td>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

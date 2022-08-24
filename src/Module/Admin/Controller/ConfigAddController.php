@@ -33,7 +33,7 @@ class ConfigAddController extends AbstractController
             return $this->redirectToRoute('app_admin_config_settings');
         }
 
-        return $this->renderForm('admin/config/add.html.twig', [
+        return $this->renderForm('@admin/config/add.html.twig', [
             'form' => $form,
         ]);
     }

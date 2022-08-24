@@ -34,7 +34,7 @@ final class PersonController extends AbstractController
         $query      = $this->personRepository->createQueryBuilder('p');
         $pagination = $this->paginator->paginate($query);
 
-        return $this->render('admin/person/index.html.twig', [
+        return $this->render('@admin/person/index.html.twig', [
             'pagination' => $pagination,
         ]);
     }
@@ -56,7 +56,7 @@ final class PersonController extends AbstractController
             return $this->redirectToRoute('app_admin_person_index');
         }
 
-        return $this->renderForm('admin/person/create.html.twig', [
+        return $this->renderForm('@admin/person/create.html.twig', [
             'form' => $form,
         ]);
     }
@@ -74,7 +74,7 @@ final class PersonController extends AbstractController
             return $this->redirectToRoute('app_admin_person_index');
         }
 
-        return $this->renderForm('admin/person/edit.html.twig', [
+        return $this->renderForm('@admin/person/edit.html.twig', [
             'form' => $form,
         ]);
     }

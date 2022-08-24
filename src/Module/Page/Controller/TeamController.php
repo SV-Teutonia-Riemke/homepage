@@ -16,7 +16,7 @@ final class TeamController extends AbstractController
 {
     public function __invoke(Team $team): Response
     {
-        return $this->render('page/team/index.html.twig', [
+        return $this->render('@page/team/index.html.twig', [
             'team' => $team,
         ]);
     }

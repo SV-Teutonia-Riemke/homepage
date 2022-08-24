@@ -21,7 +21,7 @@ final class ImprintController extends AbstractController
 
     public function __invoke(): Response
     {
-        return $this->render('page/info/imprint.html.twig', [
+        return $this->render('@page/info/imprint.html.twig', [
             'imprint' => $this->configProvider->get('imprint'),
         ]);
     }

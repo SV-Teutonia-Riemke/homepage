@@ -34,7 +34,7 @@ final class SponsorController extends AbstractController
         $query      = $this->sponsorRepository->createQueryBuilder('p');
         $pagination = $this->paginator->paginate($query);
 
-        return $this->render('admin/sponsor/index.html.twig', [
+        return $this->render('@admin/sponsor/index.html.twig', [
             'pagination' => $pagination,
         ]);
     }
@@ -55,7 +55,7 @@ final class SponsorController extends AbstractController
             return $this->redirectToRoute('app_admin_sponsor_index');
         }
 
-        return $this->renderForm('admin/sponsor/create.html.twig', [
+        return $this->renderForm('@admin/sponsor/create.html.twig', [
             'form' => $form,
         ]);
     }
@@ -72,7 +72,7 @@ final class SponsorController extends AbstractController
             return $this->redirectToRoute('app_admin_sponsor_index');
         }
 
-        return $this->renderForm('admin/sponsor/edit.html.twig', [
+        return $this->renderForm('@admin/sponsor/edit.html.twig', [
             'form' => $form,
         ]);
     }

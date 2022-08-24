@@ -1,0 +1,91 @@
+{% extends '@admin/_layout/layout.html.twig' %}
+
+{% set pagePreTitle = 'List' %}
+{% set pageTitle = 'Files' %}
+
+{% block pageTitleActionsButtons %}
+    {% if directory is null %}
+        <a class="btn btn-primary" href="{{ path('app_admin_files_directory_create') }}">Create directory</a>
+        <a class="btn btn-primary" href="{{ path('app_admin_files_upload') }}">Upload file</a>
+    {% else %}
+        <a class="btn btn-primary" href="{{ path('app_admin_files_directory_create_parent', { directory: directory.id }) }}">Create directory</a>
+        <a class="btn btn-primary" href="{{ path('app_admin_files_upload_directory', { directory: directory.id }) }}">Upload file</a>
+    {% endif %}
+{% endblock %}
+
+{% block pageBody %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <span class="badge">{{ directories|length + files|length }}</span>
+                Files
+            </h3>
+        </div>
+        <table class="table card-table table-vcenter text-nowrap">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th class="w-1"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if directory is not null %}
+                <tr>
+                    <td>
+                        <a
+                                {% if directory.parent is not null %}
+                                    href="{{ path('app_admin_files_directory', { directory: directory.parent.id }) }}"
+                                {% else %}
+                                    href="{{ path('app_admin_files_index') }}"
+                                {% endif %}
+                        >
+                            ..
+                        </a>
+                    </td>
+                    <td></td>
+                </tr>
+            {% endif %}
+            {% for directory in directories %}
+                <tr>
+                    <td>
+                        <a href="{{ path('app_admin_files_directory', { directory: directory.id }) }}">
+                            {{ directory.name }}
+                        </a>
+                    </td>
+                    <td class="text-end">
+                        <div class="btn-group btn-group-sm">
+                            <a class="btn btn-outline-primary" href="{{ path('app_admin_files_directory_edit', { directory: directory.id }) }}">
+                                <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
+                            </a>
+                            <a class="btn btn-outline-danger" href="{{ path('app_admin_files_directory_remove', { directory: directory.id }) }}">
+                                <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            {% for file in files %}
+                <tr>
+                    <td>{{ file }}</td>
+                    <td class="text-end">
+                        <div class="btn-group btn-group-sm">
+                            <span class="btn btn-outline-primary copy-to-clipboard" data-clipboard-text="{{ file_url(file) }}">
+                                <span class="iconify-inline" data-icon="fa6-solid:copy"></span>
+                            </span>
+                            <a class="btn btn-outline-primary" href="{{ file_url(file) }}" target="_blank">
+                                <span class="iconify-inline" data-icon="fa6-solid:arrow-up-right-from-square"></span>
+                            </a>
+                            <a class="btn btn-outline-primary" href="{{ path('app_admin_files_file_edit', { file: file.id }) }}">
+                                <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
+                            </a>
+                            <a class="btn btn-outline-danger" href="{{ path('app_admin_files_file_remove', { file: file.id }) }}">
+                                <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -34,7 +34,7 @@ final class PersonGroupController extends AbstractController
         $query      = $this->personGroupRepository->createQueryBuilder('p');
         $pagination = $this->paginator->paginate($query);
 
-        return $this->render('admin/person_group/index.html.twig', [
+        return $this->render('@admin/person_group/index.html.twig', [
             'pagination' => $pagination,
         ]);
     }
@@ -55,7 +55,7 @@ final class PersonGroupController extends AbstractController
             return $this->redirectToRoute('app_admin_person_group_index');
         }
 
-        return $this->renderForm('admin/person_group/create.html.twig', [
+        return $this->renderForm('@admin/person_group/create.html.twig', [
             'form' => $form,
         ]);
     }
@@ -73,7 +73,7 @@ final class PersonGroupController extends AbstractController
             return $this->redirectToRoute('app_admin_person_group_index');
         }
 
-        return $this->renderForm('admin/person_group/edit.html.twig', [
+        return $this->renderForm('@admin/person_group/edit.html.twig', [
             'form'        => $form,
             'personGroup' => $personGroup,
         ]);

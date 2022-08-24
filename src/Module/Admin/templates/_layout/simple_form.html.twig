@@ -1,0 +1,35 @@
+{% extends '@admin/_layout/layout.html.twig' %}
+
+{% block formCancel %}
+    {% if formCancelLink is defined and formCancelLink is not empty %}
+        <a href="{{ formCancelLink }}" class="btn btn-link">
+            <span class="iconify-inline" data-icon="{{ formCancelIcon ?? 'fa6-solid:times' }}"></span>
+            {{ (formCancelLabel ?? 'Cancel')|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block formSubmit %}
+    <button type="submit" class="btn btn-primary">
+        <span class="iconify-inline" data-icon="{{ formSubmitIcon ?? 'fa6-solid:save' }}"></span>
+        {{ (formSubmitLabel ?? 'Submit')|trans }}
+    </button>
+{% endblock %}
+
+{% block formActions %}
+    {{ block('formCancel') }}
+    {{ block('formSubmit') }}
+{% endblock %}
+
+{% block pageTitleActionsButtons %}
+    {{ block('formActions') }}
+{% endblock %}
+
+{% block pageWrapper %}
+    {{ form_start(form) }}
+    {{ parent() }}
+    <div class="d-none">
+        {{ form_rest(form) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

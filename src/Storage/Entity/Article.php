@@ -24,6 +24,14 @@ class Article extends AbstractEntity
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
 
+    public function __construct(
+        string $title,
+        string $content
+    ) {
+        $this->title   = $title;
+        $this->content = $content;
+    }
+
     public function getTitle(): string
     {
         return $this->title;

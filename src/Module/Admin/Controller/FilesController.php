@@ -55,7 +55,7 @@ final class FilesController extends AbstractController
             'directory' => $directory,
         ]);
 
-        return $this->render('admin/files/index.html.twig', [
+        return $this->render('@admin/files/index.html.twig', [
             'directory'   => $directory,
             'directories' => $directories,
             'files'       => $files,
@@ -84,7 +84,7 @@ final class FilesController extends AbstractController
                 ]);
         }
 
-        return $this->render('admin/files/directory_create.html.twig', [
+        return $this->render('@admin/files/directory_create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -108,7 +108,7 @@ final class FilesController extends AbstractController
                 ]);
         }
 
-        return $this->render('admin/files/directory_create.html.twig', [
+        return $this->render('@admin/files/directory_create.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -185,7 +185,7 @@ final class FilesController extends AbstractController
                 ]);
         }
 
-        return $this->renderForm('admin/files/upload.html.twig', [
+        return $this->renderForm('@admin/files/upload.html.twig', [
             'directory' => $directory,
             'form'      => $form,
         ]);
@@ -211,7 +211,7 @@ final class FilesController extends AbstractController
                 ]);
         }
 
-        return $this->render('admin/files/directory_create.html.twig', [
+        return $this->render('@admin/files/directory_create.html.twig', [
             'file' => $file,
             'form' => $form->createView(),
         ]);

@@ -21,7 +21,7 @@ final class PrivacyPoliciesController extends AbstractController
 
     public function __invoke(): Response
     {
-        return $this->render('page/info/privacy_polices.html.twig', [
+        return $this->render('@page/info/privacy_polices.html.twig', [
             'privacyPolicies' => $this->configProvider->get('privacy_polices'),
             'copyright'       => $this->configProvider->get('copyright'),
             'disclaimer'      => $this->configProvider->get('disclaimer'),
