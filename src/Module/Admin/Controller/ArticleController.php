@@ -29,13 +29,17 @@ final class ArticleController extends AbstractController
     }
 
     #[Route('', name: 'index')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $query      = $this->articleRepository->createQueryBuilder('p');
-        $pagination = $this->paginator->paginate($query, options: [
-            'defaultSortFieldName' => 'p.id',
-            'defaultSortDirection' => 'desc',
-        ]);
+        $pagination = $this->paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            options: [
+                'defaultSortFieldName' => 'p.id',
+                'defaultSortDirection' => 'desc',
+            ]
+        );
 
         return $this->render('@admin/article/index.html.twig', [
             'pagination' => $pagination,

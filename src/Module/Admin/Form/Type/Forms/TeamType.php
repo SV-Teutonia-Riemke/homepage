@@ -81,4 +81,9 @@ final class TeamType extends AbstractType
             'data_class' => Team::class,
         ]);
     }
+
+    public function getParent(): string
+    {
+        return AbstractForm::class;
+    }
 }

@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
+use App\Module\Admin\Form\Type\Forms\AbstractForm;
 use App\Module\Admin\Form\Type\Forms\PersonType;
 use App\Storage\Entity\Person;
 use App\Storage\Repository\PersonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
@@ -29,10 +32,13 @@ final class PersonController extends AbstractController
     }
 
     #[Route('', name: 'index')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $query      = $this->personRepository->createQueryBuilder('p');
-        $pagination = $this->paginator->paginate($query);
+        $pagination = $this->paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)
+        );
 
         return $this->render('@admin/person/index.html.twig', [
             'pagination' => $pagination,
@@ -47,13 +53,7 @@ final class PersonController extends AbstractController
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $person = $form->getData();
-            assert($person instanceof Person);
-
-            $this->entityManager->persist($person);
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_admin_person_index');
+            return $this->handleValidForm($form);
         }
 
         return $this->renderForm('@admin/person/create.html.twig', [
@@ -69,14 +69,30 @@ final class PersonController extends AbstractController
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_admin_person_index');
+            return $this->handleValidForm($form);
         }
 
         return $this->renderForm('@admin/person/edit.html.twig', [
             'form' => $form,
         ]);
+    }
+
+    private function handleValidForm(FormInterface $form): Response
+    {
+        $person = $form->getData();
+        assert($person instanceof Person);
+
+        $this->entityManager->persist($person);
+        $this->entityManager->flush();
+
+        $submitAndNew = $form->get(AbstractForm::BUTTON_SUBMIT_AND_NEW);
+        assert($submitAndNew instanceof SubmitButton);
+
+        if ($submitAndNew->isClicked()) {
+            return $this->redirectToRoute('app_admin_person_create');
+        }
+
+        return $this->redirectToRoute('app_admin_person_index');
     }
 
     #[Route('/{person}/remove', name: 'remove')]

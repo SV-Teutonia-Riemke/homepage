@@ -50,4 +50,9 @@ final class SponsorType extends AbstractType
             'data_class' => Sponsor::class,
         ]);
     }
+
+    public function getParent(): string
+    {
+        return AbstractForm::class;
+    }
 }

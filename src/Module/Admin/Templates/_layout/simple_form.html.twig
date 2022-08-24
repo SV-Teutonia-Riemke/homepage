@@ -10,10 +10,32 @@
 {% endblock %}
 
 {% block formSubmit %}
-    <button type="submit" class="btn btn-primary">
-        <span class="iconify-inline" data-icon="{{ formSubmitIcon ?? 'fa6-solid:save' }}"></span>
-        {{ (formSubmitLabel ?? 'Submit')|trans }}
-    </button>
+    {% if form.submit is defined %}
+        {% set submitLabel %}
+            <span class="iconify-inline" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
+            {{ (formSubmitLabel ?? 'Submit')|trans }}
+        {% endset %}
+        {{ form_row(form.submit, {
+            label: submitLabel,
+            label_html: true
+        }) }}
+    {% else %}
+        <button type="submit" class="btn btn-primary">
+            <span class="iconify-inline" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
+            {{ (formSubmitLabel ?? 'Submit')|trans }}
+        </button>
+    {% endif %}
+
+    {% if form.submitAndNew is defined %}
+        {% set submitAndNewLabel %}
+            <span class="iconify-inline" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
+            {{ (formSubmitAndNewLabel ?? 'Submit & New')|trans }}
+        {% endset %}
+        {{ form_row(form.submitAndNew, {
+            label: submitAndNewLabel,
+            label_html: true
+        }) }}
+    {% endif %}
 {% endblock %}
 
 {% block formActions %}

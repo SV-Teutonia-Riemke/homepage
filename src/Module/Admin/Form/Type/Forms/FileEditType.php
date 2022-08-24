@@ -38,4 +38,9 @@ final class FileEditType extends AbstractType
             'data_class' => File::class,
         ]);
     }
+
+    public function getParent(): string
+    {
+        return AbstractForm::class;
+    }
 }

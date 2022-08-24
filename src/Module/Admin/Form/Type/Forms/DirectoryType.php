@@ -43,4 +43,9 @@ final class DirectoryType extends AbstractType
             },
         ]);
     }
+
+    public function getParent(): string
+    {
+        return AbstractForm::class;
+    }
 }

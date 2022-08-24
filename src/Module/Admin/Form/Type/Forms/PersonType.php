@@ -57,4 +57,9 @@ final class PersonType extends AbstractType
             'data_class' => Person::class,
         ]);
     }
+
+    public function getParent(): string
+    {
+        return AbstractForm::class;
+    }
 }

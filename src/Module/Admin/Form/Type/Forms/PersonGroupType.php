@@ -37,4 +37,9 @@ final class PersonGroupType extends AbstractType
             'data_class' => PersonGroup::class,
         ]);
     }
+
+    public function getParent(): string
+    {
+        return AbstractForm::class;
+    }
 }
