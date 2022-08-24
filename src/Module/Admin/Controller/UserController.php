@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 use function assert;
@@ -25,6 +26,7 @@ final class UserController extends AbstractController
         private readonly UserRepository $userRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly PaginatorInterface $paginator,
+        private readonly UserPasswordHasherInterface $userPasswordHasher,
     ) {
     }
 
@@ -49,6 +51,11 @@ final class UserController extends AbstractController
             $user = $form->getData();
             assert($user instanceof User);
 
+            $password = $form->get('password')->getData();
+            if ($password !== null) {
+                $user->setPassword($this->userPasswordHasher->hashPassword($user, $password));
+            }
+
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
@@ -67,7 +74,11 @@ final class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($user);
+            $password = $form->get('password')->getData();
+            if ($password !== null) {
+                $user->setPassword($this->userPasswordHasher->hashPassword($user, $password));
+            }
+
             $this->entityManager->flush();
 
             return $this->redirectToRoute('app_admin_user_index');

@@ -19,8 +19,10 @@ class User extends AbstractEntity implements PasswordAuthenticatedUserInterface,
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private ?string $password;
 
-    public function __construct(string $email, ?string $password = null)
-    {
+    public function __construct(
+        string $email,
+        ?string $password = null
+    ) {
         $this->email    = $email;
         $this->password = $password;
     }

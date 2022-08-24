@@ -8,6 +8,8 @@ use App\Storage\Repository\TeamRepository;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 
+use function count;
+
 final class Navbar
 {
     public function __construct(
@@ -28,37 +30,41 @@ final class Navbar
             'icon'  => 'tabler:home',
         ]);
 
-        $teamSeniors = $this->factory->createItem('Senioren', [
-            'dropdown' => true,
-            'icon'     => 'tabler:home',
-        ]);
-
-        foreach ($seniorTeams as $team) {
-            $teamSeniors->addChild($team->getName(), [
-                'route'           => 'app_team',
-                'routeParameters' => [
-                    'team' => $team->getId(),
-                ],
+        if (count($seniorTeams) > 0) {
+            $teamSeniors = $this->factory->createItem('Senioren', [
+                'dropdown' => true,
+                'icon'     => 'tabler:home',
             ]);
+
+            foreach ($seniorTeams as $team) {
+                $teamSeniors->addChild($team->getName(), [
+                    'route'           => 'app_team',
+                    'routeParameters' => [
+                        'team' => $team->getId(),
+                    ],
+                ]);
+            }
+
+            $menu->addChild($teamSeniors);
         }
 
-        $menu->addChild($teamSeniors);
-
-        $teamJuniors = $this->factory->createItem('Junioren', [
-            'dropdown' => true,
-            'icon'     => 'tabler:home',
-        ]);
-
-        foreach ($juniorTeams as $team) {
-            $teamJuniors->addChild($team->getName(), [
-                'route'           => 'app_team',
-                'routeParameters' => [
-                    'team' => $team->getId(),
-                ],
+        if (count($juniorTeams) > 0) {
+            $teamJuniors = $this->factory->createItem('Junioren', [
+                'dropdown' => true,
+                'icon'     => 'tabler:home',
             ]);
-        }
 
-        $menu->addChild($teamJuniors);
+            foreach ($juniorTeams as $team) {
+                $teamJuniors->addChild($team->getName(), [
+                    'route'           => 'app_team',
+                    'routeParameters' => [
+                        'team' => $team->getId(),
+                    ],
+                ]);
+            }
+
+            $menu->addChild($teamJuniors);
+        }
 
 //        $menu->addChild('Sponsoren', [
 //            'route' => 'app_index',
