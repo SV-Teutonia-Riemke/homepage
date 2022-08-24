@@ -15,3 +15,6 @@ liip_imagine:
 
         optimized :
             quality : 90
+
+    twig:
+        mode: lazy

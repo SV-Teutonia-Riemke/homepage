@@ -11,7 +11,7 @@ RUN sudo rm -rf assets docker docs node_modules tests \
     .env.test .env.local.dist .gitignore composer-require-checker.json docker-compose.yml Makefile package.json \
     phpcs.xml phpstan.neon phpstan-baseline.neon phpunit.xml webpack.config.js .editorconfig README.md composer-unused.php rector.php
 
-RUN sudo mkdir -p /var/www/html/var/cache
+RUN sudo mkdir -p /var/www/html/var/cache /var/www/html/var/flysystem
 #RUN sudo mkdir -p /var/www/html/var/log
 RUN sudo chown -R docker:docker /var/www/html/var
 
