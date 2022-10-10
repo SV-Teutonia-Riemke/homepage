@@ -11,11 +11,24 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 class Notification extends AbstractEntity
 {
+    #[ORM\Column(type: Types::STRING)]
+    private string $title;
+
     #[ORM\Column(type: Types::TEXT)]
     private string $content;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
 
     public function getContent(): string
     {

@@ -1,6 +1,15 @@
 {% extends '@page/_layout/layout.html.twig' %}
 
 {% block pageSubBody %}
+    <div class="row">
+        <div class="col">
+            {% for notification in notifications %}
+                <div class="alert alert-info">
+                    {{ notification.content|raw }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
     <div class="row row-cards">
         <div class="col-12 col-md-9">
             {% for article in articles %}
