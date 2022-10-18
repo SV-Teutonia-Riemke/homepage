@@ -169,6 +169,7 @@ class Team extends AbstractEntity
         return $this->players;
     }
 
+    /** @return Collection<Player> */
     public function getPlayersByNumber(): Collection
     {
         $data = $this->players->toArray();
