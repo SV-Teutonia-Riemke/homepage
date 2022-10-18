@@ -34,7 +34,7 @@ final class TeamController extends AbstractController
         $query      = $this->teamRepository->createQueryBuilder('p');
         $pagination = $this->paginator->paginate(
             $query,
-            $request->query->getInt('page', 1)
+            $request->query->getInt('page', 1),
         );
 
         return $this->render('@admin/team/index.html.twig', [

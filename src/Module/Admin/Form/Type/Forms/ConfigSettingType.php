@@ -15,9 +15,7 @@ use function assert;
 
 final class ConfigSettingType extends AbstractType
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(FormEvents::POST_SET_DATA, static function (PostSetDataEvent $event): void {

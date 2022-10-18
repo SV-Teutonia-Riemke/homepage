@@ -17,11 +17,11 @@ class User extends AbstractEntity implements PasswordAuthenticatedUserInterface,
     private string $email;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $password;
+    private string|null $password;
 
     public function __construct(
         string $email,
-        ?string $password = null
+        string|null $password = null,
     ) {
         $this->email    = $email;
         $this->password = $password;
@@ -37,19 +37,17 @@ class User extends AbstractEntity implements PasswordAuthenticatedUserInterface,
         $this->email = $email;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string|null
     {
         return $this->password;
     }
 
-    public function setPassword(?string $password): void
+    public function setPassword(string|null $password): void
     {
         $this->password = $password;
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     public function getRoles(): array
     {
         return [

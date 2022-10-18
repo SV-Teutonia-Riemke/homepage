@@ -7,6 +7,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 use App\Form\Type\Entities\FileEntityType;
 use App\Storage\Entity\Person;
 use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -17,9 +18,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class PersonType extends AbstractType
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -29,7 +28,9 @@ final class PersonType extends AbstractType
                 ],
             ])
             ->add('lastName', TextType::class, [
-                'required' => false,
+                'constraints' => [
+                    new NotBlank(),
+                ],
             ])
             ->add('anonymizeLastName', CheckboxType::class, [
                 'required' => false,
@@ -54,7 +55,10 @@ final class PersonType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Person::class,
+            'data_class'  => Person::class,
+            'constraints' => [
+                new UniqueEntity(fields: ['firstName', 'lastName']),
+            ],
         ]);
     }
 

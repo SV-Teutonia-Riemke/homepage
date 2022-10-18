@@ -13,13 +13,11 @@ use Twig\TwigFunction;
 final class FileExtension extends AbstractExtension
 {
     public function __construct(
-        private readonly UrlGeneratorInterface $urlGenerator
+        private readonly UrlGeneratorInterface $urlGenerator,
     ) {
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function getFilters(): array
     {
         return [
@@ -27,9 +25,7 @@ final class FileExtension extends AbstractExtension
         ];
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function getFunctions(): array
     {
         return [
@@ -52,7 +48,7 @@ final class FileExtension extends AbstractExtension
                 'extension' => $file->getExtension(),
                 'download'  => $download === true ? 1 : null,
             ],
-            UrlGeneratorInterface::ABSOLUTE_URL
+            UrlGeneratorInterface::ABSOLUTE_URL,
         );
     }
 }

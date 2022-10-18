@@ -8,9 +8,7 @@ use App\Storage\Entity\File;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @template-extends ServiceEntityRepository<File>
- */
+/** @template-extends ServiceEntityRepository<File> */
 final class FileRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

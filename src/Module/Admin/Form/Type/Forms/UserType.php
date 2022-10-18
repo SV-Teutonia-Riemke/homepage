@@ -15,9 +15,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class UserType extends AbstractType
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -38,7 +36,7 @@ final class UserType extends AbstractType
             'data_class' => User::class,
             'empty_data' => static function (FormInterface $form): User {
                 return new User(
-                    $form->get('email')->getData() ?? ''
+                    $form->get('email')->getData() ?? '',
                 );
             },
         ]);

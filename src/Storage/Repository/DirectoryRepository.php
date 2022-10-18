@@ -8,9 +8,7 @@ use App\Storage\Entity\Directory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @template-extends ServiceEntityRepository<Directory>
- */
+/** @template-extends ServiceEntityRepository<Directory> */
 final class DirectoryRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

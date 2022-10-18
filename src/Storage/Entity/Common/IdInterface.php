@@ -6,5 +6,5 @@ namespace App\Storage\Entity\Common;
 
 interface IdInterface
 {
-    public function getId(): ?int;
+    public function getId(): int|null;
 }

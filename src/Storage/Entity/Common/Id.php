@@ -12,9 +12,9 @@ trait Id
     #[ORM\Column(type: Types::INTEGER, options: ['unsigned' => true])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'AUTO')]
-    protected ?int $id = null;
+    protected int|null $id = null;
 
-    public function getId(): ?int
+    public function getId(): int|null
     {
         return $this->id;
     }

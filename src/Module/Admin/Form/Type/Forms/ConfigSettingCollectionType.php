@@ -10,9 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ConfigSettingCollectionType extends AbstractType
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('settings', CollectionType::class, [

@@ -11,17 +11,17 @@ use Shapecode\Doctrine\DBAL\Types\DateTimeUTCType;
 trait Modified
 {
     #[ORM\Column(type: DateTimeUTCType::DATETIMEUTC, nullable: false)]
-    protected ?DateTimeInterface $createdAt = null;
+    protected DateTimeInterface|null $createdAt = null;
 
     #[ORM\Column(type: DateTimeUTCType::DATETIMEUTC, nullable: true)]
-    protected ?DateTimeInterface $updatedAt = null;
+    protected DateTimeInterface|null $updatedAt = null;
 
     public function setCreatedAt(DateTimeInterface $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
-    public function getCreatedAt(): ?DateTimeInterface
+    public function getCreatedAt(): DateTimeInterface|null
     {
         return $this->createdAt;
     }
@@ -31,7 +31,7 @@ trait Modified
         $this->updatedAt = $updatedAt;
     }
 
-    public function getUpdatedAt(): ?DateTimeInterface
+    public function getUpdatedAt(): DateTimeInterface|null
     {
         return $this->updatedAt;
     }

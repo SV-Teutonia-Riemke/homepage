@@ -13,22 +13,18 @@ final class IconifyExtension implements ExtensionInterface
 {
     private const KEY_NAME = 'icon';
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildOptions(array $options): array
     {
         return array_merge(
             [
                 self::KEY_NAME => null,
             ],
-            $options
+            $options,
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildItem(ItemInterface $item, array $options): void
     {
         $item->setExtra(self::KEY_NAME, $options[self::KEY_NAME] ?? null);

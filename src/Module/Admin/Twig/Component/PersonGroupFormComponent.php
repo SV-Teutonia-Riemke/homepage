@@ -17,7 +17,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent(
     'admin_person_group_form',
-    '@admin/_components/person_group_form.html.twig'
+    '@admin/_components/person_group_form.html.twig',
 )]
 final class PersonGroupFormComponent extends AbstractController
 {
@@ -25,13 +25,13 @@ final class PersonGroupFormComponent extends AbstractController
     use DefaultActionTrait;
 
     #[LiveProp(fieldName: 'data')]
-    public ?PersonGroup $personGroup;
+    public PersonGroup|null $personGroup;
 
     protected function instantiateForm(): FormInterface
     {
         return $this->createForm(
             PersonGroupType::class,
-            $this->personGroup
+            $this->personGroup,
         );
     }
 
@@ -43,7 +43,7 @@ final class PersonGroupFormComponent extends AbstractController
 
     #[LiveAction]
     public function removeMember(
-        #[LiveArg] int $index
+        #[LiveArg] int $index,
     ): void {
         unset($this->formValues['members'][$index]);
     }

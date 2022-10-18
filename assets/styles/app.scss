@@ -2,3 +2,38 @@
 //@import './boot.scss';
 @import '@tabler/core/src/scss/tabler';
 
+.hb-embed {
+  .hb-embed__title-container,
+  .hb-embed__branding,
+  .hb-embed__btn-box {
+    display: none !important;
+  }
+
+  .hb-embed__table {
+    margin-bottom: 0 !important;
+
+    thead {
+      th {
+        border-bottom-color: $border-color !important;
+        border-bottom-width: $border-width !important;
+      }
+    }
+
+    tbody {
+      :last-child {
+        td {
+          border-bottom-width: 0 !important;
+        }
+      }
+    }
+  }
+
+  .hb-embed__schedule-list-item-date {
+    border-bottom-color: $border-color !important;
+    border-bottom-width: $border-width !important;
+  }
+
+  .hb-embed__schedule .hb-embed__schedule-list > *:not(:last-child) {
+    @extend .mb-2;
+  }
+}

@@ -34,7 +34,7 @@ final class SponsorController extends AbstractController
         $query      = $this->sponsorRepository->createQueryBuilder('p');
         $pagination = $this->paginator->paginate(
             $query,
-            $request->query->getInt('page', 1)
+            $request->query->getInt('page', 1),
         );
 
         return $this->render('@admin/sponsor/index.html.twig', [

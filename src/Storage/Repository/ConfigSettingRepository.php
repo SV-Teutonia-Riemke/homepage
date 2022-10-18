@@ -9,9 +9,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @template-extends ServiceEntityRepository<ConfigSetting>
- */
+/** @template-extends ServiceEntityRepository<ConfigSetting> */
 final class ConfigSettingRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -19,9 +17,7 @@ final class ConfigSettingRepository extends ServiceEntityRepository
         parent::__construct($registry, ConfigSetting::class);
     }
 
-    /**
-     * @return list<ConfigSetting>
-     */
+    /** @return list<ConfigSetting> */
     public function findByNames(string ...$names): array
     {
         return $this->createQueryBuilder('s', 's.name')

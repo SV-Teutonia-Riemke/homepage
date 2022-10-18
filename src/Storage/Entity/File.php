@@ -23,10 +23,10 @@ class File extends AbstractEntity implements Stringable
     private string $safeName;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $extension;
+    private string|null $extension;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $mimeType;
+    private string|null $mimeType;
 
     #[ORM\Column(type: 'uuid', unique: true)]
     private Uuid $uuid;
@@ -35,16 +35,16 @@ class File extends AbstractEntity implements Stringable
     private string $filePath;
 
     #[ORM\ManyToOne(targetEntity: Directory::class, inversedBy: 'files')]
-    private ?Directory $directory;
+    private Directory|null $directory;
 
     public function __construct(
         string $name,
         string $safeName,
-        ?string $extension,
-        ?string $mimeType,
+        string|null $extension,
+        string|null $mimeType,
         Uuid $uuid,
         string $filePath,
-        ?Directory $directory
+        Directory|null $directory,
     ) {
         $this->name      = $name;
         $this->safeName  = $safeName;
@@ -80,12 +80,12 @@ class File extends AbstractEntity implements Stringable
         $this->safeName = $safeName;
     }
 
-    public function getExtension(): ?string
+    public function getExtension(): string|null
     {
         return $this->extension;
     }
 
-    public function getMimeType(): ?string
+    public function getMimeType(): string|null
     {
         return $this->mimeType;
     }
@@ -100,12 +100,12 @@ class File extends AbstractEntity implements Stringable
         return $this->filePath;
     }
 
-    public function getDirectory(): ?Directory
+    public function getDirectory(): Directory|null
     {
         return $this->directory;
     }
 
-    public function setDirectory(?Directory $directory): void
+    public function setDirectory(Directory|null $directory): void
     {
         $this->directory = $directory;
     }
@@ -115,9 +115,7 @@ class File extends AbstractEntity implements Stringable
         return implode($separator, $this->getPathArray());
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     public function getPathArray(): array
     {
         $names   = $this->directory === null ? [] : $this->directory->getPathArray();

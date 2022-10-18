@@ -17,7 +17,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 
 #[AsLiveComponent(
     'admin_team_form',
-    '@admin/_components/team_form.html.twig'
+    '@admin/_components/team_form.html.twig',
 )]
 final class TeamFormComponent extends AbstractController
 {
@@ -25,13 +25,13 @@ final class TeamFormComponent extends AbstractController
     use DefaultActionTrait;
 
     #[LiveProp(fieldName: 'data')]
-    public ?Team $team;
+    public Team|null $team;
 
     protected function instantiateForm(): FormInterface
     {
         return $this->createForm(
             TeamType::class,
-            $this->team
+            $this->team,
         );
     }
 
@@ -43,7 +43,7 @@ final class TeamFormComponent extends AbstractController
 
     #[LiveAction]
     public function removePlayer(
-        #[LiveArg] int $index
+        #[LiveArg] int $index,
     ): void {
         unset($this->formValues['players'][$index]);
     }
@@ -56,7 +56,7 @@ final class TeamFormComponent extends AbstractController
 
     #[LiveAction]
     public function removeStaff(
-        #[LiveArg] int $index
+        #[LiveArg] int $index,
     ): void {
         unset($this->formValues['staffs'][$index]);
     }

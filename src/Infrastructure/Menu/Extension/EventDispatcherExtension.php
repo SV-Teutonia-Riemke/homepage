@@ -16,19 +16,15 @@ final class EventDispatcherExtension implements ExtensionInterface
     ) {
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildItem(ItemInterface $item, array $options): void
     {
         $this->eventDispatcher->dispatch(
-            new ConfigureMenuEvent($item)
+            new ConfigureMenuEvent($item),
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildOptions(array $options): array
     {
         return $options;

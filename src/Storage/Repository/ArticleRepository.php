@@ -8,9 +8,7 @@ use App\Storage\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @template-extends ServiceEntityRepository<Article>
- */
+/** @template-extends ServiceEntityRepository<Article> */
 final class ArticleRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -18,9 +16,7 @@ final class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    /**
-     * @return list<Article>
-     */
+    /** @return list<Article> */
     public function findNewestEnabled(): array
     {
         return $this->findBy([

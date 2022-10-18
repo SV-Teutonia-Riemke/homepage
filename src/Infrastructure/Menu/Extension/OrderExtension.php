@@ -13,22 +13,18 @@ final class OrderExtension implements ExtensionInterface
 {
     public const KEY_NAME = 'order';
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildOptions(array $options): array
     {
         return array_merge(
             [
                 self::KEY_NAME => 0,
             ],
-            $options
+            $options,
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildItem(ItemInterface $item, array $options): void
     {
         $item->setExtra(self::KEY_NAME, $options[self::KEY_NAME] ?? 0);

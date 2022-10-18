@@ -12,7 +12,7 @@ use function in_array;
 final class ConfigureMenuEvent extends Event
 {
     public function __construct(
-        private readonly ItemInterface $menuItem
+        private readonly ItemInterface $menuItem,
     ) {
     }
 

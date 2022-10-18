@@ -11,7 +11,7 @@ final class AlertComponent
 {
     public string $message;
 
-    public ?string $icon = null;
+    public string|null $icon = null;
 
     public string $type = 'success';
 }

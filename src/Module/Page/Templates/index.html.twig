@@ -1,5 +1,26 @@
 {% extends '@page/_layout/layout.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        (function (e, t, n, r, i, s, o) {
+            e[i] = e[i] || function () {
+                (e[i].q = e[i].q || []).push(arguments)
+            }, e[i].l = 1 * new Date;
+            s = t.createElement(n), o = t.getElementsByTagName(n)[0];
+            s.async = 1;
+            s.src = r;
+            o.parentNode.insertBefore(s, o)
+        })(window, document, "script", 'https://www.handball.net/widgets/embed/v1.js', "_hb");
+    </script>
+    <script>
+        _hb({
+            widget: 'spielplan',
+            clubId: 'handball4all.westfalen.1393',
+            container: 'handball-spielplan'
+        })
+    </script>
+{% endblock %}
 {% block pageSubBody %}
     <div class="row">
         <div class="col">
@@ -14,6 +35,7 @@
         <div class="col-12 col-md-9">
             {% for article in articles %}
                 <div class="card mb-3">
+                    <div class="card-status-top bg-primary"></div>
                     <div class="card-header">
                         <h3 class="card-title">{{ article.title }}</h3>
                     </div>
@@ -30,8 +52,8 @@
             {% endfor %}
         </div>
         <div class="col-12 col-md-3">
-            {% if sponsors|length > 0 %}
-                <div class="row row-cards">
+            <div class="row row-cards">
+                {% if sponsors|length > 0 %}
                     <div class="col-12">
                         <div class="card">
                             <div class="card-status-top bg-primary"></div>
@@ -59,8 +81,20 @@
                             </div>
                         </div>
                     </div>
+                {% endif %}
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-status-top bg-primary"></div>
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Nächsten Spiele
+                            </h3>
+                        </div>
+                        <div class="card-body p-2 pb-0" id="handball-spielplan">
+                        </div>
+                    </div>
                 </div>
-            {% endif %}
+            </div>
         </div>
     </div>
 {% endblock %}

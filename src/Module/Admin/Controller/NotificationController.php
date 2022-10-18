@@ -38,7 +38,7 @@ final class NotificationController extends AbstractController
             options: [
                 'defaultSortFieldName' => 'p.id',
                 'defaultSortDirection' => 'desc',
-            ]
+            ],
         );
 
         return $this->render('@admin/notification/index.html.twig', [

@@ -9,9 +9,7 @@ use App\Storage\Entity\PersonGroupMember;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @template-extends ServiceEntityRepository<PersonGroup>
- */
+/** @template-extends ServiceEntityRepository<PersonGroup> */
 final class PersonGroupMemberRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

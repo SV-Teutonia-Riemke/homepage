@@ -8,9 +8,7 @@ use App\Storage\Entity\Staff;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @template-extends ServiceEntityRepository<Staff>
- */
+/** @template-extends ServiceEntityRepository<Staff> */
 final class StaffRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)

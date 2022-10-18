@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class PersonGroupController extends AbstractController
 {
     public function __construct(
-        private readonly PersonGroupRepository $personGroupRepository
+        private readonly PersonGroupRepository $personGroupRepository,
     ) {
     }
 

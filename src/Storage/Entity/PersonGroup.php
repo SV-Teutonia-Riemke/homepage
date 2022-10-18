@@ -48,15 +48,13 @@ class PersonGroup extends AbstractEntity
         $this->enabled = $enabled;
     }
 
-    /**
-     * @return Collection<PersonGroupMember>
-     */
+    /** @return Collection<PersonGroupMember> */
     public function getMembers(): Collection
     {
         return $this->members;
     }
 
-    public function addMember(?PersonGroupMember $member): void
+    public function addMember(PersonGroupMember|null $member): void
     {
         if ($member === null) {
             return;

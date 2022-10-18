@@ -32,7 +32,7 @@ final class FileController extends AbstractController
     public function __invoke(
         Request $request,
         Uuid $uuid,
-        string $extension
+        string $extension,
     ): Response {
         $file = $this->fileRepository->findOneBy([
             'uuid' => $uuid,
@@ -58,7 +58,7 @@ final class FileController extends AbstractController
 
         $disposition = HeaderUtils::makeDisposition(
             $download ? HeaderUtils::DISPOSITION_ATTACHMENT : HeaderUtils::DISPOSITION_INLINE,
-            $file->getFileName()
+            $file->getFileName(),
         );
 
         $response->headers->set('Content-Type', $mimeType);

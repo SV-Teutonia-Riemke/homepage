@@ -6,6 +6,11 @@ parameters:
 			path: src/Storage/Entity/Person.php
 
 		-
+			message: "#^Method App\\\\Storage\\\\Entity\\\\Person\\:\\:getAnonymizedName\\(\\) should return string but returns string\\|null\\.$#"
+			count: 1
+			path: src/Storage/Entity/Person.php
+
+		-
 			message: "#^Property App\\\\Storage\\\\Entity\\\\Person\\:\\:\\$firstName type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
 			count: 1
 			path: src/Storage/Entity/Person.php

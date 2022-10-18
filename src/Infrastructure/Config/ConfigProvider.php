@@ -16,7 +16,7 @@ final class ConfigProvider
     ) {
     }
 
-    public function get(string $name): ?string
+    public function get(string $name): string|null
     {
         $setting = $this->configSettingRepository->findOneBy([
             'name' => $name,
@@ -33,17 +33,13 @@ final class ConfigProvider
         return $setting->getValue();
     }
 
-    /**
-     * @return array<string, string|null>
-     */
+    /** @return array<string, string|null> */
     public function all(): array
     {
         return $this->getAsNamesAndValues(...$this->configSettingRepository->findAll());
     }
 
-    /**
-     * @return array<string, string|null>
-     */
+    /** @return array<string, string|null> */
     private function getAsNamesAndValues(ConfigSetting ...$settings): array
     {
         $result = [];

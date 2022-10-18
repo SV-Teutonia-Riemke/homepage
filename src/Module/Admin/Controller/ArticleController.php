@@ -38,7 +38,7 @@ final class ArticleController extends AbstractController
             options: [
                 'defaultSortFieldName' => 'p.id',
                 'defaultSortDirection' => 'desc',
-            ]
+            ],
         );
 
         return $this->render('@admin/article/index.html.twig', [

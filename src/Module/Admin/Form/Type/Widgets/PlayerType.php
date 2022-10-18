@@ -17,9 +17,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class PlayerType extends AbstractType
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

@@ -16,9 +16,7 @@ use Symfony\Component\Validator\Constraints\Url;
 
 final class SponsorType extends AbstractType
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

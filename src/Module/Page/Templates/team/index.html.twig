@@ -73,14 +73,14 @@
                         <div class="card-header">
                             <h3 class="card-title">Tabelle</h3>
                         </div>
-                        <div class="card-body p-2" id="handball-tabelle"></div>
+                        <div class="card-body p-0" id="handball-tabelle"></div>
                     </div>
 
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Spielplan</h3>
                         </div>
-                        <div class="card-body p-2" id="handball-spielplan"></div>
+                        <div class="card-body p-2 pb-0" id="handball-spielplan"></div>
                     </div>
                 {% endif %}
             </div>
@@ -97,45 +97,6 @@
                         </div>
                     {% endif %}
                 </div>
-
-                {% if team.players|length > 0 %}
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">Kader</h5>
-                        </div>
-                        <table class="table card-table table-vcenter text-nowrap">
-                            <thead>
-                            <tr>
-                                <th>Nr.</th>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for player in team.players %}
-                                <tr>
-                                    <td>{{ player.number|default('-') }}</td>
-                                    <td>{{ player.person }}</td>
-                                    <td>{{ player.position is null ? '-' : player.position.value }}</td>
-                                    <td class="text-end">
-                                        {% if player.person.instagram is not null %}
-                                            <a href="{{ player.person.instagram }}" class="btn btn-sm btn-icon btn-link text-instagram">
-                                                <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
-                                            </a>
-                                        {% endif %}
-                                        {% if player.person.facebook is not null %}
-                                            <a href="{{ player.person.facebook }}" class="btn btn-sm btn-icon btn-link text-facebook">
-                                                <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
-                                            </a>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                {% endif %}
 
                 {% if team.staffs|length > 0 %}
                     <div class="card">
@@ -155,7 +116,7 @@
                             {% for staff in team.staffs %}
                                 <tr>
                                     <td>{{ staff.person }}</td>
-                                    <td>{{ staff.position is null ? '' : staff.position.value }}</td>
+                                    <td>{{ staff.position is null ? '' : staff.position.translatable|trans }}</td>
                                     <td>
                                         {% if staff.person.emailAddress is not null %}
                                             <a href="mailto:{{ staff.person.emailAddress }}">{{ staff.person.emailAddress }}</a>
@@ -168,6 +129,46 @@
                         </table>
                     </div>
                 {% endif %}
+
+                {% if team.players|length > 0 %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Kader</h5>
+                        </div>
+                        <table class="table card-table table-vcenter text-nowrap">
+                            <thead>
+                            <tr>
+                                <th>Nr.</th>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for player in team.getPlayersByNumber %}
+                                <tr>
+                                    <td>{{ player.number|default('-') }}</td>
+                                    <td>{{ player.person }}</td>
+                                    <td>{{ player.position is null ? '-' : player.position.translatable|trans }}</td>
+                                    <td class="text-end">
+                                        {% if player.person.instagram is not null %}
+                                            <a href="{{ player.person.instagram }}" class="btn btn-sm btn-icon btn-link text-instagram">
+                                                <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+                                            </a>
+                                        {% endif %}
+                                        {% if player.person.facebook is not null %}
+                                            <a href="{{ player.person.facebook }}" class="btn btn-sm btn-icon btn-link text-facebook">
+                                                <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
+
             </div>
         </div>
     </div>

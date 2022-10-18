@@ -13,22 +13,18 @@ final class DropdownExtension implements ExtensionInterface
 {
     private const KEY_NAME = 'dropdown';
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildOptions(array $options): array
     {
         return array_merge(
             [
                 self::KEY_NAME => false,
             ],
-            $options
+            $options,
         );
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildItem(ItemInterface $item, array $options): void
     {
         $item->setExtra(self::KEY_NAME, ($options[self::KEY_NAME] ?? false) === true);

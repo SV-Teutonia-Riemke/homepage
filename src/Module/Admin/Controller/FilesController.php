@@ -46,13 +46,17 @@ final class FilesController extends AbstractController
     #[Route('', name: 'index')]
     #[Route('/directory/{directory}', name: 'directory', requirements: ['directory' => Requirement::DIGITS])]
     public function index(
-        ?Directory $directory
+        Directory|null $directory,
     ): Response {
         $directories = $this->directoryRepository->findBy([
             'parent' => $directory,
+        ], [
+            'name' => 'ASC',
         ]);
         $files       = $this->fileRepository->findBy([
             'directory' => $directory,
+        ], [
+            'name' => 'ASC',
         ]);
 
         return $this->render('@admin/files/index.html.twig', [
@@ -66,7 +70,7 @@ final class FilesController extends AbstractController
     #[Route('/directory/{directory}/create', name: 'directory_create_parent')]
     public function directoryCreate(
         Request $request,
-        ?Directory $directory
+        Directory|null $directory,
     ): Response {
         $newDirectory = new Directory('', $directory);
 
@@ -133,7 +137,7 @@ final class FilesController extends AbstractController
     #[Route('/upload/{directory}', name: 'upload_directory')]
     public function fileUpload(
         Request $request,
-        ?Directory $directory,
+        Directory|null $directory,
     ): Response {
         $form = $this->createForm(FileUploadType::class, [
             'directory' => $directory,
@@ -141,9 +145,10 @@ final class FilesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $uploadedFile = $form->get('file')->getData();
+            /** @var list<UploadedFile> $uploadedFiles */
+            $uploadedFiles = $form->get('files')->getData();
 
-            if ($uploadedFile instanceof UploadedFile) {
+            foreach ($uploadedFiles as $uploadedFile) {
                 $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $extension        = $uploadedFile->guessExtension();
 
@@ -157,7 +162,7 @@ final class FilesController extends AbstractController
                     $dir1->__toString(),
                     $dir2->__toString(),
                     $hash->__toString(),
-                    $extension
+                    $extension,
                 );
 
                 $safeFilename = $this->slugger->slug($originalFilename);
@@ -169,14 +174,15 @@ final class FilesController extends AbstractController
                     $uploadedFile->getMimeType(),
                     $uid,
                     $filePath,
-                    $form->get('directory')->getData()
+                    $form->get('directory')->getData(),
                 );
 
                 $this->defaultFilesystem->write($filePath, $uploadedFile->getContent());
 
                 $this->entityManager->persist($file);
-                $this->entityManager->flush();
             }
+
+            $this->entityManager->flush();
 
             return $directory === null
                 ? $this->redirectToRoute('app_admin_files_index')
@@ -194,7 +200,7 @@ final class FilesController extends AbstractController
     #[Route('/file/{file}/edit', name: 'file_edit')]
     public function fileEdit(
         Request $request,
-        File $file
+        File $file,
     ): Response {
         $form = $this->createForm(FileEditType::class, $file);
         $form->handleRequest($request);

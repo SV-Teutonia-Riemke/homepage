@@ -10,13 +10,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class AbstractForm extends AbstractType
 {
-
-    public const BUTTON_SUBMIT = 'submit';
+    public const BUTTON_SUBMIT         = 'submit';
     public const BUTTON_SUBMIT_AND_NEW = 'submitAndNew';
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

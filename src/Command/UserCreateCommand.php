@@ -34,7 +34,7 @@ final class UserCreateCommand extends Command
             $user = $this->userRepository->loadUserByIdentifier($answer);
             if ($user !== null) {
                 throw new RuntimeException(
-                    'A user with this user already exists'
+                    'A user with this user already exists',
                 );
             }
 

@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class ImprintController extends AbstractController
 {
     public function __construct(
-        private readonly ConfigProvider $configProvider
+        private readonly ConfigProvider $configProvider,
     ) {
     }
 

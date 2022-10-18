@@ -17,9 +17,7 @@ final class ModifiedListener implements EventSubscriberInterface
     ) {
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function getSubscribedEvents(): array
     {
         return [

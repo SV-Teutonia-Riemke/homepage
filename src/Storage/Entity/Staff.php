@@ -14,55 +14,55 @@ class Staff extends AbstractEntity
 {
     #[ORM\ManyToOne(targetEntity: Person::class)]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    private ?Person $person = null;
+    private Person|null $person = null;
 
     #[ORM\ManyToOne(targetEntity: Team::class, inversedBy: 'staffs')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    private ?Team $team = null;
+    private Team|null $team = null;
 
     #[ORM\OneToOne(targetEntity: File::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?File $image = null;
+    private File|null $image = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true, enumType: StaffPosition::class)]
-    private ?StaffPosition $position = null;
+    private StaffPosition|null $position = null;
 
-    public function getPerson(): ?Person
+    public function getPerson(): Person|null
     {
         return $this->person;
     }
 
-    public function setPerson(?Person $person): void
+    public function setPerson(Person|null $person): void
     {
         $this->person = $person;
     }
 
-    public function getTeam(): ?Team
+    public function getTeam(): Team|null
     {
         return $this->team;
     }
 
-    public function setTeam(?Team $team): void
+    public function setTeam(Team|null $team): void
     {
         $this->team = $team;
     }
 
-    public function getImage(): ?File
+    public function getImage(): File|null
     {
         return $this->image;
     }
 
-    public function setImage(?File $image): void
+    public function setImage(File|null $image): void
     {
         $this->image = $image;
     }
 
-    public function getPosition(): ?StaffPosition
+    public function getPosition(): StaffPosition|null
     {
         return $this->position;
     }
 
-    public function setPosition(?StaffPosition $position): void
+    public function setPosition(StaffPosition|null $position): void
     {
         $this->position = $position;
     }

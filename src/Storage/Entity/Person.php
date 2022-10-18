@@ -15,34 +15,35 @@ use function sprintf;
 use function Symfony\Component\String\u;
 
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
+#[ORM\UniqueConstraint(fields: ['firstName', 'lastName'])]
 class Person extends AbstractEntity implements Stringable
 {
     #[ORM\Column(type: Types::STRING)]
-    private ?string $firstName = null;
+    private string|null $firstName = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $lastName = null;
+    private string|null $lastName = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $anonymizeLastName = true;
 
     #[ORM\OneToOne(targetEntity: File::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?File $image = null;
+    private File|null $image = null;
 
     #[ORM\Column(type: PhoneNumberType::NAME, nullable: true)]
-    private ?PhoneNumber $phoneNumber = null;
+    private PhoneNumber|null $phoneNumber = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $emailAddress = null;
+    private string|null $emailAddress = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $facebook = null;
+    private string|null $facebook = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $instagram = null;
+    private string|null $instagram = null;
 
-    public function getFirstName(): ?string
+    public function getFirstName(): string|null
     {
         return $this->firstName;
     }
@@ -52,12 +53,12 @@ class Person extends AbstractEntity implements Stringable
         $this->firstName = $firstName;
     }
 
-    public function getLastName(): ?string
+    public function getLastName(): string|null
     {
         return $this->lastName;
     }
 
-    public function setLastName(?string $lastName): void
+    public function setLastName(string|null $lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -72,63 +73,72 @@ class Person extends AbstractEntity implements Stringable
         $this->anonymizeLastName = $anonymizeLastName;
     }
 
-    public function getImage(): ?File
+    public function getImage(): File|null
     {
         return $this->image;
     }
 
-    public function setImage(?File $image): void
+    public function setImage(File|null $image): void
     {
         $this->image = $image;
     }
 
-    public function getPhoneNumber(): ?PhoneNumber
+    public function getPhoneNumber(): PhoneNumber|null
     {
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(?PhoneNumber $phoneNumber): void
+    public function setPhoneNumber(PhoneNumber|null $phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
 
-    public function getEmailAddress(): ?string
+    public function getEmailAddress(): string|null
     {
         return $this->emailAddress;
     }
 
-    public function setEmailAddress(?string $emailAddress): void
+    public function setEmailAddress(string|null $emailAddress): void
     {
         $this->emailAddress = $emailAddress;
     }
 
-    public function getFacebook(): ?string
+    public function getFacebook(): string|null
     {
         return $this->facebook;
     }
 
-    public function setFacebook(?string $facebook): void
+    public function setFacebook(string|null $facebook): void
     {
         $this->facebook = $facebook;
     }
 
-    public function getInstagram(): ?string
+    public function getInstagram(): string|null
     {
         return $this->instagram;
     }
 
-    public function setInstagram(?string $instagram): void
+    public function setInstagram(string|null $instagram): void
     {
         $this->instagram = $instagram;
     }
 
-    public function __toString(): string
+    public function getAnonymizedName(): string
     {
         if ($this->firstName !== null && $this->lastName !== null) {
             if ($this->anonymizeLastName) {
                 return sprintf('%s %s.', $this->firstName, u($this->lastName)->truncate(1)->toString());
             }
 
+            return sprintf('%s %s', $this->firstName, $this->lastName);
+        }
+
+        return $this->firstName;
+    }
+
+    public function __toString(): string
+    {
+        if ($this->firstName !== null && $this->lastName !== null) {
             return sprintf('%s %s', $this->firstName, $this->lastName);
         }
 

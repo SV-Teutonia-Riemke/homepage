@@ -8,9 +8,7 @@ use App\Storage\Entity\Sponsor;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-/**
- * @template-extends ServiceEntityRepository<Sponsor>
- */
+/** @template-extends ServiceEntityRepository<Sponsor> */
 final class SponsorRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -18,9 +16,7 @@ final class SponsorRepository extends ServiceEntityRepository
         parent::__construct($registry, Sponsor::class);
     }
 
-    /**
-     * @return list<Sponsor>
-     */
+    /** @return list<Sponsor> */
     public function findEnabled(): array
     {
         return $this->findBy([

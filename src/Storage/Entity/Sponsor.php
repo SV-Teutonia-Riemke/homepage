@@ -15,14 +15,14 @@ class Sponsor extends AbstractEntity
     private string $name;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $url = null;
+    private string|null $url = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
 
     #[ORM\OneToOne(targetEntity: File::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?File $image = null;
+    private File|null $image = null;
 
     public function getName(): string
     {
@@ -34,12 +34,12 @@ class Sponsor extends AbstractEntity
         $this->name = $name;
     }
 
-    public function getUrl(): ?string
+    public function getUrl(): string|null
     {
         return $this->url;
     }
 
-    public function setUrl(?string $url): void
+    public function setUrl(string|null $url): void
     {
         $this->url = $url;
     }
@@ -54,12 +54,12 @@ class Sponsor extends AbstractEntity
         $this->enabled = $enabled;
     }
 
-    public function getImage(): ?File
+    public function getImage(): File|null
     {
         return $this->image;
     }
 
-    public function setImage(?File $image): void
+    public function setImage(File|null $image): void
     {
         $this->image = $image;
     }

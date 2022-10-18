@@ -17,9 +17,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class ArticleType extends AbstractType
 {
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

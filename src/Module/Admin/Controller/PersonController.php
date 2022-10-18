@@ -37,7 +37,7 @@ final class PersonController extends AbstractController
         $query      = $this->personRepository->createQueryBuilder('p');
         $pagination = $this->paginator->paginate(
             $query,
-            $request->query->getInt('page', 1)
+            $request->query->getInt('page', 1),
         );
 
         return $this->render('@admin/person/index.html.twig', [

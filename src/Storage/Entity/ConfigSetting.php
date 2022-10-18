@@ -19,12 +19,12 @@ class ConfigSetting extends AbstractEntity
     private ConfigType $type;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $value;
+    private string|null $value;
 
     public function __construct(
         string $name,
         ConfigType $type,
-        ?string $value = null
+        string|null $value = null,
     ) {
         $this->name  = $name;
         $this->type  = $type;
@@ -41,12 +41,12 @@ class ConfigSetting extends AbstractEntity
         return $this->type;
     }
 
-    public function setValue(?string $value): void
+    public function setValue(string|null $value): void
     {
         $this->value = $value;
     }
 
-    public function getValue(): ?string
+    public function getValue(): string|null
     {
         return $this->value;
     }

@@ -19,14 +19,14 @@ class Article extends AbstractEntity
 
     #[ORM\OneToOne(targetEntity: File::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?File $image = null;
+    private File|null $image = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
 
     public function __construct(
         string $title,
-        string $content
+        string $content,
     ) {
         $this->title   = $title;
         $this->content = $content;
@@ -52,12 +52,12 @@ class Article extends AbstractEntity
         $this->content = $content;
     }
 
-    public function getImage(): ?File
+    public function getImage(): File|null
     {
         return $this->image;
     }
 
-    public function setImage(?File $image): void
+    public function setImage(File|null $image): void
     {
         $this->image = $image;
     }

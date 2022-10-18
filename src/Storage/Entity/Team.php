@@ -13,6 +13,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use function usort;
+
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
 class Team extends AbstractEntity
 {
@@ -26,11 +28,11 @@ class Team extends AbstractEntity
     private TeamAgeCategory $ageCategory;
 
     #[ORM\Column(type: Types::STRING, nullable: true, enumType: TeamJuniorAge::class)]
-    private ?TeamJuniorAge $juniorAge = null;
+    private TeamJuniorAge|null $juniorAge = null;
 
     #[ORM\OneToOne(targetEntity: File::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private ?File $image = null;
+    private File|null $image = null;
 
     /** @var Collection<Player> */
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Player::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
@@ -41,16 +43,16 @@ class Team extends AbstractEntity
     private Collection $staffs;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $facebook = null;
+    private string|null $facebook = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $instagram = null;
+    private string|null $instagram = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $currentMatchday = null;
+    private string|null $currentMatchday = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private ?string $handballNetId = null;
+    private string|null $handballNetId = null;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
@@ -91,62 +93,62 @@ class Team extends AbstractEntity
         $this->ageCategory = $ageCategory;
     }
 
-    public function getJuniorAge(): ?TeamJuniorAge
+    public function getJuniorAge(): TeamJuniorAge|null
     {
         return $this->juniorAge;
     }
 
-    public function setJuniorAge(?TeamJuniorAge $juniorAge): void
+    public function setJuniorAge(TeamJuniorAge|null $juniorAge): void
     {
         $this->juniorAge = $juniorAge;
     }
 
-    public function getImage(): ?File
+    public function getImage(): File|null
     {
         return $this->image;
     }
 
-    public function setImage(?File $image): void
+    public function setImage(File|null $image): void
     {
         $this->image = $image;
     }
 
-    public function getFacebook(): ?string
+    public function getFacebook(): string|null
     {
         return $this->facebook;
     }
 
-    public function setFacebook(?string $facebook): void
+    public function setFacebook(string|null $facebook): void
     {
         $this->facebook = $facebook;
     }
 
-    public function getInstagram(): ?string
+    public function getInstagram(): string|null
     {
         return $this->instagram;
     }
 
-    public function setInstagram(?string $instagram): void
+    public function setInstagram(string|null $instagram): void
     {
         $this->instagram = $instagram;
     }
 
-    public function getCurrentMatchday(): ?string
+    public function getCurrentMatchday(): string|null
     {
         return $this->currentMatchday;
     }
 
-    public function setCurrentMatchday(?string $currentMatchday): void
+    public function setCurrentMatchday(string|null $currentMatchday): void
     {
         $this->currentMatchday = $currentMatchday;
     }
 
-    public function getHandballNetId(): ?string
+    public function getHandballNetId(): string|null
     {
         return $this->handballNetId;
     }
 
-    public function setHandballNetId(?string $handballNetId): void
+    public function setHandballNetId(string|null $handballNetId): void
     {
         $this->handballNetId = $handballNetId;
     }
@@ -161,15 +163,35 @@ class Team extends AbstractEntity
         $this->enabled = $enabled;
     }
 
-    /**
-     * @return Collection<Player>
-     */
+    /** @return Collection<Player> */
     public function getPlayers(): Collection
     {
         return $this->players;
     }
 
-    public function addPlayer(?Player $player): void
+    public function getPlayersByNumber(): Collection
+    {
+        $data = $this->players->toArray();
+
+        usort(
+            $data,
+            static function (Player $a, Player $b): int {
+                if ($a->getNumber() === null) {
+                    return 1;
+                }
+
+                if ($b->getNumber() === null) {
+                    return -1;
+                }
+
+                return $a->getNumber() <=> $b->getNumber();
+            },
+        );
+
+        return new ArrayCollection($data);
+    }
+
+    public function addPlayer(Player|null $player): void
     {
         if ($player === null) {
             return;
@@ -192,15 +214,13 @@ class Team extends AbstractEntity
         $this->players->removeElement($player);
     }
 
-    /**
-     * @return Collection<Staff>
-     */
+    /** @return Collection<Staff> */
     public function getStaffs(): Collection
     {
         return $this->staffs;
     }
 
-    public function addStaff(?Staff $staff): void
+    public function addStaff(Staff|null $staff): void
     {
         if ($staff === null) {
             return;
