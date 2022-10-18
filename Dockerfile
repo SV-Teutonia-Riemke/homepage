@@ -1,6 +1,6 @@
 ARG PHP_EXTENSIONS="pdo_mysql imagick gd intl bcmath"
 
-FROM thecodingmachine/php:8.1-v4-apache-node14 as builder
+FROM thecodingmachine/php:8.1-v4-apache-node16 as builder
 
 COPY --chown=docker:docker . /var/www/html/
 
