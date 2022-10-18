@@ -20,7 +20,7 @@
                                         <div class="card h-100">
                                             <div class="card-body p-4 text-center">
                                                 {% set imagePath = member.person.image is null
-                                                    ? 'https://via.placeholder.com/160x160.png?text=Nicht+vorhanden'
+                                                    ? 'https://via.placeholder.com/160x160.png?text=Kein+Bild+vorhanden'
                                                     : member.person.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 160 } }) %}
                                                 <img src="{{ imagePath }}" class="rounded mb-3"/>
                                                 <h3 class="m-0 mb-1">{{ member.person }}</h3>
