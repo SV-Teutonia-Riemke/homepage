@@ -7,6 +7,8 @@ namespace App\Storage\Entity;
 use App\Domain\Gender;
 use App\Domain\TeamAgeCategory;
 use App\Domain\TeamJuniorAge;
+use App\Domain\YearGroup;
+use App\Infrastructure\Doctrine\DBAL\Types\Type\YearGroupType;
 use App\Storage\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -30,6 +32,15 @@ class Team extends AbstractEntity
     #[ORM\Column(type: Types::STRING, nullable: true, enumType: TeamJuniorAge::class)]
     private TeamJuniorAge|null $juniorAge = null;
 
+    #[ORM\Column(type: YearGroupType::NAME, nullable: true)]
+    private YearGroup|null $ageGroup = null;
+
+    #[ORM\Column(type: YearGroupType::NAME, nullable: true)]
+    private YearGroup|null $season = null;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private string|null $league = null;
+
     #[ORM\OneToOne(targetEntity: File::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private File|null $image = null;
@@ -47,6 +58,9 @@ class Team extends AbstractEntity
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private string|null $instagram = null;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private string|null $emailAddress = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private string|null $currentMatchday = null;
@@ -103,6 +117,36 @@ class Team extends AbstractEntity
         $this->juniorAge = $juniorAge;
     }
 
+    public function getAgeGroup(): YearGroup|null
+    {
+        return $this->ageGroup;
+    }
+
+    public function setAgeGroup(YearGroup|null $ageGroup): void
+    {
+        $this->ageGroup = $ageGroup;
+    }
+
+    public function getSeason(): YearGroup|null
+    {
+        return $this->season;
+    }
+
+    public function setSeason(YearGroup|null $season): void
+    {
+        $this->season = $season;
+    }
+
+    public function getLeague(): string|null
+    {
+        return $this->league;
+    }
+
+    public function setLeague(string|null $league): void
+    {
+        $this->league = $league;
+    }
+
     public function getImage(): File|null
     {
         return $this->image;
@@ -131,6 +175,16 @@ class Team extends AbstractEntity
     public function setInstagram(string|null $instagram): void
     {
         $this->instagram = $instagram;
+    }
+
+    public function getEmailAddress(): string|null
+    {
+        return $this->emailAddress;
+    }
+
+    public function setEmailAddress(string|null $emailAddress): void
+    {
+        $this->emailAddress = $emailAddress;
     }
 
     public function getCurrentMatchday(): string|null

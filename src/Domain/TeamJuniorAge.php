@@ -12,4 +12,5 @@ enum TeamJuniorAge: string
     case D = 'd';
     case E = 'e';
     case F = 'f';
+    case G = 'g';
 }

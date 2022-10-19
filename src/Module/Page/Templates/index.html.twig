@@ -21,12 +21,21 @@
         })
     </script>
 {% endblock %}
+
 {% block pageSubBody %}
     <div class="row">
         <div class="col">
             {% for notification in notifications %}
                 <div class="alert alert-info">
-                    {{ notification.content|raw }}
+                    <div class="d-flex">
+                        <div class="d-none d-md-block">
+                            <span class="iconify-inline icon alert-icon" data-icon="fa6-solid:circle-info"></span>
+                        </div>
+                        <div>
+                            <h4 class="alert-title">{{ notification.title }}</h4>
+                            {{ notification.content|striptags('<br><a><b><strong><span>')|raw }}
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
         </div>
@@ -35,21 +44,23 @@
         <div class="col-12 col-md-9">
             {% for article in articles %}
                 <div class="card mb-3">
+{#                    <div class="ribbon ribbon-top bg-red">#}
+{#                        <span class="iconify-inline icon" data-icon="fa6-solid:circle-exclamation"></span>#}
+{#                    </div>#}
                     <div class="card-status-top bg-primary"></div>
-                    <div class="card-header">
-                        <h3 class="card-title">{{ article.title }}</h3>
-                    </div>
                     {% if article.image is not null %}
                         <div class="card-img-top">
                             <img src="{{ article.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 1100 } }) }}"/>
                         </div>
                     {% endif %}
-                    <div class="card-body">{{ article.content|raw }}</div>
-                    <div class="card-footer">
-                        Erstellt am {{ article.createdAt|format_datetime }}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <div class="card-text">{{ article.content|raw }}</div>
+                        <p class="card-text"><small class="text-muted">Erstellt am {{ article.createdAt|format_datetime }}</small></p>
                     </div>
                 </div>
             {% endfor %}
+            {{ knp_pagination_render(articles) }}
         </div>
         <div class="col-12 col-md-3">
             <div class="row row-cards">

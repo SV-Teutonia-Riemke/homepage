@@ -14,6 +14,8 @@
             <th>Name</th>
             <th>Gender</th>
             <th>Type</th>
+            <th>Saison</th>
+            <th>Altersgruppe</th>
             <th></th>
         {% endblock %}
         {% block paginationRow %}
@@ -21,6 +23,8 @@
             <td>{{ object.name }}</td>
             <td>{{ object.gender.value }}</td>
             <td>{{ object.ageCategory.value }}</td>
+            <td>{{ object.season is null ? '' : object.season.displayName }}</td>
+            <td>{{ object.ageGroup is null ? '' : object.ageGroup.displayName }}</td>
             <td class="text-end">
                 <div class="btn-group btn-group-sm">
                     <a class="btn btn-outline-primary" href="{{ path('app_admin_team_edit', { team: object.id }) }}">

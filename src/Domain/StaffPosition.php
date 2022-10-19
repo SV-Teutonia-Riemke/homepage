@@ -10,8 +10,9 @@ use function sprintf;
 
 enum StaffPosition: string
 {
-    case TRAINER    = 'trainer';
-    case CO_TRAINER = 'co_trainer';
+    case TRAINER          = 'trainer';
+    case CO_TRAINER       = 'co_trainer';
+    case TEAM_RESPONSIBLE = 'team_responsible';
 
     public function getTranslatable(): TranslatableMessage
     {

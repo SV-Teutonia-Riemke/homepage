@@ -31,7 +31,7 @@ final class TeamController extends AbstractController
     #[Route('', name: 'index')]
     public function index(Request $request): Response
     {
-        $query      = $this->teamRepository->createQueryBuilder('p');
+        $query      = $this->teamRepository->createQueryBuilder('p')->orderBy('p.id', 'ASC');
         $pagination = $this->paginator->paginate(
             $query,
             $request->query->getInt('page', 1),

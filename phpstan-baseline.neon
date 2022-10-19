@@ -1,6 +1,21 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Cannot use array destructuring on array\\<int, int\\|null\\>\\|null\\.$#"
+			count: 1
+			path: src/Domain/YearGroup.php
+
+		-
+			message: "#^Parameter \\#1 \\$start of static method App\\\\Domain\\\\YearGroup\\:\\:fromYears\\(\\) expects int, int\\|null given\\.$#"
+			count: 1
+			path: src/Domain/YearGroup.php
+
+		-
+			message: "#^Parameter \\#2 \\$end of static method App\\\\Domain\\\\YearGroup\\:\\:fromYears\\(\\) expects int, int\\|null given\\.$#"
+			count: 1
+			path: src/Domain/YearGroup.php
+
+		-
 			message: "#^Method App\\\\Storage\\\\Entity\\\\Person\\:\\:__toString\\(\\) should return string but returns string\\|null\\.$#"
 			count: 1
 			path: src/Storage/Entity/Person.php

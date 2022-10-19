@@ -34,6 +34,11 @@
 {%- endblock -%}
 
 {%- block pageTitleActionsButtons -%}
+    {% if team.emailAddress is not null %}
+        <a class="btn btn-ghost-primary btn-icon" href="mailto:{{ team.emailAddress }}"  data-bs-toggle="tooltip" data-bs-title="{{ team.emailAddress }}" data-bs-placement="top">
+            <span class="iconify icon" data-icon="fa6-solid:at"></span>
+        </a>
+    {% endif %}
     {% if team.instagram is not null %}
         <a class="btn btn-ghost-instagram btn-icon" href="https://instagram.com/{{ team.instagram }}" target="_blank" rel="nofollow">
             <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
@@ -55,16 +60,25 @@
                         <h3 class="card-title">Links</h3>
                     </div>
                     <div class="list-group list-group-flush">
+                        {% if team.emailAddress is not null %}
+                            <a href="mailto:{{ team.emailAddress }}" class="list-group-item list-group-item-action">
+                                <span class="iconify icon me-2" data-icon="fa6-solid:at"></span>
+                                {{ team.emailAddress }}
+                            </a>
+                        {% endif %}
                         {% if team.currentMatchday is not null %}
-                            <a href="{{ team.currentMatchday }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Aktueller Spieltag</a>
+                            <a href="{{ team.currentMatchday }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">handball4all.de</a>
+                        {% endif %}
+                        {% if team.handballNetId is not null %}
+                            <a href="https://www.handball.net/mannschaften/{{ team.handballNetId }}/tabelle" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">handball.net</a>
                         {% endif %}
                         {#                        <a href="#" class="list-group-item list-group-item-action">Trainingszeiten</a> #}
-                        {#                        {% if team.facebook is not null %} #}
-                        {#                            <a href="https://facebook.com/{{ team.facebook }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Facebook</a> #}
-                        {#                        {% endif %} #}
-                        {#                        {% if team.instagram is not null %} #}
-                        {#                            <a href="https://instagram.com/{{ team.instagram }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Instagram</a> #}
-                        {#                        {% endif %} #}
+                        {% if team.facebook is not null %}
+                            <a href="https://facebook.com/{{ team.facebook }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Facebook</a>
+                        {% endif %}
+                        {% if team.instagram is not null %}
+                            <a href="https://instagram.com/{{ team.instagram }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Instagram</a>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -89,7 +103,16 @@
             <div class="space-y">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">Saison 2022/2023</h5>
+                        <h5 class="card-title">
+                            {% if team.season is not null %}
+                                Saison {{ team.season.displayName }}
+                                {% if team.league is not null %}
+                                    - {{ team.league }}
+                                {% endif %}
+                            {% else %}
+                                {{ team.name }}
+                            {% endif %}
+                        </h5>
                     </div>
                     {% if team.image is not null %}
                         <div class="card-img-bottom">

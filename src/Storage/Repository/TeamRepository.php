@@ -34,8 +34,8 @@ final class TeamRepository extends ServiceEntityRepository
         return $this->findBy([
             'ageCategory' => TeamAgeCategory::JUNIOR,
         ], [
-            'gender' => 'ASC',
-            'name'   => 'ASC',
+            'gender'    => 'ASC',
+            'juniorAge' => 'ASC',
         ]);
     }
 }
