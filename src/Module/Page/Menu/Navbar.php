@@ -27,13 +27,13 @@ final class Navbar
 
         $menu->addChild('Home', [
             'route' => 'app_index',
-            'icon'  => 'tabler:home',
+            'icon'  => 'fa6-solid:house',
         ]);
 
         if (count($seniorTeams) > 0) {
             $teamSeniors = $this->factory->createItem('Senioren', [
                 'dropdown' => true,
-                'icon'     => 'tabler:home',
+                'icon'     => 'fa6-solid:person-cane',
             ]);
 
             foreach ($seniorTeams as $team) {
@@ -51,7 +51,7 @@ final class Navbar
         if (count($juniorTeams) > 0) {
             $teamJuniors = $this->factory->createItem('Junioren', [
                 'dropdown' => true,
-                'icon'     => 'tabler:home',
+                'icon'     => 'fa6-solid:child',
             ]);
 
             foreach ($juniorTeams as $team) {
@@ -73,7 +73,7 @@ final class Navbar
 
         $menu->addChild('Teams', [
             'route' => 'app_person_groups',
-            'icon'  => 'tabler:home',
+            'icon'  => 'fa6-solid:people-group',
         ]);
 
 //        $menu->addChild('Infos', [
