@@ -25,6 +25,7 @@
         "lcobucci/clock": "^2.2",
         "league/flysystem": "^3.8",
         "liip/imagine-bundle": "^2.9",
+        "nesbot/carbon": "^2.62",
         "odolbeau/phone-number-bundle": "^3.7",
         "oneup/flysystem-bundle": "^4.4",
         "psr/event-dispatcher": "^1.0",
