@@ -115,7 +115,7 @@
                             <tbody>
                             {% for staff in team.staffs %}
                                 <tr>
-                                    <td>{{ staff.person }}</td>
+                                    <td>{{ staff.person.anonymizedName }}</td>
                                     <td>{{ staff.position is null ? '' : staff.position.translatable|trans }}</td>
                                     <td>
                                         {% if staff.person.emailAddress is not null %}
@@ -148,7 +148,7 @@
                             {% for player in team.getPlayersByNumber %}
                                 <tr>
                                     <td>{{ player.number|default('-') }}</td>
-                                    <td>{{ player.person }}</td>
+                                    <td>{{ player.person.anonymizedName }}</td>
                                     <td>{{ player.position is null ? '-' : player.position.translatable|trans }}</td>
                                     <td class="text-end">
                                         {% if player.person.instagram is not null %}
