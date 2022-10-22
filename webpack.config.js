@@ -29,6 +29,11 @@ Encore
         pattern: /\.(png|jpg|jpeg|gif|ico|svg)$/
     })
 
+    .copyFiles({
+        from: './assets/documents',
+        to: 'documents/[path][name].[hash:8].[ext]',
+    })
+
     .copyFiles([
         {from: './node_modules/ckeditor4/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
         {from: './node_modules/ckeditor4/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},

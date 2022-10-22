@@ -7,6 +7,8 @@ namespace App\Module\Page\Menu;
 use App\Storage\Repository\TeamRepository;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 use function count;
 
@@ -15,6 +17,7 @@ final class Navbar
     public function __construct(
         private readonly FactoryInterface $factory,
         private readonly TeamRepository $teamRepository,
+        #[Autowire(service: 'assets._default_package')] private readonly Package $package,
     ) {
     }
 
@@ -66,20 +69,26 @@ final class Navbar
             $menu->addChild($teamJuniors);
         }
 
-//        $menu->addChild('Sponsoren', [
-//            'route' => 'app_index',
-//            'icon'  => 'tabler:home',
-//        ]);
-
         $menu->addChild('Teams', [
             'route' => 'app_person_groups',
             'icon'  => 'fa6-solid:people-group',
         ]);
 
-//        $menu->addChild('Infos', [
-//            'route' => 'app_index',
-//            'icon'  => 'tabler:home',
-//        ]);
+        $menu->addChild('Trainingszeiten', [
+            'icon'           => 'fa6-solid:calendar-day',
+            'uri'            => $this->package->getUrl('build/documents/trainingszeiten.pdf'),
+            'linkAttributes' => [
+                'target' => '_blank',
+            ],
+        ]);
+
+        $menu->addChild('Aufnahmeantrag', [
+            'icon'           => 'fa6-solid:file-contract',
+            'uri'            => $this->package->getUrl('build/documents/aufnahmeantrag.pdf'),
+            'linkAttributes' => [
+                'target' => '_blank',
+            ],
+        ]);
 
         return $menu;
     }
