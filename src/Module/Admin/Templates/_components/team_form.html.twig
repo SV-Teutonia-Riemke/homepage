@@ -49,7 +49,7 @@
                         <td>{{ form_row(itemForm.person, { label: false }) }}</td>
                         <td>{{ form_row(itemForm.number, { label: false }) }}</td>
                         <td>{{ form_row(itemForm.position, { label: false }) }}</td>
-                        <td>{{ form_row(itemForm.image, { label: false }) }}</td>
+{#                        <td>{{ form_row(form.players.image, { label: false }) }}</td>#}
                         <td class="text-end">
                             <button data-action="live#action" data-action-name="removePlayer(index={{ key }})" type="button" class="btn btn-icon btn-outline-danger">
                                 <span class="iconify icon" data-icon="fa6-solid:trash"></span>
@@ -91,7 +91,7 @@
                     <tr>
                         <td>{{ form_row(itemForm.person, { label: false }) }}</td>
                         <td>{{ form_row(itemForm.position, { label: false }) }}</td>
-                        <td>{{ form_row(itemForm.image, { label: false }) }}</td>
+{#                        <td>{{ form_row(itemForm.image, { label: false }) }}</td>#}
                         <td class="text-end">
                             <button data-action="live#action" data-action-name="removeStaff(index={{ key }})" type="button" class="btn btn-icon btn-outline-danger">
                                 <span class="iconify icon" data-icon="fa6-solid:trash"></span>

@@ -26,9 +26,9 @@ final class PlayerType extends AbstractType
                     new NotBlank(),
                 ],
             ])
-            ->add('image', FileEntityType::class, [
-                'required' => false,
-            ])
+//            ->add('image', FileEntityType::class, [
+//                'required' => false,
+//            ])
             ->add('position', GamePositionType::class, [
                 'required' => false,
             ])

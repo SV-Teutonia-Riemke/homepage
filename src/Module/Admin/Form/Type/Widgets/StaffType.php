@@ -25,9 +25,9 @@ final class StaffType extends AbstractType
                     new NotBlank(),
                 ],
             ])
-            ->add('image', FileEntityType::class, [
-                'required' => false,
-            ])
+//            ->add('image', FileEntityType::class, [
+//                'required' => false,
+//            ])
             ->add('position', StaffPositionType::class, [
                 'required' => false,
             ]);
