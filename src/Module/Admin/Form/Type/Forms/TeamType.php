@@ -83,11 +83,9 @@ final class TeamType extends AbstractType
             ])
             ->add('players', PlayerCollectionType::class, [
                 'required'     => false,
-                'by_reference' => false,
             ])
             ->add('staffs', StaffCollectionType::class, [
                 'required'     => false,
-                'by_reference' => false,
             ]);
     }
 

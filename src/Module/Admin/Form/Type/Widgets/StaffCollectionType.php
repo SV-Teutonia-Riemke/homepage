@@ -16,6 +16,7 @@ final class StaffCollectionType extends AbstractType
             'entry_type'   => StaffType::class,
             'allow_add'    => true,
             'allow_delete' => true,
+            'by_reference' => false,
         ]);
     }
 

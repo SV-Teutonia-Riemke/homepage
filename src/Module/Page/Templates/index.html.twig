@@ -48,15 +48,23 @@
                     {#                        <span class="iconify-inline icon" data-icon="fa6-solid:circle-exclamation"></span> #}
                     {#                    </div> #}
                     <div class="card-status-top bg-primary"></div>
+                    <div class="card-header">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                    </div>
                     {% if article.image is not null %}
-                        <div class="card-img-top">
-                            <img src="{{ article.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 1100 } }) }}"/>
+                        <div class="card-img-top d-md-none">
+                            <img src="{{ article.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 450 } }) }}"/>
                         </div>
                     {% endif %}
                     <div class="card-body">
-                        <h5 class="card-title">{{ article.title }}</h5>
+
+                        {% if article.image is not null %}
+                            <img class="float-start rounded me-2 d-none d-md-block" style="width: 35%" src="{{ article.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 450 } }) }}"/>
+                        {% endif %}
                         <div class="card-text">{{ article.content|raw }}</div>
-                        <p class="card-text"><small class="text-muted">Erstellt am {{ article.createdAt|format_datetime }}</small></p>
+                        <div class="card-text">
+                            <small class="text-muted">Erstellt am {{ article.createdAt|format_datetime }}</small>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
@@ -77,9 +85,9 @@
                             <div class="card-body text-center">
                                 <div class="row row-cols-2 justify-content-center">
                                     {% for sponsor in sponsors %}
-                                        <div class="col d-flex align-items-center">
+                                        <div class="col d-flex align-items-center justify-content-center">
                                             {% set image %}
-                                                <img src="{{ sponsor.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 150 } }) }}"/>
+                                                <img src="{{ sponsor.image.filePath|imagine_filter('optimized', { downscale: { max: [120, 60] } }) }}"/>
                                             {% endset %}
 
                                             {% if sponsor.url is null %}

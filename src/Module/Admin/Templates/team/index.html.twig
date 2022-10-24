@@ -10,6 +10,7 @@
 {% block pageBody %}
     {% embed '_partials/pagination_table.html.twig' with { title: 'Teams'} %}
         {% block paginationHeader %}
+            <th class="w-1"></th>
             <th class="w-1">Id</th>
             <th>Name</th>
             <th>Gender</th>
@@ -19,6 +20,9 @@
             <th></th>
         {% endblock %}
         {% block paginationRow %}
+            <td>
+                <span class="iconify-inline text-{% if object.enabled %}success{% else %}danger{% endif %}" data-icon="fa6-solid:circle"></span>
+            </td>
             <td>{{ object.id }}</td>
             <td>{{ object.name }}</td>
             <td>{{ object.gender.value }}</td>
@@ -27,6 +31,15 @@
             <td>{{ object.ageGroup is null ? '' : object.ageGroup.displayName }}</td>
             <td class="text-end">
                 <div class="btn-group btn-group-sm">
+                    {% if object.enabled %}
+                        <a class="btn btn-outline-success" href="{{ path('app_admin_team_disable', { team: object.id }) }}">
+                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
+                        </a>
+                    {% else %}
+                        <a class="btn btn-outline-danger" href="{{ path('app_admin_team_enable', { team: object.id }) }}">
+                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
+                        </a>
+                    {% endif %}
                     <a class="btn btn-outline-primary" href="{{ path('app_admin_team_edit', { team: object.id }) }}">
                         <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
                     </a>

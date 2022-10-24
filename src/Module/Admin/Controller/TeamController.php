@@ -90,4 +90,15 @@ final class TeamController extends AbstractController
 
         return $this->redirectToRoute('app_admin_team_index');
     }
+
+    #[Route('/{team}/enable', name: 'enable', defaults: ['enabled' => true])]
+    #[Route('/{team}/disable', name: 'disable', defaults: ['enabled' => false])]
+    public function changeEnabled(Team $team, bool $enabled): Response
+    {
+        $team->setEnabled($enabled);
+
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_team_index');
+    }
 }

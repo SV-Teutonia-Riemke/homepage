@@ -10,11 +10,15 @@
 {% block pageBody %}
     {% embed '_partials/pagination_table.html.twig' with { title: 'Notifications'} %}
         {% block paginationHeader %}
+            <th class="w-1"></th>
             <th class="w-1">Id</th>
             <th>Title</th>
             <th></th>
         {% endblock %}
         {% block paginationRow %}
+            <td>
+                <span class="iconify-inline text-{% if object.enabled %}success{% else %}danger{% endif %}" data-icon="fa6-solid:circle"></span>
+            </td>
             <td>{{ object.id }}</td>
             <td>{{ object.title }}</td>
             <td class="text-end">

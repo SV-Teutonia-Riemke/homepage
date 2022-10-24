@@ -22,6 +22,7 @@ final class TeamRepository extends ServiceEntityRepository
     {
         return $this->findBy([
             'ageCategory' => TeamAgeCategory::SENIOR,
+            'enabled'     => true,
         ], [
             'gender' => 'ASC',
             'name'   => 'ASC',
@@ -33,6 +34,7 @@ final class TeamRepository extends ServiceEntityRepository
     {
         return $this->findBy([
             'ageCategory' => TeamAgeCategory::JUNIOR,
+            'enabled'     => true,
         ], [
             'gender'    => 'ASC',
             'juniorAge' => 'ASC',
