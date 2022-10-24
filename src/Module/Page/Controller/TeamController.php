@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+use function array_filter;
 use function implode;
 
 #[AsController]
@@ -29,10 +30,10 @@ final class TeamController extends AbstractController
         Team $team,
         string $slug = '',
     ): Response {
-        $slugParts = [
+        $slugParts = array_filter([
             $team->getName(),
-            $team->getSeason()->__toString(),
-        ];
+            $team->getSeason()?->__toString(),
+        ]);
 
         $slugToBe = $this->slugger->slug(implode('/', $slugParts));
 
