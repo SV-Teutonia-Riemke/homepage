@@ -31,13 +31,14 @@ final class TeamController extends AbstractController
     #[Route('', name: 'index')]
     public function index(Request $request): Response
     {
-        $query      = $this->teamRepository->createQueryBuilder('p')->orderBy('p.id', 'ASC');
+        $query = $this->teamRepository->createQueryBuilder('p')->orderBy('p.id', 'ASC');
+
         $pagination = $this->paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
         );
 
-        return $this->render('@admin/team/index.html.twig', [
+        return $this->renderForm('@admin/team/index.html.twig', [
             'pagination' => $pagination,
         ]);
     }

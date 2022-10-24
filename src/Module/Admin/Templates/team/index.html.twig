@@ -8,7 +8,10 @@
 {% endblock %}
 
 {% block pageBody %}
-    {% embed '_partials/pagination_table.html.twig' with { title: 'Teams'} %}
+    {% embed '_partials/pagination_table.html.twig' with {
+        title: 'Teams',
+        pagination: pagination
+    } only %}
         {% block paginationHeader %}
             <th class="w-1"></th>
             <th class="w-1">Id</th>

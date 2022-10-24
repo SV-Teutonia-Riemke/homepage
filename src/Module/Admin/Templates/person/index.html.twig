@@ -8,7 +8,11 @@
 {% endblock %}
 
 {% block pageBody %}
-    {% embed '_partials/pagination_table.html.twig' with { title: 'Persons'} %}
+    {% embed '_partials/pagination_table.html.twig' with {
+        title: 'Persons',
+        pagination: pagination,
+        form: form
+    } only %}
         {% block paginationHeader %}
             <th class="w-1">Id</th>
             <th>Vorname</th>

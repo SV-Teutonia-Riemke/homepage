@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace App\Module\Admin\Controller;
 
 use App\Module\Admin\Form\Type\Forms\AbstractForm;
+use App\Module\Admin\Form\Type\Forms\PersonSearchType;
 use App\Module\Admin\Form\Type\Forms\PersonType;
 use App\Storage\Entity\Person;
 use App\Storage\Repository\PersonRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\SubmitButton;
@@ -28,19 +30,29 @@ final class PersonController extends AbstractController
         private readonly PersonRepository $personRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly PaginatorInterface $paginator,
+        private readonly FilterBuilderUpdater $filterBuilderUpdater,
     ) {
     }
 
     #[Route('', name: 'index')]
     public function index(Request $request): Response
     {
-        $query      = $this->personRepository->createQueryBuilder('p');
+        $query = $this->personRepository->createQueryBuilder('p');
+
+        $form = $this->createForm(PersonSearchType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->filterBuilderUpdater->addFilterConditions($form, $query);
+        }
+
         $pagination = $this->paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
         );
 
-        return $this->render('@admin/person/index.html.twig', [
+        return $this->renderForm('@admin/person/index.html.twig', [
+            'form'       => $form,
             'pagination' => $pagination,
         ]);
     }
