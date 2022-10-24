@@ -32,7 +32,7 @@ final class PasswordChangeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $form->get('currentPassword')->getData();
+            $password = $form->get('newPassword')->getData();
 
             $user->setPassword(
                 $this->userPasswordHasher->hashPassword($user, $password),
