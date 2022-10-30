@@ -1,0 +1,33 @@
+when@prod:
+    sentry:
+        dsn: '%env(SENTRY_DSN)%'
+        options:
+            traces_sample_rate: '%env(float:SENTRY_TRACE)%'
+            integrations:
+                - 'Sentry\Integration\IgnoreErrorsIntegration'
+        tracing:
+            enabled: true
+            dbal:
+                enabled: true
+                connection: 'default'
+            cache:
+                enabled: true
+            twig:
+                enabled: true
+        messenger:
+            enabled: true
+
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        Sentry\Integration\IgnoreErrorsIntegration:
+            arguments:
+                $options:
+                    ignore_exceptions:
+                        - Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+                        - Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+                        - Symfony\Component\Security\Core\Exception\AccessDeniedException
+                        - Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+                        - Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException

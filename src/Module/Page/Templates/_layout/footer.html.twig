@@ -16,14 +16,9 @@
         <div class="col-12 col-md mb-3 mb-md-0">
             <h3>Links</h3>
             <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="https://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=78&clubID=1393" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Handball4all Teutonia Riemke</a></li>
-                <li class="nav-item mb-2"><a href="https://spo.handball4all.de/Spielbetrieb/index.php?orgGrpID=78&gymID=2197&gymnasium=608877" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Handball4all Böll-Halle</a></li>
-                <li class="nav-item mb-2"><a href="https://www.dhb.de/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Deutscher Handballbund</a></li>
-                <li class="nav-item mb-2"><a href="https://www.westdeutscher-handball-verband.de/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Westdeutscher Handballverband</a></li>
-                <li class="nav-item mb-2"><a href="https://www.sport-in-bochum.de/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Stadtsportbund Bochum</a></li>
-                <li class="nav-item mb-2"><a href="https://handballkreis-industrie.de/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Handballkreis Industrie</a></li>
-                <li class="nav-item mb-2"><a href="https://www.handballwestfalen.de/aktuelles/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Handballverband Westfalen</a></li>
-                <li class="nav-item mb-2"><a href="https://www.handballwestfalen.de/qualifizierung/seminare-und-lehrgaenge/" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">Seminaranmeldung HVW</a></li>
+                {% for link in links() %}
+                    <li class="nav-item mb-2"><a href="{{ link.uri }}" class="nav-link p-0 text-muted" target="_blank" rel="noreferrer">{{ link.name }}</a></li>
+                {% endfor %}
             </ul>
         </div>
 

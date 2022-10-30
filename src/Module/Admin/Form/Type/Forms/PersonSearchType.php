@@ -24,7 +24,7 @@ final class PersonSearchType extends AbstractType
                     'placeholder'  => 'Suchen...',
                 ],
                 'apply_filter' => static function (QueryInterface $filterQuery, $field, $values) {
-                    if (empty($values['value'])) {
+                    if ($values['value'] === null) {
                         return null;
                     }
 

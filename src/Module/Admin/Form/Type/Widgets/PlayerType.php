@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Form\Type\Widgets;
 
-use App\Form\Type\Entities\FileEntityType;
 use App\Form\Type\Entities\PersonEntityType;
 use App\Form\Type\Widgets\GamePositionType;
 use App\Storage\Entity\Player;

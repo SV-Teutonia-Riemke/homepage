@@ -15,7 +15,10 @@ use function sprintf;
 use function Symfony\Component\String\u;
 
 #[ORM\Entity(repositoryClass: PersonRepository::class)]
-#[ORM\UniqueConstraint(fields: ['firstName', 'lastName'])]
+#[ORM\UniqueConstraint(fields: [
+    'firstName',
+    'lastName',
+])]
 class Person extends AbstractEntity implements Stringable
 {
     #[ORM\Column(type: Types::STRING)]
@@ -126,11 +129,7 @@ class Person extends AbstractEntity implements Stringable
     public function getAnonymizedName(): string
     {
         if ($this->firstName !== null && $this->lastName !== null) {
-            if ($this->anonymizeLastName) {
-                return sprintf('%s %s.', $this->firstName, u($this->lastName)->truncate(1)->toString());
-            }
-
-            return sprintf('%s %s', $this->firstName, $this->lastName);
+            return sprintf('%s %s.', $this->firstName, u($this->lastName)->truncate(1)->toString());
         }
 
         return $this->firstName;

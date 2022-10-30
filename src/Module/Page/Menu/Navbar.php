@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Page\Menu;
 
+use App\Storage\Repository\LinkRepository;
 use App\Storage\Repository\TeamRepository;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
@@ -17,6 +18,7 @@ final class Navbar
     public function __construct(
         private readonly FactoryInterface $factory,
         private readonly TeamRepository $teamRepository,
+        private readonly LinkRepository $linkRepository,
         #[Autowire(service: 'assets._default_package')] private readonly Package $package,
     ) {
     }
@@ -28,7 +30,7 @@ final class Navbar
 
         $menu = $this->factory->createItem('root');
 
-        $menu->addChild('Home', [
+        $menu->addChild('Startseite', [
             'route' => 'app_index',
             'icon'  => 'fa6-solid:house',
         ]);
@@ -85,6 +87,47 @@ final class Navbar
         $menu->addChild('Aufnahmeantrag', [
             'icon'           => 'fa6-solid:file-contract',
             'uri'            => $this->package->getUrl('build/documents/aufnahmeantrag.pdf'),
+            'linkAttributes' => [
+                'target' => '_blank',
+            ],
+        ]);
+
+        $links = $this->linkRepository->findEnabled();
+        if (count($links) > 0) {
+            $linkItem = $this->factory->createItem('Links', [
+                'dropdown' => true,
+                'icon'     => 'fa6-solid:link',
+            ]);
+
+            foreach ($links as $link) {
+                $linkItem->addChild($link->getName(), [
+                    'uri'            => $link->getUri(),
+                    'linkAttributes' => [
+                        'target' => '_blank',
+                    ],
+                ]);
+            }
+
+            $menu->addChild($linkItem);
+        }
+
+        $menu->addChild('Zur alten Webseite / Archiv', [
+            'icon'           => 'fa6-solid:box-archive',
+            'uri'            => 'https://legacy.teutonia-riemke.de/',
+            'attributes'     => [
+                'class' => 'd-md-none',
+            ],
+            'linkAttributes' => [
+                'target' => '_blank',
+            ],
+        ]);
+
+        $menu->addChild('Spenden', [
+            'icon'           => 'fa6-solid:heart',
+            'uri'            => 'https://svtr.link/spenden',
+            'attributes'     => [
+                'class' => 'd-md-none',
+            ],
             'linkAttributes' => [
                 'target' => '_blank',
             ],

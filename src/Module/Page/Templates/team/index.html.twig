@@ -138,7 +138,7 @@
                             <tbody>
                             {% for staff in team.staffs %}
                                 <tr>
-                                    <td>{{ staff.person.anonymizedName }}</td>
+                                    <td>{{ staff.person }}</td>
                                     <td>{{ staff.position is null ? '' : staff.position.translatable|trans }}</td>
                                     <td>
                                         {% if staff.person.emailAddress is not null %}

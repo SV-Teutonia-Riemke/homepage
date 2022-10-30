@@ -962,7 +962,7 @@
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.1.0.tgz#20215251e5afe6e0a3787285181ba1bfc9097df0"
   integrity sha512-iDMHUhiEJ1xFeicyHcZQQgBzhtk5mPR0QZO3L6wtqzMsJEk2TKECuCQTGKjm+KJTHVY0dKq1dOOAWvODjpd2Mg==
 
-"@hotwired/turbo@^7.2.4":
+"@hotwired/turbo@^7.0.1":
   version "7.2.4"
   resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.2.4.tgz#0d35541be32cfae3b4f78c6ab9138f5b21f28a21"
   integrity sha512-c3xlOroHp/cCZHDOuLp6uzQYEbvXBUVaal0puXoGJ9M8L/KHwZ3hQozD4dVeSN9msHWLxxtmPT1TlCN7gFhj4w==
@@ -1108,16 +1108,16 @@
 
 "@tabler/core@github:tabler/tabler#dev":
   version "1.0.0-beta14"
-  resolved "https://codeload.github.com/tabler/tabler/tar.gz/fcf850c34165ca6c073ad5a75bc25d2505a2b7f2"
+  resolved "https://codeload.github.com/tabler/tabler/tar.gz/e59e62e6e5a48e77f2aad16fc57336937e2efe19"
   dependencies:
     "@popperjs/core" "^2.11.6"
-    "@tabler/icons" "^1.107.0"
+    "@tabler/icons" "^1.108.0"
     bootstrap "~5.2.2"
 
-"@tabler/icons@^1.107.0":
-  version "1.107.0"
-  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.107.0.tgz#ad1ecd20a3a478a9f2e8f9c5000a54662a854ec3"
-  integrity sha512-HlNN5uXPr9NUD2IqTNv5HfL2P3P8RT8VzYip3CBSiB4t9n7ZNFj/9gJRKgy9ONn9AN+hqACRaisu7M+koLAZzA==
+"@tabler/icons@^1.108.0":
+  version "1.108.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.108.0.tgz#95f20eed2d32aa60a0e992ad08f6e2fa213e6161"
+  integrity sha512-g5omegUgM1aaS+ICoJNNlFpxBGHPQq92Hs0w0pZLn1LzvMRc2H/3NO7A+G4idJwrJ6Nk8V7rnA9T8X2m4aGSaQ==
 
 "@trysound/sax@0.2.0":
   version "0.2.0"
