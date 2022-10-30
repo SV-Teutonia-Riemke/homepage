@@ -1,0 +1,23 @@
+{
+  "short_name": "SVT",
+  "name": "SV Teutonia Riemke",
+  "description": "App des SV Teutonia Riemke",
+  "icons": [
+    {
+      "src": "/build/img/logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/build/img/logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
+  "background_color": "#009146",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#009146"
+}

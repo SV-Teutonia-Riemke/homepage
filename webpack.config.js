@@ -30,6 +30,12 @@ Encore
     })
 
     .copyFiles({
+        from: './assets/images',
+        to: 'img/[path][name].[ext]',
+        pattern: /\.(png|jpg|jpeg|gif|ico|svg)$/
+    })
+
+    .copyFiles({
         from: './assets/documents',
         to: 'documents/[path][name].[hash:8].[ext]',
     })
