@@ -1,4 +1,30 @@
 const Encore = require('@symfony/webpack-encore');
+const OfflinePlugin = require('@lcdp/offline-plugin');
+
+const imageCacheBuster = (Math.random() + 1).toString(36).substring(7);
+const manifestOptions = {
+    name: 'SV Teutonia Riemke', // Erscheint unter anderem im App-Startbildschirm auf Android.
+    short_name: 'SVT', // App-Titel z.b. im Android App-Drawer.
+    description: 'App des SV Teutonia Riemke',
+
+    // Einfärbungen der Browserleiste.
+    theme_color: '#009146',
+    background_color: '#009146',
+
+    display: 'minimal-ui', // Browser stellt im App-Modus nur einen Reload und Vor/Zurückbutton bereit.
+    prefer_related_applications: false, // Legt fest das keine alternativ Apps zur Installation angeboten werden sollen.
+    start_url: '/', // Diese URL wird beim öffnen der App geladen. Könnte z.b. auch /?pwa=true sein falls man es tracken möchte.
+
+    icons: [{
+        src: '/build/img/logo.' + imageCacheBuster + '.png',
+        sizes: '192x192',
+        type: 'image/png'
+    }, {
+        src: '/build/img/logo.' + imageCacheBuster + '.png',
+        sizes: '512x512',
+        type: 'image/png'
+    }]
+};
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -31,7 +57,7 @@ Encore
 
     .copyFiles({
         from: './assets/images',
-        to: 'img/[path][name].[ext]',
+        to: 'img/[path][name].' + imageCacheBuster + '.[ext]',
         pattern: /\.(png|jpg|jpeg|gif|ico|svg)$/
     })
 
@@ -48,6 +74,11 @@ Encore
         {from: './node_modules/ckeditor4/skins', to: 'ckeditor/skins/[path][name].[ext]'},
         {from: './node_modules/ckeditor4/vendor', to: 'ckeditor/vendor/[path][name].[ext]'}
     ])
+
+    // Manifest hinzufügen.
+    .configureManifestPlugin((options) => {
+        options.seed = manifestOptions;
+    })
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -93,8 +124,15 @@ Encore
     // requires WebpackEncoreBundle 1.4 or higher
     .enableIntegrityHashes(Encore.isProduction())
 
-    // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .addPlugin(
+        new OfflinePlugin()
+    )
+
+// uncomment if you're having problems with a jQuery plugin
+//.autoProvidejQuery()
 ;
 
-module.exports = Encore.getWebpackConfig();
+
+const webpackConfig = Encore.getWebpackConfig();
+
+module.exports = webpackConfig;
