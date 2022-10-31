@@ -35,18 +35,21 @@
 
 {%- block pageTitleActionsButtons -%}
     {% if team.emailAddress is not null %}
-        <a class="btn btn-ghost-primary btn-icon" href="mailto:{{ team.emailAddress }}"  data-bs-toggle="tooltip" data-bs-title="{{ team.emailAddress }}" data-bs-placement="top">
+        <a class="btn btn-ghost-primary btn-icon" href="mailto:{{ team.emailAddress }}" data-bs-toggle="tooltip" data-bs-title="{{ team.emailAddress }}" data-bs-placement="top">
             <span class="iconify icon" data-icon="fa6-solid:at"></span>
+            E-Mail
         </a>
     {% endif %}
     {% if team.instagram is not null %}
-        <a class="btn btn-ghost-instagram btn-icon" href="https://instagram.com/{{ team.instagram }}" target="_blank" rel="nofollow">
+        <a class="btn btn-ghost-instagram" href="https://instagram.com/{{ team.instagram }}" target="_blank" rel="nofollow">
             <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+            Instagram
         </a>
     {% endif %}
     {% if team.facebook is not null %}
-        <a class="btn btn-ghost-facebook btn-icon" href="https://facebook.com/{{ team.facebook }}" target="_blank" rel="nofollow">
+        <a class="btn btn-ghost-facebook" href="https://facebook.com/{{ team.facebook }}" target="_blank" rel="nofollow">
             <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+            Facebook
         </a>
     {% endif %}
 {%- endblock -%}
@@ -126,30 +129,32 @@
                         <div class="card-header">
                             <h5 class="card-title">Trainerstab</h5>
                         </div>
-                        <table class="table card-table table-vcenter text-nowrap">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Funktion</th>
-                                <th>E-Mail</th>
-                                <th>Telefon</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for staff in team.staffs %}
+                        <div class="table-responsive">
+                            <table class="table card-table table-vcenter text-nowrap">
+                                <thead>
                                 <tr>
-                                    <td>{{ staff.person }}</td>
-                                    <td>{{ staff.position is null ? '' : staff.position.translatable|trans }}</td>
-                                    <td>
-                                        {% if staff.person.emailAddress is not null %}
-                                            <a href="mailto:{{ staff.person.emailAddress }}">{{ staff.person.emailAddress }}</a>
-                                        {% endif %}
-                                    </td>
-                                    <td>{{ staff.person.phoneNumber is null ? '' : staff.person.phoneNumber|phone_number_format }}</td>
+                                    <th>Name</th>
+                                    <th>Funktion</th>
+                                    <th>E-Mail</th>
+                                    <th>Telefon</th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {% for staff in team.staffs %}
+                                    <tr>
+                                        <td>{{ staff.person }}</td>
+                                        <td>{{ staff.position is null ? '' : staff.position.translatable|trans }}</td>
+                                        <td>
+                                            {% if staff.person.emailAddress is not null %}
+                                                <a href="mailto:{{ staff.person.emailAddress }}">{{ staff.person.emailAddress }}</a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ staff.person.phoneNumber is null ? '' : staff.person.phoneNumber|phone_number_format }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 {% endif %}
 
@@ -158,37 +163,39 @@
                         <div class="card-header">
                             <h5 class="card-title">Kader</h5>
                         </div>
-                        <table class="table card-table table-vcenter text-nowrap">
-                            <thead>
-                            <tr>
-                                <th>Nr.</th>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for player in team.getPlayersByNumber %}
+                        <div class="table-responsive">
+                            <table class="table card-table table-vcenter text-nowrap">
+                                <thead>
                                 <tr>
-                                    <td>{{ player.number|default('-') }}</td>
-                                    <td>{{ player.person.anonymizedName }}</td>
-                                    <td>{{ player.position is null ? '-' : player.position.translatable|trans }}</td>
-                                    <td class="text-end">
-                                        {% if player.person.instagram is not null %}
-                                            <a href="{{ player.person.instagram }}" class="btn btn-sm btn-icon btn-link text-instagram">
-                                                <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
-                                            </a>
-                                        {% endif %}
-                                        {% if player.person.facebook is not null %}
-                                            <a href="{{ player.person.facebook }}" class="btn btn-sm btn-icon btn-link text-facebook">
-                                                <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
-                                            </a>
-                                        {% endif %}
-                                    </td>
+                                    <th>Nr.</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th></th>
                                 </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {% for player in team.getPlayersByNumber %}
+                                    <tr>
+                                        <td>{{ player.number|default('-') }}</td>
+                                        <td>{{ player.person.anonymizedName }}</td>
+                                        <td>{{ player.position is null ? '-' : player.position.translatable|trans }}</td>
+                                        <td class="text-end">
+                                            {% if player.person.instagram is not null %}
+                                                <a href="{{ player.person.instagram }}" class="btn btn-sm btn-icon btn-link text-instagram">
+                                                    <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+                                                </a>
+                                            {% endif %}
+                                            {% if player.person.facebook is not null %}
+                                                <a href="{{ player.person.facebook }}" class="btn btn-sm btn-icon btn-link text-facebook">
+                                                    <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+                                                </a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 {% endif %}
 

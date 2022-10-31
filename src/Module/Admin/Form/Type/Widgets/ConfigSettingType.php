@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Module\Admin\Form\Type\Forms;
+namespace App\Module\Admin\Form\Type\Widgets;
 
+use App\Infrastructure\Config\ConfigItem;
 use App\Storage\Entity\ConfigSetting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSetDataEvent;
@@ -18,25 +19,33 @@ final class ConfigSettingType extends AbstractType
     /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->addEventListener(FormEvents::POST_SET_DATA, static function (PostSetDataEvent $event): void {
+        $configItem = $options['config_item'];
+        assert($configItem instanceof ConfigItem);
+
+        $builder->addEventListener(FormEvents::POST_SET_DATA, static function (PostSetDataEvent $event) use ($configItem): void {
             $setting = $event->getData();
             assert($setting instanceof ConfigSetting);
 
-            $event->getForm()->add('value', $setting->getType()->getFormType(), [
-                'label'    => $setting->getName(),
+            $formOptions = $configItem->formOptions + [
+                'label'    => $configItem->name,
                 'required' => false,
                 'setter'   => static function (ConfigSetting $configSetting, $value): void {
-                    $value = $value === null ? null : (string) $value;
-                    $configSetting->setValue($value);
+                        $value = $value === null ? null : (string) $value;
+                        $configSetting->setValue($value);
                 },
-            ]);
+            ];
+
+            $event->getForm()->add('value', $configItem->formType, $formOptions);
         });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'label'      => false,
             'data_class' => ConfigSetting::class,
         ]);
+
+        $resolver->define('config_item')->allowedTypes(ConfigItem::class)->required();
     }
 }

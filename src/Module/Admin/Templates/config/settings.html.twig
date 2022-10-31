@@ -14,9 +14,7 @@
             <h3 class="card-title">Settings</h3>
         </div>
         <div class="card-body">
-            {% for setting in form.settings %}
-                {{ form_row(setting.value) }}
-            {% endfor %}
+            {{ form_row(form) }}
         </div>
     </div>
 {% endblock %}

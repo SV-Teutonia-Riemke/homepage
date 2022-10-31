@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
-use App\Module\Admin\Form\Type\Forms\ConfigSettingCollectionType;
-use App\Storage\Repository\ConfigSettingRepository;
+use App\Infrastructure\Config\ConfigBuilder;
+use App\Infrastructure\Config\ConfigSettingProvider;
+use App\Module\Admin\Form\Type\Forms\ConfigType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,24 +20,23 @@ class ConfigSettingsController extends AbstractController
 {
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly ConfigSettingRepository $configSettingRepository,
+        private readonly ConfigBuilder $configBuilder,
+        private readonly ConfigSettingProvider $configSettingProvider,
     ) {
     }
 
     public function __invoke(Request $request): Response
     {
-        $allStoredSettings = $this->configSettingRepository->findAll();
-
-        $formData = [
-            'settings' => $allStoredSettings,
-        ];
-
-        $form = $this->createForm(ConfigSettingCollectionType::class, $formData);
+        $form = $this->createForm(ConfigType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($formData['settings'] as $formSetting) {
-                $this->entityManager->persist($formSetting);
+            $collection = $this->configBuilder->build();
+
+            foreach ($collection->getAllItems() as $item) {
+                $setting = $this->configSettingProvider->get($item->name);
+
+                $this->entityManager->persist($setting);
             }
 
             $this->entityManager->flush();
