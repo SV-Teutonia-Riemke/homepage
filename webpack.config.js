@@ -11,7 +11,7 @@ const manifestOptions = {
     theme_color: '#009146',
     background_color: '#009146',
 
-    display: 'minimal-ui', // Browser stellt im App-Modus nur einen Reload und Vor/Zurückbutton bereit.
+    display: 'standalone', // Browser stellt im App-Modus nur einen Reload und Vor/Zurückbutton bereit.
     prefer_related_applications: false, // Legt fest das keine alternativ Apps zur Installation angeboten werden sollen.
     start_url: '/', // Diese URL wird beim öffnen der App geladen. Könnte z.b. auch /?pwa=true sein falls man es tracken möchte.
 
