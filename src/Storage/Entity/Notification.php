@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Entity\Common\Position;
 use App\Storage\Repository\NotificationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
 class Notification extends AbstractEntity
 {
+    use Position;
+
     #[ORM\Column(type: Types::STRING)]
     private string $title;
 

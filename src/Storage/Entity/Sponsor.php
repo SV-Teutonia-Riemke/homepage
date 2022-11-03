@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Entity\Common\Position;
 use App\Storage\Repository\SponsorRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: SponsorRepository::class)]
 class Sponsor extends AbstractEntity
 {
+    use Position;
+
     #[ORM\Column(type: Types::STRING)]
     private string $name;
 

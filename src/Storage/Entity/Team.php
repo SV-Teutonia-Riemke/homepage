@@ -9,6 +9,7 @@ use App\Domain\TeamAgeCategory;
 use App\Domain\TeamJuniorAge;
 use App\Domain\YearGroup;
 use App\Infrastructure\Doctrine\DBAL\Types\Type\YearGroupType;
+use App\Storage\Entity\Common\Position;
 use App\Storage\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,6 +21,8 @@ use function usort;
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
 class Team extends AbstractEntity
 {
+    use Position;
+
     #[ORM\Column(type: Types::STRING)]
     private string $name;
 

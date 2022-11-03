@@ -31,7 +31,7 @@ final class SponsorController extends AbstractController
     #[Route('', name: 'index')]
     public function index(Request $request): Response
     {
-        $query      = $this->sponsorRepository->createQueryBuilder('p');
+        $query      = $this->sponsorRepository->createQueryBuilder('p')->orderBy('p.position', 'ASC');
         $pagination = $this->paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -95,6 +95,18 @@ final class SponsorController extends AbstractController
     {
         $sponsor->setEnabled($enabled);
 
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_sponsor_index');
+    }
+
+    #[Route('/{sponsor}/up', name: 'up', defaults: ['position' => -1])]
+    #[Route('/{sponsor}/down', name: 'down', defaults: ['position' => 1])]
+    public function position(Sponsor $sponsor, int $position): Response
+    {
+        $sponsor->increasePosition($position);
+
+        $this->entityManager->persist($sponsor);
         $this->entityManager->flush();
 
         return $this->redirectToRoute('app_admin_sponsor_index');

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Entity\Common\Position;
 use App\Storage\Repository\LinkRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,6 +13,8 @@ use Stringable;
 #[ORM\Entity(repositoryClass: LinkRepository::class)]
 class Link extends AbstractEntity implements Stringable
 {
+    use Position;
+
     #[ORM\Column(type: Types::STRING)]
     private string $name;
 
