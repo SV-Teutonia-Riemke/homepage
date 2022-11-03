@@ -7,26 +7,38 @@ namespace App\Infrastructure\Config;
 use App\Storage\Entity\ConfigSetting;
 use App\Storage\Repository\ConfigSettingRepository;
 
+use function array_key_exists;
+
 final class ConfigSettingProvider
 {
     /** @var array<string, ConfigSetting>|null */
     private array|null $all = null;
 
+    private ConfigItemCollection $items;
+
     public function __construct(
         private readonly ConfigSettingRepository $configSettingRepository,
+        ConfigBuilder $configBuilder,
     ) {
+        $this->items = $configBuilder->build()->getAllItems();
     }
 
     public function get(string $name): ConfigSetting
     {
-        $all     = $this->all();
-        $setting = $all[$name] ?? null;
-
-        if ($setting === null) {
-            $setting = new ConfigSetting($name);
+        if (! $this->items->has($name)) {
+            return new ConfigSetting($name);
         }
 
-        return $setting;
+        $all = $this->all();
+
+        if (! array_key_exists($name, $all)) {
+            return new ConfigSetting(
+                $name,
+                $this->items->get($name)->default,
+            );
+        }
+
+        return $all[$name];
     }
 
     /** @return array<string, ConfigSetting> */

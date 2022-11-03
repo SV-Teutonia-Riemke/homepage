@@ -15,11 +15,11 @@ class ConfigSetting extends AbstractEntity
     private string $name;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private string|null $value;
+    private mixed $value;
 
     public function __construct(
         string $name,
-        string|null $value = null,
+        mixed $value = null,
     ) {
         $this->name  = $name;
         $this->value = $value;
@@ -30,12 +30,12 @@ class ConfigSetting extends AbstractEntity
         return $this->name;
     }
 
-    public function setValue(string|null $value): void
+    public function setValue(mixed $value): void
     {
         $this->value = $value;
     }
 
-    public function getValue(): string|null
+    public function getValue(): mixed
     {
         return $this->value;
     }

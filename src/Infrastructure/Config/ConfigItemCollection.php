@@ -6,29 +6,47 @@ namespace App\Infrastructure\Config;
 
 use ArrayIterator;
 use IteratorAggregate;
+use OutOfRangeException;
 
+use function array_key_exists;
 use function array_merge;
-use function array_values;
+use function sprintf;
 
-/** @template-implements IteratorAggregate<int, ConfigItem> */
+/** @template-implements IteratorAggregate<string, ConfigItem> */
 final class ConfigItemCollection implements IteratorAggregate
 {
-    /** @var list<ConfigItem> */
-    private array $items;
+    /** @var array<string, ConfigItem> */
+    private array $items = [];
 
     public function __construct(ConfigItem ...$items)
     {
-        $this->items = array_values($items);
+        $this->add(...$items);
     }
 
-    public function add(ConfigItem $item): self
+    public function add(ConfigItem ...$items): self
     {
-        $this->items[] = $item;
+        foreach ($items as $item) {
+            $this->items[$item->name] = $item;
+        }
 
         return $this;
     }
 
-    /** @return ArrayIterator<int, ConfigItem> */
+    public function has(string $name): bool
+    {
+        return array_key_exists($name, $this->items);
+    }
+
+    public function get(string $name): ConfigItem
+    {
+        if (! $this->has($name)) {
+            throw new OutOfRangeException(sprintf('item with name "%s" does not exist', $name), 1667508373649);
+        }
+
+        return $this->items[$name];
+    }
+
+    /** @return ArrayIterator<string, ConfigItem> */
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->items);

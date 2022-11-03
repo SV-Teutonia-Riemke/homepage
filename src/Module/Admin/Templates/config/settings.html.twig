@@ -1,20 +1,43 @@
 {% extends '@admin/_layout/simple_form.html.twig' %}
 
-{% set pagePreTitle = 'Edit' %}
-{% set pageTitle = 'Configs' %}
-
-{% block pageTitleActionsButtons %}
-    <a class="btn btn-primary" href="{{ path('app_admin_config_add') }}">Create</a>
-    {{ parent() }}
-{% endblock %}
+{% set pageTitle = 'Einstellungen' %}
 
 {% block pageBody %}
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Settings</h3>
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <div class="list-group list-group-flush">
+                    {% for category in form %}
+                        {% if category.children.items is defined or category.children.categories is defined %}
+                            <a class="list-group-item list-group-item-action" data-bs-toggle="collapse" href="#collapse{{ category.vars.id }}" role="button" aria-expanded="false" aria-controls="collapse{{ category.vars.id }}">
+                                {{ category.vars.label|trans }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            {{ form_row(form) }}
+        <div class="col-9">
+            <div id="collapse-group">
+                {% for category in form %}
+                    {% if category.children.items is defined or category.children.categories is defined %}
+                        <div class="collapse{% if loop.first %} show{% endif %}" id="collapse{{ category.vars.id }}" data-bs-parent="#collapse-group">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">{{ category.vars.label|trans }}</h3>
+                                </div>
+                                <div class="card-body">
+                                    {% for item in category.children.items %}
+                                        {{ form_row(item.value) }}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
+
+
 {% endblock %}

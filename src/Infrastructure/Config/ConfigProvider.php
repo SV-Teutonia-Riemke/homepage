@@ -11,7 +11,7 @@ final class ConfigProvider
     ) {
     }
 
-    public function get(string $name): string|null
+    public function get(string $name): mixed
     {
         return $this->configSettingProvider->get($name)->getValue();
     }

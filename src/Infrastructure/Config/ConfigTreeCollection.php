@@ -13,9 +13,16 @@ final class ConfigTreeCollection implements IteratorAggregate
     /** @var list<ConfigTree> */
     private array $items = [];
 
-    public function add(ConfigTree $item): self
+    public static function create(): self
     {
-        $this->items[] = $item;
+        return new self();
+    }
+
+    public function add(ConfigTree ...$trees): self
+    {
+        foreach ($trees as $tree) {
+            $this->items[] = $tree;
+        }
 
         return $this;
     }

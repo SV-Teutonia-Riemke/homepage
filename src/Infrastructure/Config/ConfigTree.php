@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Config;
 
+use Symfony\Component\Translation\TranslatableMessage;
+
 use function iterator_to_array;
+use function sprintf;
 
 final class ConfigTree
 {
@@ -22,9 +25,19 @@ final class ConfigTree
         $this->items    = new ConfigItemCollection();
     }
 
+    public static function create(string $name): self
+    {
+        return new self($name);
+    }
+
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getLabel(): TranslatableMessage
+    {
+        return new TranslatableMessage(sprintf('category_%s', $this->name), [], 'config');
     }
 
     public function getParent(): ConfigTree|null
@@ -74,9 +87,11 @@ final class ConfigTree
         return $child;
     }
 
-    public function addItem(ConfigItem $item): self
+    public function addItem(ConfigItem ...$items): self
     {
-        $this->items->add($item);
+        foreach ($items as $item) {
+            $this->items->add($item);
+        }
 
         return $this;
     }

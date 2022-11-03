@@ -7,7 +7,6 @@ namespace App\Module\Admin\Form\Type\Widgets;
 use App\Infrastructure\Config\ConfigSettingProvider;
 use App\Infrastructure\Config\ConfigTree;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,15 +25,16 @@ final class ConfigTreeType extends AbstractType
         $tree = $options['tree'];
         assert($tree instanceof ConfigTree);
 
-        $children = $builder->create('children', FormType::class, ['label' => false]);
-        $items    = $builder->create('items', FormType::class, ['label' => false]);
+        $categories = $builder->create('categories', options: ['compound' => true]);
+        $items      = $builder->create('items', options: ['compound' => true]);
 
         foreach ($tree->getChildren() as $child) {
             $form = $builder->create($child->getName(), self::class, [
-                'tree' => $child,
+                'label' => $child->getLabel(),
+                'tree'  => $child,
             ]);
 
-            $children->add($form);
+            $categories->add($form);
         }
 
         foreach ($tree->getItems() as $configItem) {
@@ -49,16 +49,12 @@ final class ConfigTreeType extends AbstractType
         }
 
         $builder
-            ->add($children)
+            ->add($categories)
             ->add($items);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'label'    => false,
-        ]);
-
         $resolver->define('tree')->allowedTypes(ConfigTree::class)->required();
     }
 }

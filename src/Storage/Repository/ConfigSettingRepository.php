@@ -17,7 +17,7 @@ final class ConfigSettingRepository extends ServiceEntityRepository
         parent::__construct($registry, ConfigSetting::class);
     }
 
-    /** @return list<ConfigSetting> */
+    /** @return array<ConfigSetting> */
     public function findByNames(string ...$names): array
     {
         return $this->createQueryBuilder('s', 's.name')

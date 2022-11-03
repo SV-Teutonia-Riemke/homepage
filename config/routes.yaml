@@ -2,10 +2,6 @@ page:
     resource: ../src/Module/Page/Controller/
     type: attribute
 
-member:
-    resource: ../src/Module/Member/Controller/
-    type: attribute
-
 admin:
     resource: ../src/Module/Admin/Controller/
     type: attribute

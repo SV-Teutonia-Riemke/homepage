@@ -27,7 +27,7 @@ final class ConfigSettingType extends AbstractType
             assert($setting instanceof ConfigSetting);
 
             $formOptions = $configItem->formOptions + [
-                'label'    => $configItem->name,
+                'label'    => $configItem->getLabel(),
                 'required' => false,
                 'setter'   => static function (ConfigSetting $configSetting, $value): void {
                         $value = $value === null ? null : (string) $value;
