@@ -1,5 +1,5 @@
 const Encore = require('@symfony/webpack-encore');
-const OfflinePlugin = require('@lcdp/offline-plugin');
+// const OfflinePlugin = require('@lcdp/offline-plugin');
 
 const imageCacheBuster = (Math.random() + 1).toString(36).substring(7);
 const manifestOptions = {
@@ -124,9 +124,9 @@ Encore
     // requires WebpackEncoreBundle 1.4 or higher
     .enableIntegrityHashes(Encore.isProduction())
 
-    .addPlugin(
-        new OfflinePlugin()
-    )
+    // .addPlugin(
+    //     new OfflinePlugin()
+    // )
 
 // uncomment if you're having problems with a jQuery plugin
 //.autoProvidejQuery()
