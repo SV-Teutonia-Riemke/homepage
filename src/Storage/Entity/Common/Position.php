@@ -12,14 +12,14 @@ trait Position
 {
     #[Gedmo\SortablePosition]
     #[ORM\Column(type: Types::INTEGER)]
-    private int $position = 0;
+    private int|null $position = null;
 
-    public function getPosition(): int
+    public function getPosition(): int|null
     {
         return $this->position;
     }
 
-    public function setPosition(int $position): void
+    public function setPosition(int|null $position): void
     {
         if ($position < 0) {
             $position = 0;
@@ -30,6 +30,6 @@ trait Position
 
     public function increasePosition(int $position): void
     {
-        $this->setPosition($this->getPosition() + $position);
+        $this->setPosition(($this->getPosition() ?? 0) + $position);
     }
 }

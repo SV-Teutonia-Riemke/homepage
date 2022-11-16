@@ -143,9 +143,6 @@
             "config/packages/sentry.yaml"
         ]
     },
-    "shapecode/doctrine-session-handler-bundle": {
-        "version": "5.1.0"
-    },
     "squizlabs/php_codesniffer": {
         "version": "3.7",
         "recipe": {

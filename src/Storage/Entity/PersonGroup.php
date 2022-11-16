@@ -17,7 +17,8 @@ class PersonGroup extends AbstractEntity
     private string $name;
 
     /** @var Collection<PersonGroupMember> */
-    #[ORM\OneToMany(mappedBy: 'group', targetEntity: PersonGroupMember::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'group', targetEntity: PersonGroupMember::class, cascade: ['persist'], orphanRemoval: true)]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $members;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]

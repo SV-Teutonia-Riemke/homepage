@@ -24,7 +24,6 @@ final class PersonEntityType extends AbstractType
                     ->orderBy('p.firstName', 'ASC')
                     ->addOrderBy('p.lastName', 'ASC');
             },
-//            'autocomplete' => true
         ]);
     }
 

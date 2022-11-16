@@ -7,10 +7,10 @@ namespace App\Module\Admin\Form\Type\Widgets;
 use App\Form\Type\Entities\PersonEntityType;
 use App\Storage\Entity\PersonGroupMember;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class PersonGroupMemberType extends AbstractType
 {
@@ -20,13 +20,11 @@ final class PersonGroupMemberType extends AbstractType
         $builder
             ->add('person', PersonEntityType::class, [
                 'required'    => false,
-                'constraints' => [
-                    new NotBlank(),
-                ],
             ])
-            ->add('position', TextType::class, [
+            ->add('jobTitle', TextType::class, [
                 'required' => false,
-            ]);
+            ])
+            ->add('position', IntegerType::class, []);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

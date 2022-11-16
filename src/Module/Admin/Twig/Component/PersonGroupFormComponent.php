@@ -9,11 +9,9 @@ use App\Storage\Entity\PersonGroup;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
-use Symfony\UX\LiveComponent\Attribute\LiveAction;
-use Symfony\UX\LiveComponent\Attribute\LiveArg;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
-use Symfony\UX\LiveComponent\ComponentWithFormTrait;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
+use Symfony\UX\LiveComponent\LiveCollectionTrait;
 
 #[AsLiveComponent(
     'admin_person_group_form',
@@ -21,7 +19,7 @@ use Symfony\UX\LiveComponent\DefaultActionTrait;
 )]
 final class PersonGroupFormComponent extends AbstractController
 {
-    use ComponentWithFormTrait;
+    use LiveCollectionTrait;
     use DefaultActionTrait;
 
     #[LiveProp(fieldName: 'data')]
@@ -33,18 +31,5 @@ final class PersonGroupFormComponent extends AbstractController
             PersonGroupType::class,
             $this->personGroup,
         );
-    }
-
-    #[LiveAction]
-    public function addMember(): void
-    {
-        $this->formValues['members'][] = [];
-    }
-
-    #[LiveAction]
-    public function removeMember(
-        #[LiveArg] int $index,
-    ): void {
-        unset($this->formValues['members'][$index]);
     }
 }

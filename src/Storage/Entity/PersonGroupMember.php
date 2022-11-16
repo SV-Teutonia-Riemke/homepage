@@ -4,23 +4,28 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Entity\Common\Position;
 use App\Storage\Repository\PersonGroupMemberRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: PersonGroupMemberRepository::class)]
 class PersonGroupMember extends AbstractEntity
 {
+    use Position;
+
     #[ORM\ManyToOne(targetEntity: Person::class)]
-    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private Person|null $person = null;
 
+    #[Gedmo\SortableGroup]
     #[ORM\ManyToOne(targetEntity: PersonGroup::class, inversedBy: 'members')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private PersonGroup|null $group = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
-    private string|null $position = null;
+    private string|null $jobTitle = null;
 
     public function getPerson(): Person|null
     {
@@ -42,13 +47,13 @@ class PersonGroupMember extends AbstractEntity
         $this->group = $group;
     }
 
-    public function getPosition(): string|null
+    public function getJobTitle(): string|null
     {
-        return $this->position;
+        return $this->jobTitle;
     }
 
-    public function setPosition(string|null $position): void
+    public function setJobTitle(string|null $jobTitle): void
     {
-        $this->position = $position;
+        $this->jobTitle = $jobTitle;
     }
 }

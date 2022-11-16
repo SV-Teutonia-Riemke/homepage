@@ -16,6 +16,16 @@ parameters:
 			path: src/Domain/YearGroup.php
 
 		-
+			message: "#^Property App\\\\Storage\\\\Entity\\\\Link\\:\\:\\$position type mapping mismatch\\: property can contain int\\|null but database expects int\\.$#"
+			count: 1
+			path: src/Storage/Entity/Link.php
+
+		-
+			message: "#^Property App\\\\Storage\\\\Entity\\\\Notification\\:\\:\\$position type mapping mismatch\\: property can contain int\\|null but database expects int\\.$#"
+			count: 1
+			path: src/Storage/Entity/Notification.php
+
+		-
 			message: "#^Method App\\\\Storage\\\\Entity\\\\Person\\:\\:__toString\\(\\) should return string but returns string\\|null\\.$#"
 			count: 1
 			path: src/Storage/Entity/Person.php
@@ -36,7 +46,7 @@ parameters:
 			path: src/Storage/Entity/PersonGroupMember.php
 
 		-
-			message: "#^Property App\\\\Storage\\\\Entity\\\\PersonGroupMember\\:\\:\\$person type mapping mismatch\\: property can contain App\\\\Storage\\\\Entity\\\\Person\\|null but database expects App\\\\Storage\\\\Entity\\\\Person\\.$#"
+			message: "#^Property App\\\\Storage\\\\Entity\\\\PersonGroupMember\\:\\:\\$position type mapping mismatch\\: property can contain int\\|null but database expects int\\.$#"
 			count: 1
 			path: src/Storage/Entity/PersonGroupMember.php
 
@@ -51,6 +61,11 @@ parameters:
 			path: src/Storage/Entity/Player.php
 
 		-
+			message: "#^Property App\\\\Storage\\\\Entity\\\\Sponsor\\:\\:\\$position type mapping mismatch\\: property can contain int\\|null but database expects int\\.$#"
+			count: 1
+			path: src/Storage/Entity/Sponsor.php
+
+		-
 			message: "#^Property App\\\\Storage\\\\Entity\\\\Staff\\:\\:\\$person type mapping mismatch\\: property can contain App\\\\Storage\\\\Entity\\\\Person\\|null but database expects App\\\\Storage\\\\Entity\\\\Person\\.$#"
 			count: 1
 			path: src/Storage/Entity/Staff.php
@@ -62,5 +77,10 @@ parameters:
 
 		-
 			message: "#^Property App\\\\Storage\\\\Entity\\\\Team\\:\\:\\$ageCategory type mapping mismatch\\: database can contain App\\\\Domain\\\\TeamAgeCategory\\|null but property expects App\\\\Domain\\\\TeamAgeCategory\\.$#"
+			count: 1
+			path: src/Storage/Entity/Team.php
+
+		-
+			message: "#^Property App\\\\Storage\\\\Entity\\\\Team\\:\\:\\$position type mapping mismatch\\: property can contain int\\|null but database expects int\\.$#"
 			count: 1
 			path: src/Storage/Entity/Team.php

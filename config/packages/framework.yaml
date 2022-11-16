@@ -1,3 +1,9 @@
+# config/services.yaml
+services:
+    Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler:
+        arguments:
+            - '%env(DATABASE_URL)%'
+
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     secret: '%env(APP_SECRET)%'
@@ -7,7 +13,7 @@ framework:
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
     # Remove or comment this section to explicitly disable session support.
     session:
-        handler_id: Shapecode\Bundle\Doctrine\SessionHandlerBundle\Session\Handler\DoctrineHandler
+        handler_id: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
         cookie_secure: auto
         cookie_samesite: lax
 

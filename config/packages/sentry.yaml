@@ -31,3 +31,4 @@ when@prod:
                         - Symfony\Component\Security\Core\Exception\AccessDeniedException
                         - Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
                         - Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
+                        - Http\Client\Common\Exception\ClientErrorException
