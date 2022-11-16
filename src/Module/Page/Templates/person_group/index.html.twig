@@ -14,13 +14,13 @@
                     </h2>
                     <div id="person-group-{{ group.id }}" class="accordion-collapse collapse{% if loop.first %} show{% endif %}" data-bs-parent="#person-groups">
                         <div class="accordion-body pt-0">
-                            <div class="row row-cards">
+                            <div class="row row-cards row-cols-1 row-cols-md-3 row-cols-lg-5">
                                 {% set placeholderImage = 'https://via.placeholder.com/160x160.png?text=Kein+Bild+vorhanden' %}
 
                                 {% for member in group.members %}
                                     {% set personAvailable = member.person is not null %}
 
-                                    <div class="col-12 col-md-6 col-lg-3">
+                                    <div class="col">
                                         <div class="card h-100{% if personAvailable == false %} border-red bg-red-lt{% endif %}"
                                             {% if personAvailable == false %} data-bs-toggle="tooltip" data-bs-title="Du hast Interesse diese Position zu übernehmen? Dann meld dich bei uns unter info@teutonia-riemke.de" data-bs-placement="top"{% endif %}>
                                             <div class="card-body p-4 text-center">
@@ -39,13 +39,11 @@
                                                 {% if personAvailable and member.person.emailAddress is not null %}
                                                     <a href="mailto:{{ member.person.emailAddress }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.emailAddress }}" data-bs-placement="top">
                                                         <span class="iconify icon me-2" data-icon="fa6-solid:at"></span>
-                                                        E-Mail
                                                     </a>
                                                 {% endif %}
                                                 {% if personAvailable and member.person.phoneNumber is not null %}
                                                     <a href="tel:{{ member.person.phoneNumber|phone_number_format }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.phoneNumber|phone_number_format }}" data-bs-placement="top">
                                                         <span class="iconify icon me-2" data-icon="fa6-solid:phone"></span>
-                                                        Anrufen
                                                     </a>
                                                 {% endif %}
                                             </div>
