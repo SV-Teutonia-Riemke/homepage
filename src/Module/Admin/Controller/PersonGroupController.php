@@ -31,7 +31,7 @@ final class PersonGroupController extends AbstractController
     #[Route('', name: 'index')]
     public function index(Request $request): Response
     {
-        $query      = $this->personGroupRepository->createQueryBuilder('p');
+        $query      = $this->personGroupRepository->createQueryBuilder('p')->orderBy('p.position', 'ASC');
         $pagination = $this->paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
@@ -86,6 +86,29 @@ final class PersonGroupController extends AbstractController
     public function remove(PersonGroup $personGroup): Response
     {
         $this->entityManager->remove($personGroup);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_person_group_index');
+    }
+
+    #[Route('/{personGroup}/enable', name: 'enable', defaults: ['enabled' => true])]
+    #[Route('/{personGroup}/disable', name: 'disable', defaults: ['enabled' => false])]
+    public function changeEnabled(PersonGroup $personGroup, bool $enabled): Response
+    {
+        $personGroup->setEnabled($enabled);
+
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_person_group_index');
+    }
+
+    #[Route('/{personGroup}/up', name: 'up', defaults: ['position' => -1])]
+    #[Route('/{personGroup}/down', name: 'down', defaults: ['position' => 1])]
+    public function position(PersonGroup $personGroup, int $position): Response
+    {
+        $personGroup->increasePosition($position);
+
+        $this->entityManager->persist($personGroup);
         $this->entityManager->flush();
 
         return $this->redirectToRoute('app_admin_person_group_index');

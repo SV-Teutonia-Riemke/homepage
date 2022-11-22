@@ -21,6 +21,8 @@ final class SponsorRepository extends ServiceEntityRepository
     {
         return $this->findBy([
             'enabled' => true,
+        ], [
+            'position' => 'ASC',
         ]);
     }
 }

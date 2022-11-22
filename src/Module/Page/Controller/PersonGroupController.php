@@ -22,7 +22,7 @@ final class PersonGroupController extends AbstractController
     public function __invoke(): Response
     {
         return $this->render('@page/person_group/index.html.twig', [
-            'personGroups' => $this->personGroupRepository->findAll(),
+            'personGroups' => $this->personGroupRepository->findEnabled(),
         ]);
     }
 }

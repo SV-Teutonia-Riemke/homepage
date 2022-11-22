@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Entity\Common\Position;
 use App\Storage\Repository\PersonGroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PersonGroupRepository::class)]
 class PersonGroup extends AbstractEntity
 {
+    use Position;
+
     #[ORM\Column(type: Types::STRING)]
     private string $name;
 

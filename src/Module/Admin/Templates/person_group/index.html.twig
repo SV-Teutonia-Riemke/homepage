@@ -19,6 +19,21 @@
             <td>{{ object.name }}</td>
             <td class="text-end">
                 <div class="btn-group btn-group-sm">
+                    <a class="btn btn-outline-primary" href="{{ path('app_admin_person_group_up', { personGroup: object.id }) }}">
+                        <span class="iconify-inline" data-icon="fa6-solid:arrow-up"></span>
+                    </a>
+                    <a class="btn btn-outline-primary" href="{{ path('app_admin_person_group_down', { personGroup: object.id }) }}">
+                        <span class="iconify-inline" data-icon="fa6-solid:arrow-down"></span>
+                    </a>
+                    {% if object.enabled %}
+                        <a class="btn btn-outline-success" href="{{ path('app_admin_person_group_disable', { personGroup: object.id }) }}">
+                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
+                        </a>
+                    {% else %}
+                        <a class="btn btn-outline-danger" href="{{ path('app_admin_person_group_enable', { personGroup: object.id }) }}">
+                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
+                        </a>
+                    {% endif %}
                     <a class="btn btn-outline-primary" href="{{ path('app_admin_person_group_edit', { personGroup: object.id }) }}">
                         <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
                     </a>

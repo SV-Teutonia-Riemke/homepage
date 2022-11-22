@@ -15,4 +15,14 @@ final class PersonGroupRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, PersonGroup::class);
     }
+
+    /** @return list<PersonGroup> */
+    public function findEnabled(): array
+    {
+        return $this->findBy([
+            'enabled' => true,
+        ], [
+            'position' => 'ASC',
+        ]);
+    }
 }

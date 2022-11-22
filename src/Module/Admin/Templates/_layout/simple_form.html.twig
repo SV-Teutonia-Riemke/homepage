@@ -2,8 +2,8 @@
 
 {% block formCancel %}
     {% if formCancelLink is defined and formCancelLink is not empty %}
-        <a href="{{ formCancelLink }}" class="btn btn-link">
-            <span class="iconify-inline" data-icon="{{ formCancelIcon ?? 'fa6-solid:times' }}"></span>
+        <a href="{{ formCancelLink }}" class="btn btn-outline-danger">
+            <span class="iconify-inline icon" data-icon="{{ formCancelIcon ?? 'fa-solid:times' }}"></span>
             {{ (formCancelLabel ?? 'Cancel')|trans }}
         </a>
     {% endif %}
@@ -12,26 +12,26 @@
 {% block formSubmit %}
     {% if form.submit is defined %}
         {% set submitLabel %}
-            <span class="iconify-inline" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
+            <span class="iconify-inline icon" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
             {{ (formSubmitLabel ?? 'Submit')|trans }}
         {% endset %}
-        {{ form_row(form.submit, {
+        {{ form_widget(form.submit, {
             label: submitLabel,
             label_html: true
         }) }}
     {% else %}
-        <button type="submit" class="btn btn-primary">
-            <span class="iconify-inline" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
+        <button type="submit" class="btn btn-primary icon">
+            <span class="iconify-inline icon" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
             {{ (formSubmitLabel ?? 'Submit')|trans }}
         </button>
     {% endif %}
 
     {% if form.submitAndNew is defined %}
         {% set submitAndNewLabel %}
-            <span class="iconify-inline" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
+            <span class="iconify-inline icon" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
             {{ (formSubmitAndNewLabel ?? 'Submit & New')|trans }}
         {% endset %}
-        {{ form_row(form.submitAndNew, {
+        {{ form_widget(form.submitAndNew, {
             label: submitAndNewLabel,
             label_html: true
         }) }}
