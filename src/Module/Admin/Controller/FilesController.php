@@ -191,7 +191,7 @@ final class FilesController extends AbstractController
                 ]);
         }
 
-        return $this->renderForm('@admin/files/upload.html.twig', [
+        return $this->render('@admin/files/upload.html.twig', [
             'directory' => $directory,
             'form'      => $form,
         ]);

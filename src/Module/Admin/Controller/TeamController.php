@@ -38,7 +38,7 @@ final class TeamController extends AbstractController
             $request->query->getInt('page', 1),
         );
 
-        return $this->renderForm('@admin/team/index.html.twig', [
+        return $this->render('@admin/team/index.html.twig', [
             'pagination' => $pagination,
         ]);
     }
@@ -59,7 +59,7 @@ final class TeamController extends AbstractController
             return $this->redirectToRoute('app_admin_team_index');
         }
 
-        return $this->renderForm('@admin/team/create.html.twig', [
+        return $this->render('@admin/team/create.html.twig', [
             'form' => $form,
         ]);
     }
@@ -77,7 +77,7 @@ final class TeamController extends AbstractController
             return $this->redirectToRoute('app_admin_team_index');
         }
 
-        return $this->renderForm('@admin/team/edit.html.twig', [
+        return $this->render('@admin/team/edit.html.twig', [
             'form' => $form,
             'team' => $team,
         ]);

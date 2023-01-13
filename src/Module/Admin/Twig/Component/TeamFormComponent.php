@@ -43,7 +43,8 @@ final class TeamFormComponent extends AbstractController
 
     #[LiveAction]
     public function removePlayer(
-        #[LiveArg] int $index,
+        #[LiveArg]
+        int $index,
     ): void {
         unset($this->formValues['players'][$index]);
     }
@@ -56,7 +57,8 @@ final class TeamFormComponent extends AbstractController
 
     #[LiveAction]
     public function removeStaff(
-        #[LiveArg] int $index,
+        #[LiveArg]
+        int $index,
     ): void {
         unset($this->formValues['staffs'][$index]);
     }

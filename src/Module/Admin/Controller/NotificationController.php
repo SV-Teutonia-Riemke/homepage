@@ -62,7 +62,7 @@ final class NotificationController extends AbstractController
             return $this->redirectToRoute('app_admin_notification_index');
         }
 
-        return $this->renderForm('@admin/notification/create.html.twig', [
+        return $this->render('@admin/notification/create.html.twig', [
             'form' => $form,
         ]);
     }
@@ -80,7 +80,7 @@ final class NotificationController extends AbstractController
             return $this->redirectToRoute('app_admin_notification_index');
         }
 
-        return $this->renderForm('@admin/notification/edit.html.twig', [
+        return $this->render('@admin/notification/edit.html.twig', [
             'form' => $form,
         ]);
     }

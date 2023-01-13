@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 #[AsController]
 #[Route('/change-password', name: 'app_admin_change_password')]
@@ -25,6 +26,7 @@ final class PasswordChangeController extends AbstractController
     }
 
     public function __invoke(
+        #[CurrentUser]
         User $user,
         Request $request,
     ): Response {
@@ -44,7 +46,7 @@ final class PasswordChangeController extends AbstractController
             return $this->redirectToRoute('app_admin_change_password');
         }
 
-        return $this->renderForm('@admin/password_change/index.html.twig', [
+        return $this->render('@admin/password_change/index.html.twig', [
             'form' => $form,
         ]);
     }

@@ -59,7 +59,7 @@ final class LinkController extends AbstractController
             return $this->handleValidForm($form);
         }
 
-        return $this->renderForm('@admin/link/create.html.twig', [
+        return $this->render('@admin/link/create.html.twig', [
             'form' => $form,
         ]);
     }
@@ -74,7 +74,7 @@ final class LinkController extends AbstractController
             return $this->handleValidForm($form);
         }
 
-        return $this->renderForm('@admin/link/edit.html.twig', [
+        return $this->render('@admin/link/edit.html.twig', [
             'form' => $form,
         ]);
     }

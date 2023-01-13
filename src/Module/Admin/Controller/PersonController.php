@@ -51,7 +51,7 @@ final class PersonController extends AbstractController
             $request->query->getInt('page', 1),
         );
 
-        return $this->renderForm('@admin/person/index.html.twig', [
+        return $this->render('@admin/person/index.html.twig', [
             'form'       => $form,
             'pagination' => $pagination,
         ]);
@@ -68,7 +68,7 @@ final class PersonController extends AbstractController
             return $this->handleValidForm($form);
         }
 
-        return $this->renderForm('@admin/person/create.html.twig', [
+        return $this->render('@admin/person/create.html.twig', [
             'form' => $form,
         ]);
     }
@@ -84,7 +84,7 @@ final class PersonController extends AbstractController
             return $this->handleValidForm($form);
         }
 
-        return $this->renderForm('@admin/person/edit.html.twig', [
+        return $this->render('@admin/person/edit.html.twig', [
             'form' => $form,
         ]);
     }

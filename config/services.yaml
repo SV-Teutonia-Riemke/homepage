@@ -10,7 +10,7 @@ services:
       - '../src/Storage/Entity/'
       - '../src/Kernel.php'
 
-  StellaMaris\Clock\ClockInterface:
+  Psr\Clock\ClockInterface:
     factory: '@App\Infrastructure\Clock\ClockFactory'
 
   App\Module\Page\Menu\Navbar:

@@ -19,7 +19,8 @@ final class Navbar
         private readonly FactoryInterface $factory,
         private readonly TeamRepository $teamRepository,
         private readonly LinkRepository $linkRepository,
-        #[Autowire(service: 'assets._default_package')] private readonly Package $package,
+        #[Autowire(service: 'assets._default_package')]
+        private readonly Package $package,
     ) {
     }
 

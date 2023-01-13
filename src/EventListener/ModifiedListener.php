@@ -8,7 +8,7 @@ use App\Storage\Entity\Common\ModifiedInterface;
 use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use StellaMaris\Clock\ClockInterface;
+use Psr\Clock\ClockInterface;
 
 final class ModifiedListener implements EventSubscriberInterface
 {

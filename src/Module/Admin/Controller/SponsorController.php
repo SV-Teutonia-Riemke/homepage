@@ -58,7 +58,7 @@ final class SponsorController extends AbstractController
             return $this->redirectToRoute('app_admin_sponsor_index');
         }
 
-        return $this->renderForm('@admin/sponsor/create.html.twig', [
+        return $this->render('@admin/sponsor/create.html.twig', [
             'form' => $form,
         ]);
     }
@@ -75,7 +75,7 @@ final class SponsorController extends AbstractController
             return $this->redirectToRoute('app_admin_sponsor_index');
         }
 
-        return $this->renderForm('@admin/sponsor/edit.html.twig', [
+        return $this->render('@admin/sponsor/edit.html.twig', [
             'form' => $form,
         ]);
     }
