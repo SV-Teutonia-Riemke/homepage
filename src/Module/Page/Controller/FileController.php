@@ -13,14 +13,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Uid\Uuid;
 
 use function fopen;
 use function stream_copy_to_stream;
 
 #[AsController]
-#[Route('/f/{uuid}/{name}.{extension}', name: 'app_file', requirements: ['uuid' => Requirement::UUID])]
+#[Route('/f/{uuid}/{name}.{extension}', name: 'app_file')]
 final class FileController extends AbstractController
 {
     public function __construct(

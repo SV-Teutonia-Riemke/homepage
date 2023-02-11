@@ -79,7 +79,7 @@ final class Navbar
 
         $menu->addChild('Trainingszeiten', [
             'icon'           => 'fa6-solid:calendar-day',
-            'uri'            => $this->package->getUrl('build/documents/trainingszeiten.pdf'),
+            'uri'            => 'https://svtr.link/trainingszeiten',
             'linkAttributes' => [
                 'target' => '_blank',
             ],
@@ -91,6 +91,11 @@ final class Navbar
             'linkAttributes' => [
                 'target' => '_blank',
             ],
+        ]);
+
+        $menu->addChild('Ruhr Cup', [
+            'icon'  => 'fa6-solid:trophy',
+            'route' => 'app_ruhr_cup',
         ]);
 
         $links = $this->linkRepository->findEnabled();

@@ -27,6 +27,9 @@ class PersonGroupMember extends AbstractEntity
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private string|null $jobTitle = null;
 
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+    private bool $provisional = false;
+
     public function getPerson(): Person|null
     {
         return $this->person;
@@ -55,5 +58,15 @@ class PersonGroupMember extends AbstractEntity
     public function setJobTitle(string|null $jobTitle): void
     {
         $this->jobTitle = $jobTitle;
+    }
+
+    public function isProvisional(): bool
+    {
+        return $this->provisional;
+    }
+
+    public function setProvisional(bool $provisional): void
+    {
+        $this->provisional = $provisional;
     }
 }

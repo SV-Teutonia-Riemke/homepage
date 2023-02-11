@@ -25,7 +25,8 @@
                 <tr>
                     <th>Person</th>
                     <th>Job</th>
-                    <th>Position</th>
+                    <th class="w-1">Kommissarisch?</th>
+                    <th class="w-1">Position</th>
                     <th class="w-1"></th>
                 </tr>
                 </thead>
@@ -34,6 +35,7 @@
                     <tr>
                         <td>{{ form_row(itemForm.person, { label: false }) }}</td>
                         <td>{{ form_row(itemForm.jobTitle, { label: false }) }}</td>
+                        <td>{{ form_row(itemForm.provisional, { label: false }) }}</td>
                         <td>{{ form_row(itemForm.position, { label: false }) }}</td>
                         <td class="text-end">
                             <button data-action="live#action" data-action-name="removeCollectionItem(name=[members],index={{ key }})" type="button" class="btn btn-icon btn-outline-danger">

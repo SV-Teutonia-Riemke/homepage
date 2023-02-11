@@ -7,6 +7,7 @@ namespace App\Module\Admin\Form\Type\Widgets;
 use App\Form\Type\Entities\PersonEntityType;
 use App\Storage\Entity\PersonGroupMember;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,6 +25,7 @@ final class PersonGroupMemberType extends AbstractType
             ->add('jobTitle', TextType::class, [
                 'required' => false,
             ])
+            ->add('provisional', CheckboxType::class)
             ->add('position', IntegerType::class, []);
     }
 

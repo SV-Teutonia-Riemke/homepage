@@ -6,7 +6,7 @@ namespace App\Storage\Repository;
 
 use App\Storage\Entity\ConfigSetting;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\Persistence\ManagerRegistry;
 
 /** @template-extends ServiceEntityRepository<ConfigSetting> */
@@ -22,7 +22,7 @@ final class ConfigSettingRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('s', 's.name')
             ->where('s.name IN (:names)')
-            ->setParameter('names', $names, Connection::PARAM_STR_ARRAY)
+            ->setParameter('names', $names, ArrayParameterType::STRING)
             ->getQuery()
             ->getResult();
     }
