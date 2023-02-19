@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Repository\ArticleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
-class Article extends AbstractEntity
+class Article extends AbstractEntity implements EnabledInterface
 {
     #[ORM\Column(type: Types::STRING)]
     private string $title;

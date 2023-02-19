@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\Position;
+use App\Storage\Entity\Common\PositionInterface;
 use App\Storage\Repository\NotificationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: NotificationRepository::class)]
-class Notification extends AbstractEntity
+class Notification extends AbstractEntity implements PositionInterface, EnabledInterface
 {
     use Position;
 

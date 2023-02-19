@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Storage\Entity;
 
 use App\Storage\Entity\Common\Position;
+use App\Storage\Entity\Common\PositionInterface;
 use App\Storage\Repository\PersonGroupMemberRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: PersonGroupMemberRepository::class)]
-class PersonGroupMember extends AbstractEntity
+class PersonGroupMember extends AbstractEntity implements PositionInterface
 {
     use Position;
 

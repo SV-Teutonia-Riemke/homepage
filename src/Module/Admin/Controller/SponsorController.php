@@ -4,111 +4,74 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
+use App\Module\Admin\Crud\CrudConfig;
 use App\Module\Admin\Form\Type\Forms\SponsorType;
 use App\Storage\Entity\Sponsor;
 use App\Storage\Repository\SponsorRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
 
-use function assert;
-
 #[AsController]
 #[Route('/sponsor', name: 'app_admin_sponsor_')]
-final class SponsorController extends AbstractController
+final class SponsorController extends AbstractCrudController
 {
     public function __construct(
         private readonly SponsorRepository $sponsorRepository,
-        private readonly EntityManagerInterface $entityManager,
-        private readonly PaginatorInterface $paginator,
     ) {
     }
 
     #[Route('', name: 'index')]
     public function index(Request $request): Response
     {
-        $query      = $this->sponsorRepository->createQueryBuilder('p')->orderBy('p.position', 'ASC');
-        $pagination = $this->paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-        );
-
-        return $this->render('@admin/sponsor/index.html.twig', [
-            'pagination' => $pagination,
-        ]);
+        return $this->handleList($request);
     }
 
     #[Route('/create', name: 'create')]
     public function create(Request $request): Response
     {
-        $form = $this->createForm(SponsorType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $sponsor = $form->getData();
-            assert($sponsor instanceof Sponsor);
-
-            $this->entityManager->persist($sponsor);
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_admin_sponsor_index');
-        }
-
-        return $this->render('@admin/sponsor/create.html.twig', [
-            'form' => $form,
-        ]);
+        return $this->handleCreate($request);
     }
 
     #[Route('/{sponsor}/edit', name: 'edit')]
     public function edit(Request $request, Sponsor $sponsor): Response
     {
-        $form = $this->createForm(SponsorType::class, $sponsor);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_admin_sponsor_index');
-        }
-
-        return $this->render('@admin/sponsor/edit.html.twig', [
-            'form' => $form,
-        ]);
+        return $this->handleEdit($request, $sponsor);
     }
 
     #[Route('/{sponsor}/remove', name: 'remove')]
     public function remove(Sponsor $sponsor): Response
     {
-        $this->entityManager->remove($sponsor);
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_admin_sponsor_index');
+        return $this->handleRemove($sponsor);
     }
 
     #[Route('/{sponsor}/enable', name: 'enable', defaults: ['enabled' => true])]
     #[Route('/{sponsor}/disable', name: 'disable', defaults: ['enabled' => false])]
     public function changeEnabled(Sponsor $sponsor, bool $enabled): Response
     {
-        $sponsor->setEnabled($enabled);
-
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_admin_sponsor_index');
+        return $this->handleEnabled($sponsor, $enabled);
     }
 
     #[Route('/{sponsor}/up', name: 'up', defaults: ['position' => -1])]
     #[Route('/{sponsor}/down', name: 'down', defaults: ['position' => 1])]
     public function position(Sponsor $sponsor, int $position): Response
     {
-        $sponsor->increasePosition($position);
+        return $this->handlePosition($sponsor, $position);
+    }
 
-        $this->entityManager->persist($sponsor);
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_admin_sponsor_index');
+    protected function getCrudConfig(): CrudConfig
+    {
+        return new CrudConfig(
+            $this->sponsorRepository,
+            '@admin/sponsor/index.html.twig',
+            '@admin/sponsor/create.html.twig',
+            '@admin/sponsor/edit.html.twig',
+            'app_admin_sponsor_index',
+            'app_admin_sponsor_create',
+            SponsorType::class,
+            defaultSortFieldName: 'p.position',
+            defaultSortDirection: 'asc',
+        );
     }
 }

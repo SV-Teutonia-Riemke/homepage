@@ -35,7 +35,7 @@
 
 {%- block pageTitleActionsButtons -%}
     {% if team.emailAddress is not null %}
-        <a class="btn btn-ghost-primary btn-icon" href="mailto:{{ team.emailAddress }}" data-bs-toggle="tooltip" data-bs-title="{{ team.emailAddress }}" data-bs-placement="top">
+        <a class="btn btn-ghost-primary" href="mailto:{{ team.emailAddress }}" data-bs-toggle="tooltip" data-bs-title="{{ team.emailAddress }}" data-bs-placement="top">
             <span class="iconify icon" data-icon="fa6-solid:at"></span>
             E-Mail
         </a>

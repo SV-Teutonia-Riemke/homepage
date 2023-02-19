@@ -53,7 +53,8 @@ final class FilesController extends AbstractController
         ], [
             'name' => 'ASC',
         ]);
-        $files       = $this->fileRepository->findBy([
+
+        $files = $this->fileRepository->findBy([
             'directory' => $directory,
         ], [
             'name' => 'ASC',

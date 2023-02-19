@@ -9,7 +9,9 @@ use App\Domain\TeamAgeCategory;
 use App\Domain\TeamJuniorAge;
 use App\Domain\YearGroup;
 use App\Infrastructure\Doctrine\DBAL\Types\Type\YearGroupType;
+use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\Position;
+use App\Storage\Entity\Common\PositionInterface;
 use App\Storage\Repository\TeamRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -19,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 use function usort;
 
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
-class Team extends AbstractEntity
+class Team extends AbstractEntity implements PositionInterface, EnabledInterface
 {
     use Position;
 

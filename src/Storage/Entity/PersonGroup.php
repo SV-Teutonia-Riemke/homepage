@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\Position;
+use App\Storage\Entity\Common\PositionInterface;
 use App\Storage\Repository\PersonGroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,7 +14,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PersonGroupRepository::class)]
-class PersonGroup extends AbstractEntity
+class PersonGroup extends AbstractEntity implements PositionInterface, EnabledInterface
 {
     use Position;
 

@@ -4,116 +4,67 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
-use App\Module\Admin\Form\Type\Forms\AbstractForm;
+use App\Module\Admin\Crud\CrudConfig;
 use App\Module\Admin\Form\Type\Forms\LinkType;
 use App\Storage\Entity\Link;
 use App\Storage\Repository\LinkRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
 
-use function assert;
-
 #[AsController]
 #[Route('/link', name: 'app_admin_link_')]
-final class LinkController extends AbstractController
+final class LinkController extends AbstractCrudController
 {
     public function __construct(
         private readonly LinkRepository $linkRepository,
-        private readonly EntityManagerInterface $entityManager,
-        private readonly PaginatorInterface $paginator,
     ) {
     }
 
     #[Route('', name: 'index')]
     public function index(Request $request): Response
     {
-        $query      = $this->linkRepository->createQueryBuilder('p');
-        $pagination = $this->paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            options: [
-                'defaultSortFieldName' => 'p.id',
-                'defaultSortDirection' => 'desc',
-            ],
-        );
-
-        return $this->render('@admin/link/index.html.twig', [
-            'pagination' => $pagination,
-        ]);
+        return $this->handleList($request);
     }
 
     #[Route('/create', name: 'create')]
     public function create(Request $request): Response
     {
-        $form = $this->createForm(LinkType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $this->handleValidForm($form);
-        }
-
-        return $this->render('@admin/link/create.html.twig', [
-            'form' => $form,
-        ]);
+        return $this->handleCreate($request);
     }
 
     #[Route('/{link}/edit', name: 'edit')]
     public function edit(Request $request, Link $link): Response
     {
-        $form = $this->createForm(LinkType::class, $link);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $this->handleValidForm($form);
-        }
-
-        return $this->render('@admin/link/edit.html.twig', [
-            'form' => $form,
-        ]);
-    }
-
-    private function handleValidForm(FormInterface $form): Response
-    {
-        $data = $form->getData();
-        assert($data instanceof Link);
-
-        $this->entityManager->persist($data);
-        $this->entityManager->flush();
-
-        $submitAndNew = $form->get(AbstractForm::BUTTON_SUBMIT_AND_NEW);
-        assert($submitAndNew instanceof SubmitButton);
-
-        if ($submitAndNew->isClicked()) {
-            return $this->redirectToRoute('app_admin_link_create');
-        }
-
-        return $this->redirectToRoute('app_admin_link_index');
+        return $this->handleEdit($request, $link);
     }
 
     #[Route('/{link}/remove', name: 'remove')]
     public function remove(Link $link): Response
     {
-        $this->entityManager->remove($link);
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_admin_link_index');
+        return $this->handleRemove($link);
     }
 
     #[Route('/{link}/enable', name: 'enable', defaults: ['enabled' => true])]
     #[Route('/{link}/disable', name: 'disable', defaults: ['enabled' => false])]
     public function changeEnabled(Link $link, bool $enabled): Response
     {
-        $link->setEnabled($enabled);
+        return $this->handleEnabled($link, $enabled);
+    }
 
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_admin_link_index');
+    protected function getCrudConfig(): CrudConfig
+    {
+        return new CrudConfig(
+            $this->linkRepository,
+            '@admin/link/index.html.twig',
+            '@admin/link/create.html.twig',
+            '@admin/link/edit.html.twig',
+            'app_admin_link_index',
+            'app_admin_link_create',
+            LinkType::class,
+            defaultSortFieldName: 'p.id',
+            defaultSortDirection: 'desc',
+        );
     }
 }

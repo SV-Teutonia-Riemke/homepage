@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\Position;
+use App\Storage\Entity\Common\PositionInterface;
 use App\Storage\Repository\LinkRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Stringable;
 
 #[ORM\Entity(repositoryClass: LinkRepository::class)]
-class Link extends AbstractEntity implements Stringable
+class Link extends AbstractEntity implements Stringable, PositionInterface, EnabledInterface
 {
     use Position;
 

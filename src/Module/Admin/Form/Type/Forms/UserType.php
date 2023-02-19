@@ -15,16 +15,19 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class UserType extends AbstractType
 {
+    public const FIELD_EMAIL    = 'email';
+    public const FIELD_PASSWORD = 'password';
+
     /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [
+            ->add(self::FIELD_EMAIL, EmailType::class, [
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
-            ->add('password', PasswordType::class, [
+            ->add(self::FIELD_PASSWORD, PasswordType::class, [
                 'required' => false,
                 'mapped'   => false,
             ]);
@@ -36,7 +39,7 @@ final class UserType extends AbstractType
             'data_class' => User::class,
             'empty_data' => static function (FormInterface $form): User {
                 return new User(
-                    $form->get('email')->getData() ?? '',
+                    $form->get(self::FIELD_EMAIL)->getData() ?? '',
                 );
             },
         ]);

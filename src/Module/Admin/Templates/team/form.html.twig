@@ -5,7 +5,7 @@
 
 {% block pageBody %}
     {{ component('admin_team_form', {
-        team: team|default(null),
+        team: object|default(null),
         form: form
     }) }}
 {% endblock %}

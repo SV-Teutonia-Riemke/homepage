@@ -4,115 +4,60 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
-use App\Module\Admin\Form\Type\Forms\AbstractForm;
+use App\Module\Admin\Crud\CrudConfig;
 use App\Module\Admin\Form\Type\Forms\PersonSearchType;
 use App\Module\Admin\Form\Type\Forms\PersonType;
 use App\Storage\Entity\Person;
 use App\Storage\Repository\PersonRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
-use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
 
-use function assert;
-
 #[AsController]
 #[Route('/person', name: 'app_admin_person_')]
-final class PersonController extends AbstractController
+final class PersonController extends AbstractCrudController
 {
     public function __construct(
         private readonly PersonRepository $personRepository,
-        private readonly EntityManagerInterface $entityManager,
-        private readonly PaginatorInterface $paginator,
-        private readonly FilterBuilderUpdater $filterBuilderUpdater,
     ) {
     }
 
     #[Route('', name: 'index')]
     public function index(Request $request): Response
     {
-        $query = $this->personRepository->createQueryBuilder('p');
-
-        $form = $this->createForm(PersonSearchType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->filterBuilderUpdater->addFilterConditions($form, $query);
-        }
-
-        $pagination = $this->paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-        );
-
-        return $this->render('@admin/person/index.html.twig', [
-            'form'       => $form,
-            'pagination' => $pagination,
-        ]);
+        return $this->handleList($request);
     }
 
     #[Route('/create', name: 'create')]
     public function create(Request $request): Response
     {
-        $form = $this
-            ->createForm(PersonType::class)
-            ->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $this->handleValidForm($form);
-        }
-
-        return $this->render('@admin/person/create.html.twig', [
-            'form' => $form,
-        ]);
+        return $this->handleCreate($request);
     }
 
     #[Route('/{person}/edit', name: 'edit')]
     public function edit(Request $request, Person $person): Response
     {
-        $form = $this
-            ->createForm(PersonType::class, $person)
-            ->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            return $this->handleValidForm($form);
-        }
-
-        return $this->render('@admin/person/edit.html.twig', [
-            'form' => $form,
-        ]);
-    }
-
-    private function handleValidForm(FormInterface $form): Response
-    {
-        $person = $form->getData();
-        assert($person instanceof Person);
-
-        $this->entityManager->persist($person);
-        $this->entityManager->flush();
-
-        $submitAndNew = $form->get(AbstractForm::BUTTON_SUBMIT_AND_NEW);
-        assert($submitAndNew instanceof SubmitButton);
-
-        if ($submitAndNew->isClicked()) {
-            return $this->redirectToRoute('app_admin_person_create');
-        }
-
-        return $this->redirectToRoute('app_admin_person_index');
+        return $this->handleEdit($request, $person);
     }
 
     #[Route('/{person}/remove', name: 'remove')]
     public function remove(Person $person): Response
     {
-        $this->entityManager->remove($person);
-        $this->entityManager->flush();
+        return $this->handleRemove($person);
+    }
 
-        return $this->redirectToRoute('app_admin_person_index');
+    protected function getCrudConfig(): CrudConfig
+    {
+        return new CrudConfig(
+            $this->personRepository,
+            '@admin/person/index.html.twig',
+            '@admin/person/create.html.twig',
+            '@admin/person/edit.html.twig',
+            'app_admin_person_index',
+            'app_admin_person_create',
+            PersonType::class,
+            PersonSearchType::class,
+        );
     }
 }

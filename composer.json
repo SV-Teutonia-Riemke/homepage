@@ -1,5 +1,5 @@
 {
-    "name": "nicklog/resin",
+    "name": "svt/svt",
     "description": "",
     "type": "project",
     "license": "proprietary",
@@ -32,7 +32,7 @@
         "psr/clock": "^1.0",
         "psr/event-dispatcher": "^1.0",
         "psr/log": "^3.0",
-        "sentry/sentry-symfony": "^4.5",
+        "sentry/sentry-symfony": "^4.6",
         "shapecode/doctrine-dbal-datetimeutc": "^3.1",
         "stof/doctrine-extensions-bundle": "^1.7",
         "symfony/apache-pack": "^1.0",

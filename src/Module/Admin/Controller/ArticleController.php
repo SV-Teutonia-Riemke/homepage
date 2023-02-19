@@ -4,104 +4,67 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
+use App\Module\Admin\Crud\CrudConfig;
 use App\Module\Admin\Form\Type\Forms\ArticleType;
 use App\Storage\Entity\Article;
 use App\Storage\Repository\ArticleRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
 
-use function assert;
-
 #[AsController]
 #[Route('/article', name: 'app_admin_article_')]
-final class ArticleController extends AbstractController
+final class ArticleController extends AbstractCrudController
 {
     public function __construct(
         private readonly ArticleRepository $articleRepository,
-        private readonly EntityManagerInterface $entityManager,
-        private readonly PaginatorInterface $paginator,
     ) {
     }
 
     #[Route('', name: 'index')]
     public function index(Request $request): Response
     {
-        $query      = $this->articleRepository->createQueryBuilder('p');
-        $pagination = $this->paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            options: [
-                'defaultSortFieldName' => 'p.id',
-                'defaultSortDirection' => 'desc',
-            ],
-        );
-
-        return $this->render('@admin/article/index.html.twig', [
-            'pagination' => $pagination,
-        ]);
+        return $this->handleList($request);
     }
 
     #[Route('/create', name: 'create')]
     public function create(Request $request): Response
     {
-        $form = $this->createForm(ArticleType::class);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $article = $form->getData();
-            assert($article instanceof Article);
-
-            $this->entityManager->persist($article);
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_admin_article_index');
-        }
-
-        return $this->render('@admin/article/create.html.twig', [
-            'form' => $form,
-        ]);
+        return $this->handleCreate($request);
     }
 
     #[Route('/{article}/edit', name: 'edit')]
     public function edit(Request $request, Article $article): Response
     {
-        $form = $this->createForm(ArticleType::class, $article);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->entityManager->persist($article);
-            $this->entityManager->flush();
-
-            return $this->redirectToRoute('app_admin_article_index');
-        }
-
-        return $this->render('@admin/article/edit.html.twig', [
-            'form' => $form,
-        ]);
+        return $this->handleEdit($request, $article);
     }
 
     #[Route('/{article}/remove', name: 'remove')]
     public function remove(Article $article): Response
     {
-        $this->entityManager->remove($article);
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_admin_article_index');
+        return $this->handleRemove($article);
     }
 
     #[Route('/{article}/enable', name: 'enable', defaults: ['enabled' => true])]
     #[Route('/{article}/disable', name: 'disable', defaults: ['enabled' => false])]
     public function changeEnabled(Article $article, bool $enabled): Response
     {
-        $article->setEnabled($enabled);
+        return $this->handleEnabled($article, $enabled);
+    }
 
-        $this->entityManager->flush();
-
-        return $this->redirectToRoute('app_admin_article_index');
+    protected function getCrudConfig(): CrudConfig
+    {
+        return new CrudConfig(
+            $this->articleRepository,
+            '@admin/article/index.html.twig',
+            '@admin/article/create.html.twig',
+            '@admin/article/edit.html.twig',
+            'app_admin_article_index',
+            'app_admin_article_create',
+            ArticleType::class,
+            defaultSortFieldName: 'p.id',
+            defaultSortDirection: 'desc',
+        );
     }
 }

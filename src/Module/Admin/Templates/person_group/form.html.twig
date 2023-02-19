@@ -5,7 +5,7 @@
 
 {% block pageBody %}
     {{ component('admin_person_group_form', {
-        personGroup: personGroup|default(null),
+        personGroup: object|default(null),
         form: form
     }) }}
 {% endblock %}
