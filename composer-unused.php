@@ -12,5 +12,5 @@ return static function (Configuration $config): Configuration {
         ->addPatternFilter(PatternFilter::fromString('/symfony\/.*/'))
         ->addNamedFilter(NamedFilter::fromString('ext-iconv'))
         ->addNamedFilter(NamedFilter::fromString('twig/intl-extra'))
-        ->setAdditionalFilesFor('nicklog/resin', Glob::glob(__DIR__ . '/config/*.php'));
+        ->setAdditionalFilesFor('svt/svt', Glob::glob(__DIR__ . '/config/*.php'));
 };

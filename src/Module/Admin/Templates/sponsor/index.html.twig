@@ -26,29 +26,13 @@
             <td>{{ object.url }}</td>
             <td>{{ object.image is null ? '' : object.image.pathName }}</td>
             <td class="text-end">
-                <div class="btn-group btn-group-sm">
-                    <a class="btn btn-outline-primary" href="{{ path('app_admin_sponsor_up', { sponsor: object.id }) }}">
-                        <span class="iconify-inline" data-icon="fa6-solid:arrow-up"></span>
-                    </a>
-                    <a class="btn btn-outline-primary" href="{{ path('app_admin_sponsor_down', { sponsor: object.id }) }}">
-                        <span class="iconify-inline" data-icon="fa6-solid:arrow-down"></span>
-                    </a>
-                    {% if object.enabled %}
-                        <a class="btn btn-outline-success" href="{{ path('app_admin_sponsor_disable', { sponsor: object.id }) }}">
-                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
-                        </a>
-                    {% else %}
-                        <a class="btn btn-outline-danger" href="{{ path('app_admin_sponsor_enable', { sponsor: object.id }) }}">
-                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
-                        </a>
-                    {% endif %}
-                    <a class="btn btn-outline-primary" href="{{ path('app_admin_sponsor_edit', { sponsor: object.id }) }}">
-                        <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
-                    </a>
-                    <a class="btn btn-outline-danger" href="{{ path('app_admin_sponsor_remove', { sponsor: object.id }) }}">
-                        <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
-                    </a>
-                </div>
+                {{ pagination_cta(
+                    object,
+                    path('app_admin_sponsor_remove', { sponsor: object.id }),
+                    path('app_admin_sponsor_edit', { sponsor: object.id }),
+                    path('app_admin_sponsor_enable', { sponsor: object.id }),
+                    path('app_admin_sponsor_disable', { sponsor: object.id }),
+                ) }}
             </td>
         {% endblock %}
     {% endembed %}

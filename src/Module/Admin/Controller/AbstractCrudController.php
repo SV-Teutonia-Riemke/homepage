@@ -169,6 +169,7 @@ abstract class AbstractCrudController extends AbstractController
         return $this->container->get(FilterBuilderUpdater::class);
     }
 
+    /** @inheritDoc */
     public static function getSubscribedServices(): array
     {
         $services = parent::getSubscribedServices();

@@ -21,7 +21,7 @@ final class FileExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('file_url', $this->getCallable()),
+            new TwigFilter('file_url', $this->getFileUrl(...)),
         ];
     }
 
@@ -29,13 +29,8 @@ final class FileExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('file_url', $this->getCallable()),
+            new TwigFunction('file_url', $this->getFileUrl(...)),
         ];
-    }
-
-    private function getCallable(): callable
-    {
-        return fn (File $file, bool $download = false): string => $this->getFileUrl($file, $download);
     }
 
     private function getFileUrl(File $file, bool $download = false): string

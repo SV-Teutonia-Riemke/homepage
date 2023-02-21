@@ -4,7 +4,7 @@
     {% if formCancelLink is defined and formCancelLink is not empty %}
         <a href="{{ formCancelLink }}" class="btn btn-outline-danger">
             <span class="iconify-inline icon" data-icon="{{ formCancelIcon ?? 'fa-solid:times' }}"></span>
-            {{ (formCancelLabel ?? 'Cancel')|trans }}
+            {{ (formCancelLabel ?? 'Abbrechen')|trans }}
         </a>
     {% endif %}
 {% endblock %}
@@ -13,7 +13,7 @@
     {% if form.submit is defined %}
         {% set submitLabel %}
             <span class="iconify-inline icon" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
-            {{ (formSubmitLabel ?? 'Submit')|trans }}
+            {{ (formSubmitLabel ?? 'Speichern')|trans }}
         {% endset %}
         {{ form_widget(form.submit, {
             label: submitLabel,
@@ -22,14 +22,14 @@
     {% else %}
         <button type="submit" class="btn btn-primary icon">
             <span class="iconify-inline icon" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
-            {{ (formSubmitLabel ?? 'Submit')|trans }}
+            {{ (formSubmitLabel ?? 'Speichern')|trans }}
         </button>
     {% endif %}
 
     {% if form.submitAndNew is defined %}
         {% set submitAndNewLabel %}
             <span class="iconify-inline icon" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
-            {{ (formSubmitAndNewLabel ?? 'Submit & New')|trans }}
+            {{ (formSubmitAndNewLabel ?? 'Speichern & Neu')|trans }}
         {% endset %}
         {{ form_widget(form.submitAndNew, {
             label: submitAndNewLabel,

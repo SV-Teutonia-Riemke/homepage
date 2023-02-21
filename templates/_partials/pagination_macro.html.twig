@@ -1,0 +1,33 @@
+{% if preElements is not null %}
+    {{ preElements|raw }}
+{% endif %}
+
+<div class="btn-group btn-group-sm">
+    {% if enableLink is not null and disableLink is not null %}
+        {% if object.enabled %}
+            <a class="btn btn-outline-success" href="{{ disableLink }}">
+                <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
+            </a>
+        {% else %}
+            <a class="btn btn-outline-danger" href="{{ enableLink }}">
+                <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
+            </a>
+        {% endif %}
+    {% endif %}
+    {% if editLink is not null %}
+        <a class="btn btn-outline-primary" href="{{ editLink }}">
+            <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
+        </a>
+    {% endif %}
+</div>
+{% if removeLink is not null %}
+    <div class="btn-group btn-group-sm">
+        <a class="btn btn-outline-danger" href="{{ removeLink }}" {{ stimulus_controller('confirmation') }}>
+            <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
+        </a>
+    </div>
+{% endif %}
+
+{% if postElements is not null %}
+    {{ postElements|raw }}
+{% endif %}

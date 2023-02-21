@@ -22,23 +22,13 @@
             <td>{{ object.id }}</td>
             <td>{{ object.title }}</td>
             <td class="text-end">
-                <div class="btn-group btn-group-sm">
-                    {% if object.enabled %}
-                        <a class="btn btn-outline-success" href="{{ path('app_admin_notification_disable', { notification: object.id }) }}">
-                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
-                        </a>
-                    {% else %}
-                        <a class="btn btn-outline-danger" href="{{ path('app_admin_notification_enable', { notification: object.id }) }}">
-                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
-                        </a>
-                    {% endif %}
-                    <a class="btn btn-outline-primary" href="{{ path('app_admin_notification_edit', { notification: object.id }) }}">
-                        <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
-                    </a>
-                    <a class="btn btn-outline-danger" href="{{ path('app_admin_notification_remove', { notification: object.id }) }}">
-                        <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
-                    </a>
-                </div>
+                {{ pagination_cta(
+                    object,
+                    path('app_admin_notification_remove', { notification: object.id }),
+                    path('app_admin_notification_edit', { notification: object.id }),
+                    path('app_admin_notification_enable', { notification: object.id }),
+                    path('app_admin_notification_disable', { notification: object.id }),
+                ) }}
             </td>
         {% endblock %}
     {% endembed %}

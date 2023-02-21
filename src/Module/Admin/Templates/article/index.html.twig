@@ -1,20 +1,21 @@
 {% extends '@admin/_layout/layout.html.twig' %}
 
-{% set pagePreTitle = 'List' %}
-{% set pageTitle = 'Article' %}
+
+{% set pagePreTitle = 'Liste' %}
+{% set pageTitle = 'Artikel' %}
 
 {% block pageTitleActionsButtons %}
-    <a class="btn btn-primary" href="{{ path('app_admin_article_create') }}">Create</a>
+    <a class="btn btn-primary" href="{{ path('app_admin_article_create') }}">Erstellen</a>
 {% endblock %}
 
 {% block pageBody %}
     {% embed '_partials/pagination_table.html.twig' with {
-        title: 'Articles'
+        title: 'Artikel'
     } %}
         {% block paginationHeader %}
             <th class="w-1"></th>
             <th class="w-1">Id</th>
-            <th>Title</th>
+            <th>Titel</th>
             <th></th>
         {% endblock %}
         {% block paginationRow %}
@@ -24,23 +25,13 @@
             <td>{{ object.id }}</td>
             <td>{{ object.title }}</td>
             <td class="text-end">
-                <div class="btn-group btn-group-sm">
-                    {% if object.enabled %}
-                        <a class="btn btn-outline-success" href="{{ path('app_admin_article_disable', { article: object.id }) }}">
-                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
-                        </a>
-                    {% else %}
-                        <a class="btn btn-outline-danger" href="{{ path('app_admin_article_enable', { article: object.id }) }}">
-                            <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
-                        </a>
-                    {% endif %}
-                    <a class="btn btn-outline-primary" href="{{ path('app_admin_article_edit', { article: object.id }) }}">
-                        <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
-                    </a>
-                    <a class="btn btn-outline-danger" href="{{ path('app_admin_article_remove', { article: object.id }) }}">
-                        <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
-                    </a>
-                </div>
+                {{ pagination_cta(
+                    object,
+                    path('app_admin_article_remove', { article: object.id }),
+                    path('app_admin_article_edit', { article: object.id }),
+                    path('app_admin_article_enable', { article: object.id }),
+                    path('app_admin_article_disable', { article: object.id }),
+                ) }}
             </td>
         {% endblock %}
     {% endembed %}

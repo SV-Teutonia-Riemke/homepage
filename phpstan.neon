@@ -34,6 +34,3 @@ parameters:
 
     doctrine:
         objectManagerLoader: bin/phpstan-doctrine-loader.php
-
-    ignoreErrors:
-        - "#will always evaluate to true#"

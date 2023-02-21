@@ -18,14 +18,11 @@
             <td>{{ object.id }}</td>
             <td>{{ object.email }}</td>
             <td class="text-end">
-                <div class="btn-group btn-group-sm">
-                    <a class="btn btn-outline-primary" href="{{ path('app_admin_user_edit', { user: object.id }) }}">
-                        <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
-                    </a>
-                    <a class="btn btn-outline-danger" href="{{ path('app_admin_user_remove', { user: object.id }) }}">
-                        <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
-                    </a>
-                </div>
+                {{ pagination_cta(
+                    object,
+                    path('app_admin_user_remove', { user: object.id }),
+                    path('app_admin_user_edit', { user: object.id }),
+                ) }}
             </td>
         {% endblock %}
     {% endembed %}
