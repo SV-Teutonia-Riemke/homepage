@@ -16,6 +16,11 @@ parameters:
 			path: src/Domain/YearGroup.php
 
 		-
+			message: "#^Property App\\\\Storage\\\\Entity\\\\Download\\:\\:\\$position type mapping mismatch\\: property can contain int\\|null but database expects int\\.$#"
+			count: 1
+			path: src/Storage/Entity/Download.php
+
+		-
 			message: "#^Property App\\\\Storage\\\\Entity\\\\Link\\:\\:\\$position type mapping mismatch\\: property can contain int\\|null but database expects int\\.$#"
 			count: 1
 			path: src/Storage/Entity/Link.php

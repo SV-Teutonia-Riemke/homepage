@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Page\Controller;
 
+use App\Infrastructure\Asset\AssetUrlGenerator;
 use App\Storage\Repository\FileRepository;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,12 +26,14 @@ final class FileController extends AbstractController
     public function __construct(
         private readonly FileRepository $fileRepository,
         private readonly FilesystemOperator $defaultFilesystem,
+        private readonly AssetUrlGenerator $assetUrlGenerator,
     ) {
     }
 
     public function __invoke(
         Request $request,
         Uuid $uuid,
+        string $name,
         string $extension,
     ): Response {
         $file = $this->fileRepository->findOneBy([
@@ -39,6 +42,17 @@ final class FileController extends AbstractController
 
         if ($file === null) {
             throw $this->createNotFoundException();
+        }
+
+        $download = $request->query->getBoolean('download');
+
+        if (
+            $file->getSafeName() !== $name ||
+            $file->getExtension() !== $extension
+        ) {
+            return $this->redirect(
+                $this->assetUrlGenerator->__invoke($file, $download),
+            );
         }
 
         $mimeType = $this->defaultFilesystem->mimeType($file->getFilePath());
@@ -52,8 +66,6 @@ final class FileController extends AbstractController
             $fileStream = $this->defaultFilesystem->readStream($file->getFilePath());
             stream_copy_to_stream($fileStream, $outputStream);
         });
-
-        $download = $request->query->getBoolean('download');
 
         $disposition = HeaderUtils::makeDisposition(
             $download ? HeaderUtils::DISPOSITION_ATTACHMENT : HeaderUtils::DISPOSITION_INLINE,

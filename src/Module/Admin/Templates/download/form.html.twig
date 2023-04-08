@@ -1,0 +1,15 @@
+{% extends '@admin/_layout/simple_form.html.twig' %}
+
+{% set pageTitle = 'Download' %}
+{% set formCancelDownload = path('app_admin_download_index') %}
+
+{% block pageBody %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Download</h3>
+        </div>
+        <div class="card-body">
+            {{ form(form) }}
+        </div>
+    </div>
+{% endblock %}

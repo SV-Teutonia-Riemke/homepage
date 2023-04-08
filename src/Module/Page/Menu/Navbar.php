@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Module\Page\Menu;
 
+use App\Infrastructure\Asset\AssetUrlGenerator;
+use App\Storage\Repository\DownloadRepository;
 use App\Storage\Repository\LinkRepository;
 use App\Storage\Repository\TeamRepository;
 use Knp\Menu\FactoryInterface;
@@ -17,8 +19,10 @@ final class Navbar
 {
     public function __construct(
         private readonly FactoryInterface $factory,
+        private readonly AssetUrlGenerator $assetUrlGenerator,
         private readonly TeamRepository $teamRepository,
         private readonly LinkRepository $linkRepository,
+        private readonly DownloadRepository $downloadRepository,
         #[Autowire(service: 'assets._default_package')]
         private readonly Package $package,
     ) {
@@ -115,6 +119,29 @@ final class Navbar
             }
 
             $menu->addChild($linkItem);
+        }
+
+        $downloads = $this->downloadRepository->findEnabled();
+        if (count($downloads) > 0) {
+            $downloadItem = $this->factory->createItem('Downloads', [
+                'dropdown' => true,
+                'icon'     => 'fa6-solid:download',
+            ]);
+
+            foreach ($downloads as $download) {
+                $downloadLink = $download->getFile() === null
+                    ? $download->getUri()
+                    : $this->assetUrlGenerator->__invoke($download->getFile());
+
+                $downloadItem->addChild($download->getName(), [
+                    'uri'            => $downloadLink,
+                    'linkAttributes' => [
+                        'target' => '_blank',
+                    ],
+                ]);
+            }
+
+            $menu->addChild($downloadItem);
         }
 
         $menu->addChild('Zur alten Webseite / Archiv', [
