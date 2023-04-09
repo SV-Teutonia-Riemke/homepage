@@ -26,4 +26,5 @@ return [
     Lexik\Bundle\FormFilterBundle\LexikFormFilterBundle::class => ['all' => true],
     Sentry\SentryBundle\SentryBundle::class => ['all' => true],
     Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
+    Tbbc\MoneyBundle\TbbcMoneyBundle::class => ['all' => true],
 ];

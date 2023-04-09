@@ -5,6 +5,7 @@ twig:
         '%kernel.project_dir%/src/Module/Page/Templates': 'page'
     form_themes:
         - 'bootstrap_5_layout.html.twig'
+        - '@TbbcMoney/Form/fields.html.twig'
 
 when@test:
     twig:

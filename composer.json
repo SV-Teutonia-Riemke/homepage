@@ -26,6 +26,7 @@
         "league/flysystem": "^3.12",
         "lexik/form-filter-bundle": "^7.0",
         "liip/imagine-bundle": "^2.10",
+        "moneyphp/money": "^4.1",
         "nesbot/carbon": "^2.66",
         "odolbeau/phone-number-bundle": "^3.9",
         "oneup/flysystem-bundle": "^4.6",
@@ -69,6 +70,7 @@
         "symfony/validator": "^6.2",
         "symfony/webpack-encore-bundle": "^1.16",
         "symfony/yaml": "^6.2",
+        "tbbc/money-bundle": "^5.0",
         "twig/extra-bundle": "^3.5",
         "twig/intl-extra": "^3.5",
         "twig/twig": "^3.5"
