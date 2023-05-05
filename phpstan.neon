@@ -18,9 +18,6 @@ parameters:
 
     tmpDir: var/cache
 
-    parallel:
-        maximumNumberOfProcesses: 4
-
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
 
