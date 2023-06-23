@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Form\Type\Forms;
 
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
-use Lexik\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
+use Spiriit\Bundle\FormFilterBundle\Filter\Form\Type\TextFilterType;
+use Spiriit\Bundle\FormFilterBundle\Filter\Query\QueryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -5,25 +5,18 @@ declare(strict_types=1);
 namespace App\EventListener;
 
 use App\Storage\Entity\Common\ModifiedInterface;
-use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Psr\Clock\ClockInterface;
 
-final class ModifiedListener implements EventSubscriberInterface
+#[AsDoctrineListener(Events::prePersist)]
+#[AsDoctrineListener(Events::preUpdate)]
+final class ModifiedListener
 {
     public function __construct(
         private readonly ClockInterface $clock,
     ) {
-    }
-
-    /** @inheritDoc */
-    public function getSubscribedEvents(): array
-    {
-        return [
-            Events::prePersist,
-            Events::preUpdate,
-        ];
     }
 
     public function prePersist(LifecycleEventArgs $args): void

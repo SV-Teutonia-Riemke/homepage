@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Form\Type\Entities\FileEntityType;
+use App\Form\Type\Widgets\SponsorLevelType;
 use App\Storage\Entity\Sponsor;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -29,6 +30,11 @@ final class SponsorType extends AbstractType
                 'required'    => false,
                 'constraints' => [
                     new Url(),
+                ],
+            ])
+            ->add('level', SponsorLevelType::class, [
+                'constraints' => [
+                    new NotBlank(),
                 ],
             ])
             ->add('enabled', CheckboxType::class, [

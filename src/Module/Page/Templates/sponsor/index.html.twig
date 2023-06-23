@@ -1,0 +1,40 @@
+{% extends '@page/_layout/layout.html.twig' %}
+
+{% set pageTitle = 'Sponsoren' %}
+
+{% block pageSubBody %}
+    <div class="row row-cards">
+        <div class="col-12">
+            <div class="row row-cards">
+                {% for sponsors in levels %}
+                    {% set level = sponsors|first.level %}
+                    {% set columns = level.main ? 2 : 4 %}
+                    {% set filter = level.main ? 'sponsor_main' : 'sponsor_page' %}
+
+                    <div class="col-12">
+                        <h1 class="text-center border-bottom my-2 pb-2">{{ level.translatable|trans }}</h1>
+
+                        <div class="row row-cols-md-{{ columns }} row-cols-1 justify-content-center">
+                            {% for sponsor in sponsors %}
+                                <div class="col my-md-4 my-2 d-flex align-items-center justify-content-center">
+                                    {% set image %}
+                                        <img src="{{ sponsor.image.filePath|imagine_filter(filter) }}" class="img-thumbnail" />
+                                    {% endset %}
+
+                                    {% if sponsor.url is null %}
+                                        {{ image|raw }}
+                                    {% else %}
+                                        <a href="{{ sponsor.url }}" target="_blank" rel="noreferrer">
+                                            {{ image|raw }}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

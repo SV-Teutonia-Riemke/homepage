@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Domain\SponsorLevel;
 use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\Position;
 use App\Storage\Entity\Common\PositionInterface;
@@ -21,6 +22,9 @@ class Sponsor extends AbstractEntity implements PositionInterface, EnabledInterf
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private string|null $url = null;
+
+    #[ORM\Column(type: Types::STRING, enumType: SponsorLevel::class, options: ['default' => SponsorLevel::SPONSOR])]
+    private SponsorLevel $level;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
@@ -47,6 +51,16 @@ class Sponsor extends AbstractEntity implements PositionInterface, EnabledInterf
     public function setUrl(string|null $url): void
     {
         $this->url = $url;
+    }
+
+    public function getLevel(): SponsorLevel
+    {
+        return $this->level;
+    }
+
+    public function setLevel(SponsorLevel $level): void
+    {
+        $this->level = $level;
     }
 
     public function isEnabled(): bool

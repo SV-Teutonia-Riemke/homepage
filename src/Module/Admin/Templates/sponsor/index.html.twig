@@ -13,6 +13,7 @@
             <th class="w-1"></th>
             <th class="w-1">Id</th>
             <th>Name</th>
+            <th>Level</th>
             <th>Url</th>
             <th>Logo</th>
             <th class="w-1"></th>
@@ -23,6 +24,7 @@
             </td>
             <td>{{ object.id }}</td>
             <td>{{ object.name }}</td>
+            <td>{{ object.level.translatable|trans }}</td>
             <td>{{ object.url }}</td>
             <td>{{ object.image is null ? '' : object.image.pathName }}</td>
             <td class="text-end">

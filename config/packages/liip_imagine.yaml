@@ -16,5 +16,28 @@ liip_imagine:
         optimized :
             quality : 90
 
+        # the name of the "filter set"
+        sponsor_main:
+            quality: 90
+            filters:
+                thumbnail:
+                    size: [ 380, 190 ]
+                    mode: inset
+                background:
+                    size: [ 420, 220 ]
+                    position: center
+                    transparency: 100
+
+        sponsor_page:
+            quality: 90
+            filters:
+                thumbnail:
+                    size: [ 245, 122 ]
+                    mode: inset
+                background:
+                    size: [ 257, 124 ]
+                    position: center
+                    transparency: 100
+
     twig:
         mode: lazy

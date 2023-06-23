@@ -76,7 +76,7 @@ final class Navbar
             $menu->addChild($teamJuniors);
         }
 
-        $menu->addChild('Teams', [
+        $menu->addChild('Verein', [
             'route' => 'app_person_groups',
             'icon'  => 'fa6-solid:people-group',
         ]);

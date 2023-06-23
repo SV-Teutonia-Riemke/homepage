@@ -6,6 +6,7 @@
         "@hotwired/turbo": "^7.3.0",
         "@lcdp/offline-plugin": "^5.1.1",
         "@symfony/stimulus-bridge": "^3.2.2",
+        "@symfony/stimulus-bundle": "file:vendor/symfony/stimulus-bundle/assets",
         "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/assets",
         "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",

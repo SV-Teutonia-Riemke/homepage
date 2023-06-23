@@ -65,9 +65,6 @@
     "knplabs/knp-paginator-bundle": {
         "version": "v5.8.0"
     },
-    "lexik/form-filter-bundle": {
-        "version": "v7.0.3"
-    },
     "liip/imagine-bundle": {
         "version": "2.8",
         "recipe": {
@@ -105,6 +102,18 @@
             "config/packages/oneup_flysystem.yaml"
         ]
     },
+    "php-http/discovery": {
+        "version": "1.19",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.18",
+            "ref": "f45b5dd173a27873ab19f5e3180b2f661c21de02"
+        },
+        "files": [
+            "config/packages/http_discovery.yaml"
+        ]
+    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {
@@ -130,6 +139,9 @@
         "files": [
             "config/packages/sentry.yaml"
         ]
+    },
+    "spiriitlabs/form-filter-bundle": {
+        "version": "v9.0.1"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.7",
@@ -251,6 +263,20 @@
         },
         "files": [
             "config/packages/security.yaml"
+        ]
+    },
+    "symfony/stimulus-bundle": {
+        "version": "2.9",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.9",
+            "ref": "05c45071c7ecacc1e48f94bc43c1f8d4405fb2b2"
+        },
+        "files": [
+            "assets/bootstrap.js",
+            "assets/controllers.json",
+            "assets/controllers/hello_controller.js"
         ]
     },
     "symfony/translation": {

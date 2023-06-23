@@ -10,7 +10,8 @@ use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\PositionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Lexik\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
+use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
+use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\SubmitButton;
@@ -164,9 +165,9 @@ abstract class AbstractCrudController extends AbstractController
         return $this->container->get(PaginatorInterface::class);
     }
 
-    private function getFilterBuilderUpdater(): FilterBuilderUpdater
+    private function getFilterBuilderUpdater(): FilterBuilderUpdaterInterface
     {
-        return $this->container->get(FilterBuilderUpdater::class);
+        return $this->container->get(FilterBuilderUpdaterInterface::class);
     }
 
     /** @inheritDoc */
