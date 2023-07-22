@@ -10,7 +10,6 @@ use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\PositionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdater;
 use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -178,7 +177,7 @@ abstract class AbstractCrudController extends AbstractController
         return array_merge($services, [
             EntityManagerInterface::class,
             PaginatorInterface::class,
-            FilterBuilderUpdater::class,
+            FilterBuilderUpdaterInterface::class,
         ]);
     }
 }
