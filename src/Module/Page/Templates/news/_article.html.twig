@@ -1,0 +1,29 @@
+<div class="card mb-3">
+    <div class="card-status-top bg-primary"></div>
+    <div class="card-header">
+        <h5 class="card-title">{{ article.title }}</h5>
+        <div class="card-actions">
+            <div class="btn btn-link btn-icon copy-to-clipboard"
+                 data-clipboard-text="{{ url('app_news_article', { id: article.id }) }}">
+                <span class="iconify icon" data-icon="fa6-solid:share-nodes"></span>
+            </div>
+        </div>
+    </div>
+    {% if article.image is not null %}
+        <div class="card-img-top d-md-none">
+            <img src="{{ article.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 450 } }) }}"/>
+        </div>
+    {% endif %}
+    <div class="card-body">
+        {% if article.image is not null %}
+            <img class="float-start rounded me-2 d-none d-md-block" style="width: 35%"
+                 src="{{ article.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 450 } }) }}"/>
+        {% endif %}
+        <div class="card-text">{{ article.content|raw }}</div>
+        <div class="card-text">
+            <small class="text-muted">Erstellt am {{ article.createdAt|format_datetime }}</small>
+        </div>
+    </div>
+    {% block cardFooter %}
+    {% endblock %}
+</div>

@@ -67,6 +67,11 @@ final class Navbar
             ]);
         }
 
+        $menu->addChild('News', [
+            'route' => 'app_news',
+            'icon'  => 'fa6-solid:newspaper',
+        ]);
+
         $menu->addChild('Verein', [
             'route' => 'app_person_groups',
             'icon'  => 'fa6-solid:people-group',

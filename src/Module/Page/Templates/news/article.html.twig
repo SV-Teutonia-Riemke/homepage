@@ -1,0 +1,5 @@
+{% extends '@page/news/base.html.twig' %}
+
+{% block newsContent %}
+    {% include '@page/news/_article.html.twig' with { article: article } %}
+{% endblock %}

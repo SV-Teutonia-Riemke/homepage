@@ -36,7 +36,7 @@ final class IndexController extends AbstractController
         );
 
         return $this->render('@page/index.html.twig', [
-            'article'       => $this->articleRepository->findOneLatestEnabled(),
+            'articles'      => $this->articleRepository->findLatestEnabled(2),
             'sponsors'      => $sponsors,
             'notifications' => $this->notificationRepository->findEnabled(),
         ]);

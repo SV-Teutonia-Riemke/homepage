@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Page\Controller;
 
+use App\Storage\Entity\Article;
 use App\Storage\Repository\ArticleRepository;
 use App\Storage\Repository\SponsorRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -14,7 +15,6 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[AsController]
-#[Route('/news', name: 'app_news')]
 final class NewsController extends AbstractController
 {
     public function __construct(
@@ -24,7 +24,8 @@ final class NewsController extends AbstractController
     ) {
     }
 
-    public function __invoke(Request $request): Response
+    #[Route('/news', name: 'app_news')]
+    public function news(Request $request): Response
     {
         $query = $this->articleRepository
             ->createQueryBuilder('p')
@@ -38,6 +39,15 @@ final class NewsController extends AbstractController
 
         return $this->render('@page/news/index.html.twig', [
             'articles' => $pagination,
+            'sponsors' => $this->sponsorRepository->findEnabled(),
+        ]);
+    }
+
+    #[Route('/news/{id}', name: 'app_news_article')]
+    public function article(Article $article): Response
+    {
+        return $this->render('@page/news/article.html.twig', [
+            'article'  => $article,
             'sponsors' => $this->sponsorRepository->findEnabled(),
         ]);
     }

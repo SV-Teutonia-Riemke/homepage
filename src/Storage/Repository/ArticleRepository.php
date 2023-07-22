@@ -16,12 +16,17 @@ final class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public function findOneLatestEnabled(): Article|null
+    /** @return array<Article> */
+    public function findLatestEnabled(int $limit): array
     {
-        return $this->findOneBy([
-            'enabled' => true,
-        ], [
-            'createdAt' => 'desc',
-        ]);
+        return $this->findBy(
+            [
+                'enabled' => true,
+            ],
+            [
+                'createdAt' => 'desc',
+            ],
+            $limit,
+        );
     }
 }

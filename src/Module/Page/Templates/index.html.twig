@@ -42,31 +42,15 @@
                 </div>
             {% endfor %}
 
-            {% if article is not null %}
-                <div class="card mb-3">
-                    <div class="card-status-top bg-primary"></div>
-                    <div class="card-header">
-                        <h5 class="card-title">{{ article.title }}</h5>
-                    </div>
-                    {% if article.image is not null %}
-                        <div class="card-img-top d-md-none">
-                            <img src="{{ article.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 450 } }) }}"/>
+            {% for article in articles %}
+                {% embed '@page/news/_article.html.twig' with { article: article } %}
+                    {% block cardFooter %}
+                        <div class="card-footer">
+                            <a href="{{ path('app_news') }}" class="btn btn-primary">Weitere Artikel zum Nachlesen</a>
                         </div>
-                    {% endif %}
-                    <div class="card-body">
-                        {% if article.image is not null %}
-                            <img class="float-start rounded me-2 d-none d-md-block" style="width: 35%" src="{{ article.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 450 } }) }}"/>
-                        {% endif %}
-                        <div class="card-text">{{ article.content|raw }}</div>
-                        <div class="card-text mb-3">
-                            <small class="text-muted">Erstellt am {{ article.createdAt|format_datetime }}</small>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="{{ path('app_news') }}" class="btn btn-primary">Weitere Artikel zum Nachlesen</a>
-                    </div>
-                </div>
-            {% endif %}
+                    {% endblock %}
+                {% endembed %}
+            {% endfor %}
         </div>
         <div class="col-12 col-md-3">
             <div class="row row-cards">
