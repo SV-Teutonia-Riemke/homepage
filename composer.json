@@ -133,7 +133,7 @@
         },
         "prepare-test": [
             "php bin/console cache:clear --env=test --no-warmup --ansi",
-            "php bin/console cache:warmup --env=test --ansi"
+            "php bin/console cache:warmup --env=test --ansi --no-optional-warmers"
         ],
         "check": [
             "composer check-platform-reqs -n --ansi",

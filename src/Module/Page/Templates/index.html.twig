@@ -85,7 +85,7 @@
                                     {% for sponsor in sponsors %}
                                         <div class="col mb-2 d-flex align-items-center justify-content-center">
                                             {% set image %}
-                                                <img src="{{ sponsor.image.filePath|imagine_filter('optimized', { downscale: { max: [120, 60] } }) }}"/>
+                                                <img src="{{ sponsor.image.filePath|imagine_filter('sponsor_index') }}"/>
                                             {% endset %}
 
                                             {% if sponsor.url is null %}

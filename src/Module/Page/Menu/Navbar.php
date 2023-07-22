@@ -40,45 +40,49 @@ final class Navbar
             'icon'  => 'fa6-solid:house',
         ]);
 
-        if (count($seniorTeams) > 0) {
-            $teamSeniors = $this->factory->createItem('Senioren', [
-                'dropdown' => true,
-                'icon'     => 'fa6-solid:person-cane',
+        $teams = $this->factory->createItem('Mannschaften', [
+            'dropdown' => true,
+            'icon'     => 'fa6-solid:users',
+        ]);
+        $menu->addChild($teams);
+
+        foreach ($seniorTeams as $team) {
+            $teams->addChild($team->getName(), [
+                'route'           => 'app_team',
+                'routeParameters' => [
+                    'team' => $team->getId(),
+                ],
             ]);
-
-            foreach ($seniorTeams as $team) {
-                $teamSeniors->addChild($team->getName(), [
-                    'route'           => 'app_team',
-                    'routeParameters' => [
-                        'team' => $team->getId(),
-                    ],
-                ]);
-            }
-
-            $menu->addChild($teamSeniors);
         }
 
-        if (count($juniorTeams) > 0) {
-            $teamJuniors = $this->factory->createItem('Junioren', [
-                'dropdown' => true,
-                'icon'     => 'fa6-solid:child',
+        foreach ($juniorTeams as $key => $team) {
+            $teams->addChild($team->getName(), [
+                'route'           => 'app_team',
+                'routeParameters' => [
+                    'team' => $team->getId(),
+                ],
+                'attributes'      => [
+                    'divider_prepend' => $key === 0,
+                ],
             ]);
-
-            foreach ($juniorTeams as $team) {
-                $teamJuniors->addChild($team->getName(), [
-                    'route'           => 'app_team',
-                    'routeParameters' => [
-                        'team' => $team->getId(),
-                    ],
-                ]);
-            }
-
-            $menu->addChild($teamJuniors);
         }
 
         $menu->addChild('Verein', [
             'route' => 'app_person_groups',
             'icon'  => 'fa6-solid:people-group',
+        ]);
+
+        $menu->addChild('Shop', [
+            'uri'            => 'https://svtr.link/clubshop',
+            'linkAttributes' => [
+                'target' => '_blank',
+            ],
+            'icon'           => 'fa6-solid:basket-shopping',
+        ]);
+
+        $menu->addChild('Sponsoren', [
+            'route' => 'app_sponsor',
+            'icon'  => 'fa6-solid:handshake-simple',
         ]);
 
         $menu->addChild('Trainingszeiten', [
