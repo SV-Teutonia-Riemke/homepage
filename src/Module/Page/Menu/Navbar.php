@@ -10,8 +10,6 @@ use App\Storage\Repository\LinkRepository;
 use App\Storage\Repository\TeamRepository;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Symfony\Component\Asset\Package;
-use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 use function count;
 
@@ -23,8 +21,6 @@ final class Navbar
         private readonly TeamRepository $teamRepository,
         private readonly LinkRepository $linkRepository,
         private readonly DownloadRepository $downloadRepository,
-        #[Autowire(service: 'assets._default_package')]
-        private readonly Package $package,
     ) {
     }
 
@@ -77,6 +73,15 @@ final class Navbar
             'icon'  => 'fa6-solid:people-group',
         ]);
 
+        $menu->addChild('Tickets', [
+            'uri'            => 'https://ticket.teutonia-riemke.de/dhbpokal-1damen/',
+            'linkAttributes' => [
+                'target' => '_blank',
+            ],
+            'icon'           => 'fa6-solid:ticket',
+            'badge'          => 'teenyicons:star-solid',
+        ]);
+
         $menu->addChild('Shop', [
             'uri'            => 'https://svtr.link/clubshop',
             'linkAttributes' => [
@@ -90,26 +95,10 @@ final class Navbar
             'icon'  => 'fa6-solid:handshake-simple',
         ]);
 
-        $menu->addChild('Trainingszeiten', [
-            'icon'           => 'fa6-solid:calendar-day',
-            'uri'            => 'https://svtr.link/trainingszeiten',
-            'linkAttributes' => [
-                'target' => '_blank',
-            ],
-        ]);
-
-        $menu->addChild('Aufnahmeantrag', [
-            'icon'           => 'fa6-solid:file-contract',
-            'uri'            => $this->package->getUrl('build/documents/aufnahmeantrag.pdf'),
-            'linkAttributes' => [
-                'target' => '_blank',
-            ],
-        ]);
-
-        $menu->addChild('Ruhr Cup', [
-            'icon'  => 'fa6-solid:trophy',
-            'route' => 'app_ruhr_cup',
-        ]);
+//        $menu->addChild('Ruhr Cup', [
+//            'icon'  => 'fa6-solid:trophy',
+//            'route' => 'app_ruhr_cup',
+//        ]);
 
         $links = $this->linkRepository->findEnabled();
         if (count($links) > 0) {

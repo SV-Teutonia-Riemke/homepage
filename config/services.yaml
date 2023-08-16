@@ -23,6 +23,9 @@ services:
   App\Infrastructure\Menu\Extension\IconifyExtension:
     tags: [ 'knp_menu.factory_extension' ]
 
+  App\Infrastructure\Menu\Extension\BadgeExtension:
+    tags: [ 'knp_menu.factory_extension' ]
+
   App\Infrastructure\Menu\Extension\EventDispatcherExtension:
     tags:
       - { name: knp_menu.factory_extension, priority: -1000 }
