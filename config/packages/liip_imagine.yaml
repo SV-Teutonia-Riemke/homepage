@@ -38,7 +38,6 @@ liip_imagine:
                 background:
                     size: [ 420, 220 ]
                     position: center
-                    transparency: 100
 
         sponsor_page:
             quality: 90
@@ -49,7 +48,6 @@ liip_imagine:
                 background:
                     size: [ 257, 124 ]
                     position: center
-                    transparency: 100
 
     twig:
         mode: lazy

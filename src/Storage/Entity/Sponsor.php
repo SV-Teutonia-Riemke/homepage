@@ -33,6 +33,9 @@ class Sponsor extends AbstractEntity implements PositionInterface, EnabledInterf
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private File|null $image = null;
 
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private string|null $backgroundColor = '#ffffff';
+
     public function getName(): string
     {
         return $this->name;
@@ -81,5 +84,15 @@ class Sponsor extends AbstractEntity implements PositionInterface, EnabledInterf
     public function setImage(File|null $image): void
     {
         $this->image = $image;
+    }
+
+    public function getBackgroundColor(): string|null
+    {
+        return $this->backgroundColor;
+    }
+
+    public function setBackgroundColor(string|null $backgroundColor): void
+    {
+        $this->backgroundColor = $backgroundColor;
     }
 }

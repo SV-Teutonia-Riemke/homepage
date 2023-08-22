@@ -15,6 +15,8 @@ enum SponsorLevel: string
     case PREMIUM     = 'premium';
     case SPONSOR     = 'sponsor';
     case KOOPERATION = 'kooperation';
+    case FUNDING     = 'funding';
+    case OUTFITTER   = 'outfitter';
 
     public function getTranslatable(): TranslatableMessage
     {
@@ -35,7 +37,9 @@ enum SponsorLevel: string
             self::EXCLUSIVE => 2,
             self::PREMIUM => 3,
             self::SPONSOR => 4,
-            self::KOOPERATION => 5,
+            self::OUTFITTER => 5,
+            self::KOOPERATION => 6,
+            self::FUNDING => 7,
         };
     }
 }

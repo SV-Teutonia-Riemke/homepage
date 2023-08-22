@@ -69,7 +69,7 @@
                                     {% for sponsor in sponsors %}
                                         <div class="col mb-2 d-flex align-items-center justify-content-center">
                                             {% set image %}
-                                                <img src="{{ sponsor.image.filePath|imagine_filter('sponsor_index') }}"/>
+                                                <img src="{{ sponsor.image.filePath|imagine_filter('sponsor_index', { background: { color: sponsor.backgroundColor|default('#ffffff') }}) }}"/>
                                             {% endset %}
 
                                             {% if sponsor.url is null %}
