@@ -73,14 +73,14 @@ final class Navbar
             'icon'  => 'fa6-solid:people-group',
         ]);
 
-        $menu->addChild('Tickets', [
-            'uri'            => 'https://ticket.teutonia-riemke.de/dhbpokal-1damen/',
-            'linkAttributes' => [
-                'target' => '_blank',
-            ],
-            'icon'           => 'fa6-solid:ticket',
-            'badge'          => 'teenyicons:star-solid',
-        ]);
+//        $menu->addChild('Tickets', [
+//            'uri'            => 'https://ticket.teutonia-riemke.de/dhbpokal-1damen/',
+//            'linkAttributes' => [
+//                'target' => '_blank',
+//            ],
+//            'icon'           => 'fa6-solid:ticket',
+//            'badge'          => 'teenyicons:star-solid',
+//        ]);
 
         $menu->addChild('Shop', [
             'uri'            => 'https://svtr.link/clubshop',
