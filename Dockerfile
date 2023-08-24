@@ -4,7 +4,8 @@ FROM thecodingmachine/php:8.2-v4-apache-node16 as builder
 
 COPY --chown=docker:docker . /var/www/html/
 
-RUN composer install --no-dev --no-interaction --no-progress --classmap-authoritative --ignore-platform-reqs
+RUN composer install --no-dev --no-interaction --no-scripts --no-progress --classmap-authoritative --ignore-platform-reqs
+RUN php bin/console ckeditor:install --clear=drop
 RUN yarn install --force
 RUN yarn build
 RUN sudo rm -rf assets docker docs node_modules tests \
