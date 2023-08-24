@@ -23,7 +23,6 @@
         "sass": "^1.66.1",
         "sass-loader": "^13.3.2",
         "stimulus-clipboard": "^4.0.1",
-        "tinymce": "^6.6.2",
         "tom-select": "^2.2.2",
         "ts-loader": "^9.4.4",
         "typescript": "^5.2.2",
@@ -38,8 +37,5 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
-    },
-    "dependencies": {
-        "ckeditor4": "^4.23.0"
     }
 }
