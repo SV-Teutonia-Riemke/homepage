@@ -25,8 +25,8 @@ ENV PHP_EXTENSIONS="pdo_mysql imagick gd intl bcmath"
 ENV STARTUP_COMMAND_1="bin/console cache:clear"
 ENV STARTUP_COMMAND_2="bin/console cache:warmup"
 ENV STARTUP_COMMAND_3="bin/console doctrine:migrations:migrate --no-interaction"
-ENV STARTUP_COMMAND_4="bin/console assets:install public"
-ENV STARTUP_COMMAND_5="bin/console ckeditor:install --clear=drop"
+ENV STARTUP_COMMAND_4="bin/console ckeditor:install --clear=drop --tag=4.22.1"
+ENV STARTUP_COMMAND_5="bin/console assets:install public"
 
 ENV APACHE_DOCUMENT_ROOT="public/"
 #ENV APACHE_RUN_USER=www-data
