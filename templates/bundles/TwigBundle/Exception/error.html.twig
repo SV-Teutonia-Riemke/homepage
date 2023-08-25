@@ -1,0 +1,21 @@
+{% extends '_layout/base.html.twig' %}
+
+{% block body %}
+    <div class="page page-center">
+        <div class="container-tight py-4">
+            <div class="empty">
+                <div class="empty-header">{{ status_code }}</div>
+                <p class="empty-title">Oops… {{ status_text }}</p>
+                <p class="empty-subtitle text-secondary">
+                    {{ exception.message }}
+                </p>
+                <div class="empty-action">
+                    <a href="{{ path('app_index') }}" class="btn btn-primary">
+                        <span class="iconify-inline icon" data-icon="fa6-solid:arrow-left"></span>
+                        Take me home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
