@@ -26,7 +26,7 @@ ENV STARTUP_COMMAND_1="bin/console cache:clear"
 ENV STARTUP_COMMAND_2="bin/console cache:warmup"
 ENV STARTUP_COMMAND_3="bin/console doctrine:migrations:migrate --no-interaction"
 ENV STARTUP_COMMAND_4="bin/console assets:install public"
-ENV STARTUP_COMMAND_4="bin/console ckeditor:install --clear=drop"
+ENV STARTUP_COMMAND_5="bin/console ckeditor:install --clear=drop"
 
 ENV APACHE_DOCUMENT_ROOT="public/"
 #ENV APACHE_RUN_USER=www-data
