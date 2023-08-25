@@ -18,6 +18,7 @@ final class PersonEntityType extends AbstractType
     {
         $resolver->setDefaults([
             'class'         => Person::class,
+            'autocomplete'  => true,
             'choice_label'  => static fn (Person $person): string => $person->__toString(),
             'query_builder' => static function (PersonRepository $repository) {
                 return $repository->createQueryBuilder('p')
@@ -30,6 +31,5 @@ final class PersonEntityType extends AbstractType
     public function getParent(): string
     {
         return EntityType::class;
-//        return ParentEntityAutocompleteType::class;
     }
 }
