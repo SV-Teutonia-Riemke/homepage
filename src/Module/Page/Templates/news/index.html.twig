@@ -1,5 +1,7 @@
 {% extends '@page/news/base.html.twig' %}
 
+{% set pageTitle = 'News' %}
+
 {% block newsContent %}
     {% for article in articles %}
         {% include '@page/news/_article.html.twig' with { article: article } %}
