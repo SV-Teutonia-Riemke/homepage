@@ -5,7 +5,6 @@ FROM thecodingmachine/php:8.2-v4-apache-node16 as builder
 COPY --chown=docker:docker . /var/www/html/
 
 RUN composer install --no-dev --no-interaction --no-scripts --no-progress --classmap-authoritative --ignore-platform-reqs
-RUN php bin/console ckeditor:install --clear=drop
 RUN yarn install --force
 RUN yarn build
 RUN sudo rm -rf assets docker docs node_modules tests \
@@ -27,6 +26,7 @@ ENV STARTUP_COMMAND_1="bin/console cache:clear"
 ENV STARTUP_COMMAND_2="bin/console cache:warmup"
 ENV STARTUP_COMMAND_3="bin/console doctrine:migrations:migrate --no-interaction"
 ENV STARTUP_COMMAND_4="bin/console assets:install public"
+ENV STARTUP_COMMAND_4="bin/console ckeditor:install --clear=drop"
 
 ENV APACHE_DOCUMENT_ROOT="public/"
 #ENV APACHE_RUN_USER=www-data

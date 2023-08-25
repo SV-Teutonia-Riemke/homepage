@@ -74,7 +74,7 @@ final class Navbar
         ]);
 
         $menu->addChild('Tickets', [
-            'uri'            => 'https://ticket.teutonia-riemke.de/dhbpokal-1damen/',
+            'uri'            => 'https://svtr.link/dhbpokal-1damen',
             'linkAttributes' => [
                 'target' => '_blank',
             ],
