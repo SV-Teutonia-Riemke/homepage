@@ -18,7 +18,7 @@
                             {% for sponsor in sponsors %}
                                 <div class="col my-md-4 my-2 d-flex align-items-center justify-content-center">
                                     {% set image %}
-                                        <img src="{{ sponsor.image.filePath|imagine_filter(filter, { background: { color: sponsor.backgroundColor|default('#ffffff') } }) }}" class="img-thumbnail" />
+                                        <img src="{{ sponsor.image.filePath|imagine_filter(filter, { background: { color: sponsor.backgroundColor|default('#ffffff') } }) }}" class="img-thumbnail rounded" />
                                     {% endset %}
 
                                     {% if sponsor.url is null %}

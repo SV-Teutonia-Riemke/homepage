@@ -38,8 +38,8 @@ services:
       internal:
         ipv4_address: 192.168.19.11
 
-  mailhog:
-    image: mailhog/mailhog
+  mailpit:
+    image: axllent/mailpit
     networks:
       internal:
         ipv4_address: 192.168.19.12
