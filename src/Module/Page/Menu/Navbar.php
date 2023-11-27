@@ -95,10 +95,10 @@ final class Navbar
             'icon'  => 'fa6-solid:handshake-simple',
         ]);
 
-//        $menu->addChild('Ruhr Cup', [
-//            'icon'  => 'fa6-solid:trophy',
-//            'route' => 'app_ruhr_cup',
-//        ]);
+        $menu->addChild('Ruhr Cup', [
+            'icon'  => 'fa6-solid:trophy',
+            'route' => 'app_ruhr_cup',
+        ]);
 
         $links = $this->linkRepository->findEnabled();
         if (count($links) > 0) {
