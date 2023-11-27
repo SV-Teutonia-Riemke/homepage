@@ -28,6 +28,17 @@ liip_imagine:
                     position: center
                     transparency: 100
 
+        sponsor_index_main:
+            quality: 90
+            filters:
+                thumbnail:
+                    size: [ 256, 127 ]
+                    mode: inset
+                background:
+                    size: [ 258, 129 ]
+                    position: center
+                    transparency: 100
+
         # the name of the "filter set"
         sponsor_main:
             quality: 90
