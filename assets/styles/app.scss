@@ -2,6 +2,10 @@
 //@import './boot.scss';
 @import '@tabler/core/src/scss/tabler';
 
+:root {
+  --bs-body-bg: #f5f7fb;
+}
+
 .hb-embed {
   .hb-embed__title-container,
   .hb-embed__branding,

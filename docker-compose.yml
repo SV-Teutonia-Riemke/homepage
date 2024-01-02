@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   app:
-    image: thecodingmachine/php:8.2-v4-apache-node18
+    image: thecodingmachine/php:8.3-v4-apache-node18
     volumes:
       - .:/var/www/html
       - ./var/.bash_history:/home/docker/.bash_history
