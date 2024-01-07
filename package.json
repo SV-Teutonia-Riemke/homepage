@@ -21,7 +21,7 @@
         "file-loader": "^6.0.0",
         "offline-plugin": "^5.0.7",
         "regenerator-runtime": "^0.14.1",
-        "sass": "^1.69.6",
+        "sass": "^1.69.7",
         "sass-loader": "^13.3.3",
         "stimulus-clipboard": "^4.0.1",
         "tom-select": "^2.3.1",
