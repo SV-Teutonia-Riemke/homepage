@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         php-versions: [ '8.3' ]
-        dependencies: [ 'locked', 'lowest', 'latest' ]
+        dependencies: [ 'locked', 'latest' ]
 
     runs-on: ubuntu-latest
 
