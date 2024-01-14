@@ -52,6 +52,7 @@ class Team extends AbstractEntity implements PositionInterface, EnabledInterface
 
     /** @var Collection<Player> */
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Player::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['number' => 'ASC'])]
     private Collection $players;
 
     /** @var Collection<Staff> */
@@ -75,6 +76,9 @@ class Team extends AbstractEntity implements PositionInterface, EnabledInterface
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
+
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+    private bool $portraits = false;
 
     public function __construct()
     {
@@ -220,6 +224,16 @@ class Team extends AbstractEntity implements PositionInterface, EnabledInterface
     public function setEnabled(bool $enabled): void
     {
         $this->enabled = $enabled;
+    }
+
+    public function isPortraits(): bool
+    {
+        return $this->portraits;
+    }
+
+    public function setPortraits(bool $portraits): void
+    {
+        $this->portraits = $portraits;
     }
 
     /** @return Collection<Player> */

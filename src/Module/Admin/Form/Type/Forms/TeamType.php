@@ -35,6 +35,9 @@ final class TeamType extends AbstractType
             ->add('enabled', CheckboxType::class, [
                 'required' => false,
             ])
+            ->add('portraits', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('gender', GenderType::class, [
                 'constraints' => [
                     new NotBlank(),

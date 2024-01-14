@@ -3,64 +3,49 @@
 {% set pageTitle = 'Verein' %}
 
 {% block pageSubBody %}
-    <div class="card">
-        <div class="accordion" id="person-groups">
-            {% for group in personGroups %}
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading-{{ group.id }}">
-                        <button class="accordion-button{% if loop.first == false %} collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#person-group-{{ group.id }}">
-                            {{ group.name }}
-                        </button>
-                    </h2>
-                    <div id="person-group-{{ group.id }}" class="accordion-collapse collapse{% if loop.first %} show{% endif %}" data-bs-parent="#person-groups">
-                        <div class="accordion-body pt-0">
-                            <div class="row row-cards row-cols-1 row-cols-md-3 row-cols-lg-5">
-                                {% set placeholderImage = 'https://via.placeholder.com/160x160.png?text=Kein+Bild+vorhanden' %}
+    {% for group in personGroups %}
+        <h3 class="mt-5 border-bottom">{{ group.name }}</h3>
+        <div class="row row-cards row-cols-1 row-cols-md-3 row-cols-lg-5">
+            {% set placeholderImage = 'https://placehold.co/160x227/FFFFFF/000000/png?text=Kein+Bild+vorhanden' %}
 
-                                {% for member in group.members %}
-                                    {% set personAvailable = member.person is not null %}
+            {% for member in group.members %}
+                {% set personAvailable = member.person is not null %}
 
-                                    <div class="col">
-                                        <div class="card h-100{% if personAvailable == false %} border-red bg-red-lt{% endif %}"
-                                            {% if personAvailable == false %} data-bs-toggle="tooltip" data-bs-title="Du hast Interesse diese Position zu übernehmen? Dann meld dich bei uns unter info@teutonia-riemke.de" data-bs-placement="top"{% endif %}>
-                                            <div class="card-body p-4 text-center">
-                                                {% set imagePath = personAvailable == false or member.person.image is null
-                                                    ? placeholderImage
-                                                    : member.person.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 160 } }) %}
-                                                <img src="{{ imagePath }}" class="rounded mb-3"/>
-                                                <h3 class="m-0 mb-1 fw-bold">{{ personAvailable ? member.person : 'Wir suchen dich!' }}</h3>
-                                                {% if member.jobTitle is not null %}
-                                                    <div class="mt-3">
-                                                        <span class="badge bg-green-lt">{{ member.jobTitle }}</span>
-                                                    </div>
-                                                {% endif %}
-                                                {% if member.provisional %}
-                                                    <div class="mt-3">
-                                                        <span class="badge bg-yellow-lt">Kommissarisch</span>
-                                                    </div>
-                                                {% endif %}
-                                            </div>
-                                            <div class="d-flex">
-                                                {% if personAvailable and member.person.emailAddress is not null %}
-                                                    <a href="mailto:{{ member.person.emailAddress }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.emailAddress }}" data-bs-placement="top">
-                                                        <span class="iconify icon me-2" data-icon="fa6-solid:at"></span>
-                                                    </a>
-                                                {% endif %}
-                                                {% if personAvailable and member.person.phoneNumber is not null %}
-                                                    <a href="tel:{{ member.person.phoneNumber|phone_number_format }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.phoneNumber|phone_number_format }}" data-bs-placement="top">
-                                                        <span class="iconify icon me-2" data-icon="fa6-solid:phone"></span>
-                                                    </a>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
+                <div class="col">
+                    <div class="card h-100"
+                            {% if personAvailable == false %} data-bs-toggle="tooltip" data-bs-title="Du hast Interesse diese Position zu übernehmen? Dann meld dich bei uns unter info@teutonia-riemke.de" data-bs-placement="top"{% endif %}>
+                        <div class="card-body p-4 text-center">
+                            {% set imagePath = personAvailable == false or member.person.image is null
+                                ? placeholderImage
+                                : member.person.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 160 } }) %}
+                            <img src="{{ imagePath }}" class="rounded mb-3"/>
+                            <h3 class="m-0 mb-1 fw-bold">{{ personAvailable ? member.person : 'Wir suchen dich!' }}</h3>
+                            {% if member.jobTitle is not null %}
+                                <div class="mt-3">
+                                    <span class="badge bg-green-lt">{{ member.jobTitle }}</span>
+                                </div>
+                            {% endif %}
+                            {% if member.provisional %}
+                                <div class="mt-3">
+                                    <span class="badge bg-yellow-lt">Kommissarisch</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="d-flex">
+                            {% if personAvailable and member.person.emailAddress is not null %}
+                                <a href="mailto:{{ member.person.emailAddress }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.emailAddress }}" data-bs-placement="top">
+                                    <span class="iconify icon me-2" data-icon="fa6-solid:at"></span>
+                                </a>
+                            {% endif %}
+                            {% if personAvailable and member.person.phoneNumber is not null %}
+                                <a href="tel:{{ member.person.phoneNumber|phone_number_format }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.phoneNumber|phone_number_format }}" data-bs-placement="top">
+                                    <span class="iconify icon me-2" data-icon="fa6-solid:phone"></span>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
-    </div>
-    </div>
+    {% endfor %}
 {% endblock %}

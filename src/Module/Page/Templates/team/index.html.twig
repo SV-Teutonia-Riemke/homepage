@@ -159,47 +159,78 @@
                 {% endif %}
 
                 {% if team.players|length > 0 %}
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">Kader</h5>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table card-table table-vcenter text-nowrap">
-                                <thead>
-                                <tr>
-                                    <th>Nr.</th>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for player in team.getPlayersByNumber %}
-                                    <tr>
-                                        <td>{{ player.number|default('-') }}</td>
-                                        <td>{{ player.person.anonymizedName }}</td>
-                                        <td>{{ player.position is null ? '-' : player.position.translatable|trans }}</td>
-                                        <td class="text-end">
-                                            {% if player.person.instagram is not null %}
-                                                <a href="{{ player.person.instagram }}" class="btn btn-sm btn-icon btn-link text-instagram">
-                                                    <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
-                                                </a>
-                                            {% endif %}
-                                            {% if player.person.facebook is not null %}
-                                                <a href="{{ player.person.facebook }}" class="btn btn-sm btn-icon btn-link text-facebook">
-                                                    <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
-                                                </a>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    {% if team.portraits %}
+                        {{ _self.imageview(team) }}
+                    {% else %}
+                        {{ _self.tableview(team) }}
+                    {% endif %}
                 {% endif %}
 
             </div>
         </div>
     </div>
 {% endblock %}
+
+{% macro tableview(team) %}
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Kader</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table card-table table-vcenter text-nowrap">
+                <thead>
+                <tr>
+                    <th>Nr.</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for player in team.getPlayersByNumber %}
+                    <tr>
+                        <td>{{ player.number|default('-') }}</td>
+                        <td>{{ player.person.anonymizedName }}</td>
+                        <td>{{ player.position is null ? '-' : player.position.translatable|trans }}</td>
+                        <td class="text-end">
+                            {% if player.person.instagram is not null %}
+                                <a href="{{ player.person.instagram }}" class="btn btn-sm btn-icon btn-link text-instagram">
+                                    <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+                                </a>
+                            {% endif %}
+                            {% if player.person.facebook is not null %}
+                                <a href="{{ player.person.facebook }}" class="btn btn-sm btn-icon btn-link text-facebook">
+                                    <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro imageview(team) %}
+    <div class="row row-cards">
+
+        {% for player in team.getPlayersByNumber %}
+            {% set filePath = player.image ? player.image.filePath : 'handball.jpg' %}
+
+            <div class="col-sm-6 col-lg-4">
+                <div class="card card-sm">
+                    <a href="#" class="d-block"><img src="{{ filePath|imagine_filter('optimized', { downscale: { max: [300] } }) }}" class="card-img-top"></a>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <div>{{ player.person.anonymizedName }}</div>
+                                <div class="text-secondary">{{ player.number|default('-') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}

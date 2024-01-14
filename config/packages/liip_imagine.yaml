@@ -4,11 +4,20 @@ liip_imagine:
     driver: "gd"
 
     loaders:
-        default_filesystem:
+        default:
+            filesystem:
+                data_root: '%kernel.project_dir%/assets/images'
+        flysystem:
             flysystem:
                 filesystem_service: oneup_flysystem.default_filesystem_filesystem
+        chain:
+            chain:
+                # use the "foo", "bar", and "baz" loaders
+                loaders:
+                    - default
+                    - flysystem
 
-    data_loader: default_filesystem
+    data_loader: chain
 
     filter_sets :
         cache : ~
