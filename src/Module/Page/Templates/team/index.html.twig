@@ -190,7 +190,7 @@
                 {% for player in team.getPlayersByNumber %}
                     <tr>
                         <td>{{ player.number|default('-') }}</td>
-                        <td>{{ player.person.anonymizedName }}</td>
+                        <td>{{ player }}</td>
                         <td>{{ player.position is null ? '-' : player.position.translatable|trans }}</td>
                         <td class="text-end">
                             {% if player.person.instagram is not null %}
@@ -220,11 +220,11 @@
 
             <div class="col-sm-6 col-lg-4">
                 <div class="card card-sm">
-                    <a href="#" class="d-block"><img src="{{ filePath|imagine_filter('optimized', { downscale: { max: [300] } }) }}" class="card-img-top"></a>
+                    <a href="#" class="d-block"><img src="{{ filePath|imagine_filter('optimized', { downscale: { max: [400] } }) }}" class="card-img-top"></a>
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div>
-                                <div>{{ player.person.anonymizedName }}</div>
+                                <div>{{ player }}</div>
                                 <div class="text-secondary">{{ player.number|default('-') }}</div>
                             </div>
                         </div>

@@ -135,6 +135,11 @@ class Person extends AbstractEntity implements Stringable
         return $this->firstName;
     }
 
+    public function getFullName(): string
+    {
+        return sprintf('%s %s', $this->firstName, $this->lastName);
+    }
+
     public function __toString(): string
     {
         if ($this->firstName !== null && $this->lastName !== null) {

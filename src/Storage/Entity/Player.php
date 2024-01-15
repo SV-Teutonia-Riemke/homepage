@@ -8,9 +8,10 @@ use App\Domain\GamePosition;
 use App\Storage\Repository\PlayerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Stringable;
 
 #[ORM\Entity(repositoryClass: PlayerRepository::class)]
-class Player extends AbstractEntity
+class Player extends AbstractEntity implements Stringable
 {
     #[ORM\ManyToOne(targetEntity: Person::class)]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
@@ -78,5 +79,10 @@ class Player extends AbstractEntity
     public function setPosition(GamePosition|null $position): void
     {
         $this->position = $position;
+    }
+
+    public function __toString(): string
+    {
+        return $this->person?->getAnonymizedName() ?? '';
     }
 }
