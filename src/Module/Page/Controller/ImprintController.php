@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/imprint', name: 'app_imprint')]
+#[Route('/imprint', name: 'app_imprint', options: ['sitemap' => true])]
 final class ImprintController extends AbstractController
 {
     public function __construct(

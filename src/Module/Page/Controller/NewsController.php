@@ -24,7 +24,7 @@ final class NewsController extends AbstractController
     ) {
     }
 
-    #[Route('/news', name: 'app_news')]
+    #[Route('/news', name: 'app_news', options: ['sitemap' => true, 'section' => 'article'])]
     public function news(Request $request): Response
     {
         $query = $this->articleRepository

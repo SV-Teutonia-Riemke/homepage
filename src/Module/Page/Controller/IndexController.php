@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use function usort;
 
 #[AsController]
-#[Route('/', name: 'app_index')]
+#[Route('/', name: 'app_index', options: ['sitemap' => true])]
 final class IndexController extends AbstractController
 {
     public function __construct(

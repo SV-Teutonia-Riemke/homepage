@@ -17,7 +17,7 @@ final class ArticleRepository extends ServiceEntityRepository
     }
 
     /** @return array<Article> */
-    public function findLatestEnabled(int $limit): array
+    public function findLatestEnabled(int|null $limit = null): array
     {
         return $this->findBy(
             [

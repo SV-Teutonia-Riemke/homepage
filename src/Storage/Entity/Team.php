@@ -17,7 +17,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
+use function array_filter;
+use function implode;
 use function usort;
 
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
@@ -315,5 +318,15 @@ class Team extends AbstractEntity implements PositionInterface, EnabledInterface
         }
 
         $this->staffs->removeElement($staff);
+    }
+
+    public function getSlug(SluggerInterface $slugger): string
+    {
+        $slugParts = array_filter([
+            $this->getName(),
+            $this->getSeason()?->__toString(),
+        ]);
+
+        return $slugger->slug(implode('/', $slugParts))->toString();
     }
 }

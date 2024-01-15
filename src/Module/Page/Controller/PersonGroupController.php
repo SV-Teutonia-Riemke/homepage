@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/person-groups', name: 'app_person_groups')]
+#[Route('/person-groups', name: 'app_person_groups', options: ['sitemap' => true])]
 final class PersonGroupController extends AbstractController
 {
     public function __construct(

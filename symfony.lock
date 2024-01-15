@@ -128,6 +128,9 @@
             "tests/bootstrap.php"
         ]
     },
+    "presta/sitemap-bundle": {
+        "version": "v3.3.1"
+    },
     "sentry/sentry-symfony": {
         "version": "4.4",
         "recipe": {

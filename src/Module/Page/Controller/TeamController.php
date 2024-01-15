@@ -40,7 +40,7 @@ final class TeamController extends AbstractController
         if (! $slugToBe->equalsTo($slug)) {
             return $this->redirectToRoute('app_team_slug', [
                 'team' => $team->getId(),
-                'slug' => $slugToBe,
+                'slug' => $team->getSlug($this->slugger),
             ]);
         }
 

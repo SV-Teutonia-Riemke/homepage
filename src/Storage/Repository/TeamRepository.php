@@ -18,6 +18,17 @@ final class TeamRepository extends ServiceEntityRepository
     }
 
     /** @return list<Team> */
+    public function findAllEnabled(): array
+    {
+        return $this->findBy([
+            'enabled'     => true,
+        ], [
+            'gender' => 'ASC',
+            'name'   => 'ASC',
+        ]);
+    }
+
+    /** @return list<Team> */
     public function findAllSeniors(): array
     {
         return $this->findBy([

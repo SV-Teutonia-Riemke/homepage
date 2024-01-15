@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use function uksort;
 
 #[AsController]
-#[Route('/sponsoren', name: 'app_sponsor')]
+#[Route('/sponsoren', name: 'app_sponsor', options: ['sitemap' => true])]
 final class SponsorController extends AbstractController
 {
     public function __construct(
