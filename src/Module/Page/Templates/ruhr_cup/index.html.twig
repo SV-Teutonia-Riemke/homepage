@@ -4,10 +4,10 @@
 {% set pageTitle = 'Ruhr-Cup' %}
 
 {% block pageSubBody %}
-    <div class="row row-cards">
-        <div class="col-12">
-            <div class="row row-deck row-cards">
-                <div class="col-12 col-md-8 mb-2 mb-md-0">
+    <div class="row">
+        <div class="col-md-8 col-12">
+            <div class="row row-cards">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Liebe Handballfreunde</h3>
@@ -29,118 +29,119 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
-                    <div class="card">
-                        <div class="ribbon ribbon-top bg-primary">
-                            <span class="iconify icon" data-icon="fa6-solid:star"></span>
-                        </div>
-                        <div class="card-status-top bg-primary"></div>
-                        <div class="card-header">
-                            <h3 class="card-title">Anmeldung</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                Anmeldestart ist der 01.02.24<br>
-                                Anmeldeschluss ist der 31.03.24<br><br>
+                <div class="col-12">
+                    <div class="row row-deck row-cols-1 row-cols-md-2 gy-3">
+                        <div class="col">
+                            <div class="card">
+                                <div class="ribbon ribbon-top bg-primary">
+                                    <span class="iconify icon" data-icon="fa6-solid:star"></span>
+                                </div>
+                                <div class="card-status-top bg-primary"></div>
+                                <div class="card-header">
+                                    <h3 class="card-title">Anmeldung</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        Anmeldestart ist der 01.02.24<br>
+                                        Anmeldeschluss ist der 31.03.24<br><br>
 
-                                {#                                Bitte das Formular ausfüllen und per E-Mail senden an: <a href="mailto:ruhrcup@teutonia-riemke.de">ruhrcup@teutonia-riemke.de</a><br><br> #}
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="https://svtr.link/anmeldeformular_2024" target="_blank" class="btn btn-primary">Anmeldeformular</a>
+                                    <a href="https://svtr.link/ruhrcup-anfrage" target="_blank" class="btn btn-outline-primary">Unverbindliche Anfrage</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Übernachtungsmöglichkeiten</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        Übernachtungen sind in Form von Zelten, Jugendhäusern und Sälen geplant.<br><br>
+                                        <b>Weitere Infos folgen!</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col mb-2 mb-md-0">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Ablauf</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        Der Ruhr-Cup findet am 17. - 19. Mai 2024 statt.<br>
+                                        Gespielt wird in diesem Jahr in 5 verschiedenen Hallen in Bochum an Samstag und Sonntag wie folgt:<br><br>
 
-                                <b>Weitere Infos folgen!</b>
+                                        <ul>
+                                            <li>A-Jugend (w/m) Jahrgänge 2006/2007</li>
+                                            <li>B-Jugend (w/m) Jahrgänge 2008/2009</li>
+                                            <li>C-Jugend (w/m) Jahrgänge 2010/2011</li>
+                                            <li>D-Jugend (gemischt) Jahrgänge 2012/2013</li>
+                                            <li>E-Jugend (gemischt) Jahrgänge 2014/2015</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        {#                        <div class="card-footer"> #}
-                        {#                            <a href="https://svtr.link/RC23-anmeldung" target="_blank" class="btn btn-primary">Formular öffnen</a> #}
-                        {#                        </div> #}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="row row-deck">
-                <div class="col-12 col-md-4 mb-2 mb-md-0">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Ablauf</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                Der Ruhr-Cup findet am 17. - 19. Mai 2024 statt.<br>
-                                Gespielt wird in diesem Jahr in 5 verschiedenen Hallen in Bochum an Samstag und Sonntag wie folgt:<br><br>
+                        <div class="col mb-2 mb-md-0">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Preismodalitäten</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        50€ Teilnahmegebühr + 100€ Kaution* <b>pro Mannschaft</b><br><br>
 
-                                <ul>
-                                    <li>A-Jugend (w/m) Jahrgänge 2006/2007</li>
-                                    <li>B-Jugend (w/m) Jahrgänge 2008/2009</li>
-                                    <li>C-Jugend (w/m) Jahrgänge 2010/2011</li>
-                                    <li>D-Jugend (gemischt) Jahrgänge 2012/2013</li>
-                                    <li>E-Jugend (gemischt) Jahrgänge 2014/2015</li>
-                                </ul>
+                                        *Die Kaution wird bei Teilnahme am Turnier per Überweisung zurückerstattet.<br>
+                                        *Die Kaution wird bei einer Absage bis max. 4 Wochen vor Turnierbeginn zurückerstattet.
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4 mb-2 mb-md-0">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Preismodalitäten</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                50€ Teilnahmegebühr + 100€ Kaution* <b>pro Mannschaft</b><br><br>
-
-                                *Die Kaution wird bei Teilnahme am Turnier per Überweisung zurückerstattet.<br>
-                                *Die Kaution wird bei einer Absage bis max. 4 Wochen vor Turnierbeginn zurückerstattet.
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Programm</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        Gewohntes Format mit Übernachtungen, Verpflegung, Bustransfer u.v.m.<br>
+                                        Ruhr-Cup-Fete am Samstagabend im Clubhaus im Riemker Schrebergarten.<br>
+                                        Disco, Kletterwand und weitere Highlights.<br><br>
+                                        <b>Weitere Infos folgen!</b>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Übernachtungsmöglichkeiten</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                Übernachtungen sind in Form von Zelten, Jugendhäusern und Sälen geplant.<br><br>
-                                <b>Weitere Infos folgen!</b>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="row row-deck row-cards">
-                <div class="col-12 col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Programm</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                Gewohntes Format mit Übernachtungen, Verpflegung, Bustransfer u.v.m.<br>
-                                Ruhr-Cup-Fete am Samstagabend im Clubhaus im Riemker Schrebergarten.<br>
-                                Disco, Kletterwand und weitere Highlights.<br><br>
-                                <b>Weitere Infos folgen!</b>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Verpflegung</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                Frühstück und Abendessen am Clubhaus-Gelände.<br>
-                                Verpflegungsmöglichkeiten an der Halle sind geplant.<br><br>
-                                <b>Weitere Infos folgen!</b>
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Verpflegung</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-text">
+                                        Frühstück und Abendessen am Clubhaus-Gelände.<br>
+                                        Verpflegungsmöglichkeiten an der Halle sind geplant.<br><br>
+                                        <b>Weitere Infos folgen!</b>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="col-md-4 col-12">
+            <div class="card">
+                <img class="card-img" src="{{ asset('build/images/ruhrcup/ruhr_cup_info_1.jpg') | imagine_filter('optimized') }}">
+            </div>
+            <div class="card">
+                <img class="card-img" src="{{ asset('build/images/ruhrcup/ruhr_cup_info_2.jpg') | imagine_filter('optimized') }}">
+            </div>
+        </div>
     </div>
 {% endblock %}

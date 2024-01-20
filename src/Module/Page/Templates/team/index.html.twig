@@ -216,7 +216,7 @@
     <div class="row row-cards">
 
         {% for player in team.getPlayersByNumber %}
-            {% set filePath = player.image ? player.image.filePath : 'handball.jpg' %}
+            {% set filePath = player.image ? player.image.filePath : asset('build/images/handball.jpg') %}
 
             <div class="col-sm-6 col-lg-4">
                 <div class="card card-sm">

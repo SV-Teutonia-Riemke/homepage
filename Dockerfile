@@ -7,7 +7,7 @@ COPY --chown=docker:docker . /var/www/html/
 RUN composer install --no-dev --no-interaction --no-scripts --no-progress --classmap-authoritative --ignore-platform-reqs
 RUN yarn install --force
 RUN yarn build
-RUN sudo rm -rf docker docs node_modules tests \
+RUN sudo rm -rf assets docker docs node_modules tests \
     .env.test .env.local.dist .gitignore composer-require-checker.json docker-compose.yml Makefile package.json \
     phpcs.xml phpstan.neon phpstan-baseline.neon phpunit.xml webpack.config.js .editorconfig README.md composer-unused.php rector.php
 
