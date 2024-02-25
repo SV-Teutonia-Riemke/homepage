@@ -1,9 +1,21 @@
 fos_ck_editor:
-    default_config: my_config
-    configs:
-        my_config:
-            uiColor:                "#ffffff"
+  default_config: my_config
+  configs:
+    my_config:
+      uiColor: "#ffffff"
+      removePlugins: 'iframe,magicline'
+
+    page_editor:
+      uiColor: "#ffffff"
+      apiKey: "ZNl3ixFO"
+      extraPlugins: "N1ED-editor"
+      removePlugins: 'iframe,magicline'
+
+  plugins:
+    N1ED-editor:
+      path: "/build/ckeditor/plugins/N1ED-editor/"
+      filename: "plugin.js"
 
 twig:
-    form_themes:
-        - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+  form_themes:
+    - '@FOSCKEditor/Form/ckeditor_widget.html.twig'

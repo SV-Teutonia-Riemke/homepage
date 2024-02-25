@@ -66,6 +66,11 @@ Encore
         to: 'documents/[path][name].[hash:8].[ext]',
     })
 
+    .copyFiles({
+        from: './assets/ckeditor/plugins',
+        to: 'ckeditor/plugins/[path][name].[ext]',
+    })
+
     // Manifest hinzufügen.
     .configureManifestPlugin((options) => {
         options.seed = manifestOptions;

@@ -1,12 +1,13 @@
 ARG PHP_EXTENSIONS="pdo_mysql imagick gd intl bcmath"
 
-FROM thecodingmachine/php:8.3-v4-apache-node18 as builder
+FROM thecodingmachine/php:8.3-v4-apache-node20 as builder
 
 COPY --chown=docker:docker . /var/www/html/
 
+RUN sudo npm install -g pnpm
 RUN composer install --no-dev --no-interaction --no-scripts --no-progress --classmap-authoritative --ignore-platform-reqs
-RUN yarn install --force
-RUN yarn build
+RUN pnpm install
+RUN pnpm build
 RUN sudo rm -rf assets docker docs node_modules tests \
     .env.test .env.local.dist .gitignore composer-require-checker.json docker-compose.yml Makefile package.json \
     phpcs.xml phpstan.neon phpstan-baseline.neon phpunit.xml webpack.config.js .editorconfig README.md composer-unused.php rector.php
