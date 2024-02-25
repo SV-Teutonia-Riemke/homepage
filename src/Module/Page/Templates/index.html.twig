@@ -56,49 +56,7 @@
         </div>
         <div class="col-12 col-md-3">
             <div class="row row-cards">
-                {% if sponsors|length > 0 %}
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-status-top bg-primary"></div>
-                            <div class="card-header bg-primary-lt">
-                                <h3 class="card-title">
-                                    <span class="iconify-inline" data-icon="fa6-solid:handshake"></span>
-                                    Sponsoren
-                                </h3>
-                            </div>
-                            <div class="card-body text-center">
-                                <div class="row justify-content-center">
-
-                                    <div class="col-12 mb-2 d-flex align-items-center justify-content-center">
-                                        <div class="img-thumbnail">
-                                            {# sparkassen werbung #}
-                                            <ins data-revive-zoneid="328" data-revive-id="88421f1a0d7f88ee2b51e711d5634df0"></ins>
-                                        </div>
-                                    </div>
-
-                                    {% for sponsor in sponsors %}
-                                        {% set columns = sponsor.level.main ? '12' : '6' %}
-                                        {% set filterName = sponsor.level.main ? 'sponsor_index_main' : 'sponsor_index' %}
-
-                                        <div class="col-{{ columns }} mb-2 d-flex align-items-center justify-content-center">
-                                            {% set image %}
-                                                <img src="{{ sponsor.image.filePath|imagine_filter(filterName, { background: { color: sponsor.backgroundColor|default('#ffffff') }}) }}" class="img-thumbnail rounded"/>
-                                            {% endset %}
-
-                                            {% if sponsor.url is null %}
-                                                {{ image|raw }}
-                                            {% else %}
-                                                <a href="{{ sponsor.url }}" target="_blank" rel="noreferrer">
-                                                    {{ image|raw }}
-                                                </a>
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
+                {% include '@page/_partials/sponsors.html.twig' %}
 
                 {% if config_has('handball_net_club_id') %}
                     <div class="col-12">

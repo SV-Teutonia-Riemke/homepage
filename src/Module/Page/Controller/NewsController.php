@@ -6,7 +6,6 @@ namespace App\Module\Page\Controller;
 
 use App\Storage\Entity\Article;
 use App\Storage\Repository\ArticleRepository;
-use App\Storage\Repository\SponsorRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +18,6 @@ final class NewsController extends AbstractController
 {
     public function __construct(
         private readonly ArticleRepository $articleRepository,
-        private readonly SponsorRepository $sponsorRepository,
         private readonly PaginatorInterface $paginator,
     ) {
     }
@@ -39,7 +37,6 @@ final class NewsController extends AbstractController
 
         return $this->render('@page/news/index.html.twig', [
             'articles' => $pagination,
-            'sponsors' => $this->sponsorRepository->findEnabled(),
         ]);
     }
 
@@ -48,7 +45,6 @@ final class NewsController extends AbstractController
     {
         return $this->render('@page/news/article.html.twig', [
             'article'  => $article,
-            'sponsors' => $this->sponsorRepository->findEnabled(),
         ]);
     }
 }
