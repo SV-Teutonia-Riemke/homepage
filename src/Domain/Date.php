@@ -32,7 +32,7 @@ final class Date implements JsonSerializable, Stringable
     {
         try {
             $date = CarbonImmutable::createFromFormat(self::FORMAT, $dateString, 'UTC');
-            if ($date === false) {
+            if ($date === null) {
                 throw new InvalidFormatException('Invalid format', 1627987262343);
             }
 
@@ -46,7 +46,7 @@ final class Date implements JsonSerializable, Stringable
                 'UTC',
             );
 
-            if ($date === false || $date->format(self::FORMAT) !== $dateString) {
+            if ($date === null || $date->format(self::FORMAT) !== $dateString) {
                 throw new InvalidFormatException('Invalid format', 1627987768869);
             }
         } catch (Throwable $exception) {
@@ -107,14 +107,14 @@ final class Date implements JsonSerializable, Stringable
     public function addDays(int $days): self
     {
         return new self(
-            $this->carbon->addRealDays($days),
+            $this->carbon->addDays($days),
         );
     }
 
     public function subtractDays(int $days): self
     {
         return new self(
-            $this->carbon->subRealDays($days),
+            $this->carbon->subDays($days),
         );
     }
 

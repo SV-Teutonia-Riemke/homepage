@@ -34,7 +34,7 @@ final class SponsorController extends AbstractController
 
         uksort(
             $levels,
-            static fn (string $a, string $b): int => SponsorLevel::from($a)->order() <=> SponsorLevel::from($b)->order()
+            static fn (string $a, string $b): int => SponsorLevel::from($a)->order() <=> SponsorLevel::from($b)->order(),
         );
 
         return $this->render('@page/sponsor/index.html.twig', [

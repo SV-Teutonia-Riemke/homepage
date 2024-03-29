@@ -32,7 +32,7 @@ class SponsorExtension extends AbstractExtension
         $sponsors = $this->sponsorRepository->findEnabled();
         usort(
             $sponsors,
-            static fn (Sponsor $a, Sponsor $b): int => $a->getLevel()->order() <=> $b->getLevel()->order()
+            static fn (Sponsor $a, Sponsor $b): int => $a->getLevel()->order() <=> $b->getLevel()->order(),
         );
 
         return $sponsors;
