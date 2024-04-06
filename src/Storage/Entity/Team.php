@@ -322,10 +322,13 @@ class Team extends AbstractEntity implements PositionInterface, EnabledInterface
 
     public function getSlug(SluggerInterface $slugger): string
     {
-        $slugParts = array_filter([
-            $this->getName(),
-            $this->getSeason()?->__toString(),
-        ]);
+        $slugParts = array_filter(
+            [
+                $this->getName(),
+                $this->getSeason()?->__toString(),
+            ],
+            static fn (string|null $name): bool => $name !== null,
+        );
 
         return $slugger->slug(implode('/', $slugParts))->toString();
     }

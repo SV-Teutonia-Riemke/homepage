@@ -30,10 +30,13 @@ final class TeamController extends AbstractController
         Team $team,
         string $slug = '',
     ): Response {
-        $slugParts = array_filter([
-            $team->getName(),
-            $team->getSeason()?->__toString(),
-        ]);
+        $slugParts = array_filter(
+            [
+                $team->getName(),
+                $team->getSeason()?->__toString(),
+            ],
+            static fn (string|null $name): bool => $name !== null,
+        );
 
         $slugToBe = $this->slugger->slug(implode('/', $slugParts));
 
