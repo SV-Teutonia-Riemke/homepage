@@ -1,11 +1,31 @@
+framework:
+    cache:
+        pools:
+            liip_cache:
+                adapter: cache.adapter.redis
+
+services:
+    liip_imagine.cache.resolver.psr:
+        class: Liip\ImagineBundle\Imagine\Cache\Resolver\PsrCacheResolver
+        arguments:
+            - "@liip_cache"
+            - "@liip_imagine.cache.resolver.generic"
+        tags:
+            - { name: "liip_imagine.cache.resolver", resolver: "psr_cache" }
+
 # Documentation on how to configure the bundle can be found at: https://symfony.com/doc/current/bundles/LiipImagineBundle/basic-usage.html
 liip_imagine:
     # valid drivers options include "gd" or "gmagick" or "imagick"
     driver: "imagick"
 
-    # configure webp
     webp:
         generate: true
+
+    resolvers:
+        generic:
+            web_path:
+                web_root: "%kernel.project_dir%/public"
+                cache_prefix: "media/cache"
 
     loaders:
         default:
@@ -23,9 +43,9 @@ liip_imagine:
 
     data_loader: chain
 
-    filter_sets :
-        cache : ~
+    cache: psr_cache
 
+    filter_sets :
         optimized :
             quality : 99
 
