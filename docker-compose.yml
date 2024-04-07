@@ -42,19 +42,11 @@ services:
       internal:
         ipv4_address: 192.168.19.12
 
-  redis:
-    image: redis
+  dragonfly:
+    image: docker.dragonflydb.io/dragonflydb/dragonfly
     networks:
       internal:
         ipv4_address: 192.168.19.13
-
-  dragonfly:
-    image: 'docker.dragonflydb.io/dragonflydb/dragonfly'
-    ulimits:
-      memlock: -1
-    networks:
-      internal:
-        ipv4_address: 192.168.19.14
 
 networks:
   internal:
