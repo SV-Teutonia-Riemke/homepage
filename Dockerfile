@@ -28,7 +28,7 @@ FROM thecodingmachine/php:8.3-v4-apache
 
 ENV TEMPLATE_PHP_INI="production"
 ENV PHP_EXTENSIONS="pdo_mysql imagick gd intl bcmath"
-ENV APACHE_DOCUMENT_ROOT="/home/docker/app/public/"
+ENV APACHE_DOCUMENT_ROOT="public/"
 ENV APACHE_RUN_USER=www-data
 ENV APACHE_RUN_GROUP=www-data
 
@@ -38,7 +38,7 @@ ENV STARTUP_COMMAND_3="bin/console doctrine:migrations:migrate --no-interaction"
 ENV STARTUP_COMMAND_4="bin/console ckeditor:install --clear=drop --tag=4.22.1"
 ENV STARTUP_COMMAND_5="bin/console assets:install public"
 
-COPY --from=builder --chown=docker:docker /var/www/html /home/docker/app
+COPY --from=builder --chown=docker:docker /var/www/html /var/www/html
 
-WORKDIR /home/docker/app
+WORKDIR /var/www/html
 EXPOSE 80
