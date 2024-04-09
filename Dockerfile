@@ -11,15 +11,33 @@ RUN pnpm build
 RUN sudo rm -rf \
     .git \
     .github \
+    .pnpm-store \
     assets \
     docker \
     docs \
     node_modules \
     tests \
-    .env.test .env.local.dist .gitignore composer-require-checker.json docker-compose.yml Makefile package.json phpunit.xml.dist pnpm-lock.yaml tsconfig.ts \
-    phpcs.xml phpstan.neon phpstan-baseline.neon phpunit.xml webpack.config.js .editorconfig README.md composer-unused.php rector.php
+    .env.test \
+    .env.local.dist \
+    .editorconfig \
+    .gitignore \
+    composer-require-checker.json \
+    composer-unused.php \
+    docker-compose.yml \
+    package.json \
+    phpcs.xml \
+    phpstan.neon \
+    phpstan-baseline.neon \
+    phpunit.xml.dist \
+    phpunit.xml \
+    pnpm-lock.yaml \
+    symfony.lock \
+    tsconfig.ts \
+    webpack.config.js \
+    rector.php
 
 RUN sudo mkdir -p \
+    /var/www/html/public/media \
     /var/www/html/var/cache \
     /var/www/html/var/flysystem \
     /var/www/html/var/log
@@ -33,10 +51,11 @@ ENV APACHE_DOCUMENT_ROOT="public/"
 #ENV APACHE_RUN_GROUP=www-data
 
 ENV STARTUP_COMMAND_1="bin/console cache:clear"
-ENV STARTUP_COMMAND_2="bin/console cache:warmup"
-ENV STARTUP_COMMAND_3="bin/console doctrine:migrations:migrate --no-interaction"
-ENV STARTUP_COMMAND_4="bin/console ckeditor:install --clear=drop --tag=4.22.1"
-ENV STARTUP_COMMAND_5="bin/console assets:install public"
+ENV STARTUP_COMMAND_2="bin/console cache:pool:clear --all"
+ENV STARTUP_COMMAND_3="bin/console cache:warmup"
+ENV STARTUP_COMMAND_4="bin/console doctrine:migrations:migrate --no-interaction"
+ENV STARTUP_COMMAND_5="bin/console ckeditor:install --clear=drop --tag=4.22.1"
+ENV STARTUP_COMMAND_6="bin/console assets:install public"
 
 COPY --from=builder --chown=docker:docker /var/www/html /var/www/html
 
