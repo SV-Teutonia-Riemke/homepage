@@ -7,8 +7,6 @@
     <arg name="parallel" value="4"/>
     <arg name="cache" value="./var/cache/.phpcs.cache"/>
 
-    <config name="php_version" value="80101"/>
-
     <file>bin/</file>
     <file>src/</file>
     <file>tests/</file>
@@ -19,34 +17,9 @@
         <exclude name="Squiz.Arrays.ArrayDeclaration.MultiLineNotAllowed"/>
     </rule>
 
-    <rule ref="Squiz.WhiteSpace.MemberVarSpacing">
-        <properties>
-            <property name="spacing" value="1" />
-            <property name="spacingBeforeFirst" value="0" />
-        </properties>
-    </rule>
-
     <rule ref="Generic.Files.LineLength">
         <properties>
             <property name="lineLimit" value="160"/>
         </properties>
-    </rule>
-
-    <rule ref="SlevomatCodingStandard.Classes.RequireMultiLineMethodSignature">
-        <properties>
-            <property name="minLineLength" value="120" />
-        </properties>
-    </rule>
-
-    <rule ref="Squiz.Arrays.ArrayDeclaration.DoubleArrowNotAligned">
-        <severity>5</severity>
-    </rule>
-
-    <!--
-     https://github.com/squizlabs/PHP_CodeSniffer/issues/3479
-     CodeSniffer isnt fully compatible with php8.1
-     -->
-    <rule ref="PSR12.Properties.ConstantVisibility.NotFound">
-        <exclude-pattern>/*</exclude-pattern>
     </rule>
 </ruleset>
