@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Stringable;
 
+use function array_map;
 use function array_reverse;
 use function implode;
 
@@ -71,6 +72,18 @@ class Directory extends AbstractEntity implements Stringable
         return $this->files;
     }
 
+    /** @return Collection<File> */
+    public function getDeepFiles(): Collection
+    {
+        $files = new ArrayCollection($this->files->toArray());
+
+        foreach ($this->children as $child) {
+            $files = new ArrayCollection([...$files, ...$child->getDeepFiles()]);
+        }
+
+        return $files;
+    }
+
     public function getPathName(string $separator = ' / '): string
     {
         return implode($separator, $this->getPathArray());
@@ -79,19 +92,28 @@ class Directory extends AbstractEntity implements Stringable
     /** @return list<string> */
     public function getPathArray(): array
     {
-        $names = [];
+        $parents = $this->getParents();
+        $names   = array_map(
+            static fn (self $directory) => $directory->getName(),
+            $parents,
+        );
+
+        return array_reverse($names);
+    }
+
+    /** @return list<self> */
+    public function getParents(): array
+    {
+        $parents = [$this];
 
         $parent = $this->getParent();
         while ($parent !== null) {
-            $names[] = $parent->getName();
+            $parents[] = $parent;
 
             $parent = $parent->getParent();
         }
 
-        $names   = array_reverse($names);
-        $names[] = $this->getName();
-
-        return $names;
+        return $parents;
     }
 
     public function __toString(): string

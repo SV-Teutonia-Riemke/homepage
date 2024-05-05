@@ -26,4 +26,5 @@ return [
     Spiriit\Bundle\FormFilterBundle\SpiriitFormFilterBundle::class => ['all' => true],
     Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
     Presta\SitemapBundle\PrestaSitemapBundle::class => ['all' => true],
+    Shapecode\Bundle\TwigStringLoaderBundle\ShapecodeTwigStringLoaderBundle::class => ['all' => true],
 ];

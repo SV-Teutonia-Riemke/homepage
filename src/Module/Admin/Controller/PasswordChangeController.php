@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 
 #[AsController]
-#[Route('/change-password', name: 'app_admin_change_password')]
+#[Route('/change-password', name: 'change_password')]
 final class PasswordChangeController extends AbstractController
 {
     public function __construct(

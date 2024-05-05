@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/download', name: 'app_admin_download_')]
+#[Route('/download', name: 'download_')]
 final class DownloadController extends AbstractCrudController
 {
     public function __construct(

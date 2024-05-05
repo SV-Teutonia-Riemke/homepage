@@ -16,8 +16,8 @@ use function array_filter;
 use function implode;
 
 #[AsController]
-#[Route('/team/{team}', name: 'app_team')]
-#[Route('/team/{team}/{slug}', name: 'app_team_slug')]
+#[Route('/team/{team}', name: 'team')]
+#[Route('/team/{team}/{slug}', name: 'team_slug')]
 final class TeamController extends AbstractController
 {
     public function __construct(

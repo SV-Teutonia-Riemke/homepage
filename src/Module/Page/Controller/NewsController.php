@@ -22,7 +22,7 @@ final class NewsController extends AbstractController
     ) {
     }
 
-    #[Route('/news', name: 'app_news', options: ['sitemap' => true, 'section' => 'article'])]
+    #[Route('/news', name: 'news', options: ['sitemap' => true, 'section' => 'article'])]
     public function news(Request $request): Response
     {
         $query = $this->articleRepository
@@ -40,7 +40,7 @@ final class NewsController extends AbstractController
         ]);
     }
 
-    #[Route('/news/{id}', name: 'app_news_article')]
+    #[Route('/news/{id}', name: 'news_article')]
     public function article(Article $article): Response
     {
         return $this->render('@page/news/article.html.twig', [

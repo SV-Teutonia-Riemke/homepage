@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/', name: 'app_index', options: ['sitemap' => true])]
+#[Route('/', name: 'index', options: ['sitemap' => true])]
 final class IndexController extends AbstractController
 {
     public function __construct(

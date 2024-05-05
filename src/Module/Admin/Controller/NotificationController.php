@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/notification', name: 'app_admin_notification_')]
+#[Route('/notification', name: 'notification_')]
 final class NotificationController extends AbstractCrudController
 {
     public function __construct(

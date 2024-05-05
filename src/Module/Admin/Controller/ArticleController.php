@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/article', name: 'app_admin_article_')]
+#[Route('/article', name: 'article_')]
 final class ArticleController extends AbstractCrudController
 {
     public function __construct(

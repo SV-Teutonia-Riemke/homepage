@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/team', name: 'app_admin_team_')]
+#[Route('/team', name: 'team_')]
 final class TeamController extends AbstractCrudController
 {
     public function __construct(

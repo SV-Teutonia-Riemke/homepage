@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/', name: 'app_admin_index')]
+#[Route('/', name: 'index')]
 final class IndexController extends AbstractController
 {
     public function __invoke(): Response

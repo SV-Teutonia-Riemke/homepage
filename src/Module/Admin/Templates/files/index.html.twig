@@ -1,7 +1,7 @@
 {% extends '@admin/_layout/layout.html.twig' %}
 
 {% set pagePreTitle = 'List' %}
-{% set pageTitle = 'Files' %}
+{% set pageTitle = directory is null ? 'Files' : directory.name %}
 
 {% block pageTitleActionsButtons %}
     {% if directory is null %}
@@ -13,11 +13,25 @@
     {% endif %}
 {% endblock %}
 
+{% block breadcrumbInner %}
+    <li class="breadcrumb-item"><a href="{{ path('app_admin_files_index') }}">Dateien</a></li>
+    {% if directory is not null %}
+        {% for parent in directory.parents|reverse %}
+            <li class="breadcrumb-item{% if loop.last %} active{% endif %}"{% if loop.last %} aria-current="page"{% endif %}>
+                <a href="{{ path('app_admin_files_directory', { directory: parent.id }) }}">
+                    {{ parent.name }}
+                </a>
+            </li>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
 {% block pageBody %}
+
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
-                <span class="badge bg-secondary">{{ directories|length + files|length }}</span>
+                <span class="badge bg-secondary text-white">{{ directories|length + files|length }}</span>
                 Files
             </h3>
         </div>

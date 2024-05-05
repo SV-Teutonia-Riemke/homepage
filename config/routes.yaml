@@ -1,11 +1,13 @@
 page:
     resource: ../src/Module/Page/Controller/
     type: attribute
+    name_prefix: app_
 
 admin:
     resource: ../src/Module/Admin/Controller/
     type: attribute
     prefix: admin
+    name_prefix: app_admin_
 
 app_admin_logout:
     path: /admin/logout

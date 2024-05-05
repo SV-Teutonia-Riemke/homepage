@@ -1,0 +1,8 @@
+{% extends '@page/news/base.html.twig' %}
+
+{% set pageTitle = page.title %}
+{% set pagePreTitle = page.subTitle %}
+
+{% block pageSubBody %}
+    {{ pageContent|raw }}
+{% endblock %}

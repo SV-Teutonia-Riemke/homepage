@@ -20,7 +20,7 @@ use function fopen;
 use function stream_copy_to_stream;
 
 #[AsController]
-#[Route('/f/{uuid}/{name}.{extension}', name: 'app_file')]
+#[Route('/f/{uuid}/{name}.{extension}', name: 'file')]
 final class FileController extends AbstractController
 {
     public function __construct(

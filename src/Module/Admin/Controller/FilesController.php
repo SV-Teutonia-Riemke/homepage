@@ -31,7 +31,7 @@ use function Symfony\Component\String\u;
 use const PATHINFO_FILENAME;
 
 #[AsController]
-#[Route('/files', name: 'app_admin_files_')]
+#[Route('/files', name: 'files_')]
 final class FilesController extends AbstractController
 {
     public function __construct(

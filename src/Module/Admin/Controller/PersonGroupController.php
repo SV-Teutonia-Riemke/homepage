@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/person-group', name: 'app_admin_person_group_')]
+#[Route('/person-group', name: 'person_group_')]
 final class PersonGroupController extends AbstractCrudController
 {
     public function __construct(

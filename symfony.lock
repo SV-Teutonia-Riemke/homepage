@@ -131,6 +131,9 @@
             "config/packages/sentry.yaml"
         ]
     },
+    "shapecode/twig-string-loader-bundle": {
+        "version": "3.0.0"
+    },
     "spiriitlabs/form-filter-bundle": {
         "version": "v9.0.1"
     },

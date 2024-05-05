@@ -1,0 +1,38 @@
+{% extends '@admin/_layout/layout.html.twig' %}
+
+
+{% set pagePreTitle = 'Liste' %}
+{% set pageTitle = 'Seiten' %}
+
+{% block pageTitleActionsButtons %}
+    <a class="btn btn-primary" href="{{ path('app_admin_page_create') }}">Erstellen</a>
+{% endblock %}
+
+{% block pageBody %}
+    {% embed '_partials/pagination_table.html.twig' with {
+        title: 'Artikel'
+    } %}
+        {% block paginationHeader %}
+            <th class="w-1"></th>
+            <th class="w-1">Id</th>
+            <th>Titel</th>
+            <th></th>
+        {% endblock %}
+        {% block paginationRow %}
+            <td>
+                <span class="iconify-inline text-{% if object.enabled %}success{% else %}danger{% endif %}" data-icon="fa6-solid:circle"></span>
+            </td>
+            <td>{{ object.id }}</td>
+            <td>{{ object.title }}</td>
+            <td class="text-end">
+                {{ pagination_cta(
+                    object,
+                    path('app_admin_page_remove', { page: object.id }),
+                    path('app_admin_page_edit', { page: object.id }),
+                    path('app_admin_page_enable', { page: object.id }),
+                    path('app_admin_page_disable', { page: object.id }),
+                ) }}
+            </td>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

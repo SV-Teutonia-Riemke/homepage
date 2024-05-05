@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/sponsor', name: 'app_admin_sponsor_')]
+#[Route('/sponsor', name: 'sponsor_')]
 final class SponsorController extends AbstractCrudController
 {
     public function __construct(

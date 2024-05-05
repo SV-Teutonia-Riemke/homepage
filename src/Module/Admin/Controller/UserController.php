@@ -16,7 +16,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/user', name: 'app_admin_user_')]
+#[Route('/user', name: 'user_')]
 final class UserController extends AbstractCrudController
 {
     public function __construct(

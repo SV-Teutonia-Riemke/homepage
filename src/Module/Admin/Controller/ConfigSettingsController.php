@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[AsController]
-#[Route('/config', name: 'app_admin_config_settings')]
+#[Route('/config', name: 'config_settings')]
 class ConfigSettingsController extends AbstractController
 {
     public function __construct(
