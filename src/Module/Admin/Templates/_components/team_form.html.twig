@@ -28,7 +28,7 @@
             <div class="card-header">
                 <h3 class="card-title">Players</h3>
                 <div class="card-actions">
-                    <button data-action="live#action" data-action-name="addPlayer" type="button" class="btn btn-outline-primary">
+                    <button data-action="live#action" data-live-action-param="addPlayer" type="button" class="btn btn-outline-primary">
                         <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
                         Add
                     </button>
@@ -52,7 +52,7 @@
                         <td>{{ form_row(itemForm.position, { label: false }) }}</td>
                         <td>{{ form_row(itemForm.image, { label: false }) }}</td>
                         <td class="text-end">
-                            <button data-action="live#action" data-action-name="removePlayer(index={{ key }})" type="button" class="btn btn-icon btn-outline-danger">
+                            <button data-action="live#action" data-live-action-param="removePlayer" data-live-index-param="{{ key }}" type="button" class="btn btn-icon btn-outline-danger">
                                 <span class="iconify icon" data-icon="fa6-solid:trash"></span>
                             </button>
                         </td>
@@ -61,7 +61,7 @@
                 </tbody>
             </table>
             <div class="card-footer d-flex justify-content-right">
-                <button data-action="live#action" data-action-name="addPlayer" type="button" class="btn btn-outline-primary ms-auto">
+                <button data-action="live#action" data-live-action-param="addPlayer" type="button" class="btn btn-outline-primary ms-auto">
                     <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
                     Add
                 </button>
@@ -72,7 +72,7 @@
             <div class="card-header">
                 <h3 class="card-title">Staff</h3>
                 <div class="card-actions">
-                    <button data-action="live#action" data-action-name="addStaff" type="button" class="btn btn-outline-primary">
+                    <button data-action="live#action" data-live-action-param="addStaff" type="button" class="btn btn-outline-primary">
                         <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
                         Add
                     </button>
@@ -94,7 +94,7 @@
                         <td>{{ form_row(itemForm.position, { label: false }) }}</td>
 {#                        <td>{{ form_row(itemForm.image, { label: false }) }}</td>#}
                         <td class="text-end">
-                            <button data-action="live#action" data-action-name="removeStaff(index={{ key }})" type="button" class="btn btn-icon btn-outline-danger">
+                            <button data-action="live#action" data-live-action-param="removeStaff" data-live-index-param="{{ key }}" type="button" class="btn btn-icon btn-outline-danger">
                                 <span class="iconify icon" data-icon="fa6-solid:trash"></span>
                             </button>
                         </td>
@@ -103,7 +103,7 @@
                 </tbody>
             </table>
             <div class="card-footer d-flex justify-content-right">
-                <button data-action="live#action" data-action-name="addStaff" type="button" class="btn btn-outline-primary ms-auto">
+                <button data-action="live#action" data-live-action-param="addStaff" type="button" class="btn btn-outline-primary ms-auto">
                     <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
                     Add
                 </button>

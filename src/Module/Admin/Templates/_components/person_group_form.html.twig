@@ -14,7 +14,7 @@
             <div class="card-header">
                 <h3 class="card-title">Mitglieder</h3>
                 <div class="card-actions">
-                    <button data-action="live#action" data-action-name="addCollectionItem(name=[members])" type="button" class="btn btn-outline-primary">
+                    <button data-action="live#action" data-live-action-param="addCollectionItem" data-live-name-param="[members]" type="button" class="btn btn-outline-primary">
                         <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
                         Add
                     </button>
@@ -38,7 +38,7 @@
                         <td>{{ form_row(itemForm.provisional, { label: false }) }}</td>
                         <td>{{ form_row(itemForm.position, { label: false }) }}</td>
                         <td class="text-end">
-                            <button data-action="live#action" data-action-name="removeCollectionItem(name=[members],index={{ key }})" type="button" class="btn btn-icon btn-outline-danger">
+                            <button data-action="live#action" data-live-action-param="removeCollectionItem" data-live-name-param="[members]" data-live-index-param="{{ key }}" type="button" class="btn btn-icon btn-outline-danger">
                                 <span class="iconify icon" data-icon="fa6-solid:trash"></span>
                             </button>
                         </td>
