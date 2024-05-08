@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Storage\Entity\Common\Enabled;
 use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Repository\PageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Stringable;
 use Symfony\Component\String\AbstractString;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: PageRepository::class)]
-class Page extends AbstractEntity implements EnabledInterface
+class Page extends AbstractEntity implements EnabledInterface, Stringable
 {
+    use Enabled;
+
     #[ORM\Column(type: Types::STRING)]
     private string $title;
 
@@ -22,9 +26,6 @@ class Page extends AbstractEntity implements EnabledInterface
 
     #[ORM\Column(type: Types::TEXT)]
     private string $content;
-
-    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
-    private bool $enabled = true;
 
     public function __construct(
         string $title,
@@ -66,18 +67,13 @@ class Page extends AbstractEntity implements EnabledInterface
         $this->content = $content;
     }
 
-    public function isEnabled(): bool
-    {
-        return $this->enabled;
-    }
-
-    public function setEnabled(bool $enabled): void
-    {
-        $this->enabled = $enabled;
-    }
-
     public function getSlug(SluggerInterface $slugger): AbstractString
     {
         return $slugger->slug($this->getTitle());
+    }
+
+    public function __toString(): string
+    {
+        return $this->title;
     }
 }

@@ -140,6 +140,7 @@ abstract class AbstractCrudController extends AbstractController
         $this->getEntityManager()->persist($data);
         $this->getEntityManager()->flush();
 
+
         return $this->redirectToRoute($this->getCrudConfigObject()->listRouteName);
     }
 

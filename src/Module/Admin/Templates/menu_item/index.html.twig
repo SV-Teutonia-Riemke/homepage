@@ -1,0 +1,49 @@
+{% extends '@admin/_layout/layout.html.twig' %}
+
+
+{% set pagePreTitle = 'Liste' %}
+{% set pageTitle = 'Menüs' %}
+
+{% block pageTitleActionsButtons %}
+    <a class="btn btn-primary" href="{{ path('app_admin_menu_item_create') }}">Erstellen</a>
+{% endblock %}
+
+{% block pageBody %}
+    {% embed '_partials/pagination_table.html.twig' with {
+        title: 'Items'
+    } %}
+        {% block paginationHeader %}
+            <th class="w-1"></th>
+            <th class="w-1">Id</th>
+            <th>Titel</th>
+            <th></th>
+        {% endblock %}
+        {% block paginationRow %}
+            <td>
+                <span class="iconify-inline text-{% if object.enabled %}success{% else %}danger{% endif %}" data-icon="fa6-solid:circle"></span>
+            </td>
+            <td>{{ object.id }}</td>
+            <td>{{ object.title }}</td>
+            <td class="text-end">
+                {% set preActions %}
+                    <div class="btn-group btn-group-sm">
+                        <a class="btn btn-outline-primary" href="{{ path('app_admin_menu_item_up', { menuItem: object.id }) }}">
+                            <span class="iconify-inline" data-icon="fa6-solid:arrow-up"></span>
+                        </a>
+                        <a class="btn btn-outline-primary" href="{{ path('app_admin_menu_item_down', { menuItem: object.id }) }}">
+                            <span class="iconify-inline" data-icon="fa6-solid:arrow-down"></span>
+                        </a>
+                    </div>
+                {% endset %}
+                {{ pagination_cta(
+                    object,
+                    path('app_admin_menu_item_remove', { menuItem: object.id }),
+                    path('app_admin_menu_item_edit', { menuItem: object.id }),
+                    path('app_admin_menu_item_enable', { menuItem: object.id }),
+                    path('app_admin_menu_item_disable', { menuItem: object.id }),
+                    preElements=preActions
+                ) }}
+            </td>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
