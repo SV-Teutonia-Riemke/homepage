@@ -1,7 +1,6 @@
 {% extends '@page/_layout/layout.html.twig' %}
 
 {# {% set pageTitle = 'Sponsoren' %} #}
-{% set sparkasseAdEnabled = true %}
 
 {% block pageSubBody %}
     <div class="row row-cards">
@@ -17,18 +16,6 @@
                         <h1 class="text-center border-bottom my-2 pb-2">{{ level.translatable|trans }}</h1>
 
                         <div class="row row-cols-md-{{ columns }} row-cols-1 justify-content-center">
-
-                            {# sparkassen werbung workaround #}
-                            {% if level.main %}
-                                <div class="row row-cols-md-2 row-cols-1 justify-content-center">
-                                    <div class="col my-md-4 my-2 d-flex align-items-center justify-content-center">
-                                        <div class="img-thumbnail">
-                                            {# sparkassen werbung #}
-                                            <ins data-revive-zoneid="328" data-revive-id="88421f1a0d7f88ee2b51e711d5634df0"></ins>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endif %}
 
                             {% for sponsor in sponsors %}
                                 <div class="col my-md-4 my-2 d-flex align-items-center justify-content-center">
