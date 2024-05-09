@@ -64,7 +64,7 @@ abstract class AbstractCrudController extends AbstractController
     protected function handleCreate(Request $request): Response
     {
         $form = $this
-            ->createForm($this->getCrudConfigObject()->formType)
+            ->createForm($this->getCrudConfigObject()->getFormType($request))
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +79,7 @@ abstract class AbstractCrudController extends AbstractController
     public function handleEdit(Request $request, object $object): Response
     {
         $form = $this
-            ->createForm($this->getCrudConfigObject()->formType, $object)
+            ->createForm($this->getCrudConfigObject()->getFormType($request, $object), $object)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -15,7 +15,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[AsController]
 #[Route(
-    path: '/page/{page}',
+    path: '/p/{page}',
     name: 'page',
     requirements: [
         'page' => Requirement::POSITIVE_INT,
@@ -55,10 +55,13 @@ final class PageController extends AbstractController
             );
         }
 
-        return $this->render('@page/page/index.html.twig', [
-            'page' => $page,
-            'pageContent' => $this->renderView($page->getContent()),
-        ]);
+        return $this->render(
+            '@page/page/index.html.twig',
+            [
+                'page' => $page,
+                'pageContent' => $this->renderView($page->getContent()),
+            ],
+        );
     }
 
     #[Route(

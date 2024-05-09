@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 trait Position
 {
     #[Gedmo\SortablePosition]
-    #[ORM\Column(type: Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private int|null $position = null;
 
     public function getPosition(): int|null
@@ -19,7 +19,7 @@ trait Position
         return $this->position;
     }
 
-    public function setPosition(int|null $position): void
+    public function setPosition(int $position): void
     {
         if ($position < 0) {
             $position = 0;

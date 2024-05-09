@@ -1,0 +1,28 @@
+{% props
+    title = null,
+    type = 'info',
+    icon = null,
+    important = false,
+%}
+
+{% set importantClass = important == true ? 'alert-important' : 'bg-white' %}
+
+<div {{ attributes.defaults({
+    class: 'alert ' ~ importantClass ~ ' alert-' ~ type,
+    role: 'alert',
+}) }}>
+
+    <div class="d-flex">
+        {% if icon is not null %}
+            <div class="d-none d-md-block">
+                <span class="iconify-inline icon alert-icon" data-icon="{{ icon }}"></span>
+            </div>
+        {% endif %}
+        <div>
+            {% if title is not null %}
+                <h4 class="alert-title">{{ title }}</h4>
+            {% endif %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
