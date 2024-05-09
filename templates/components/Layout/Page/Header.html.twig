@@ -1,0 +1,23 @@
+{% props
+    pageTitleActions = null,
+    pagePreTitle = null,
+    pageTitle = null
+%}
+
+<div class="container-xl">
+    <div class="page-header d-print-none">
+        <div class="row g-2">
+            <div class="col">
+                <twig:Layout:Page:Breadcrumb />
+                <twig:Layout:Page:Title :pagePreTitle="pagePreTitle" :pageTitle="pageTitle" />
+            </div>
+
+            {% if pageTitleActions is not empty %}
+                <!-- Page title actions -->
+                <div class="col-12 col-md-auto ms-auto d-print-none">
+                    {{ pageTitleActions|raw }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

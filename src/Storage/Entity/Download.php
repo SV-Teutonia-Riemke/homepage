@@ -25,7 +25,7 @@ class Download extends AbstractEntity implements Stringable, PositionInterface, 
 
     #[ORM\OneToOne(targetEntity: File::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
-    private File|null $file = null;
+    private File|null $file;
 
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;

@@ -13,11 +13,12 @@ use App\Infrastructure\Menu\Type\Resolver\MainResolver;
 use App\Infrastructure\Menu\Type\Resolver\NewsResolver;
 use App\Infrastructure\Menu\Type\Resolver\PageResolver;
 use App\Infrastructure\Menu\Type\Resolver\PrivacyResolver;
-use App\Infrastructure\Menu\Type\Resolver\SimpleResolver;
 use App\Infrastructure\Menu\Type\Resolver\SponsorResolver;
 use App\Infrastructure\Menu\Type\Resolver\TeamsResolver;
+use App\Infrastructure\Menu\Type\Resolver\UrlResolver;
 use App\Storage\Entity\MenuItem;
 use Knp\Menu\FactoryInterface;
+use Knp\Menu\ItemInterface;
 
 class TypeResolver
 {
@@ -31,13 +32,13 @@ class TypeResolver
         private readonly NewsResolver $newsResolver,
         private readonly PageResolver $pageResolver,
         private readonly PrivacyResolver $privacyResolver,
-        private readonly SimpleResolver $simpleResolver,
+        private readonly UrlResolver $urlResolver,
         private readonly SponsorResolver $sponsorResolver,
         private readonly TeamsResolver $teamsResolver,
     ) {
     }
 
-    public function resolve(MenuItem $menuItem): object
+    public function resolve(MenuItem $menuItem): ItemInterface
     {
         $resolver = match ($menuItem->getType()) {
             MenuType::CLUB => fn () => $this->clubResolver,
@@ -48,7 +49,7 @@ class TypeResolver
             MenuType::NEWS => fn () => $this->newsResolver,
             MenuType::PAGE => fn () => $this->pageResolver,
             MenuType::PRIVACY => fn () => $this->privacyResolver,
-            MenuType::SIMPLE => fn () => $this->simpleResolver,
+            MenuType::URL => fn () => $this->urlResolver,
             MenuType::SPONSOR => fn () => $this->sponsorResolver,
             MenuType::TEAMS => fn () => $this->teamsResolver,
         };

@@ -11,7 +11,7 @@ use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\Position;
 use App\Storage\Entity\Common\PositionInterface;
 use App\Storage\Entity\MenuItem\MenuItemPage;
-use App\Storage\Entity\MenuItem\MenuItemSimple;
+use App\Storage\Entity\MenuItem\MenuItemUrl;
 use App\Storage\Repository\MenuItemRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,7 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\DiscriminatorMap([
     'menu' => MenuItem::class,
     'page' => MenuItemPage::class,
-    'simple' => MenuItemSimple::class,
+    'url' => MenuItemUrl::class,
 ])]
 class MenuItem extends AbstractEntity implements EnabledInterface, PositionInterface
 {

@@ -5,7 +5,11 @@
 {% set pageTitle = 'Menüs' %}
 
 {% block pageTitleActionsButtons %}
-    <a class="btn btn-primary" href="{{ path('app_admin_menu_item_create') }}">Erstellen</a>
+    <twig:Button:Dropdown type="primary" title="Erstellen">
+        <twig:Button:Dropdown:Item href="{{ path('app_admin_menu_item_create', { type: 'main' }) }}" title="Funktion"/>
+        <twig:Button:Dropdown:Item href="{{ path('app_admin_menu_item_create', { type: 'url' }) }}" title="Url"/>
+        <twig:Button:Dropdown:Item href="{{ path('app_admin_menu_item_create', { type: 'page' }) }}" title="Seite"/>
+    </twig:Button:Dropdown>
 {% endblock %}
 
 {% block pageBody %}

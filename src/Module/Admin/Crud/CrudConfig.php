@@ -6,6 +6,9 @@ namespace App\Module\Admin\Crud;
 
 use Closure;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpFoundation\Request;
+
+use function is_string;
 
 final class CrudConfig
 {
@@ -16,11 +19,22 @@ final class CrudConfig
         public readonly string $editTemplate,
         public readonly string $listRouteName,
         public readonly string $createRouteName,
-        public readonly string $formType,
+        private readonly string|Closure $formType,
         public readonly string|null $searchType = null,
         public readonly string|null $defaultSortFieldName = null,
         public readonly string|null $defaultSortDirection = null,
         public readonly Closure|null $handleForm = null,
     ) {
+    }
+
+    public function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string {
+        if (is_string($this->formType)) {
+            return $this->formType;
+        }
+
+        return ($this->formType)($request, $object);
     }
 }

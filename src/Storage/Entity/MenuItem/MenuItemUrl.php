@@ -12,7 +12,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MenuItemRepository::class)]
-class MenuItemSimple extends MenuItem
+class MenuItemUrl extends MenuItem
 {
     #[ORM\Column(type: Types::STRING)]
     private string $url;
@@ -21,10 +21,14 @@ class MenuItemSimple extends MenuItem
         string $title,
         string $icon,
         string $url,
-        MenuType $type,
         MenuGroup $group,
     ) {
-        parent::__construct($title, $icon, $type, $group);
+        parent::__construct(
+            $title,
+            $icon,
+            MenuType::URL,
+            $group,
+        );
 
         $this->url = $url;
     }
@@ -36,7 +40,7 @@ class MenuItemSimple extends MenuItem
 
     public function setUrl(string|null $url): void
     {
-        if($url === null) {
+        if ($url === null) {
             return;
         }
 

@@ -8,7 +8,7 @@ interface PositionInterface
 {
     public function getPosition(): int|null;
 
-    public function setPosition(int|null $position): void;
+    public function setPosition(int $position): void;
 
     public function increasePosition(int $position): void;
 }

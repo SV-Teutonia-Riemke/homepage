@@ -1,0 +1,8 @@
+{% props title, type = null %}
+
+<div class="dropdown">
+    <button type="button" class="btn{% if type is not null %} btn-{{ type }}{% endif %} dropdown-toggle" data-bs-toggle="dropdown">{{ title }}</button>
+    <div class="dropdown-menu">
+        <twig:block name="content"></twig:block>
+    </div>
+</div>

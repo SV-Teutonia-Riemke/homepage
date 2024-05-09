@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
+use App\Infrastructure\Menu\MenuType;
 use App\Module\Admin\Crud\CrudConfig;
+use App\Module\Admin\Form\Type\Forms\MenuItemPageType;
 use App\Module\Admin\Form\Type\Forms\MenuItemType;
+use App\Module\Admin\Form\Type\Forms\MenuItemUrlType;
 use App\Storage\Entity\MenuItem;
 use App\Storage\Repository\MenuItemRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -69,7 +72,23 @@ final class MenuItemController extends AbstractCrudController
             '@admin/menu_item/edit.html.twig',
             'app_admin_menu_item_index',
             'app_admin_menu_item_create',
-            MenuItemType::class,
+            static function (Request $request, MenuItem|null $menuItem = null): string {
+                if ($menuItem !== null) {
+                    return match ($menuItem->getType()) {
+                        MenuType::PAGE => MenuItemPageType::class,
+                        MenuType::URL => MenuItemUrlType::class,
+                        default => MenuItemType::class,
+                    };
+                }
+
+                $type = $request->get('type');
+
+                return match ($type) {
+                    'page' => MenuItemPageType::class,
+                    'url' => MenuItemUrlType::class,
+                    default => MenuItemType::class,
+                };
+            },
             defaultSortFieldName: 'p.position',
             defaultSortDirection: 'asc',
         );

@@ -29,17 +29,9 @@
     <div class="row row-cards">
         <div class="col-12 col-md-9">
             {% for notification in notifications %}
-                <div class="alert alert-info bg-white">
-                    <div class="d-flex">
-                        <div class="d-none d-md-block">
-                            <span class="iconify-inline icon alert-icon" data-icon="fa6-solid:circle-info"></span>
-                        </div>
-                        <div>
-                            <h4 class="alert-title">{{ notification.title }}</h4>
-                            {{ notification.content|striptags('<br><a><b><strong><span>')|raw }}
-                        </div>
-                    </div>
-                </div>
+                <twig:Alert title="{{ notification.title }}" icon="fa6-solid:circle-info">
+                    {{ notification.content|striptags('<br><a><b><strong><span>')|raw }}
+                </twig:Alert>
             {% endfor %}
 
             {% for article in articles %}

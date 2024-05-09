@@ -15,16 +15,21 @@ use Doctrine\ORM\Mapping as ORM;
 class MenuItemPage extends MenuItem
 {
     #[ORM\ManyToOne(targetEntity: Page::class)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private Page $page;
 
     public function __construct(
         string $title,
         string $icon,
         Page $page,
-        MenuType $type,
         MenuGroup $group,
     ) {
-        parent::__construct($title, $icon, $type, $group);
+        parent::__construct(
+            $title,
+            $icon,
+            MenuType::PAGE,
+            $group,
+        );
 
         $this->page = $page;
     }
