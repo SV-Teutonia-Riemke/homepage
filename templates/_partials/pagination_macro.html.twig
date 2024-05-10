@@ -2,30 +2,23 @@
     {{ preElements|raw }}
 {% endif %}
 
-<div class="btn-group btn-group-sm">
+<twig:bs:button:group size="sm" class="me-1">
     {% if enableLink is not null and disableLink is not null %}
         {% if object.enabled %}
-            <a class="btn btn-outline-success" href="{{ disableLink }}">
-                <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
-            </a>
+            <twig:bs:button type="success" href="{{ disableLink }}" icon="fa6-solid:circle" />
         {% else %}
-            <a class="btn btn-outline-danger" href="{{ enableLink }}">
-                <span class="iconify-inline" data-icon="fa6-solid:circle"></span>
-            </a>
+            <twig:bs:button type="danger" href="{{ enableLink }}" icon="fa6-solid:circle" />
         {% endif %}
     {% endif %}
     {% if editLink is not null %}
-        <a class="btn btn-outline-primary" href="{{ editLink }}">
-            <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
-        </a>
+        <twig:bs:button type="primary" href="{{ editLink }}" icon="fa6-solid:pencil" />
     {% endif %}
-</div>
+</twig:bs:button:group>
 {% if removeLink is not null %}
-    <div class="btn-group btn-group-sm">
-        <a class="btn btn-outline-danger" href="{{ removeLink }}" {{ stimulus_controller('confirmation') }}>
-            <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
-        </a>
-    </div>
+    <twig:bs:button:group size="sm" class="me-1">
+        <twig:bs:button type="danger" href="{{ removeLink }}" icon="fa6-solid:trash" />
+{#        {{ stimulus_controller('confirmation') }}#}
+    </twig:bs:button:group>
 {% endif %}
 
 {% if postElements is not null %}

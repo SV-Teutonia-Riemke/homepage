@@ -1,0 +1,16 @@
+{% set classes = cva({
+    base: 'btn-group ',
+    variants: {
+        size: {
+            sm: 'btn-group-sm',
+            md: 'btn-group-md',
+            lg: 'btn-group-lg',
+        }
+    }
+}) %}
+
+<div
+        class="{{ classes.apply({size}, attributes.render('class')) }}"
+        {{ attributes }}>
+    {% block content %}{% endblock %}
+</div>

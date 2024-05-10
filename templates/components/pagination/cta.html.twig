@@ -1,0 +1,42 @@
+<div{{ attributes }}>
+    {% block preElements %}
+        {% if preElements is not null %}
+            {{ preElements }}
+        {% endif %}
+    {% endblock %}
+
+    {% block content %}
+        {% if up is not null and down is not null %}
+            <twig:bs:button:group size="sm" class="me-1">
+                <twig:bs:button outline href="{{ up }}" icon="fa6-solid:arrow-up"/>
+                <twig:bs:button outline href="{{ down }}" icon="fa6-solid:arrow-down"/>
+            </twig:bs:button:group>
+        {% endif %}
+
+        <twig:bs:button:group size="sm" class="me-1">
+            {% if enable is not null and disable is not null %}
+                {% if object.enabled %}
+                    <twig:bs:button outline type="success" href="{{ disable }}" icon="fa6-solid:circle"/>
+                {% else %}
+                    <twig:bs:button outline type="danger" href="{{ enable }}" icon="fa6-solid:circle"/>
+                {% endif %}
+            {% endif %}
+            {% if edit is not null %}
+                <twig:bs:button outline type="primary" href="{{ edit }}" icon="fa6-solid:pencil"/>
+            {% endif %}
+        </twig:bs:button:group>
+
+        {% if remove is not null %}
+            <twig:bs:button:group size="sm" class="me-1">
+                <twig:bs:button outline type="danger" href="{{ remove }}" icon="fa6-solid:trash"/>
+                {#        {{ stimulus_controller('confirmation') }} #}
+            </twig:bs:button:group>
+        {% endif %}
+    {% endblock %}
+
+    {% block postElements %}
+        {% if postElements is not null %}
+            {{ postElements }}
+        {% endif %}
+    {% endblock %}
+</div>

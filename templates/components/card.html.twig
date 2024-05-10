@@ -1,0 +1,41 @@
+{% apply spaceless %}
+    <div{{ attributes.defaults({class: 'card'}) }}>
+        {% block header %}
+            {% if header is not empty %}
+                <twig:bs:card:header>{{ header }}</twig:bs:card:header>
+            {% endif %}
+        {% endblock %}
+        {% block img_top %}
+            {% if image is not empty and image.position in ['top', 'overlay'] %}
+                {{ component('bs:img', image | filter((v, k) => k != 'position')) }}
+            {% endif %}
+        {% endblock %}
+        {% block body %}
+            {% if body is empty %}
+                {% set body %}
+                    {% block body_content %}{% endblock %}
+                {% endset %}
+            {% endif %}
+            {% if image.position | default('top') == 'overlay' %}
+                <div class="card-img-overlay">{{ body }}</div>
+            {% else %}
+                {% set content %}
+                    {% block content %}{% endblock %}
+                {% endset %}
+                <twig:bs:card:body>
+                    {{ content }}
+                </twig:bs:card:body>
+            {% endif %}
+        {% endblock %}
+        {% block img_bottom %}
+            {% if image is not empty and image.position == 'bottom' %}
+                {{ component('bs:img', image | filter((v, k) => k != 'position')) }}
+            {% endif %}
+        {% endblock %}
+        {% block footer %}
+            {% if footer is not empty %}
+                <twig:bs:card:footer>{{ footer }}</twig:bs:card:footer>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endapply %}

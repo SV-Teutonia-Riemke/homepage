@@ -1,0 +1,48 @@
+{% set paginationHeader %}
+    {% block paginationHeader %}{% endblock %}
+{% endset %}
+
+{% set paginationRowWrapper %}
+    {% block paginationRowWrapper %}
+        {% for object in pagination %}
+            <tr>
+                {% block paginationRow %}{% endblock %}
+            </tr>
+        {% endfor %}
+    {% endblock %}
+{% endset %}
+
+<div{{ attributes }}>
+    <twig:bs:card>
+        <twig:block name="header">
+            <twig:bs:card:header>
+                <span class="badge bg-secondary text-white">{{ pagination.getTotalItemCount }}</span>
+                {{ paginationTitle }}
+            </twig:bs:card:header>
+        </twig:block>
+
+        <twig:block name="body">
+            {% if form is not null %}
+                <twig:bs:card:body>
+                    {{ form(form) }}
+                </twig:bs:card:body>
+            {% endif %}
+            <table class="table card-table table-vcenter text-nowrap">
+                <thead>
+                <tr>
+                    {{ paginationHeader }}
+                </tr>
+                </thead>
+                <tbody>
+                {{ paginationRowWrapper }}
+                </tbody>
+            </table>
+        </twig:block>
+
+        <twig:block name="footer">
+            <twig:bs:card:footer class="d-flex align-items-center">
+                {{ knp_pagination_render(pagination) }}
+            </twig:bs:card:footer>
+        </twig:block>
+    </twig:bs:card>
+</div>

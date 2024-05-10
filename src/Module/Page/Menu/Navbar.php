@@ -31,19 +31,6 @@ final class Navbar
             );
         }
 
-//        $menu->addChild('Shop', [
-//            'uri'            => 'https://svtr.link/clubshop',
-//            'linkAttributes' => [
-//                'target' => '_blank',
-//            ],
-//            'icon'           => 'fa6-solid:basket-shopping',
-//        ]);
-//
-//        $menu->addChild('Ruhr Cup', [
-//            'icon'  => 'fa6-solid:trophy',
-//            'route' => 'app_ruhr_cup',
-//        ]);
-
         return $menu;
     }
 }

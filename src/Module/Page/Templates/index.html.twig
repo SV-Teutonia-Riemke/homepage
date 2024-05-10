@@ -29,9 +29,9 @@
     <div class="row row-cards">
         <div class="col-12 col-md-9">
             {% for notification in notifications %}
-                <twig:Alert title="{{ notification.title }}" icon="fa6-solid:circle-info">
+                <twig:bs:alert title="{{ notification.title }}" icon="fa6-solid:circle-info">
                     {{ notification.content|striptags('<br><a><b><strong><span>')|raw }}
-                </twig:Alert>
+                </twig:bs:alert>
             {% endfor %}
 
             {% for article in articles %}
