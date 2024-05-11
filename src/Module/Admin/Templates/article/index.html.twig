@@ -9,30 +9,24 @@
 {% endblock %}
 
 {% block pageBody %}
-    {% embed '_partials/pagination_table.html.twig' with {
-        title: 'Artikel'
-    } %}
-        {% block paginationHeader %}
+    <twig:pagination:table paginationTitle="Artikel">
+        <twig:block name="tableHeader">
             <th class="w-1"></th>
             <th class="w-1">Id</th>
             <th>Titel</th>
             <th></th>
-        {% endblock %}
-        {% block paginationRow %}
-            <td>
-                <twig:ux:icon:enabled enabled="{{ object.enabled }}" />
-            </td>
-            <td>{{ object.id }}</td>
-            <td>{{ object.title }}</td>
-            <td class="text-end">
-                <twig:pagination:cta
-                        enabled="{{ object.enabled }}"
-                        remove="{{ path('app_admin_article_remove', { article: object.id }) }}"
-                        edit="{{ path('app_admin_article_edit', { article: object.id }) }}"
-                        enable="{{ path('app_admin_article_enable', { article: object.id }) }}"
-                        disable="{{ path('app_admin_article_disable', { article: object.id }) }}"
-                />
-            </td>
-        {% endblock %}
-    {% endembed %}
+        </twig:block>
+        <twig:block name="tableRow">
+            <twig:pagination:row
+                    enabled="{{ object.enabled }}"
+                    remove="{{ path('app_admin_article_remove', { article: object.id }) }}"
+                    edit="{{ path('app_admin_article_edit', { article: object.id }) }}"
+                    enable="{{ path('app_admin_article_enable', { article: object.id }) }}"
+                    disable="{{ path('app_admin_article_disable', { article: object.id }) }}"
+            >
+                <td>{{ object.id }}</td>
+                <td>{{ object.title }}</td>
+            </twig:pagination:row>
+        </twig:block>
+    </twig:pagination:table>
 {% endblock %}

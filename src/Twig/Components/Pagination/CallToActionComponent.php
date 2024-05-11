@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Twig\Components\Pagination;
 
-use App\Storage\Entity\Common\EnabledInterface;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent(
@@ -13,14 +12,13 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 )]
 class CallToActionComponent
 {
-    public EnabledInterface|null $object = null;
-    public string|null $up               = null;
-    public string|null $down             = null;
-    public bool|null $enabled            = null;
-    public string|null $enable           = null;
-    public string|null $disable          = null;
-    public string|null $edit             = null;
-    public string|null $remove           = null;
-    public string|null $preElements      = null;
-    public string|null $postElements     = null;
+    public string|null $up           = null;
+    public string|null $down         = null;
+    public bool|null $enabled        = null;
+    public string|null $enable       = null;
+    public string|null $disable      = null;
+    public string|null $edit         = null;
+    public string|null $remove       = null;
+    public string|null $preElements  = null;
+    public string|null $postElements = null;
 }

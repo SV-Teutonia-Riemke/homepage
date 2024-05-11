@@ -14,7 +14,7 @@
         {% endif %}
 
         <twig:bs:button:group size="sm" class="me-1">
-            {% if enable is not null and disable is not null %}
+            {% if enable is not null and disable is not null and enabled is not null %}
                 {% if enabled %}
                     <twig:bs:button outline type="success" href="{{ disable }}" icon="fa6-solid:circle"/>
                 {% else %}

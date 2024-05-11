@@ -8,31 +8,26 @@
 {% endblock %}
 
 {% block pageBody %}
-    {% embed '_partials/pagination_table.html.twig' with {
-        title: 'Persons',
-        pagination: pagination,
-        form: form
-    } only %}
-        {% block paginationHeader %}
+    <twig:pagination:table paginationTitle="Persons">
+        <twig:block name="tableHeader">
             <th class="w-1">Id</th>
             <th>Vorname</th>
             <th>Nachname</th>
             <th>Email</th>
             <th>Phone</th>
             <th></th>
-        {% endblock %}
-        {% block paginationRow %}
-            <td>{{ object.id }}</td>
-            <td>{{ object.firstName }}</td>
-            <td>{{ object.lastName }}</td>
-            <td>{{ object.emailAddress }}</td>
-            <td>{{ object.phoneNumber is null ? '' : object.phoneNumber|phone_number_format }}</td>
-            <td class="text-end">
-                <twig:pagination:cta
-                        remove="{{ path('app_admin_person_remove', { person: object.id }) }}"
-                        edit="{{ path('app_admin_person_edit', { person: object.id }) }}"
-                />
-            </td>
-        {% endblock %}
-    {% endembed %}
+        </twig:block>
+        <twig:block name="tableRow">
+            <twig:pagination:row
+                    remove="{{ path('app_admin_person_remove', { person: object.id }) }}"
+                    edit="{{ path('app_admin_person_edit', { person: object.id }) }}"
+            >
+                <td>{{ object.id }}</td>
+                <td>{{ object.firstName }}</td>
+                <td>{{ object.lastName }}</td>
+                <td>{{ object.emailAddress }}</td>
+                <td>{{ object.phoneNumber is null ? '' : object.phoneNumber|phone_number_format }}</td>
+            </twig:pagination:row>
+        </twig:block>
+    </twig:pagination:table>
 {% endblock %}

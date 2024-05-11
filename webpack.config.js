@@ -1,5 +1,6 @@
 const Encore = require('@symfony/webpack-encore');
 // const OfflinePlugin = require('@lcdp/offline-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 const imageCacheBuster = (Math.random() + 1).toString(36).substring(7);
 const manifestOptions = {
@@ -48,6 +49,7 @@ Encore
      */
     .addEntry('app', './assets/app.ts')
     .addEntry('admin', './assets/admin.ts')
+    .addEntry('monaco', './assets/monaco.js')
 
     .copyFiles({
         from: './assets/images',
@@ -120,9 +122,9 @@ Encore
     // requires WebpackEncoreBundle 1.4 or higher
     .enableIntegrityHashes(Encore.isProduction())
 
-    // .addPlugin(
-    //     new OfflinePlugin()
-    // )
+    .addPlugin(
+        new MonacoWebpackPlugin()
+    )
 
 // uncomment if you're having problems with a jQuery plugin
 //.autoProvidejQuery()

@@ -1,0 +1,34 @@
+{% props
+    up = null,
+    down = null,
+    enabled = null,
+    enable = null,
+    disable = null,
+    remove = null,
+    edit = null %}
+
+<tr{{ attributes }}>
+    {% block enabled %}
+        {% if enabled is not null %}
+            <td>
+                <twig:ux:icon:enabled enabled="{{ enabled }}"/>
+            </td>
+        {% endif %}
+    {% endblock %}
+    {% block content %}{% endblock %}
+    {% block cta %}
+        {% if up or down or enabled or enable is not null or disable or remove or edit %}
+            <td class="text-end">
+                <twig:pagination:cta
+                        :up="up"
+                        :down="down"
+                        :enabled="enabled"
+                        :enable="enable"
+                        :disable="disable"
+                        :remove="remove"
+                        :edit="edit"
+                />
+            </td>
+        {% endif %}
+    {% endblock %}
+</tr>

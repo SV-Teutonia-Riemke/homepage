@@ -8,32 +8,26 @@
 {% endblock %}
 
 {% block pageBody %}
-    {% embed '_partials/pagination_table.html.twig' with {
-        title: 'Links'
-    } %}
-        {% block paginationHeader %}
+    <twig:pagination:table paginationTitle="Downloads">
+        <twig:block name="tableHeader">
             <th class="w-1"></th>
             <th class="w-1">Id</th>
             <th>Name</th>
             <th>URI</th>
             <th></th>
-        {% endblock %}
-        {% block paginationRow %}
-            <td>
-                <twig:ux:icon:enabled enabled="{{ object.enabled }}" />
-            </td>
-            <td>{{ object.id }}</td>
-            <td>{{ object.name }}</td>
-            <td>{{ object.uri }}</td>
-            <td class="text-end">
-                <twig:pagination:cta
-                        enabled="{{ object.enabled }}"
-                        remove="{{ path('app_admin_link_remove', { link: object.id }) }}"
-                        edit="{{ path('app_admin_link_edit', { link: object.id }) }}"
-                        enable="{{ path('app_admin_link_enable', { link: object.id }) }}"
-                        disable="{{ path('app_admin_link_disable', { link: object.id }) }}"
-                />
-            </td>
-        {% endblock %}
-    {% endembed %}
+        </twig:block>
+        <twig:block name="tableRow">
+            <twig:pagination:row
+                    enabled="{{ object.enabled }}"
+                    remove="{{ path('app_admin_link_remove', { link: object.id }) }}"
+                    edit="{{ path('app_admin_link_edit', { link: object.id }) }}"
+                    enable="{{ path('app_admin_link_enable', { link: object.id }) }}"
+                    disable="{{ path('app_admin_link_disable', { link: object.id }) }}"
+            >
+                <td>{{ object.id }}</td>
+                <td>{{ object.name }}</td>
+                <td>{{ object.uri }}</td>
+            </twig:pagination:row>
+        </twig:block>
+    </twig:pagination:table>
 {% endblock %}

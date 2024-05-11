@@ -15,6 +15,6 @@ final class RuhrCupController extends AbstractController
 {
     public function __invoke(): Response
     {
-        return $this->render('@page/ruhr_cup/index.html.twig');
+        return $this->redirect('https://ruhr-cup.de/');
     }
 }

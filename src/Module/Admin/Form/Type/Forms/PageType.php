@@ -33,7 +33,8 @@ final class PageType extends AbstractType
             ])
             ->add('content', TextareaType::class, [
                 'attr' => [
-                    'rows' => 50,
+                    'class' => 'monaco-editor',
+                    'data-language' => 'twig',
                 ],
                 'constraints' => [
                     new NotBlank(),

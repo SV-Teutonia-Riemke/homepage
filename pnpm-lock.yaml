@@ -20,9 +20,6 @@ importers:
       '@hotwired/turbo':
         specifier: ^7.3.0
         version: 7.3.0
-      '@iconify/iconify':
-        specifier: ^3.1.1
-        version: 3.1.1
       '@lcdp/offline-plugin':
         specifier: ^5.1.1
         version: 5.1.1
@@ -68,6 +65,12 @@ importers:
       file-loader:
         specifier: ^6.2.0
         version: 6.2.0(webpack@5.91.0(webpack-cli@5.1.4))
+      monaco-editor:
+        specifier: ^0.48.0
+        version: 0.48.0
+      monaco-editor-webpack-plugin:
+        specifier: ^7.1.0
+        version: 7.1.0(monaco-editor@0.48.0)(webpack@5.91.0(webpack-cli@5.1.4))
       offline-plugin:
         specifier: ^5.0.7
         version: 5.0.7
@@ -699,13 +702,6 @@ packages:
   '@hotwired/turbo@7.3.0':
     resolution: {integrity: sha512-Dcu+NaSvHLT7EjrDrkEmH4qET2ZJZ5IcCWmNXxNQTBwlnE5tBZfN6WxZ842n5cHV52DH/AKNirbPBtcEXDLW4g==}
     engines: {node: '>= 14'}
-
-  '@iconify/iconify@3.1.1':
-    resolution: {integrity: sha512-1nemfyD/OJzh9ALepH7YfuuP8BdEB24Skhd8DXWh0hzcOxImbb1ZizSZkpCzAwSZSGcJFmscIBaBQu+yLyWaxQ==}
-    deprecated: no longer maintained, switch to modern iconify-icon web component
-
-  '@iconify/types@2.0.0':
-    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
   '@jest/schemas@29.6.3':
     resolution: {integrity: sha512-mo5j5X+jIZmJQveBKeS/clAueipV7KgiX1vMgCxam1RNYiqE1w62n0/tJJnHtjW8ZHcQco5gY85jA3mi0L+nSA==}
@@ -2170,6 +2166,15 @@ packages:
   minimatch@5.1.6:
     resolution: {integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==}
     engines: {node: '>=10'}
+
+  monaco-editor-webpack-plugin@7.1.0:
+    resolution: {integrity: sha512-ZjnGINHN963JQkFqjjcBtn1XBtUATDZBMgNQhDQwd78w2ukRhFXAPNgWuacaQiDZsUr4h1rWv5Mv6eriKuOSzA==}
+    peerDependencies:
+      monaco-editor: '>= 0.31.0'
+      webpack: ^4.5.0 || 5.x
+
+  monaco-editor@0.48.0:
+    resolution: {integrity: sha512-goSDElNqFfw7iDHMg8WDATkfcyeLTNpBHQpO8incK6p5qZt5G/1j41X0xdGzpIkGojGXM+QiRQyLjnfDVvrpwA==}
 
   ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
@@ -3817,12 +3822,6 @@ snapshots:
 
   '@hotwired/turbo@7.3.0': {}
 
-  '@iconify/iconify@3.1.1':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify/types@2.0.0': {}
-
   '@jest/schemas@29.6.3':
     dependencies:
       '@sinclair/typebox': 0.27.8
@@ -5236,6 +5235,14 @@ snapshots:
   minimatch@5.1.6:
     dependencies:
       brace-expansion: 2.0.1
+
+  monaco-editor-webpack-plugin@7.1.0(monaco-editor@0.48.0)(webpack@5.91.0(webpack-cli@5.1.4)):
+    dependencies:
+      loader-utils: 2.0.4
+      monaco-editor: 0.48.0
+      webpack: 5.91.0(webpack-cli@5.1.4)
+
+  monaco-editor@0.48.0: {}
 
   ms@2.0.0: {}
 

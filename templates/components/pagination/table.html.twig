@@ -1,13 +1,11 @@
-{% set paginationHeader %}
-    {% block paginationHeader %}{% endblock %}
+{% set tableHeader %}
+    {% block tableHeader %}{% endblock %}
 {% endset %}
 
 {% set paginationRowWrapper %}
     {% block paginationRowWrapper %}
         {% for object in pagination %}
-            <tr>
-                {% block paginationRow %}{% endblock %}
-            </tr>
+            {% block tableRow %}{% endblock %}
         {% endfor %}
     {% endblock %}
 {% endset %}
@@ -30,11 +28,11 @@
             <table class="table card-table table-vcenter text-nowrap">
                 <thead>
                 <tr>
-                    {{ paginationHeader }}
+                    {{ tableHeader }}
                 </tr>
                 </thead>
                 <tbody>
-                {{ paginationRowWrapper }}
+                    {{ paginationRowWrapper }}
                 </tbody>
             </table>
         </twig:block>
