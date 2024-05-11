@@ -3,7 +3,7 @@
 {% block formCancel %}
     {% if formCancelLink is defined and formCancelLink is not empty %}
         <a href="{{ formCancelLink }}" class="btn btn-outline-danger">
-            <span class="iconify-inline icon" data-icon="{{ formCancelIcon ?? 'fa-solid:times' }}"></span>
+            <twig:ux:icon class="icon" name="{{ formCancelIcon ?? 'fa-solid:times' }}" />
             {{ (formCancelLabel ?? 'Abbrechen')|trans }}
         </a>
     {% endif %}
@@ -12,7 +12,7 @@
 {% block formSubmit %}
     {% if form.submit is defined %}
         {% set submitLabel %}
-            <span class="iconify-inline icon" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
+            <twig:ux:icon class="icon" name="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}" />
             {{ (formSubmitLabel ?? 'Speichern')|trans }}
         {% endset %}
         {{ form_widget(form.submit, {
@@ -21,14 +21,14 @@
         }) }}
     {% else %}
         <button type="submit" class="btn btn-primary">
-            <span class="iconify-inline icon" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
+            <twig:ux:icon class="icon" name="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}" />
             {{ (formSubmitLabel ?? 'Speichern')|trans }}
         </button>
     {% endif %}
 
     {% if form.submitAndNew is defined %}
         {% set submitAndNewLabel %}
-            <span class="iconify-inline icon" data-icon="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}"></span>
+            <twig:ux:icon class="icon" name="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}" />
             {{ (formSubmitAndNewLabel ?? 'Speichern & Neu')|trans }}
         {% endset %}
         {{ form_widget(form.submitAndNew, {

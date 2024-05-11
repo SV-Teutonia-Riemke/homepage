@@ -71,10 +71,10 @@
                     <td class="text-end">
                         <div class="btn-group btn-group-sm">
                             <a class="btn btn-outline-primary" href="{{ path('app_admin_files_directory_edit', { directory: directory.id }) }}">
-                                <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
+                                <twig:ux:icon name="fa6-solid:pencil" />
                             </a>
                             <a class="btn btn-outline-danger" href="{{ path('app_admin_files_directory_remove', { directory: directory.id }) }}">
-                                <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
+                                <twig:ux:icon name="fa6-solid:trash" />
                             </a>
                         </div>
                     </td>
@@ -88,16 +88,16 @@
                     <td class="text-end">
                         <div class="btn-group btn-group-sm">
                             <span class="btn btn-outline-primary copy-to-clipboard" data-clipboard-text="{{ file_url(file) }}">
-                                <span class="iconify-inline" data-icon="fa6-solid:copy"></span>
+                                <twig:ux:icon name="fa6-solid:copy" />
                             </span>
                             <a class="btn btn-outline-primary" href="{{ file_url(file) }}" target="_blank">
-                                <span class="iconify-inline" data-icon="fa6-solid:arrow-up-right-from-square"></span>
+                                <twig:ux:icon name="fa6-solid:arrow-up-right-from-square" />
                             </a>
                             <a class="btn btn-outline-primary" href="{{ path('app_admin_files_file_edit', { file: file.id }) }}">
-                                <span class="iconify-inline" data-icon="fa6-solid:pencil"></span>
+                                <twig:ux:icon name="fa6-solid:pencil" />
                             </a>
                             <a class="btn btn-outline-danger" href="{{ path('app_admin_files_file_remove', { file: file.id }) }}">
-                                <span class="iconify-inline" data-icon="fa6-solid:trash"></span>
+                                <twig:ux:icon name="fa6-solid:trash" />
                             </a>
                         </div>
                     </td>

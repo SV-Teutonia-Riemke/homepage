@@ -24,7 +24,7 @@
         {% endblock %}
         {% block paginationRow %}
             <td>
-                <span class="iconify-inline text-{% if object.enabled %}success{% else %}danger{% endif %}" data-icon="fa6-solid:circle"></span>
+                <twig:ux:icon:enabled enabled="{{ object.enabled }}" />
             </td>
             <td>{{ object.id }}</td>
             <td>{{ object.name }}</td>
@@ -33,13 +33,13 @@
             <td>{{ object.season is null ? '' : object.season.displayName }}</td>
             <td>{{ object.ageGroup is null ? '' : object.ageGroup.displayName }}</td>
             <td class="text-end">
-                {{ pagination_cta(
-                    object,
-                    path('app_admin_team_remove', { team: object.id }),
-                    path('app_admin_team_edit', { team: object.id }),
-                    path('app_admin_team_enable', { team: object.id }),
-                    path('app_admin_team_disable', { team: object.id }),
-                ) }}
+                <twig:pagination:cta
+                        enabled="{{ object.enabled }}"
+                        remove="{{ path('app_admin_team_remove', { team: object.id }) }}"
+                        edit="{{ path('app_admin_team_edit', { team: object.id }) }}"
+                        enable="{{ path('app_admin_team_enable', { team: object.id }) }}"
+                        disable="{{ path('app_admin_team_disable', { team: object.id }) }}"
+                />
             </td>
         {% endblock %}
     {% endembed %}

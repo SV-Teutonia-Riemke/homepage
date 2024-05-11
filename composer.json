@@ -50,6 +50,7 @@
         "symfony/flex": "^2.4",
         "symfony/form": "^7.0",
         "symfony/framework-bundle": "^7.0",
+        "symfony/http-client": "7.0.*",
         "symfony/http-foundation": "^7.0",
         "symfony/http-kernel": "^7.0",
         "symfony/mime": "^7.0",
@@ -78,7 +79,7 @@
         "symfony/yaml": "^7.0",
         "twig/extra-bundle": "^3.9",
         "twig/intl-extra": "^3.9",
-        "twig/twig": "^3.9"
+        "twig/twig": "3.9.*"
     },
     "require-dev": {
         "doctrine/coding-standard": "^12.0",
@@ -199,7 +200,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.4.*"
+            "require": "7.0.*"
         }
     }
 }

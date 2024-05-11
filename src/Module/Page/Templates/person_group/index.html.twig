@@ -34,12 +34,12 @@
                         <div class="d-flex">
                             {% if personAvailable and member.person.emailAddress is not null %}
                                 <a href="mailto:{{ member.person.emailAddress }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.emailAddress }}" data-bs-placement="top">
-                                    <span class="iconify icon me-2" data-icon="fa6-solid:at"></span>
+                                    <twig:ux:icon class="icon me-2" name="fa6-solid:at" />
                                 </a>
                             {% endif %}
                             {% if personAvailable and member.person.phoneNumber is not null %}
                                 <a href="tel:{{ member.person.phoneNumber|phone_number_format }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.phoneNumber|phone_number_format }}" data-bs-placement="top">
-                                    <span class="iconify icon me-2" data-icon="fa6-solid:phone"></span>
+                                    <twig:ux:icon class="icon me-2" name="fa6-solid:phone" />
                                 </a>
                             {% endif %}
                         </div>

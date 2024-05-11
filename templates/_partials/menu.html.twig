@@ -205,13 +205,13 @@
 {% block label %}
     {% if item.extra('icon') is not empty %}
         <span class="icon nav-link-icon d-md-none d-lg-inline-block">
-            <span class="iconify-inline" data-icon="{{ item.extra('icon') }}"></span>
+            <twig:ux:icon name="{{ item.extra('icon') }}" />
         </span>
     {% endif %}
     <span class="nav-link-title">{{ item.label|trans }}</span>
     {% if item.extra('badge') is not empty %}
         <span class="badge badge-sm bg-primary text-white">
-        <span class="iconify" data-icon="{{ item.extra('badge') }}"></span>
+        <twig:ux:icon name="{{ item.extra('badge') }}" />
     </span>
     {% endif %}
 {% endblock %}

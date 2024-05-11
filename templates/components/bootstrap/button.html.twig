@@ -1,0 +1,14 @@
+{% set classes = this.getDefaultClasses %}
+<a{{ attributes.defaults({
+    class: this.getDefaultClasses|join(' '),
+    href: href
+}) }}>
+    {% block content %}
+        {% if icon is not null %}
+            <twig:ux:icon :name="icon" />
+        {% endif %}
+        {% if title is not null %}
+            {{ title }}
+        {% endif %}
+    {% endblock %}
+</a>

@@ -36,19 +36,19 @@
 {%- block pageTitleActionsButtons -%}
     {% if team.emailAddress is not null %}
         <a class="btn btn-ghost-primary" href="mailto:{{ team.emailAddress }}" data-bs-toggle="tooltip" data-bs-title="{{ team.emailAddress }}" data-bs-placement="top">
-            <span class="iconify icon" data-icon="fa6-solid:at"></span>
+            <twig:ux:icon class="icon" name="fa6-solid:at" />
             E-Mail
         </a>
     {% endif %}
     {% if team.instagram is not null %}
         <a class="btn btn-ghost-instagram" href="https://instagram.com/{{ team.instagram }}" target="_blank" rel="nofollow">
-            <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+            <twig:ux:icon class="icon" name="fa6-brands:instagram" />
             Instagram
         </a>
     {% endif %}
     {% if team.facebook is not null %}
         <a class="btn btn-ghost-facebook" href="https://facebook.com/{{ team.facebook }}" target="_blank" rel="nofollow">
-            <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+            <twig:ux:icon class="icon" name="fa6-brands:facebook" />
             Facebook
         </a>
     {% endif %}
@@ -65,7 +65,7 @@
                     <div class="list-group list-group-flush">
                         {% if team.emailAddress is not null %}
                             <a href="mailto:{{ team.emailAddress }}" class="list-group-item list-group-item-action">
-                                <span class="iconify icon me-2" data-icon="fa6-solid:at"></span>
+                                <twig:ux:icon class="icon me-2" name="fa6-solid:at" />
                                 {{ team.emailAddress }}
                             </a>
                         {% endif %}
@@ -195,12 +195,12 @@
                         <td class="text-end">
                             {% if player.person.instagram is not null %}
                                 <a href="{{ player.person.instagram }}" class="btn btn-sm btn-icon btn-link text-instagram">
-                                    <span class="iconify icon" data-icon="fa6-brands:instagram"></span>
+                                    <twig:ux:icon class="icon" name="fa6-brands:instagram" />
                                 </a>
                             {% endif %}
                             {% if player.person.facebook is not null %}
                                 <a href="{{ player.person.facebook }}" class="btn btn-sm btn-icon btn-link text-facebook">
-                                    <span class="iconify icon" data-icon="fa6-brands:facebook"></span>
+                                    <twig:ux:icon class="icon" name="fa6-brands:facebook" />
                                 </a>
                             {% endif %}
                         </td>

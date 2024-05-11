@@ -7,14 +7,14 @@
     {% if previous is defined %}
         <li class="page-item">
             <a class="page-link" rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">
-                <span class="iconify-inline" data-icon="fa6-solid:chevron-left"></span>
+                <twig:ux:icon name="fa6-solid:chevron-left" />
                 {{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}
             </a>
         </li>
     {% else %}
         <li class="page-item disabled">
             <span class="page-link">
-                <span class="iconify-inline" data-icon="fa6-solid:chevron-left"></span>
+                <twig:ux:icon name="fa6-solid:chevron-left" />
                 {{ 'label_previous'|trans({}, 'KnpPaginatorBundle') }}
             </span>
         </li>
@@ -69,14 +69,14 @@
         <li class="page-item">
             <a class="page-link" rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">
                 {{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;
-                <span class="iconify-inline" data-icon="fa6-solid:chevron-right"></span>
+                <twig:ux:icon name="fa6-solid:chevron-right" />
             </a>
         </li>
     {% else %}
         <li class="page-item disabled">
             <span class="page-link">
                 {{ 'label_next'|trans({}, 'KnpPaginatorBundle') }}&nbsp;
-                <span class="iconify-inline" data-icon="fa6-solid:chevron-right"></span>
+                <twig:ux:icon name="fa6-solid:chevron-right" />
             </span>
         </li>
     {% endif %}

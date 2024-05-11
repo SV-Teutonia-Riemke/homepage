@@ -21,20 +21,20 @@
         {% endblock %}
         {% block paginationRow %}
             <td>
-                <span class="iconify-inline text-{% if object.enabled %}success{% else %}danger{% endif %}" data-icon="fa6-solid:circle"></span>
+                <twig:ux:icon:enabled enabled="{{ object.enabled }}" />
             </td>
             <td>{{ object.id }}</td>
             <td>{{ object.name }}</td>
             <td>{{ object.uri }}</td>
             <td>{{ object.file is null ? '-' : object.file.name }}</td>
             <td class="text-end">
-                {{ pagination_cta(
-                    object,
-                    path('app_admin_download_remove', { download: object.id }),
-                    path('app_admin_download_edit', { download: object.id }),
-                    path('app_admin_download_enable', { download: object.id }),
-                    path('app_admin_download_disable', { download: object.id }),
-                ) }}
+                <twig:pagination:cta
+                        enabled="{{ object.enabled }}"
+                        remove="{{ path('app_admin_download_remove', { download: object.id }) }}"
+                        edit="{{ path('app_admin_download_edit', { download: object.id }) }}"
+                        enable="{{ path('app_admin_download_enable', { download: object.id }) }}"
+                        disable="{{ path('app_admin_download_disable', { download: object.id }) }}"
+                />
             </td>
         {% endblock %}
     {% endembed %}

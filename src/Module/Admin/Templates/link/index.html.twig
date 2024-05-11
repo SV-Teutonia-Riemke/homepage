@@ -20,19 +20,19 @@
         {% endblock %}
         {% block paginationRow %}
             <td>
-                <span class="iconify-inline text-{% if object.enabled %}success{% else %}danger{% endif %}" data-icon="fa6-solid:circle"></span>
+                <twig:ux:icon:enabled enabled="{{ object.enabled }}" />
             </td>
             <td>{{ object.id }}</td>
             <td>{{ object.name }}</td>
             <td>{{ object.uri }}</td>
             <td class="text-end">
-                {{ pagination_cta(
-                    object,
-                    path('app_admin_link_remove', { link: object.id }),
-                    path('app_admin_link_edit', { link: object.id }),
-                    path('app_admin_link_enable', { link: object.id }),
-                    path('app_admin_link_disable', { link: object.id }),
-                ) }}
+                <twig:pagination:cta
+                        enabled="{{ object.enabled }}"
+                        remove="{{ path('app_admin_link_remove', { link: object.id }) }}"
+                        edit="{{ path('app_admin_link_edit', { link: object.id }) }}"
+                        enable="{{ path('app_admin_link_enable', { link: object.id }) }}"
+                        disable="{{ path('app_admin_link_disable', { link: object.id }) }}"
+                />
             </td>
         {% endblock %}
     {% endembed %}

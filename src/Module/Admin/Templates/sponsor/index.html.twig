@@ -20,7 +20,7 @@
         {% endblock %}
         {% block paginationRow %}
             <td>
-                <span class="iconify-inline text-{% if object.enabled %}success{% else %}danger{% endif %}" data-icon="fa6-solid:circle"></span>
+                <twig:ux:icon:enabled enabled="{{ object.enabled }}" />
             </td>
             <td>{{ object.id }}</td>
             <td>{{ object.name }}</td>
@@ -28,13 +28,13 @@
             <td>{{ object.url }}</td>
             <td>{{ object.image is null ? '' : object.image.pathName }}</td>
             <td class="text-end">
-                {{ pagination_cta(
-                    object,
-                    path('app_admin_sponsor_remove', { sponsor: object.id }),
-                    path('app_admin_sponsor_edit', { sponsor: object.id }),
-                    path('app_admin_sponsor_enable', { sponsor: object.id }),
-                    path('app_admin_sponsor_disable', { sponsor: object.id }),
-                ) }}
+                <twig:pagination:cta
+                        enabled="{{ object.enabled }}"
+                        remove="{{ path('app_admin_sponsor_remove', { sponsor: object.id }) }}"
+                        edit="{{ path('app_admin_sponsor_edit', { sponsor: object.id }) }}"
+                        enable="{{ path('app_admin_sponsor_enable', { sponsor: object.id }) }}"
+                        disable="{{ path('app_admin_sponsor_disable', { sponsor: object.id }) }}"
+                />
             </td>
         {% endblock %}
     {% endembed %}

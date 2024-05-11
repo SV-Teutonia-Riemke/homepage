@@ -20,9 +20,10 @@
                                 Lasst uns gemeinsam den Ruhr-Cup 2024 zu einem unvergesslichen Ereignis machen!<br><br>
 
                                 <a href="https://svtr.link/ruhrcup24-info-nl" target="_blank">
-                                    <span class="iconify icon" data-icon="flagpack:nl"></span>
+
+                                    <twig:ux:icon name="flagpack:nl" />
                                     Klik hier voor informatie in het Nederlands.
-                                    <span class="iconify icon" data-icon="flagpack:nl"></span>
+                                    <twig:ux:icon name="flagpack:nl" />
                                 </a>
                             </div>
                         </div>
@@ -39,7 +40,7 @@
                         <div class="col">
                             <div class="card">
                                 <div class="ribbon ribbon-top bg-primary">
-                                    <span class="iconify icon" data-icon="fa6-solid:star"></span>
+                                    <twig:ux:icon class="icon" name="fa6-solid:star" />
                                 </div>
                                 <div class="card-status-top bg-primary"></div>
                                 <div class="card-header">
@@ -78,9 +79,9 @@
                                 <div class="card-body">
                                     <div class="card-text">
                                         <div class="row align-items-center">
-                                            {% for image in '^build/images/ruhrcup/teilnehmer'|glob('*') %}
+                                            {% for image in find_directory(25)|directory_files %}
                                                 <div class="col-4 col-md-2 text-center mb-3">
-                                                    <img src="{{ asset(image.relativePathname) | imagine_filter('optimized', { relative_resize: { widen: 75 } }) }}" title="{{ image.fileName }}">
+                                                    <img src="{{ asset(image.filePath) | imagine_filter('optimized', { relative_resize: { widen: 75 } }) }}" title="{{ image.fileName }}">
                                                 </div>
                                             {% endfor %}
                                         </div>
@@ -163,9 +164,9 @@
                                         <p>Es ist wieder soweit! Der Ruhr-Cup steht vor der Tür und wir freuen uns, euch mitteilen zu können, dass die heiß begehrten Ruhr-Cup T-Shirts auch dieses Jahr wieder verfügbar sind! Zeige deine Unterstützung für dein Team und dieses großartige Event, indem du eines unserer exklusiven T-Shirts erwirbst.</p>
                                         <p>Das offizielle Ruhr-Cup T-Shirt 2024 ist in verschiedenen Größen (140 bis XXXL) erhältlich. Mit dem charakteristischen Ruhr-Cup Logo auf der Rückseite bist du bestens ausgestattet, um das Turnier in Stil zu erleben.</p>
                                         <p>Sichere dir jetzt dein Ruhr-Cup T-Shirt zum Preis von nur 15€ und sei Teil dieser einzigartigen Veranstaltung! Die T-Shirts sind ab sofort verfügbar und können direkt bei uns per E-Mail über <a href="mailto:ruhrcup@teutonia-riemke.de">ruhrcup@teutonia-riemke.de</a> vorbestellt werden (Nur solange der Vorrat reicht).</p>
-                                        <a href="{{ asset('build/images/ruhrcup/t-shirt_ruhr_cup_24.jpg') }}" target="_blank">
-                                            <img class="card-img" src="{{ asset('build/images/ruhrcup/t-shirt_ruhr_cup_24.jpg') | imagine_filter('optimized', { relative_resize: { widen: 450 } }) }}">
-                                        </a>
+                                        <twig:file:link id="159" target="_blank">
+                                            <twig:file:image id="159" class="card-img" width="450" />
+                                        </twig:file:link>
                                     </div>
                                 </div>
                             </div>
@@ -264,10 +265,10 @@
         </div>
         <div class="col-md-4 col-12">
             <div class="card">
-                <img class="card-img" src="{{ asset('build/images/ruhrcup/ruhr_cup_info_1.jpg') | imagine_filter('optimized', { relative_resize: { widen: 450 } }) }}">
+                <twig:file:image id="157" class="card-img" width="450" />
             </div>
             <div class="card">
-                <img class="card-img" src="{{ asset('build/images/ruhrcup/ruhr_cup_info_2.jpg') | imagine_filter('optimized', { relative_resize: { widen: 450 } }) }}">
+                <twig:file:image id="158" class="card-img" width="450" />
             </div>
         </div>
     </div>

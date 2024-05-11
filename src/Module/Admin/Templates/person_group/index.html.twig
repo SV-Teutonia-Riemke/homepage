@@ -18,24 +18,15 @@
             <td>{{ object.id }}</td>
             <td>{{ object.name }}</td>
             <td class="text-end">
-                {% set preActions %}
-                    <div class="btn-group btn-group-sm">
-                        <a class="btn btn-outline-primary" href="{{ path('app_admin_person_group_up', { personGroup: object.id }) }}">
-                            <span class="iconify-inline" data-icon="fa6-solid:arrow-up"></span>
-                        </a>
-                        <a class="btn btn-outline-primary" href="{{ path('app_admin_person_group_down', { personGroup: object.id }) }}">
-                            <span class="iconify-inline" data-icon="fa6-solid:arrow-down"></span>
-                        </a>
-                    </div>
-                {% endset %}
-                {{ pagination_cta(
-                    object,
-                    path('app_admin_person_group_remove', { personGroup: object.id }),
-                    path('app_admin_person_group_edit', { personGroup: object.id }),
-                    path('app_admin_person_group_enable', { personGroup: object.id }),
-                    path('app_admin_person_group_disable', { personGroup: object.id }),
-                    preElements=preActions
-                ) }}
+                <twig:pagination:cta
+                        enabled="{{ object.enabled }}"
+                        up="{{ path('app_admin_person_group_up', { personGroup: object.id }) }}"
+                        down="{{ path('app_admin_person_group_down', { personGroup: object.id }) }}"
+                        remove="{{ path('app_admin_person_group_remove', { personGroup: object.id }) }}"
+                        edit="{{ path('app_admin_person_group_edit', { personGroup: object.id }) }}"
+                        enable="{{ path('app_admin_person_group_enable', { personGroup: object.id }) }}"
+                        disable="{{ path('app_admin_person_group_disable', { personGroup: object.id }) }}"
+                />
             </td>
         {% endblock %}
     {% endembed %}

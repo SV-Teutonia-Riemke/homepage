@@ -1,0 +1,5 @@
+{% props enabled %}
+
+{% set textColor = enabled ? 'text-success' : 'text-danger' %}
+
+<twig:ux:icon name="fa6-solid:circle" class="icon {{ textColor }}" fill="currentColor" />

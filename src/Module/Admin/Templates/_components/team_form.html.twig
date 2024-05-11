@@ -29,7 +29,7 @@
                 <h3 class="card-title">Players</h3>
                 <div class="card-actions">
                     <button data-action="live#action" data-live-action-param="addPlayer" type="button" class="btn btn-outline-primary">
-                        <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
+                        <twig:ux:icon class="icon" name="fa6-solid:circle-plus" />
                         Add
                     </button>
                 </div>
@@ -53,7 +53,7 @@
                         <td>{{ form_row(itemForm.image, { label: false }) }}</td>
                         <td class="text-end">
                             <button data-action="live#action" data-live-action-param="removePlayer" data-live-index-param="{{ key }}" type="button" class="btn btn-icon btn-outline-danger">
-                                <span class="iconify icon" data-icon="fa6-solid:trash"></span>
+                                <twig:ux:icon class="icon" name="fa6-solid:trash" />
                             </button>
                         </td>
                     </tr>
@@ -62,7 +62,7 @@
             </table>
             <div class="card-footer d-flex justify-content-right">
                 <button data-action="live#action" data-live-action-param="addPlayer" type="button" class="btn btn-outline-primary ms-auto">
-                    <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
+                    <twig:ux:icon class="icon" name="fa6-solid:circle-plus" />
                     Add
                 </button>
             </div>
@@ -73,7 +73,7 @@
                 <h3 class="card-title">Staff</h3>
                 <div class="card-actions">
                     <button data-action="live#action" data-live-action-param="addStaff" type="button" class="btn btn-outline-primary">
-                        <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
+                        <twig:ux:icon class="icon" name="fa6-solid:circle-plus" />
                         Add
                     </button>
                 </div>
@@ -95,7 +95,7 @@
 {#                        <td>{{ form_row(itemForm.image, { label: false }) }}</td>#}
                         <td class="text-end">
                             <button data-action="live#action" data-live-action-param="removeStaff" data-live-index-param="{{ key }}" type="button" class="btn btn-icon btn-outline-danger">
-                                <span class="iconify icon" data-icon="fa6-solid:trash"></span>
+                                <twig:ux:icon class="icon" name="fa6-solid:trash" />
                             </button>
                         </td>
                     </tr>
@@ -104,7 +104,7 @@
             </table>
             <div class="card-footer d-flex justify-content-right">
                 <button data-action="live#action" data-live-action-param="addStaff" type="button" class="btn btn-outline-primary ms-auto">
-                    <span class="iconify icon" data-icon="fa6-solid:circle-plus"></span>
+                    <twig:ux:icon class="icon" name="fa6-solid:circle-plus" />
                     Add
                 </button>
             </div>

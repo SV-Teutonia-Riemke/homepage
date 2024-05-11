@@ -5,7 +5,7 @@
 }) }}>
     <a class="nav-link" href="{{ href }}">
         <span class="nav-link-icon d-md-none d-lg-inline-block">
-            <span class="iconify-inline icon" data-icon="{{ icon }}"></span>
+            <twig:ux:icon class="icon" :name="icon" />
         </span>
         <span class="nav-link-title">{{ title }}</span>
     </a>

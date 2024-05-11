@@ -1,0 +1,20 @@
+{% apply spaceless -%}
+    <div{{ attributes.defaults({
+        class: 'alert alert-' ~ type ~ ' ' ~ this.backgroundClass,
+        role: 'alert'
+    }) }}>
+        <div class="d-flex">
+            {% if icon is not null %}
+                <div class="d-none d-md-block">
+                    <twig:ux:icon class="icon alert-icon" :name="icon" />
+                </div>
+            {% endif %}
+            <div>
+                {% if title is not null %}
+                    <h4 class="alert-title">{{ title }}</h4>
+                {% endif %}
+                {%- block content %}{{ message }}{% endblock -%}
+            </div>
+        </div>
+    </div>
+{%- endapply %}
