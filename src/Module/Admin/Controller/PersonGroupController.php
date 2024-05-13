@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
+/** @template-extends AbstractCrudController<PersonGroup> */
 #[AsController]
 #[Route('/person-group', name: 'person_group_')]
 final class PersonGroupController extends AbstractCrudController

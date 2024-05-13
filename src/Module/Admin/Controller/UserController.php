@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
+/** @template-extends AbstractCrudController<User> */
 #[AsController]
 #[Route('/user', name: 'user_')]
 final class UserController extends AbstractCrudController

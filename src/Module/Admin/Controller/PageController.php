@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
+/** @template-extends AbstractCrudController<Page> */
 #[AsController]
 #[Route('/page', name: 'page_')]
 final class PageController extends AbstractCrudController

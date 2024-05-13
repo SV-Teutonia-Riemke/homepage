@@ -21,7 +21,7 @@ class PersonGroup extends AbstractEntity implements PositionInterface, EnabledIn
     #[ORM\Column(type: Types::STRING)]
     private string $name;
 
-    /** @var Collection<PersonGroupMember> */
+    /** @var Collection<array-key, PersonGroupMember> */
     #[ORM\OneToMany(mappedBy: 'group', targetEntity: PersonGroupMember::class, cascade: ['persist'], orphanRemoval: true)]
     #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $members;
@@ -54,7 +54,7 @@ class PersonGroup extends AbstractEntity implements PositionInterface, EnabledIn
         $this->enabled = $enabled;
     }
 
-    /** @return Collection<PersonGroupMember> */
+    /** @return Collection<array-key, PersonGroupMember> */
     public function getMembers(): Collection
     {
         return $this->members;

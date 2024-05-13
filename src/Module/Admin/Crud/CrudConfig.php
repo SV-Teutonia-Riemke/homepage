@@ -10,8 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 use function is_string;
 
+/** @template Entity of object */
 final class CrudConfig
 {
+    /** @param EntityRepository<Entity> $entityRepository */
     public function __construct(
         public readonly EntityRepository $entityRepository,
         public readonly string $listTemplate,

@@ -20,8 +20,10 @@ use Symfony\Component\HttpFoundation\Response;
 use function array_merge;
 use function assert;
 
+/** @template Entity of object */
 abstract class AbstractCrudController extends AbstractController
 {
+    /** @var CrudConfig<Entity>|null */
     private CrudConfig|null $crudConfig = null;
 
     public function handleList(Request $request): Response
@@ -143,6 +145,7 @@ abstract class AbstractCrudController extends AbstractController
         return $this->redirectToRoute($this->getCrudConfigObject()->listRouteName);
     }
 
+    /** @return CrudConfig<Entity> */
     final protected function getCrudConfigObject(): CrudConfig
     {
         if ($this->crudConfig === null) {
@@ -152,6 +155,7 @@ abstract class AbstractCrudController extends AbstractController
         return $this->crudConfig;
     }
 
+    /** @return CrudConfig<Entity> */
     abstract protected function getCrudConfig(): CrudConfig;
 
     protected function getEntityManager(): EntityManagerInterface

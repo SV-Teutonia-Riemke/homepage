@@ -6,6 +6,7 @@ namespace App\EventListener;
 
 use App\Storage\Entity\Common\ModifiedInterface;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Psr\Clock\ClockInterface;
@@ -19,6 +20,7 @@ final class ModifiedListener
     ) {
     }
 
+    /** @param LifecycleEventArgs<EntityManagerInterface> $args */
     public function prePersist(LifecycleEventArgs $args): void
     {
         $entity = $args->getObject();
@@ -30,6 +32,7 @@ final class ModifiedListener
         $this->setDates($entity);
     }
 
+    /** @param LifecycleEventArgs<EntityManagerInterface> $args */
     public function preUpdate(LifecycleEventArgs $args): void
     {
         $entity = $args->getObject();

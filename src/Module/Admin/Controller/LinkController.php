@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
+/** @template-extends AbstractCrudController<Link> */
 #[AsController]
 #[Route('/link', name: 'link_')]
 final class LinkController extends AbstractCrudController

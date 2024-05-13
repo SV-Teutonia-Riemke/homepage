@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
+/** @template-extends AbstractCrudController<MenuItem> */
 #[AsController]
 #[Route('/menu', name: 'menu_item_')]
 final class MenuItemController extends AbstractCrudController

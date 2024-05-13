@@ -53,12 +53,12 @@ class Team extends AbstractEntity implements PositionInterface, EnabledInterface
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private File|null $image = null;
 
-    /** @var Collection<Player> */
+    /** @var Collection<array-key, Player> */
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Player::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     #[ORM\OrderBy(['number' => 'ASC'])]
     private Collection $players;
 
-    /** @var Collection<Staff> */
+    /** @var Collection<array-key, Staff> */
     #[ORM\OneToMany(mappedBy: 'team', targetEntity: Staff::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $staffs;
 
@@ -239,13 +239,13 @@ class Team extends AbstractEntity implements PositionInterface, EnabledInterface
         $this->portraits = $portraits;
     }
 
-    /** @return Collection<Player> */
+    /** @return Collection<array-key, Player> */
     public function getPlayers(): Collection
     {
         return $this->players;
     }
 
-    /** @return Collection<Player> */
+    /** @return Collection<array-key, Player> */
     public function getPlayersByNumber(): Collection
     {
         $data = $this->players->toArray();
@@ -291,7 +291,7 @@ class Team extends AbstractEntity implements PositionInterface, EnabledInterface
         $this->players->removeElement($player);
     }
 
-    /** @return Collection<Staff> */
+    /** @return Collection<array-key, Staff> */
     public function getStaffs(): Collection
     {
         return $this->staffs;

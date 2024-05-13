@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
+/** @template-extends AbstractCrudController<Notification> */
 #[AsController]
 #[Route('/notification', name: 'notification_')]
 final class NotificationController extends AbstractCrudController
