@@ -8,7 +8,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent(
     name: 'bs:button:dropdown',
-    template: 'components/bootstrap/button/dropdown.html.twig',
+    template: 'components/bs/button/dropdown.html.twig',
 )]
 class DropdownComponent
 {

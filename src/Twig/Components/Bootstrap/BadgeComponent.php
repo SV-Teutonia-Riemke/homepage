@@ -14,7 +14,7 @@ use function ksort;
 
 #[AsTwigComponent(
     name: 'bs:badge',
-    template: 'components/bootstrap/badge.html.twig',
+    template: 'components/bs/badge.html.twig',
 )]
 final class BadgeComponent
 {

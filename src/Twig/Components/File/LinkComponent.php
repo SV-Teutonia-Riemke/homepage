@@ -7,10 +7,11 @@ namespace App\Twig\Components\File;
 use App\Infrastructure\Asset\AssetUrlGenerator;
 use App\Storage\Entity\File;
 use App\Storage\Repository\FileRepository;
-use RuntimeException;
+use InvalidArgumentException;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
-
-use function sprintf;
+use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsTwigComponent(
     name: 'file:link',
@@ -18,7 +19,7 @@ use function sprintf;
 )]
 class LinkComponent
 {
-    public int $id;
+    public File $file;
     public string|null $label = null;
     public bool $download     = false;
 
@@ -28,22 +29,55 @@ class LinkComponent
     ) {
     }
 
-    public function getFile(): File
+    /**
+     * @param array<string, mixed> $data
+     *
+     * @return array<string, mixed>
+     */
+    #[PreMount]
+    public function validate(array $data): array
     {
-        $file = $this->fileRepository->find($this->id);
+        $resolver = new OptionsResolver();
+        $resolver->setIgnoreUndefined();
 
-        if ($file === null) {
-            throw new RuntimeException(sprintf('File with id %d not found', $this->id));
-        }
+        $resolver->define('id')
+            ->default(null)
+            ->allowedTypes('int', 'null');
 
-        return $file;
+        $resolver->define('file')
+            ->required()
+            ->allowedTypes('int', File::class)
+            ->default(static fn (Options $options, int|File|null $fileOrId) => $fileOrId ?? $options['id'])
+            ->normalize($this->normalizeFile(...));
+
+        return [
+            ...$data,
+            ...$resolver->resolve($data),
+        ];
     }
 
     public function getUrl(): string
     {
         return $this->assetUrlGenerator->__invoke(
-            $this->getFile(),
+            $this->file,
             $this->download,
         );
+    }
+
+    private function normalizeFile(Options $options, int|File|null $fileOrId): File
+    {
+        $fileOrId = $options['id'] ?? $fileOrId;
+
+        if ($fileOrId instanceof File) {
+            return $fileOrId;
+        }
+
+        $file = $this->fileRepository->find($fileOrId);
+
+        if ($file === null) {
+            throw new InvalidArgumentException('File not found');
+        }
+
+        return $file;
     }
 }

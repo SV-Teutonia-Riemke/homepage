@@ -1,5 +1,9 @@
 {% apply spaceless %}
     <div{{ attributes.defaults({class: 'card'}) }}>
+        {% if statusTop %}
+            <div class="card-status-top bg-{{ statusTop }}"></div>
+        {% endif %}
+
         {% block header %}
             {% if header is not empty %}
                 <twig:bs:card:header>{{ header }}</twig:bs:card:header>
@@ -7,7 +11,7 @@
         {% endblock %}
         {% block img_top %}
             {% if image is not empty and image.position in ['top', 'overlay'] %}
-                {{ component('bs:img', image | filter((v, k) => k != 'position')) }}
+                {{ component('bs:image', image | filter((v, k) => k != 'position')) }}
             {% endif %}
         {% endblock %}
         {% block body %}
@@ -19,17 +23,12 @@
             {% if image.position | default('top') == 'overlay' %}
                 <div class="card-img-overlay">{{ body }}</div>
             {% else %}
-                {% set content %}
-                    {% block content %}{% endblock %}
-                {% endset %}
-                <twig:bs:card:body>
-                    {{ content }}
-                </twig:bs:card:body>
+                {% block content %}{% endblock %}
             {% endif %}
         {% endblock %}
         {% block img_bottom %}
             {% if image is not empty and image.position == 'bottom' %}
-                {{ component('bs:img', image | filter((v, k) => k != 'position')) }}
+                {{ component('bs:image', image | filter((v, k) => k != 'position')) }}
             {% endif %}
         {% endblock %}
         {% block footer %}

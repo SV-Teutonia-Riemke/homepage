@@ -8,7 +8,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent(
     name: 'bs:carousel',
-    template: 'components/bootstrap/carousel.html.twig',
+    template: 'components/bs/carousel.html.twig',
 )]
 final class Carousel
 {

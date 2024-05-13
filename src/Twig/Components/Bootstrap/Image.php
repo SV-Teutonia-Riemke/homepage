@@ -11,7 +11,7 @@ use function ksort;
 
 #[AsTwigComponent(
     name: 'bs:img',
-    template: 'components/bootstrap/image.html.twig',
+    template: 'components/bs/image.html.twig',
 )]
 class Image
 {

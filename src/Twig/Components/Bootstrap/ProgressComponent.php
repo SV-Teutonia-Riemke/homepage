@@ -12,7 +12,7 @@ use function ksort;
 
 #[AsTwigComponent(
     name: 'bs:progress',
-    template: 'components/bootstrap/progress.html.twig',
+    template: 'components/bs/progress.html.twig',
 )]
 final class ProgressComponent
 {

@@ -7,10 +7,9 @@ namespace App\Twig\Components\Bootstrap\Card;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent(
-    name: 'bs:card:header',
-    template: 'components/bs/card/header.html.twig',
+    name: 'bs:card:actions',
+    template: 'components/bs/card/actions.html.twig',
 )]
-class CardHeaderComponent
+class CardActionsComponent
 {
-    public string|null $title = null;
 }

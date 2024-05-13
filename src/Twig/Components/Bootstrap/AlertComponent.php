@@ -8,7 +8,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent(
     name: 'bs:alert',
-    template: 'components/bootstrap/alert.html.twig',
+    template: 'components/bs/alert.html.twig',
 )]
 final class AlertComponent
 {

@@ -11,13 +11,15 @@ use Symfony\UX\TwigComponent\Attribute\PreMount;
 
 #[AsTwigComponent(
     name: 'bs:card',
-    template: 'components/bootstrap/card.html.twig',
+    template: 'components/bs/card.html.twig',
 )]
 final class CardComponent
 {
     public string|null $header = null;
     public string|null $body   = null;
     public string|null $footer = null;
+
+    public string|null $statusTop = null;
 
     /** @var array{ src ?: ?string, alt ?: ?string, title ?: ?string, position ?: "top" | "bottom" | "overlay" } */
     public array $image = [];
@@ -44,6 +46,7 @@ final class CardComponent
             'header' => null,
             'body' => null,
             'footer' => null,
+            'statusTop' => null,
             'image' => [],
             'imagePosition' => 'top',
             'imageSrc' => null,
@@ -54,6 +57,7 @@ final class CardComponent
         $resolver->setAllowedTypes('header', ['null', 'string']);
         $resolver->setAllowedTypes('body', ['null', 'string']);
         $resolver->setAllowedTypes('footer', ['null', 'string']);
+        $resolver->setAllowedTypes('statusTop', ['null', 'string']);
         $resolver->setAllowedTypes('image', ['null', 'array']);
         $resolver->setAllowedTypes('imageSrc', ['null', 'string']);
         $resolver->setAllowedTypes('imageAlt', ['null', 'string']);

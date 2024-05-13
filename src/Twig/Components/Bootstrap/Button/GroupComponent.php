@@ -8,7 +8,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent(
     name: 'bs:button:group',
-    template: 'components/bootstrap/button/group.html.twig',
+    template: 'components/bs/button/group.html.twig',
 )]
 final class GroupComponent
 {

@@ -1,0 +1,4 @@
+{% props content = null %}
+<div{{ attributes.defaults({class: 'card-text'}) }}>
+    {%- block content %}{{ content|raw }}{% endblock -%}
+</div>

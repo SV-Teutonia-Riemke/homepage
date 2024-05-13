@@ -8,7 +8,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent(
     name: 'bs:card:footer',
-    template: 'components/bootstrap/card/footer.html.twig',
+    template: 'components/bs/card/footer.html.twig',
 )]
 class CardFooterComponent
 {

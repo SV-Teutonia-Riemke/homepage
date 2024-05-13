@@ -6,15 +6,16 @@ namespace App\Twig\Components\Bootstrap;
 
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
+use function implode;
 use function sprintf;
 
 #[AsTwigComponent(
     name: 'bs:button',
-    template: 'components/bootstrap/button.html.twig',
+    template: 'components/bs/button.html.twig',
 )]
 final class ButtonComponent
 {
-    public string $href;
+    public string|null $href  = null;
     public string $type       = 'primary';
     public bool $outline      = false;
     public string|null $title = null;
@@ -29,5 +30,24 @@ final class ButtonComponent
             'btn',
             sprintf($type, $this->type),
         ];
+    }
+
+    public function getRootTag(): string
+    {
+        return $this->href ? 'a' : 'button';
+    }
+
+    /** @return array<string, string> */
+    public function getDefaults(): array
+    {
+        $defaults = [
+            'class' => implode(' ', $this->getDefaultClasses()),
+        ];
+
+        if ($this->href) {
+            $defaults['href'] = $this->href;
+        }
+
+        return $defaults;
     }
 }

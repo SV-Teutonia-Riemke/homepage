@@ -8,7 +8,7 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent(
     name: 'bs:card:body',
-    template: 'components/bootstrap/card/body.html.twig',
+    template: 'components/bs/card/body.html.twig',
 )]
 final class CardBodyComponent
 {

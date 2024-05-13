@@ -6,18 +6,19 @@ namespace App\Twig\Components\File;
 
 use App\Storage\Entity\File;
 use App\Storage\Repository\FileRepository;
-use RuntimeException;
+use App\Twig\Components\AbstractComponent;
+use InvalidArgumentException;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
-
-use function sprintf;
 
 #[AsTwigComponent(
     name: 'file:image',
     template: 'components/file/image.htm.twig',
 )]
-class ImageComponent
+class ImageComponent extends AbstractComponent
 {
-    public int $id;
+    public File $file;
     public string $filter = 'default';
 
     public int|null $width  = null;
@@ -28,20 +29,22 @@ class ImageComponent
     ) {
     }
 
-    public function getImage(): File
+    protected function configureProps(OptionsResolver $resolver): void
     {
-        $file = $this->fileRepository->find($this->id);
+        $resolver->define('id')
+            ->default(null)
+            ->allowedTypes('int', 'null');
 
-        if ($file === null) {
-            throw new RuntimeException(sprintf('File with id %d not found', $this->id));
-        }
-
-        return $file;
+        $resolver->define('file')
+            ->required()
+            ->allowedTypes('int', File::class)
+            ->default(static fn (Options $options, int|File|null $fileOrId) => $fileOrId ?? $options['id'])
+            ->normalize($this->normalizeFile(...));
     }
 
     public function getFilePath(): string
     {
-        return $this->getImage()->getFilePath();
+        return $this->file->getFilePath();
     }
 
     /** @return array<string, mixed> */
@@ -58,5 +61,22 @@ class ImageComponent
         }
 
         return $config;
+    }
+
+    private function normalizeFile(Options $options, int|File|null $fileOrId): File
+    {
+        $fileOrId = $options['id'] ?? $fileOrId;
+
+        if ($fileOrId instanceof File) {
+            return $fileOrId;
+        }
+
+        $file = $this->fileRepository->find($fileOrId);
+
+        if ($file === null) {
+            throw new InvalidArgumentException('File not found');
+        }
+
+        return $file;
     }
 }
