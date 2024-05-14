@@ -4,7 +4,7 @@
 
 {% set paginationRowWrapper %}
     {% block paginationRowWrapper %}
-        {% for object in pagination %}
+        {% for object in iterable %}
             {% block tableRow %}{% endblock %}
         {% endfor %}
     {% endblock %}
@@ -14,8 +14,14 @@
     <twig:bs:card>
         <twig:block name="header">
             <twig:bs:card:header>
-                <span class="badge bg-secondary text-white">{{ pagination.getTotalItemCount }}</span>
-                {{ paginationTitle }}
+                <span class="badge bg-secondary text-white">
+                    {% if iterable is pagination %}
+                        {{ iterable.getTotalItemCount }}
+                    {% else %}
+                        {{ iterable|length }}
+                    {% endif %}
+                </span>
+                {{ title }}
             </twig:bs:card:header>
         </twig:block>
 
@@ -32,15 +38,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {{ paginationRowWrapper }}
+                {{ paginationRowWrapper }}
                 </tbody>
             </table>
         </twig:block>
 
         <twig:block name="footer">
-            <twig:bs:card:footer class="d-flex align-items-center">
-                {{ knp_pagination_render(pagination) }}
-            </twig:bs:card:footer>
+            {% if iterable is pagination %}
+                <twig:bs:card:footer class="d-flex align-items-center">
+                    {{ knp_pagination_render(iterable) }}
+                </twig:bs:card:footer>
+            {% endif %}
         </twig:block>
     </twig:bs:card>
 </div>

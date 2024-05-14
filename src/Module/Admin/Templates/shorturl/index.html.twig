@@ -1,0 +1,43 @@
+{% extends '@admin/_layout/layout.html.twig' %}
+
+
+{% set pagePreTitle = 'Liste' %}
+{% set pageTitle = 'Short URLs' %}
+
+{% block pageTitleActionsButtons %}
+    {#    <a class="btn btn-primary" href="{{ path('app_admin_article_create') }}">Erstellen</a> #}
+{% endblock %}
+
+{% block pageBody %}
+    <twig:pagination:table title="Artikel">
+        <twig:block name="tableHeader">
+            <th class="w-1"></th>
+            <th>Short URL</th>
+            <th>Titel / Long URL</th>
+            <th>Tags</th>
+            <th>Visits</th>
+            <th></th>
+        </twig:block>
+        <twig:block name="tableRow">
+            <twig:pagination:row>
+                <td>
+                    <a href="{{ object.shortUrl }}" target="_blank">
+                        {{ object.shortUrl }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ object.longUrl }}" target="_blank">
+                        {{ (object.title ?? object.longUrl)|u.truncate(50) }}
+                    </a>
+                </td>
+                <td>
+                    {% for tag in object.tags %}
+                        <twig:bs:badge label="{{ tag }}" class="me-1"/>
+                    {% endfor %}
+                </td>
+                <td>{{ object.visitsCount }}</td>
+                <td>{{ object.dateCreated|format_datetime }}</td>
+            </twig:pagination:row>
+        </twig:block>
+    </twig:pagination:table>
+{% endblock %}

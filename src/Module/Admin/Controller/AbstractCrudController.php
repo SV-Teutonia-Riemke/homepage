@@ -58,8 +58,8 @@ abstract class AbstractCrudController extends AbstractController
         );
 
         return $this->render($this->getCrudConfigObject()->listTemplate, [
-            'form'       => $form ?? null,
-            'pagination' => $pagination,
+            'form' => $form ?? null,
+            'iterable' => $pagination,
         ]);
     }
 
@@ -89,7 +89,7 @@ abstract class AbstractCrudController extends AbstractController
         }
 
         return $this->render($this->getCrudConfigObject()->editTemplate, [
-            'form'   => $form,
+            'form' => $form,
             'object' => $object,
         ]);
     }

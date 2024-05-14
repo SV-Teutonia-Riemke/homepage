@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Twig\Components\Pagination;
 
-use Knp\Bundle\PaginatorBundle\Pagination\SlidingPaginationInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
@@ -14,10 +13,10 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 )]
 class TableComponent
 {
-    public string $paginationTitle;
+    public string $title;
 
-    /** @var SlidingPaginationInterface<array-key, mixed> */
-    public SlidingPaginationInterface $pagination;
+    /** @var iterable<array-key, mixed> */
+    public iterable $iterable;
 
-    public FormInterface|null $form;
+    public FormInterface|null $form = null;
 }
