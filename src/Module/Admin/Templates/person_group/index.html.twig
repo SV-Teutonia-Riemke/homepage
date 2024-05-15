@@ -18,12 +18,12 @@
         <twig:block name="tableRow">
             <twig:pagination:row
                     enabled="{{ object.enabled }}"
-                    up="{{ path('app_admin_person_group_up', { personGroup: object.id }) }}"
-                    down="{{ path('app_admin_person_group_down', { personGroup: object.id }) }}"
-                    remove="{{ path('app_admin_person_group_remove', { personGroup: object.id }) }}"
-                    edit="{{ path('app_admin_person_group_edit', { personGroup: object.id }) }}"
-                    enable="{{ path('app_admin_person_group_enable', { personGroup: object.id }) }}"
-                    disable="{{ path('app_admin_person_group_disable', { personGroup: object.id }) }}"
+                    up="{{ path('app_admin_person_group_up', { object: object.id }) }}"
+                    down="{{ path('app_admin_person_group_down', { object: object.id }) }}"
+                    remove="{{ path('app_admin_person_group_remove', { object: object.id }) }}"
+                    edit="{{ path('app_admin_person_group_edit', { object: object.id }) }}"
+                    enable="{{ path('app_admin_person_group_enable', { object: object.id }) }}"
+                    disable="{{ path('app_admin_person_group_disable', { object: object.id }) }}"
             >
                 <td>{{ object.id }}</td>
                 <td>{{ object.name }}</td>

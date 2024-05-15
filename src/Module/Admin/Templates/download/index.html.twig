@@ -20,10 +20,10 @@
         <twig:block name="tableRow">
             <twig:pagination:row
                     enabled="{{ object.enabled }}"
-                    remove="{{ path('app_admin_download_remove', { download: object.id }) }}"
-                    edit="{{ path('app_admin_download_edit', { download: object.id }) }}"
-                    enable="{{ path('app_admin_download_enable', { download: object.id }) }}"
-                    disable="{{ path('app_admin_download_disable', { download: object.id }) }}"
+                    remove="{{ path('app_admin_download_remove', { object: object.id }) }}"
+                    edit="{{ path('app_admin_download_edit', { object: object.id }) }}"
+                    enable="{{ path('app_admin_download_enable', { object: object.id }) }}"
+                    disable="{{ path('app_admin_download_disable', { object: object.id }) }}"
             >
                 <td>{{ object.id }}</td>
                 <td>{{ object.name }}</td>

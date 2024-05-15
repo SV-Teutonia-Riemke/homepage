@@ -1,7 +1,7 @@
 <{{ this.rootTag }}{{ attributes.defaults(this.defaults) }}>
     {% block content %}
         {% if icon is not null %}
-            <twig:ux:icon class="icon" :name="icon" />
+            <twig:ux:icon :name="icon" />
         {% endif %}
         {% if title is not null %}
             {{ title }}

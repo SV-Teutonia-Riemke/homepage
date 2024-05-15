@@ -19,10 +19,10 @@
         <twig:block name="tableRow">
             <twig:pagination:row
                     enabled="{{ object.enabled }}"
-                    remove="{{ path('app_admin_link_remove', { link: object.id }) }}"
-                    edit="{{ path('app_admin_link_edit', { link: object.id }) }}"
-                    enable="{{ path('app_admin_link_enable', { link: object.id }) }}"
-                    disable="{{ path('app_admin_link_disable', { link: object.id }) }}"
+                    remove="{{ path('app_admin_link_remove', { object: object.id }) }}"
+                    edit="{{ path('app_admin_link_edit', { object: object.id }) }}"
+                    enable="{{ path('app_admin_link_enable', { object: object.id }) }}"
+                    disable="{{ path('app_admin_link_disable', { object: object.id }) }}"
             >
                 <td>{{ object.id }}</td>
                 <td>{{ object.name }}</td>

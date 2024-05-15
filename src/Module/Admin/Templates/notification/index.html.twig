@@ -18,10 +18,10 @@
         <twig:block name="tableRow">
             <twig:pagination:row
                     enabled="{{ object.enabled }}"
-                    remove="{{ path('app_admin_notification_remove', { notification: object.id }) }}"
-                    edit="{{ path('app_admin_notification_edit', { notification: object.id }) }}"
-                    enable="{{ path('app_admin_notification_enable', { notification: object.id }) }}"
-                    disable="{{ path('app_admin_notification_disable', { notification: object.id }) }}"
+                    remove="{{ path('app_admin_notification_remove', { object: object.id }) }}"
+                    edit="{{ path('app_admin_notification_edit', { object: object.id }) }}"
+                    enable="{{ path('app_admin_notification_enable', { object: object.id }) }}"
+                    disable="{{ path('app_admin_notification_disable', { object: object.id }) }}"
             >
                 <td>{{ object.id }}</td>
                 <td>{{ object.title }}</td>

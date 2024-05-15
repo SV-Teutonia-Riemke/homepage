@@ -22,10 +22,10 @@
         <twig:block name="tableRow">
             <twig:pagination:row
                     enabled="{{ object.enabled }}"
-                    remove="{{ path('app_admin_team_remove', { team: object.id }) }}"
-                    edit="{{ path('app_admin_team_edit', { team: object.id }) }}"
-                    enable="{{ path('app_admin_team_enable', { team: object.id }) }}"
-                    disable="{{ path('app_admin_team_disable', { team: object.id }) }}"
+                    remove="{{ path('app_admin_team_remove', { object: object.id }) }}"
+                    edit="{{ path('app_admin_team_edit', { object: object.id }) }}"
+                    enable="{{ path('app_admin_team_enable', { object: object.id }) }}"
+                    disable="{{ path('app_admin_team_disable', { object: object.id }) }}"
             >
                 <td>{{ object.id }}</td>
                 <td>{{ object.name }}</td>

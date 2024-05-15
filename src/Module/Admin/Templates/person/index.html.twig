@@ -19,8 +19,8 @@
         </twig:block>
         <twig:block name="tableRow">
             <twig:pagination:row
-                    remove="{{ path('app_admin_person_remove', { person: object.id }) }}"
-                    edit="{{ path('app_admin_person_edit', { person: object.id }) }}"
+                    remove="{{ path('app_admin_person_remove', { object: object.id }) }}"
+                    edit="{{ path('app_admin_person_edit', { object: object.id }) }}"
             >
                 <td>{{ object.id }}</td>
                 <td>{{ object.firstName }}</td>

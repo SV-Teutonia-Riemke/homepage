@@ -21,10 +21,10 @@
         <twig:block name="tableRow">
             <twig:pagination:row
                     enabled="{{ object.enabled }}"
-                    remove="{{ path('app_admin_sponsor_remove', { sponsor: object.id }) }}"
-                    edit="{{ path('app_admin_sponsor_edit', { sponsor: object.id }) }}"
-                    enable="{{ path('app_admin_sponsor_enable', { sponsor: object.id }) }}"
-                    disable="{{ path('app_admin_sponsor_disable', { sponsor: object.id }) }}"
+                    remove="{{ path('app_admin_sponsor_remove', { object: object.id }) }}"
+                    edit="{{ path('app_admin_sponsor_edit', { object: object.id }) }}"
+                    enable="{{ path('app_admin_sponsor_enable', { object: object.id }) }}"
+                    disable="{{ path('app_admin_sponsor_disable', { object: object.id }) }}"
             >
                 <td>{{ object.id }}</td>
                 <td>{{ object.name }}</td>
