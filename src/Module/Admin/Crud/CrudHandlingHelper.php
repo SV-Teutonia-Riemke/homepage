@@ -9,6 +9,7 @@ use Doctrine\ORM\QueryBuilder;
 use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Component\Form\FormInterface;
 
+/** @template Entity of object */
 class CrudHandlingHelper
 {
     public function __construct(
@@ -17,9 +18,10 @@ class CrudHandlingHelper
     ) {
     }
 
-    public function loadList(CrudConfig $crudConfig)
+    /** @param CrudConfig<Entity> $crudConfig */
+    public function loadList(CrudConfig $crudConfig): mixed
     {
-        return $this->entityManager->getRepository($crudConfig->dtoClass)->createQueryBuilder('p');
+        return $crudConfig->getRepository($this->entityManager)->createQueryBuilder('p');
     }
 
     public function handlePostFiltering(FormInterface $form, QueryBuilder $builder): void
@@ -27,12 +29,14 @@ class CrudHandlingHelper
         $this->filterBuilderUpdater->addFilterConditions($form, $builder);
     }
 
+    /** @param Entity $object */
     public function handlePersisting($object): void
     {
         $this->entityManager->persist($object);
         $this->entityManager->flush();
     }
 
+    /** @param Entity $object */
     public function handleRemoving($object): void
     {
         $this->entityManager->remove($object);
