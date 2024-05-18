@@ -8,6 +8,7 @@ use App\Module\Admin\Crud\CrudConfigBuilder;
 use App\Module\Admin\Crud\Handler\FullHandler;
 use App\Module\Admin\Form\Type\Forms\NotificationType;
 use App\Storage\Entity\Notification;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -20,9 +21,7 @@ final class NotificationController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->setDefaults();
         $builder->dtoClass             = Notification::class;
-        $builder->formType             = NotificationType::class;
         $builder->listTemplate         = '@admin/notification/index.html.twig';
         $builder->createTemplate       = '@admin/notification/create.html.twig';
         $builder->editTemplate         = '@admin/notification/edit.html.twig';
@@ -30,5 +29,10 @@ final class NotificationController extends AbstractCrudController
         $builder->createRouteName      = 'app_admin_notification_create';
         $builder->defaultSortFieldName = 'p.id';
         $builder->defaultSortDirection = 'desc';
+    }
+
+    protected function getFormType(Request $request, object|null $object = null): string
+    {
+        return NotificationType::class;
     }
 }

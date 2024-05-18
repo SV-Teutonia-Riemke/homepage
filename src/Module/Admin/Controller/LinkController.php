@@ -8,6 +8,7 @@ use App\Module\Admin\Crud\CrudConfigBuilder;
 use App\Module\Admin\Crud\Handler\FullHandler;
 use App\Module\Admin\Form\Type\Forms\LinkType;
 use App\Storage\Entity\Link;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -20,9 +21,7 @@ final class LinkController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->setDefaults();
         $builder->dtoClass             = Link::class;
-        $builder->formType             = LinkType::class;
         $builder->listTemplate         = '@admin/link/index.html.twig';
         $builder->createTemplate       = '@admin/link/create.html.twig';
         $builder->editTemplate         = '@admin/link/edit.html.twig';
@@ -30,5 +29,10 @@ final class LinkController extends AbstractCrudController
         $builder->createRouteName      = 'app_admin_link_create';
         $builder->defaultSortFieldName = 'p.id';
         $builder->defaultSortDirection = 'desc';
+    }
+
+    protected function getFormType(Request $request, object|null $object = null): string
+    {
+        return LinkType::class;
     }
 }

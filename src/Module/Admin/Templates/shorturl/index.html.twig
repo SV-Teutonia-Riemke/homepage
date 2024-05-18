@@ -19,7 +19,8 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:pagination:row>
+            <twig:pagination:row
+                    edit="{{ path('app_admin_shorturl_edit', { object: object.shortCode }) }}">
                 <td>
                     <a href="{{ object.shortUrl }}" target="_blank">
                         {{ object.shortUrl }}

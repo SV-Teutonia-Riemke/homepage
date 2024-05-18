@@ -8,6 +8,7 @@ use App\Module\Admin\Crud\CrudConfigBuilder;
 use App\Module\Admin\Crud\Handler\FullHandler;
 use App\Module\Admin\Form\Type\Forms\DownloadType;
 use App\Storage\Entity\Download;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -20,9 +21,7 @@ final class DownloadController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->setDefaults();
         $builder->dtoClass             = Download::class;
-        $builder->formType             = DownloadType::class;
         $builder->listTemplate         = '@admin/download/index.html.twig';
         $builder->createTemplate       = '@admin/download/create.html.twig';
         $builder->editTemplate         = '@admin/download/edit.html.twig';
@@ -30,5 +29,10 @@ final class DownloadController extends AbstractCrudController
         $builder->createRouteName      = 'app_admin_download_create';
         $builder->defaultSortFieldName = 'p.id';
         $builder->defaultSortDirection = 'desc';
+    }
+
+    protected function getFormType(Request $request, object|null $object = null): string
+    {
+        return DownloadType::class;
     }
 }

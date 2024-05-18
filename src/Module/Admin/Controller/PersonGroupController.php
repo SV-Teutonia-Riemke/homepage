@@ -9,6 +9,7 @@ use App\Module\Admin\Crud\Handler\FullHandler;
 use App\Module\Admin\Crud\Handler\PositionHandler;
 use App\Module\Admin\Form\Type\Forms\PersonGroupType;
 use App\Storage\Entity\PersonGroup;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -22,9 +23,7 @@ final class PersonGroupController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->setDefaults();
         $builder->dtoClass             = PersonGroup::class;
-        $builder->formType             = PersonGroupType::class;
         $builder->listTemplate         = '@admin/person_group/index.html.twig';
         $builder->createTemplate       = '@admin/person_group/create.html.twig';
         $builder->editTemplate         = '@admin/person_group/edit.html.twig';
@@ -32,5 +31,10 @@ final class PersonGroupController extends AbstractCrudController
         $builder->createRouteName      = 'app_admin_person_group_create';
         $builder->defaultSortFieldName = 'p.position';
         $builder->defaultSortDirection = 'asc';
+    }
+
+    protected function getFormType(Request $request, object|null $object = null): string
+    {
+        return PersonGroupType::class;
     }
 }

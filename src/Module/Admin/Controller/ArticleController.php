@@ -8,6 +8,7 @@ use App\Module\Admin\Crud\CrudConfigBuilder;
 use App\Module\Admin\Crud\Handler\FullHandler;
 use App\Module\Admin\Form\Type\Forms\ArticleType;
 use App\Storage\Entity\Article;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -20,9 +21,7 @@ final class ArticleController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->setDefaults();
         $builder->dtoClass             = Article::class;
-        $builder->formType             = ArticleType::class;
         $builder->listTemplate         = '@admin/article/index.html.twig';
         $builder->createTemplate       = '@admin/article/create.html.twig';
         $builder->editTemplate         = '@admin/article/edit.html.twig';
@@ -30,5 +29,10 @@ final class ArticleController extends AbstractCrudController
         $builder->createRouteName      = 'app_admin_article_create';
         $builder->defaultSortFieldName = 'p.id';
         $builder->defaultSortDirection = 'desc';
+    }
+
+    protected function getFormType(Request $request, object|null $object = null): string
+    {
+        return ArticleType::class;
     }
 }

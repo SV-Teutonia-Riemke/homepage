@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Form\Type\Forms;
 
-use Shlinkio\Shlink\SDK\ShortUrls\Model\ShortUrl;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,10 +17,13 @@ final class ShortUrlType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('shortUrl', UrlType::class, [
+            ->add('longUrl', UrlType::class, [
                 'constraints' => [
                     new NotBlank(),
                 ],
+            ])
+            ->add('shortCode', TextType::class, [
+                'required' => false,
             ]);
     }
 
