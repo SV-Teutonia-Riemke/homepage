@@ -21,12 +21,10 @@ final class PageController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->dtoClass        = Page::class;
-        $builder->listTemplate    = '@admin/page/index.html.twig';
-        $builder->createTemplate  = '@admin/page/create.html.twig';
-        $builder->editTemplate    = '@admin/page/edit.html.twig';
-        $builder->listRouteName   = 'app_admin_page_index';
-        $builder->createRouteName = 'app_admin_page_create';
+        $builder->setMandatory(
+            Page::class,
+            'page',
+        );
     }
 
     protected function getFormType(Request $request, object|null $object = null): string

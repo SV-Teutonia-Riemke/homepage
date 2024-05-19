@@ -15,26 +15,39 @@ use function sprintf;
 )]
 final class ButtonComponent
 {
-    public string|null $href  = null;
-    public string $type       = 'primary';
-    public bool $outline      = false;
-    public string|null $title = null;
-    public string|null $icon  = null;
+    public string|null $href    = null;
+    public string $type         = 'primary';
+    public bool $outline        = false;
+    public string|null $title   = null;
+    public string|null $icon    = null;
+    public bool $confirmation   = false;
+    public string|null $size    = null;
+    public string|null $tooltip = null;
 
     /** @return list<string> */
     public function getDefaultClasses(): array
     {
         $type = $this->outline ? 'btn-outline-%s' : 'btn-%s';
 
-        return [
+        $classes = [
             'btn',
             sprintf($type, $this->type),
         ];
+
+        if ($this->icon !== null && $this->title === null) {
+            $classes[] = 'btn-icon';
+        }
+
+        if ($this->size !== null) {
+            $classes[] = sprintf('btn-%s', $this->size);
+        }
+
+        return $classes;
     }
 
     public function getRootTag(): string
     {
-        return $this->href ? 'a' : 'button';
+        return $this->href !== null ? 'a' : 'button';
     }
 
     /** @return array<string, string> */
@@ -44,8 +57,14 @@ final class ButtonComponent
             'class' => implode(' ', $this->getDefaultClasses()),
         ];
 
-        if ($this->href) {
+        if ($this->href !== null) {
             $defaults['href'] = $this->href;
+        }
+
+        if ($this->tooltip !== null) {
+            $defaults['data-bs-toggle']    = 'tooltip';
+            $defaults['data-bs-placement'] = 'top';
+            $defaults['title']             = $this->tooltip;
         }
 
         return $defaults;

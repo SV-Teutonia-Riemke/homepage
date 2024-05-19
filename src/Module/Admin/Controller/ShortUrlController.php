@@ -37,12 +37,9 @@ class ShortUrlController extends AbstractCrudController
     {
         $builder->setMandatory(
             ShortUrl::class,
-            '@admin/shorturl/index.html.twig',
-            'app_admin_shorturl_index',
+            'shorturl',
         );
-        $builder->createTemplate  = '@admin/shorturl/create.html.twig';
-        $builder->editTemplate    = '@admin/shorturl/edit.html.twig';
-        $builder->createRouteName = 'app_admin_shorturl_create';
+        $builder->objectIdentifierCallable = static fn (ShortUrl $shortUrl): string => $shortUrl->shortCode;
     }
 
     protected function doLoadList(CrudConfig $crudConfig): mixed
@@ -55,34 +52,62 @@ class ShortUrlController extends AbstractCrudController
         return $this->shlinkClient->getShortUrl(ShortUrlIdentifier::fromShortCode($objectIdentifier));
     }
 
-    protected function doHandleValidCreateForm(Request $request, FormInterface $form, $data): void
+    protected function doHandleValidCreateForm(Request $request, FormInterface $form, mixed $data): void
     {
-        $creation = ShortUrlCreation::forLongUrl($form->get('longUrl')->getData());
+        if (! $data instanceof \App\Module\Admin\Misc\Shlink\ShortUrl) {
+            throw new RuntimeException('Invalid data type', 1716126888221);
+        }
+
+        $creation = ShortUrlCreation::forLongUrl($data->longUrl)
+            ->returnExistingMatchingShortUrl();
+
+        if ($data->shortCode !== null) {
+            $creation = $creation->withCustomSlug($data->shortCode);
+        }
+
+        if ($data->containsTags()) {
+            $creation = $creation->withTags(...$data->getTagsAsArray());
+        }
 
         $this->shlinkClient->createShortUrl($creation);
     }
 
-    protected function doHandleValidEditForm(Request $request, FormInterface $form, $data): void
+    protected function doHandleValidEditForm(Request $request, FormInterface $form, mixed $data): void
     {
-        $edition = ShortUrlEdition::create();
+        if (! $data instanceof \App\Module\Admin\Misc\Shlink\ShortUrl) {
+            throw new RuntimeException('Invalid data type', 1716126888220);
+        }
+
+        $shlinkShortUrl = $this->loadObject($request);
+        $identifier     = ShortUrlIdentifier::fromShortUrl($shlinkShortUrl);
+
+        $edition = ShortUrlEdition::create()
+            ->withLongUrl($data->longUrl);
+
+        if ($data->containsTags()) {
+            $edition = $edition->withTags(...$data->getTagsAsArray());
+        }
 
         $this->shlinkClient->editShortUrl(
-            ShortUrlIdentifier::fromShortUrl(
-                $this->loadObject($request),
-            ),
+            $identifier,
             $edition,
         );
     }
 
-    protected function doCreatePersisting($object): void
+    protected function doCreatePersisting(object $object): void
     {
     }
 
-    protected function doUpdatePersisting($object): void
+    protected function doUpdatePersisting(object $object): void
     {
     }
 
-    protected function doRemoving($object): void
+    protected function doMapToFormDto(object $object): mixed
+    {
+        return \App\Module\Admin\Misc\Shlink\ShortUrl::fromShlink($object);
+    }
+
+    protected function doRemoving(object $object): void
     {
         $this->shlinkClient->deleteShortUrl(
             ShortUrlIdentifier::fromShortUrl($object),

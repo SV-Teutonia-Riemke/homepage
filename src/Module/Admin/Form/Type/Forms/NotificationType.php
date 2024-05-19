@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Storage\Entity\Notification;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,7 +25,7 @@ final class NotificationType extends AbstractType
                     new NotBlank(),
                 ],
             ])
-            ->add('content', CKEditorType::class, [
+            ->add('content', TinymceType::class, [
                 'constraints' => [
                     new NotBlank(),
                 ],

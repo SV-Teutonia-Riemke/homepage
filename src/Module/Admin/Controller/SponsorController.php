@@ -23,12 +23,10 @@ final class SponsorController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->dtoClass             = Sponsor::class;
-        $builder->listTemplate         = '@admin/sponsor/index.html.twig';
-        $builder->createTemplate       = '@admin/sponsor/create.html.twig';
-        $builder->editTemplate         = '@admin/sponsor/edit.html.twig';
-        $builder->listRouteName        = 'app_admin_sponsor_index';
-        $builder->createRouteName      = 'app_admin_sponsor_create';
+        $builder->setMandatory(
+            Sponsor::class,
+            'sponsor',
+        );
         $builder->defaultSortFieldName = 'p.position';
         $builder->defaultSortDirection = 'asc';
     }

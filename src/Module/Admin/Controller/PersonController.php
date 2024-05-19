@@ -22,12 +22,10 @@ final class PersonController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->dtoClass        = Person::class;
-        $builder->listTemplate    = '@admin/person/index.html.twig';
-        $builder->createTemplate  = '@admin/person/create.html.twig';
-        $builder->editTemplate    = '@admin/person/edit.html.twig';
-        $builder->listRouteName   = 'app_admin_person_index';
-        $builder->createRouteName = 'app_admin_person_create';
+        $builder->setMandatory(
+            Person::class,
+            'person',
+        );
     }
 
     protected function getFormType(Request $request, object|null $object = null): string
@@ -35,7 +33,7 @@ final class PersonController extends AbstractCrudController
         return PersonType::class;
     }
 
-    protected function getSearchType(): string|null
+    protected function getSearchType(): string
     {
         return PersonSearchType::class;
     }

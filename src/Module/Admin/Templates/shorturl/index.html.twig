@@ -5,7 +5,7 @@
 {% set pageTitle = 'Short URLs' %}
 
 {% block pageTitleActionsButtons %}
-        <a class="btn btn-primary" href="{{ path('app_admin_shorturl_create') }}">Erstellen</a>
+    <twig:crud:create crud="{{ crud }}" />
 {% endblock %}
 
 {% block pageBody %}
@@ -16,11 +16,14 @@
             <th>Titel / Long URL</th>
             <th>Tags</th>
             <th>Visits</th>
+            <th>Created</th>
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:pagination:row
-                    edit="{{ path('app_admin_shorturl_edit', { object: object.shortCode }) }}">
+            <twig:crud:row>
+                <td>
+                    <twig:bs:button size="sm" type="primary" outline class="btn-icon copy-to-clipboard" data-clipboard-text="{{ object.shortUrl }}" icon="fa6-solid:copy" tooltip="In die Zwischenablage kopieren" />
+                </td>
                 <td>
                     <a href="{{ object.shortUrl }}" target="_blank">
                         {{ object.shortUrl }}
@@ -38,7 +41,7 @@
                 </td>
                 <td>{{ object.visitsCount }}</td>
                 <td>{{ object.dateCreated|format_datetime }}</td>
-            </twig:pagination:row>
+            </twig:crud:row>
         </twig:block>
     </twig:pagination:table>
 {% endblock %}

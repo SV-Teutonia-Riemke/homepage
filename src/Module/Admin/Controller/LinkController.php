@@ -6,6 +6,7 @@ namespace App\Module\Admin\Controller;
 
 use App\Module\Admin\Crud\CrudConfigBuilder;
 use App\Module\Admin\Crud\Handler\FullHandler;
+use App\Module\Admin\Crud\Handler\PositionHandler;
 use App\Module\Admin\Form\Type\Forms\LinkType;
 use App\Storage\Entity\Link;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,17 +19,17 @@ use Symfony\Component\Routing\Attribute\Route;
 final class LinkController extends AbstractCrudController
 {
     use FullHandler;
+    use PositionHandler;
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->dtoClass             = Link::class;
-        $builder->listTemplate         = '@admin/link/index.html.twig';
-        $builder->createTemplate       = '@admin/link/create.html.twig';
-        $builder->editTemplate         = '@admin/link/edit.html.twig';
-        $builder->listRouteName        = 'app_admin_link_index';
-        $builder->createRouteName      = 'app_admin_link_create';
-        $builder->defaultSortFieldName = 'p.id';
-        $builder->defaultSortDirection = 'desc';
+        $builder->setMandatory(
+            Link::class,
+            'link',
+        );
+
+        $builder->defaultSortFieldName = 'p.position';
+        $builder->defaultSortDirection = 'asc';
     }
 
     protected function getFormType(Request $request, object|null $object = null): string

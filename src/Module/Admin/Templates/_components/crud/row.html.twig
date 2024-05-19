@@ -1,0 +1,18 @@
+{% props enabled = null %}
+
+{% set content %}
+    {% block content %}
+    {% endblock %}
+{% endset %}
+
+{% component 'pagination:row' with {
+    edit: crud is crud_has_edit ? crud_url_edit(crud, object) : null,
+    remove: crud is crud_has_remove ? crud_url_remove(crud, object) : null,
+    up: crud is crud_has_up ? crud_url_up(crud, object) : null,
+    down: crud is crud_has_down ? crud_url_down(crud, object) : null,
+    enabled: enabled,
+    enable: crud is crud_has_enable ? crud_url_enable(crud, object) : null,
+    disable: crud is crud_has_disable ? crud_url_disable(crud, object) : null,
+} %}
+    {% block content %}{{ content }}{% endblock %}
+{% endcomponent %}

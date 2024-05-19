@@ -4,7 +4,7 @@
 {% set pageTitle = 'Sponsor' %}
 
 {% block pageTitleActionsButtons %}
-    <a class="btn btn-primary" href="{{ path('app_admin_sponsor_create') }}">Create</a>
+    <twig:crud:create crud="{{ crud }}" />
 {% endblock %}
 
 {% block pageBody %}
@@ -19,19 +19,15 @@
             <th class="w-1"></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:pagination:row
-                    enabled="{{ object.enabled }}"
-                    remove="{{ path('app_admin_sponsor_remove', { object: object.id }) }}"
-                    edit="{{ path('app_admin_sponsor_edit', { object: object.id }) }}"
-                    enable="{{ path('app_admin_sponsor_enable', { object: object.id }) }}"
-                    disable="{{ path('app_admin_sponsor_disable', { object: object.id }) }}"
-            >
+            <twig:crud:row enabled="{{ object.enabled }}">
                 <td>{{ object.id }}</td>
-                <td>{{ object.name }}</td>
+                <td title="{{ object.name }}">{{ object.name|u.truncate(20, '...') }}</td>
                 <td>{{ object.level.translatable|trans }}</td>
-                <td>{{ object.url }}</td>
+                <td>
+                    <a href="{{ object.url }}" target="_blank">{{ object.url }}</a>
+                </td>
                 <td>{{ object.image is null ? '' : object.image.pathName }}</td>
-            </twig:pagination:row>
+            </twig:crud:row>
         </twig:block>
     </twig:pagination:table>
 {% endblock %}

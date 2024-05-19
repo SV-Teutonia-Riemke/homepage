@@ -11,15 +11,16 @@ use RuntimeException;
 class CrudConfigBuilder
 {
     /** @var class-string<Entity>|null */
-    public string|null $dtoClass             = null;
-    public string|null $listTemplate         = null;
-    public string|null $createTemplate       = null;
-    public string|null $editTemplate         = null;
-    public string|null $listRouteName        = null;
-    public string|null $createRouteName      = null;
-    public string|null $defaultSortFieldName = null;
-    public string|null $defaultSortDirection = null;
-    public Closure|null $handleForm          = null;
+    public string|null $dtoClass                  = null;
+    public string|null $listTemplate              = null;
+    public string|null $createTemplate            = null;
+    public string|null $editTemplate              = null;
+    public string|null $baseRouteName             = null;
+    public string|null $listRouteName             = null;
+    public string|null $createRouteName           = null;
+    public string|null $defaultSortFieldName      = null;
+    public string|null $defaultSortDirection      = null;
+    public Closure|null $objectIdentifierCallable = null;
 
     /**
      * @param class-string<Entity> $dtoClass
@@ -28,12 +29,10 @@ class CrudConfigBuilder
      */
     public function setMandatory(
         string $dtoClass,
-        string $listTemplate,
-        string $listRouteName,
+        string $baseRouteName,
     ): self {
         $this->dtoClass      = $dtoClass;
-        $this->listTemplate  = $listTemplate;
-        $this->listRouteName = $listRouteName;
+        $this->baseRouteName = $baseRouteName;
 
         return $this;
     }
@@ -46,26 +45,22 @@ class CrudConfigBuilder
             throw new RuntimeException('DTO class is not set', 1715883146439);
         }
 
-        $listTemplate = $this->listTemplate;
-        if ($listTemplate === null) {
-            throw new RuntimeException('List template is not set', 1715883146440);
-        }
-
-        $listRouteName = $this->listRouteName;
-        if ($listRouteName === null) {
+        $baseRouteName = $this->baseRouteName;
+        if ($baseRouteName === null) {
             throw new RuntimeException('List route name is not set', 1715883146441);
         }
 
         return new CrudConfig(
             dtoClass: $dtoClass,
-            listTemplate: $listTemplate,
-            listRouteName: $listRouteName,
-            createTemplate: $this->createTemplate,
-            editTemplate: $this->editTemplate,
+            baseRouteName: $baseRouteName,
+            listRouteName: $this->listRouteName,
             createRouteName: $this->createRouteName,
+            listTemplateName: $this->listTemplate,
+            createTemplateName: $this->createTemplate,
+            editTemplateName: $this->editTemplate,
             defaultSortFieldName: $this->defaultSortFieldName,
             defaultSortDirection: $this->defaultSortDirection,
-            handleForm: $this->handleForm,
+            objectIdentifierCallable: $this->objectIdentifierCallable,
         );
     }
 }

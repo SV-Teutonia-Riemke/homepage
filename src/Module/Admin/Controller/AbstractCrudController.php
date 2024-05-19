@@ -11,6 +11,7 @@ use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\PositionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use LogicException;
 use RuntimeException;
 use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +25,7 @@ use function array_merge;
 use function assert;
 use function class_exists;
 use function is_a;
+use function sprintf;
 
 /** @template Entity of object */
 abstract class AbstractCrudController extends AbstractController
@@ -63,7 +65,8 @@ abstract class AbstractCrudController extends AbstractController
             options: $paginationOptions,
         );
 
-        return $this->render($crudConfig->listTemplate, [
+        return $this->render($crudConfig->getListTemplateName(), [
+            'crud' => $crudConfig,
             'form' => $form ?? null,
             'iterable' => $pagination,
         ]);
@@ -72,10 +75,6 @@ abstract class AbstractCrudController extends AbstractController
     protected function handleCreate(Request $request): Response
     {
         $crudConfig = $this->getCrudConfig();
-
-        if ($crudConfig->createTemplate === null) {
-            throw new RuntimeException('Create template is not set', 1715882067839);
-        }
 
         $formType = $this->getFormType($request);
 
@@ -87,7 +86,8 @@ abstract class AbstractCrudController extends AbstractController
             return $this->handleValidCreateForm($request, $form);
         }
 
-        return $this->render($crudConfig->createTemplate, [
+        return $this->render($crudConfig->getCreateTemplateName(), [
+            'crud' => $crudConfig,
             'form' => $form,
         ]);
     }
@@ -96,23 +96,20 @@ abstract class AbstractCrudController extends AbstractController
     {
         $crudConfig = $this->getCrudConfig();
 
-        if ($crudConfig->editTemplate === null) {
-            throw new RuntimeException('Edit template is not set', 1715881714899);
-        }
-
         $object = $this->loadObject($request);
 
         $formType = $this->getFormType($request, $object);
 
         $form = $this
-            ->createForm($formType, $object)
+            ->createForm($formType, $this->doMapToFormDto($object))
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->handleValidEditForm($form);
+            return $this->handleValidEditForm($request, $form);
         }
 
-        return $this->render($crudConfig->editTemplate, [
+        return $this->render($crudConfig->getEditTemplateName(), [
+            'crud' => $crudConfig,
             'form' => $form,
             'object' => $object,
         ]);
@@ -143,16 +140,16 @@ abstract class AbstractCrudController extends AbstractController
 
         $callable($request, $form, $data);
 
-        if ($form->has(AbstractForm::BUTTON_SUBMIT_AND_NEW) && $crudConfig->createRouteName !== null) {
+        if ($form->has(AbstractForm::BUTTON_SUBMIT_AND_NEW)) {
             $submitAndNew = $form->get(AbstractForm::BUTTON_SUBMIT_AND_NEW);
             assert($submitAndNew instanceof SubmitButton);
 
             if ($submitAndNew->isClicked()) {
-                return $this->redirectToRoute($crudConfig->createRouteName);
+                return $this->redirectToRoute($crudConfig->getCreateRouteName());
             }
         }
 
-        return $this->redirectToRoute($crudConfig->listRouteName);
+        return $this->redirectToRoute($crudConfig->getListRouteName());
     }
 
     public function handleRemove(Request $request): Response
@@ -162,7 +159,7 @@ abstract class AbstractCrudController extends AbstractController
 
         $this->doRemoving($entity);
 
-        return $this->redirectToRoute($crudConfig->listRouteName);
+        return $this->redirectToRoute($crudConfig->getListRouteName());
     }
 
     public function handleEnabled(Request $request, bool $enabled): Response
@@ -176,7 +173,7 @@ abstract class AbstractCrudController extends AbstractController
 
         $this->doPersisting($entity);
 
-        return $this->redirectToRoute($this->getCrudConfig()->listRouteName);
+        return $this->redirectToRoute($this->getCrudConfig()->getListRouteName());
     }
 
     public function handlePosition(Request $request, int $position): Response
@@ -190,7 +187,7 @@ abstract class AbstractCrudController extends AbstractController
 
         $this->doPersisting($entity);
 
-        return $this->redirectToRoute($this->getCrudConfig()->listRouteName);
+        return $this->redirectToRoute($this->getCrudConfig()->getListRouteName());
     }
 
     /** @return Entity */
@@ -216,54 +213,83 @@ abstract class AbstractCrudController extends AbstractController
         return $entity;
     }
 
+    /** @param CrudConfig<Entity> $crudConfig */
     protected function doLoadList(CrudConfig $crudConfig): mixed
     {
         return $this->getEntityManager()->getRepository($crudConfig->dtoClass)->createQueryBuilder('p');
     }
 
-    /** @return Entity|null */
-    protected function doLoadObject(CrudConfig $crudConfig, mixed $objectIdentifier): object|null
+    /**
+     * @param CrudConfig<Entity> $crudConfig
+     *
+     * @return Entity|null
+     */
+    protected function doLoadObject(CrudConfig $crudConfig, string|int $objectIdentifier): object|null
     {
-        return $this->getEntityManager()->getRepository($crudConfig->dtoClass)->find($objectIdentifier);
+        $entity = $this->getEntityManager()->getRepository($crudConfig->dtoClass)->find($objectIdentifier);
+        if ($entity === null) {
+            return null;
+        }
+
+        if (! is_a($entity, $crudConfig->dtoClass)) {
+            throw new LogicException(sprintf('Entity is not an instance of %s', $crudConfig->dtoClass), 1716117092970);
+        }
+
+        return $entity;
     }
 
-    protected function doHandleValidCreateForm(Request $request, FormInterface $form, $data): void
+    /** @param Entity $object */
+    protected function doMapToFormDto(object $object): mixed
+    {
+        return $object;
+    }
+
+    protected function doHandleValidCreateForm(Request $request, FormInterface $form, mixed $data): void
     {
         $this->doHandleValidForm($request, $form, $data);
     }
 
-    protected function doHandleValidEditForm(Request $request, FormInterface $form, $data): void
+    protected function doHandleValidEditForm(Request $request, FormInterface $form, mixed $data): void
     {
         $this->doHandleValidForm($request, $form, $data);
     }
 
-    protected function doHandleValidForm(Request $request, FormInterface $form, $data): void
+    protected function doHandleValidForm(Request $request, FormInterface $form, mixed $data): void
     {
         $this->doPersisting($data);
     }
 
-    protected function doCreatePersisting($object): void
+    /** @param Entity $object */
+    protected function doCreatePersisting(object $object): void
     {
         $this->doPersisting($object);
     }
 
-    protected function doUpdatePersisting($object): void
+    /** @param Entity $object */
+    protected function doUpdatePersisting(object $object): void
     {
         $this->doPersisting($object);
     }
 
-    protected function doPersisting($object): void
+    /** @param Entity $object */
+    protected function doPersisting(object $object): void
     {
         $this->getEntityManager()->persist($object);
         $this->getEntityManager()->flush();
     }
 
-    protected function doRemoving($object): void
+    /** @param Entity $object */
+    protected function doRemoving(object $object): void
     {
         $this->getEntityManager()->remove($object);
         $this->getEntityManager()->flush();
     }
 
+    /**
+     * @param array<string, mixed> $options
+     *
+     * @return array<string, mixed>
+     */
     protected function enrichPaginationOptions(Request $request, array $options): array
     {
         return $options;

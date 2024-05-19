@@ -21,14 +21,10 @@ final class TeamController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->dtoClass             = Team::class;
-        $builder->listTemplate         = '@admin/team/index.html.twig';
-        $builder->createTemplate       = '@admin/team/create.html.twig';
-        $builder->editTemplate         = '@admin/team/edit.html.twig';
-        $builder->listRouteName        = 'app_admin_team_index';
-        $builder->createRouteName      = 'app_admin_team_create';
-        $builder->defaultSortFieldName = 'p.id';
-        $builder->defaultSortDirection = 'asc';
+        $builder->setMandatory(
+            Team::class,
+            'team',
+        );
     }
 
     protected function getFormType(Request $request, object|null $object = null): string

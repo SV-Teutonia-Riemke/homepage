@@ -16,7 +16,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^2.19|^3.1",
         "doctrine/persistence": "^3.3",
-        "friendsofsymfony/ckeditor-bundle": "^2.5",
+        "eckinox/tinymce-bundle": "^5.0",
         "gedmo/doctrine-extensions": "^3.15",
         "giggsey/libphonenumber-for-php": "^8.13",
         "knplabs/knp-components": "^4.4",
@@ -27,10 +27,12 @@
         "league/flysystem": "^3.27",
         "liip/imagine-bundle": "^2.12",
         "nesbot/carbon": "^3.3",
-        "nyholm/psr7": "*",
+        "nyholm/psr7": "^1.8",
         "odolbeau/phone-number-bundle": "^3.10",
         "oneup/flysystem-bundle": "^4.12",
         "presta/sitemap-bundle": "^4.1",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.1",
         "psr/clock": "^1.0",
         "psr/event-dispatcher": "^1.0",
         "psr/log": "^3.0",
@@ -139,7 +141,6 @@
     "scripts": {
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
-            "ckeditor:install --tag=4.22.1 --clear=drop": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "prepare-test": [
@@ -179,7 +180,7 @@
         "fos-js-dump": "php bin/console fos:js-routing:dump --format=json --target=public/js/fos_js_routes.json",
         "crc": "vendor/bin/composer-require-checker --config-file=./composer-require-checker.json",
         "phpstan": "phpstan analyse --ansi",
-        "phpstan-update-baseline": "phpstan analyse --ansi --generate-baseline phpstan-baseline.neon",
+        "phpstan-update-baseline": "phpstan analyse --ansi --generate-baseline phpstan-baseline.php",
         "phpunit": "phpunit --colors=always",
         "cs-check": "phpcs -s --filter=GitModified",
         "cs-check-all": "phpcs -s",

@@ -21,12 +21,10 @@ final class ArticleController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->dtoClass             = Article::class;
-        $builder->listTemplate         = '@admin/article/index.html.twig';
-        $builder->createTemplate       = '@admin/article/create.html.twig';
-        $builder->editTemplate         = '@admin/article/edit.html.twig';
-        $builder->listRouteName        = 'app_admin_article_index';
-        $builder->createRouteName      = 'app_admin_article_create';
+        $builder->setMandatory(
+            Article::class,
+            'article',
+        );
         $builder->defaultSortFieldName = 'p.id';
         $builder->defaultSortDirection = 'desc';
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain;
 
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -28,7 +28,7 @@ enum ConfigType: string
             self::INTEGER => IntegerType::class,
             self::NUMBER => NumberType::class,
             self::COLOR => ColorType::class,
-            self::WYSIWYG => CKEditorType::class,
+            self::WYSIWYG => TinymceType::class,
         };
     }
 }

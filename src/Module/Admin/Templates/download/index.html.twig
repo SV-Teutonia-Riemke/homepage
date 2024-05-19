@@ -4,7 +4,7 @@
 {% set pageTitle = 'Download' %}
 
 {% block pageTitleActionsButtons %}
-    <a class="btn btn-primary" href="{{ path('app_admin_download_create') }}">Create</a>
+    <twig:crud:create crud="{{ crud }}" />
 {% endblock %}
 
 {% block pageBody %}
@@ -18,18 +18,12 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:pagination:row
-                    enabled="{{ object.enabled }}"
-                    remove="{{ path('app_admin_download_remove', { object: object.id }) }}"
-                    edit="{{ path('app_admin_download_edit', { object: object.id }) }}"
-                    enable="{{ path('app_admin_download_enable', { object: object.id }) }}"
-                    disable="{{ path('app_admin_download_disable', { object: object.id }) }}"
-            >
+            <twig:crud:row enabled="{{ object.enabled }}">
                 <td>{{ object.id }}</td>
                 <td>{{ object.name }}</td>
                 <td>{{ object.uri }}</td>
                 <td>{{ object.file is null ? '-' : object.file.name }}</td>
-            </twig:pagination:row>
+            </twig:crud:row>
         </twig:block>
     </twig:pagination:table>
 {% endblock %}

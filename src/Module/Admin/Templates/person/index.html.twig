@@ -4,7 +4,7 @@
 {% set pageTitle = 'Person' %}
 
 {% block pageTitleActionsButtons %}
-    <a class="btn btn-primary" href="{{ path('app_admin_person_create') }}">Create</a>
+    <twig:crud:create crud="{{ crud }}" />
 {% endblock %}
 
 {% block pageBody %}
@@ -18,16 +18,13 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:pagination:row
-                    remove="{{ path('app_admin_person_remove', { object: object.id }) }}"
-                    edit="{{ path('app_admin_person_edit', { object: object.id }) }}"
-            >
+            <twig:crud:row>
                 <td>{{ object.id }}</td>
                 <td>{{ object.firstName }}</td>
                 <td>{{ object.lastName }}</td>
                 <td>{{ object.emailAddress }}</td>
                 <td>{{ object.phoneNumber is null ? '' : object.phoneNumber|phone_number_format }}</td>
-            </twig:pagination:row>
+            </twig:crud:row>
         </twig:block>
     </twig:pagination:table>
 {% endblock %}

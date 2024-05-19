@@ -21,14 +21,10 @@ final class NotificationController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->dtoClass             = Notification::class;
-        $builder->listTemplate         = '@admin/notification/index.html.twig';
-        $builder->createTemplate       = '@admin/notification/create.html.twig';
-        $builder->editTemplate         = '@admin/notification/edit.html.twig';
-        $builder->listRouteName        = 'app_admin_notification_index';
-        $builder->createRouteName      = 'app_admin_notification_create';
-        $builder->defaultSortFieldName = 'p.id';
-        $builder->defaultSortDirection = 'desc';
+        $builder->setMandatory(
+            Notification::class,
+            'notification',
+        );
     }
 
     protected function getFormType(Request $request, object|null $object = null): string

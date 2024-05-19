@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cc6a239ca025eb8a885ff752cfa57967",
+    "content-hash": "2774c787cc0d1802ab6143207e573916",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1452,85 +1452,51 @@
             "time": "2024-05-08T08:12:09+00:00"
         },
         {
-            "name": "friendsofsymfony/ckeditor-bundle",
-            "version": "2.5.0",
+            "name": "eckinox/tinymce-bundle",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle.git",
-                "reference": "9d4cd4f2db4d800164b9c3051e4bfdee21acb27f"
+                "url": "https://github.com/eckinox/tinymce-bundle.git",
+                "reference": "832e5f30bd9409f1c52aca6c601bff4b4ce81708"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCKEditorBundle/zipball/9d4cd4f2db4d800164b9c3051e4bfdee21acb27f",
-                "reference": "9d4cd4f2db4d800164b9c3051e4bfdee21acb27f",
+                "url": "https://api.github.com/repos/eckinox/tinymce-bundle/zipball/832e5f30bd9409f1c52aca6c601bff4b4ce81708",
+                "reference": "832e5f30bd9409f1c52aca6c601bff4b4ce81708",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
-                "ext-zip": "*",
                 "php": "^8.0",
-                "symfony/asset": "^5.4 || ^6.0 || ^7.0",
-                "symfony/config": "^5.4 || ^6.0 || ^7.0",
-                "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
-                "symfony/expression-language": "^5.4 || ^6.0 || ^7.0",
-                "symfony/form": "^5.4 || ^6.0 || ^7.0",
-                "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0",
-                "symfony/http-foundation": "^5.4 || ^6.0 || ^7.0",
-                "symfony/http-kernel": "^5.4 || ^6.0 || ^7.0",
-                "symfony/options-resolver": "^5.4 || ^6.0 || ^7.0",
-                "symfony/property-access": "^5.4 || ^6.0 || ^7.0",
-                "symfony/routing": "^5.4 || ^6.0 || ^7.0",
-                "symfony/twig-bundle": "^5.4 || ^6.0 || ^7.0",
-                "twig/twig": "^2.4 || ^3.0"
-            },
-            "conflict": {
-                "sebastian/environment": "<1.3.4",
-                "sebastian/exporter": "<2.0.0"
+                "symfony/asset": "^4.0|^5.0|^6.0|^7.0",
+                "symfony/dependency-injection": "^4.0|^5.0|^6.0|^7.0",
+                "symfony/form": "^4.0|^5.0|^6.0|^7.0",
+                "symfony/http-foundation": "^4.0|^5.0|^6.0|^7.0",
+                "symfony/http-kernel": "^4.0|^5.0|^6.0|^7.0",
+                "symfony/routing": "^4.0|^5.0|^6.0|^7.0",
+                "twig/twig": "^3.3"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.41",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.0 || ^5.0",
-                "symfony/console": "^5.4 || ^6.0 || ^7.0",
-                "symfony/phpunit-bridge": "^5.4 || ^6.0 || ^7.0",
-                "symfony/yaml": "^5.4 || ^6.0 || ^7.0"
-            },
-            "suggest": {
-                "egeloen/form-extra-bundle": "Allows to load CKEditor asynchronously"
+                "eckinox/eckinox-cs": "^2.0"
             },
             "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "FOS\\CKEditorBundle\\": "src/"
+                    "Eckinox\\TinymceBundle\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
             "authors": [
                 {
-                    "name": "Eric GELOEN",
-                    "email": "geloen.eric@gmail.com"
-                },
-                {
-                    "name": "FriendsOfSymfony Community",
-                    "homepage": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle/graphs/contributors"
+                    "name": "Émile Perron",
+                    "email": "contact@emileperron.com"
                 }
             ],
-            "description": "Provides a CKEditor integration for your Symfony project.",
-            "keywords": [
-                "CKEditor"
-            ],
+            "description": "A Symfony bundle to add TinyMCE in your apps and forms.",
             "support": {
-                "issues": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle/issues",
-                "source": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle/tree/2.5.0"
+                "issues": "https://github.com/eckinox/tinymce-bundle/issues",
+                "source": "https://github.com/eckinox/tinymce-bundle/tree/v5.0.0"
             },
-            "time": "2024-01-23T15:35:55+00:00"
+            "time": "2024-04-25T20:37:57+00:00"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -5364,69 +5330,6 @@
                 }
             ],
             "time": "2024-04-18T09:32:20+00:00"
-        },
-        {
-            "name": "symfony/expression-language",
-            "version": "v7.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/expression-language.git",
-                "reference": "b8ec919a6d3d47fc4e7845c256d164413207bf73"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/expression-language/zipball/b8ec919a6d3d47fc4e7845c256d164413207bf73",
-                "reference": "b8ec919a6d3d47fc4e7845c256d164413207bf73",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.2",
-                "symfony/cache": "^6.4|^7.0",
-                "symfony/service-contracts": "^2.5|^3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\ExpressionLanguage\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Provides an engine that can compile and evaluate expressions",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/expression-language/tree/v7.0.7"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2024-04-18T09:29:19+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -11495,12 +11398,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "c8cc0081bff33f9080302f312e3479c13d1f592d"
+                "reference": "4a1ce99ead02e286f024fc7d032c7233ac01091b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/c8cc0081bff33f9080302f312e3479c13d1f592d",
-                "reference": "c8cc0081bff33f9080302f312e3479c13d1f592d",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/4a1ce99ead02e286f024fc7d032c7233ac01091b",
+                "reference": "4a1ce99ead02e286f024fc7d032c7233ac01091b",
                 "shasum": ""
             },
             "conflict": {
@@ -11867,8 +11770,8 @@
                 "neos/flow": ">=1,<1.0.4|>=1.1,<1.1.1|>=2,<2.0.1|>=2.3,<2.3.16|>=3,<3.0.12|>=3.1,<3.1.10|>=3.2,<3.2.13|>=3.3,<3.3.13|>=4,<4.0.6",
                 "neos/form": ">=1.2,<4.3.3|>=5,<5.0.9|>=5.1,<5.1.3",
                 "neos/media-browser": "<7.3.19|>=8,<8.0.16|>=8.1,<8.1.11|>=8.2,<8.2.11|>=8.3,<8.3.9",
-                "neos/neos": ">=1.1,<1.1.3|>=1.2,<1.2.13|>=2,<2.0.4|>=2.3,<2.9.99|>=3,<3.0.20|>=3.1,<3.1.18|>=3.2,<3.2.14|>=3.3,<5.3.10|>=7,<7.0.9|>=7.1,<7.1.7|>=7.2,<7.2.6|>=7.3,<7.3.4|>=8,<8.0.2",
-                "neos/swiftmailer": ">=4.1,<4.1.99|>=5.4,<5.4.5",
+                "neos/neos": ">=1.1,<1.1.3|>=1.2,<1.2.13|>=2,<2.0.4|>=2.3,<3.0.20|>=3.1,<3.1.18|>=3.2,<3.2.14|>=3.3,<5.3.10|>=7,<7.0.9|>=7.1,<7.1.7|>=7.2,<7.2.6|>=7.3,<7.3.4|>=8,<8.0.2",
+                "neos/swiftmailer": "<5.4.5",
                 "netgen/tagsbundle": ">=3.4,<3.4.11|>=4,<4.0.15",
                 "nette/application": ">=2,<2.0.19|>=2.1,<2.1.13|>=2.2,<2.2.10|>=2.3,<2.3.14|>=2.4,<2.4.16|>=3,<3.0.6",
                 "nette/nette": ">=2,<2.0.19|>=2.1,<2.1.13",
@@ -12282,7 +12185,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-05-15T23:04:18+00:00"
+            "time": "2024-05-18T00:15:00+00:00"
         },
         {
             "name": "sebastian/cli-parser",

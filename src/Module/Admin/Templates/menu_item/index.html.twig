@@ -20,18 +20,10 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:pagination:row
-                    enabled="{{ object.enabled }}"
-                    up="{{ path('app_admin_menu_item_up', { object: object.id }) }}"
-                    down="{{ path('app_admin_menu_item_down', { object: object.id }) }}"
-                    remove="{{ path('app_admin_menu_item_remove', { object: object.id }) }}"
-                    edit="{{ path('app_admin_menu_item_edit', { object: object.id }) }}"
-                    enable="{{ path('app_admin_menu_item_enable', { object: object.id }) }}"
-                    disable="{{ path('app_admin_menu_item_disable', { object: object.id }) }}"
-            >
+            <twig:crud:row enabled="{{ object.enabled }}">
                 <td>{{ object.id }}</td>
                 <td>{{ object.title }}</td>
-            </twig:pagination:row>
+            </twig:crud:row>
         </twig:block>
     </twig:pagination:table>
 {% endblock %}

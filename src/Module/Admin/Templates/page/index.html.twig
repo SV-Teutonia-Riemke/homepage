@@ -5,7 +5,7 @@
 {% set pageTitle = 'Seiten' %}
 
 {% block pageTitleActionsButtons %}
-    <a class="btn btn-primary" href="{{ path('app_admin_page_create') }}">Erstellen</a>
+    <twig:crud:create crud="{{ crud }}" />
 {% endblock %}
 
 {% block pageBody %}
@@ -17,16 +17,10 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:pagination:row
-                    enabled="{{ object.enabled }}"
-                    remove="{{ path('app_admin_page_remove', { object: object.id }) }}"
-                    edit="{{ path('app_admin_page_edit', { object: object.id }) }}"
-                    enable="{{ path('app_admin_page_enable', { object: object.id }) }}"
-                    disable="{{ path('app_admin_page_disable', { object: object.id }) }}"
-            >
+            <twig:crud:row enabled="{{ object.enabled }}">
                 <td>{{ object.id }}</td>
                 <td>{{ object.title }}</td>
-            </twig:pagination:row>
+            </twig:crud:row>
         </twig:block>
     </twig:pagination:table>
 {% endblock %}

@@ -23,12 +23,10 @@ final class PersonGroupController extends AbstractCrudController
 
     protected function configureCrudConfig(CrudConfigBuilder $builder): void
     {
-        $builder->dtoClass             = PersonGroup::class;
-        $builder->listTemplate         = '@admin/person_group/index.html.twig';
-        $builder->createTemplate       = '@admin/person_group/create.html.twig';
-        $builder->editTemplate         = '@admin/person_group/edit.html.twig';
-        $builder->listRouteName        = 'app_admin_person_group_index';
-        $builder->createRouteName      = 'app_admin_person_group_create';
+        $builder->setMandatory(
+            PersonGroup::class,
+            'person_group',
+        );
         $builder->defaultSortFieldName = 'p.position';
         $builder->defaultSortDirection = 'asc';
     }
