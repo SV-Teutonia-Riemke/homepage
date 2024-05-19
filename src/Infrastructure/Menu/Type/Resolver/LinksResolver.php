@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Menu\Type\Resolver;
 
+use App\Infrastructure\Shlink\ShortUrlProvider;
 use App\Storage\Entity\MenuItem;
 use App\Storage\Repository\LinkRepository;
 use Knp\Menu\FactoryInterface;
@@ -13,6 +14,7 @@ class LinksResolver implements ResolverInterface
 {
     public function __construct(
         private readonly LinkRepository $linkRepository,
+        private readonly ShortUrlProvider $shortUrlProvider,
     ) {
     }
 
@@ -28,8 +30,10 @@ class LinksResolver implements ResolverInterface
         ]);
 
         foreach ($links as $link) {
+            $uri = $this->shortUrlProvider->getShortUrl($link->getUri(), ['link']);
+
             $linkItem->addChild($link->getName(), [
-                'uri'            => $link->getUri(),
+                'uri'            => $uri,
                 'linkAttributes' => [
                     'target' => '_blank',
                 ],

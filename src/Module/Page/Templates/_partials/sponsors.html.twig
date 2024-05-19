@@ -24,7 +24,7 @@
                             {% if sponsor.url is null %}
                                 {{ image|raw }}
                             {% else %}
-                                <a href="{{ sponsor.url }}" target="_blank" rel="noreferrer">
+                                <a href="{{ sponsor.url|short_url(['sponsor']) }}" target="_blank" rel="noreferrer">
                                     {{ image|raw }}
                                 </a>
                             {% endif %}
