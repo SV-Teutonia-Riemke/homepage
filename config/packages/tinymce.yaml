@@ -1,0 +1,5 @@
+tinymce:
+#  skin: appstack
+#  content_css: appstack
+  plugins: 'advlist autolink autoresize insertdatetime emoticons anchor link image media table lists advlist fullscreen quickbars searchreplace code preview help'
+  toolbar: 'undo redo searchreplace | styles | bold italic underline forecolor | alignleft aligncenter alignjustify alignright | bullist numlist | link anchor | image media | table | insertdatetime | removeformat | fullscreen code preview | help'

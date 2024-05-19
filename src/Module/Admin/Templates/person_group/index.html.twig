@@ -4,11 +4,11 @@
 {% set pageTitle = 'Personen Gruppen' %}
 
 {% block pageTitleActionsButtons %}
-    <a class="btn btn-primary" href="{{ path('app_admin_person_group_create') }}">Create</a>
+    <twig:crud:create crud="{{ crud }}" />
 {% endblock %}
 
 {% block pageBody %}
-    <twig:pagination:table paginationTitle="Teams">
+    <twig:pagination:table title="Teams">
         <twig:block name="tableHeader">
             <th class="w-1"></th>
             <th class="w-1">Id</th>
@@ -16,18 +16,10 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:pagination:row
-                    enabled="{{ object.enabled }}"
-                    up="{{ path('app_admin_person_group_up', { personGroup: object.id }) }}"
-                    down="{{ path('app_admin_person_group_down', { personGroup: object.id }) }}"
-                    remove="{{ path('app_admin_person_group_remove', { personGroup: object.id }) }}"
-                    edit="{{ path('app_admin_person_group_edit', { personGroup: object.id }) }}"
-                    enable="{{ path('app_admin_person_group_enable', { personGroup: object.id }) }}"
-                    disable="{{ path('app_admin_person_group_disable', { personGroup: object.id }) }}"
-            >
+            <twig:crud:row enabled="{{ object.enabled }}">
                 <td>{{ object.id }}</td>
                 <td>{{ object.name }}</td>
-            </twig:pagination:row>
+            </twig:crud:row>
         </twig:block>
     </twig:pagination:table>
 {% endblock %}

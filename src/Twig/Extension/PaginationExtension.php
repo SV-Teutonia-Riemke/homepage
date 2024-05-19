@@ -4,12 +4,22 @@ declare(strict_types=1);
 
 namespace App\Twig\Extension;
 
+use Knp\Component\Pager\Pagination\PaginationInterface;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
+use Twig\TwigTest;
 
 final class PaginationExtension extends AbstractExtension
 {
+    /** @inheritDoc */
+    public function getTests(): array
+    {
+        return [
+            new TwigTest('pagination', static fn ($object): bool => $object instanceof PaginationInterface),
+        ];
+    }
+
     /** @inheritDoc */
     public function getFunctions(): array
     {

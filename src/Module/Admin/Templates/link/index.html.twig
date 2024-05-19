@@ -4,11 +4,11 @@
 {% set pageTitle = 'Link' %}
 
 {% block pageTitleActionsButtons %}
-    <a class="btn btn-primary" href="{{ path('app_admin_link_create') }}">Create</a>
+    <twig:crud:create crud="{{ crud }}" />
 {% endblock %}
 
 {% block pageBody %}
-    <twig:pagination:table paginationTitle="Downloads">
+    <twig:pagination:table title="Downloads">
         <twig:block name="tableHeader">
             <th class="w-1"></th>
             <th class="w-1">Id</th>
@@ -17,17 +17,11 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:pagination:row
-                    enabled="{{ object.enabled }}"
-                    remove="{{ path('app_admin_link_remove', { link: object.id }) }}"
-                    edit="{{ path('app_admin_link_edit', { link: object.id }) }}"
-                    enable="{{ path('app_admin_link_enable', { link: object.id }) }}"
-                    disable="{{ path('app_admin_link_disable', { link: object.id }) }}"
-            >
+            <twig:crud:row enabled="{{ object.enabled }}">
                 <td>{{ object.id }}</td>
                 <td>{{ object.name }}</td>
                 <td>{{ object.uri }}</td>
-            </twig:pagination:row>
+            </twig:crud:row>
         </twig:block>
     </twig:pagination:table>
 {% endblock %}

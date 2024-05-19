@@ -6,7 +6,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Form\Type\Entities\FileEntityType;
 use App\Storage\Entity\Article;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -32,7 +32,7 @@ final class ArticleType extends AbstractType
             ->add('image', FileEntityType::class, [
                 'required' => false,
             ])
-            ->add('content', CKEditorType::class, [
+            ->add('content', TinymceType::class, [
                 'constraints' => [
                     new NotBlank(),
                 ],

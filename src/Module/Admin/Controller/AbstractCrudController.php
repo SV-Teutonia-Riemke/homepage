@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace App\Module\Admin\Controller;
 
 use App\Module\Admin\Crud\CrudConfig;
+use App\Module\Admin\Crud\CrudConfigBuilder;
 use App\Module\Admin\Form\Type\Forms\AbstractForm;
 use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\PositionInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use LogicException;
+use RuntimeException;
 use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -17,8 +20,12 @@ use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use function array_filter;
 use function array_merge;
 use function assert;
+use function class_exists;
+use function is_a;
+use function sprintf;
 
 /** @template Entity of object */
 abstract class AbstractCrudController extends AbstractController
@@ -28,147 +35,304 @@ abstract class AbstractCrudController extends AbstractController
 
     public function handleList(Request $request): Response
     {
-        $query = $this->getCrudConfigObject()->entityRepository->createQueryBuilder('p');
+        $crudConfig = $this->getCrudConfig();
+        $form       = null;
 
-        $searchType = $this->getCrudConfigObject()->searchType;
+        $list = $this->doLoadList($crudConfig);
 
+        $searchType = $this->getSearchType();
         if ($searchType !== null) {
             $form = $this->createForm($searchType);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $this->getFilterBuilderUpdater()->addFilterConditions($form, $query);
+                $this->getFilterBuilderUpdate()->addFilterConditions($form, $list);
             }
         }
 
-        $paginationOptions = [];
-
-        if ($this->getCrudConfigObject()->defaultSortFieldName !== null) {
-            $paginationOptions['defaultSortFieldName'] = $this->getCrudConfigObject()->defaultSortFieldName;
-        }
-
-        if ($this->getCrudConfigObject()->defaultSortDirection !== null) {
-            $paginationOptions['defaultSortDirection'] = $this->getCrudConfigObject()->defaultSortDirection;
-        }
+        $paginationOptions = $this->enrichPaginationOptions($request, [
+            'defaultSortFieldName' => $crudConfig->defaultSortFieldName,
+            'defaultSortDirection' => $crudConfig->defaultSortDirection,
+        ]);
+        $paginationOptions = array_filter(
+            $paginationOptions,
+            static fn ($value) => $value !== null,
+        );
 
         $pagination = $this->getPaginator()->paginate(
-            $query,
+            $list,
             $request->query->getInt('page', 1),
             options: $paginationOptions,
         );
 
-        return $this->render($this->getCrudConfigObject()->listTemplate, [
-            'form'       => $form ?? null,
-            'pagination' => $pagination,
+        return $this->render($crudConfig->getListTemplateName(), [
+            'crud' => $crudConfig,
+            'form' => $form ?? null,
+            'iterable' => $pagination,
         ]);
     }
 
     protected function handleCreate(Request $request): Response
     {
+        $crudConfig = $this->getCrudConfig();
+
+        $formType = $this->getFormType($request);
+
         $form = $this
-            ->createForm($this->getCrudConfigObject()->getFormType($request))
+            ->createForm($formType)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->handleValidForm($form);
+            return $this->handleValidCreateForm($request, $form);
         }
 
-        return $this->render($this->getCrudConfigObject()->createTemplate, [
+        return $this->render($crudConfig->getCreateTemplateName(), [
+            'crud' => $crudConfig,
             'form' => $form,
         ]);
     }
 
-    public function handleEdit(Request $request, object $object): Response
+    public function handleEdit(Request $request): Response
     {
+        $crudConfig = $this->getCrudConfig();
+
+        $object = $this->loadObject($request);
+
+        $formType = $this->getFormType($request, $object);
+
         $form = $this
-            ->createForm($this->getCrudConfigObject()->getFormType($request, $object), $object)
+            ->createForm($formType, $this->doMapToFormDto($object))
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->handleValidForm($form);
+            return $this->handleValidEditForm($request, $form);
         }
 
-        return $this->render($this->getCrudConfigObject()->editTemplate, [
-            'form'   => $form,
+        return $this->render($crudConfig->getEditTemplateName(), [
+            'crud' => $crudConfig,
+            'form' => $form,
             'object' => $object,
         ]);
     }
 
-    private function handleValidForm(FormInterface $form): Response
+    private function handleValidCreateForm(Request $request, FormInterface $form): Response
     {
-        $data = $form->getData();
+        return $this->handleValidForm(
+            $request,
+            $form,
+            $this->doHandleValidCreateForm(...),
+        );
+    }
 
-        $callable = $this->getCrudConfigObject()->handleForm;
-        if ($callable !== null) {
-            $callable($form, $data);
-        }
+    private function handleValidEditForm(Request $request, FormInterface $form): Response
+    {
+        return $this->handleValidForm(
+            $request,
+            $form,
+            $this->doHandleValidEditForm(...),
+        );
+    }
 
-        $this->getEntityManager()->persist($data);
-        $this->getEntityManager()->flush();
+    private function handleValidForm(Request $request, FormInterface $form, callable $callable): Response
+    {
+        $data       = $form->getData();
+        $crudConfig = $this->getCrudConfig();
+
+        $callable($request, $form, $data);
 
         if ($form->has(AbstractForm::BUTTON_SUBMIT_AND_NEW)) {
             $submitAndNew = $form->get(AbstractForm::BUTTON_SUBMIT_AND_NEW);
             assert($submitAndNew instanceof SubmitButton);
 
             if ($submitAndNew->isClicked()) {
-                return $this->redirectToRoute($this->getCrudConfigObject()->createRouteName);
+                return $this->redirectToRoute($crudConfig->getCreateRouteName());
             }
         }
 
-        return $this->redirectToRoute($this->getCrudConfigObject()->listRouteName);
+        return $this->redirectToRoute($crudConfig->getListRouteName());
     }
 
-    public function handleRemove(object $data): Response
+    public function handleRemove(Request $request): Response
     {
-        $this->getEntityManager()->remove($data);
-        $this->getEntityManager()->flush();
+        $entity     = $this->loadObject($request);
+        $crudConfig = $this->getCrudConfig();
 
-        return $this->redirectToRoute($this->getCrudConfigObject()->listRouteName);
+        $this->doRemoving($entity);
+
+        return $this->redirectToRoute($crudConfig->getListRouteName());
     }
 
-    public function handleEnabled(EnabledInterface $data, bool $enabled): Response
+    public function handleEnabled(Request $request, bool $enabled): Response
     {
-        $data->setEnabled($enabled);
+        $entity = $this->loadObject($request);
+        if (! $entity instanceof EnabledInterface) {
+            throw $this->createNotFoundException();
+        }
 
-        $this->getEntityManager()->flush();
+        $entity->setEnabled($enabled);
 
-        return $this->redirectToRoute($this->getCrudConfigObject()->listRouteName);
+        $this->doPersisting($entity);
+
+        return $this->redirectToRoute($this->getCrudConfig()->getListRouteName());
     }
 
-    public function handlePosition(PositionInterface $data, int $position): Response
+    public function handlePosition(Request $request, int $position): Response
     {
-        $data->increasePosition($position);
+        $entity = $this->loadObject($request);
+        if (! $entity instanceof PositionInterface) {
+            throw $this->createNotFoundException();
+        }
 
-        $this->getEntityManager()->persist($data);
-        $this->getEntityManager()->flush();
+        $entity->increasePosition($position);
 
-        return $this->redirectToRoute($this->getCrudConfigObject()->listRouteName);
+        $this->doPersisting($entity);
+
+        return $this->redirectToRoute($this->getCrudConfig()->getListRouteName());
     }
+
+    /** @return Entity */
+    protected function loadObject(Request $request): object
+    {
+        $objectIdentifier = $request->get('object');
+        if ($objectIdentifier === null) {
+            throw new RuntimeException('Object identifier is not set', 1715881423158);
+        }
+
+        $crudConfig = $this->getCrudConfig();
+
+        $dtoClass = $crudConfig->dtoClass;
+        if (! class_exists($dtoClass)) {
+            throw new RuntimeException('DTO class not found', 1715882288448);
+        }
+
+        $entity = $this->doLoadObject($crudConfig, $objectIdentifier);
+        if ($entity === null || ! is_a($entity, $dtoClass)) {
+            throw $this->createNotFoundException();
+        }
+
+        return $entity;
+    }
+
+    /** @param CrudConfig<Entity> $crudConfig */
+    protected function doLoadList(CrudConfig $crudConfig): mixed
+    {
+        return $this->getEntityManager()->getRepository($crudConfig->dtoClass)->createQueryBuilder('p');
+    }
+
+    /**
+     * @param CrudConfig<Entity> $crudConfig
+     *
+     * @return Entity|null
+     */
+    protected function doLoadObject(CrudConfig $crudConfig, string|int $objectIdentifier): object|null
+    {
+        $entity = $this->getEntityManager()->getRepository($crudConfig->dtoClass)->find($objectIdentifier);
+        if ($entity === null) {
+            return null;
+        }
+
+        if (! is_a($entity, $crudConfig->dtoClass)) {
+            throw new LogicException(sprintf('Entity is not an instance of %s', $crudConfig->dtoClass), 1716117092970);
+        }
+
+        return $entity;
+    }
+
+    /** @param Entity $object */
+    protected function doMapToFormDto(object $object): mixed
+    {
+        return $object;
+    }
+
+    protected function doHandleValidCreateForm(Request $request, FormInterface $form, mixed $data): void
+    {
+        $this->doHandleValidForm($request, $form, $data);
+    }
+
+    protected function doHandleValidEditForm(Request $request, FormInterface $form, mixed $data): void
+    {
+        $this->doHandleValidForm($request, $form, $data);
+    }
+
+    protected function doHandleValidForm(Request $request, FormInterface $form, mixed $data): void
+    {
+        $this->doPersisting($data);
+    }
+
+    /** @param Entity $object */
+    protected function doCreatePersisting(object $object): void
+    {
+        $this->doPersisting($object);
+    }
+
+    /** @param Entity $object */
+    protected function doUpdatePersisting(object $object): void
+    {
+        $this->doPersisting($object);
+    }
+
+    /** @param Entity $object */
+    protected function doPersisting(object $object): void
+    {
+        $this->getEntityManager()->persist($object);
+        $this->getEntityManager()->flush();
+    }
+
+    /** @param Entity $object */
+    protected function doRemoving(object $object): void
+    {
+        $this->getEntityManager()->remove($object);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @param array<string, mixed> $options
+     *
+     * @return array<string, mixed>
+     */
+    protected function enrichPaginationOptions(Request $request, array $options): array
+    {
+        return $options;
+    }
+
+    protected function getSearchType(): string|null
+    {
+        return null;
+    }
+
+    abstract protected function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string;
 
     /** @return CrudConfig<Entity> */
-    final protected function getCrudConfigObject(): CrudConfig
+    final protected function getCrudConfig(): CrudConfig
     {
         if ($this->crudConfig === null) {
-            $this->crudConfig = $this->getCrudConfig();
+            /** @var CrudConfigBuilder<Entity> $builder */
+            $builder = new CrudConfigBuilder();
+            $this->configureCrudConfig($builder);
+
+            $this->crudConfig = $builder->build();
         }
 
         return $this->crudConfig;
     }
 
-    /** @return CrudConfig<Entity> */
-    abstract protected function getCrudConfig(): CrudConfig;
+    /** @param CrudConfigBuilder<Entity> $builder */
+    abstract protected function configureCrudConfig(CrudConfigBuilder $builder): void;
 
     protected function getEntityManager(): EntityManagerInterface
     {
         return $this->container->get(EntityManagerInterface::class);
     }
 
-    private function getPaginator(): PaginatorInterface
+    protected function getPaginator(): PaginatorInterface
     {
         return $this->container->get(PaginatorInterface::class);
     }
 
-    private function getFilterBuilderUpdater(): FilterBuilderUpdaterInterface
+    protected function getFilterBuilderUpdate(): FilterBuilderUpdaterInterface
     {
         return $this->container->get(FilterBuilderUpdaterInterface::class);
     }

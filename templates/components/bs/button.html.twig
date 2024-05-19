@@ -1,10 +1,16 @@
-<{{ this.rootTag }}{{ attributes.defaults(this.defaults) }}>
-    {% block content %}
-        {% if icon is not null %}
-            <twig:ux:icon class="icon" :name="icon" />
-        {% endif %}
-        {% if title is not null %}
-            {{ title }}
-        {% endif %}
-    {% endblock %}
+{% set attributes = attributes.defaults(this.defaults) %}
+
+{% if confirmation %}
+    {% set attributes = attributes.defaults(stimulus_controller('confirmation')) %}
+{% endif %}
+
+<{{ this.rootTag }}{{ attributes }}>
+{% block content %}
+    {% if icon is not null %}
+        <twig:ux:icon class="icon" :name="icon"/>
+    {% endif %}
+    {% if title is not null %}
+        {{ title }}
+    {% endif %}
+{% endblock %}
 </{{ this.rootTag }}>

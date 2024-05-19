@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Config;
 
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -46,15 +46,15 @@ final class ConfigBuilder
             ConfigTree::create('legal')->addItem(
                 new ConfigItem(
                     'imprint',
-                    CKEditorType::class,
+                    TinymceType::class,
                 ),
                 new ConfigItem(
                     'copyright',
-                    CKEditorType::class,
+                    TinymceType::class,
                 ),
                 new ConfigItem(
                     'disclaimer',
-                    CKEditorType::class,
+                    TinymceType::class,
                 ),
             ),
             ConfigTree::create('privacy')->addItem(
@@ -73,7 +73,7 @@ final class ConfigBuilder
                 ),
                 new ConfigItem(
                     'privacy_polices',
-                    CKEditorType::class,
+                    TinymceType::class,
                 ),
             ),
             ConfigTree::create('social_media')->addItem(

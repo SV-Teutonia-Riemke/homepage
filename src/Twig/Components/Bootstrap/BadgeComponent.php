@@ -19,6 +19,7 @@ use function ksort;
 final class BadgeComponent
 {
     public string|null $label = null;
+    public string $type       = 'primary';
 
     public string|null $visuallyHiddenLabel = null;
 
@@ -57,7 +58,7 @@ final class BadgeComponent
     public function configureAttributes(array $data): array
     {
         if ($this->label !== null) {
-            $class = 'badge';
+            $class = 'badge bg-' . $this->type . '-lt';
         } else {
             $class = 'p-2 rounded-circle'; // spacing to display generic indicator
         }
@@ -67,9 +68,11 @@ final class BadgeComponent
             $class .= ' position-absolute top-0 start-100 translate-middle';
         }
 
+        $preDefinedClasses = $data['class'] ?? '';
+
         $data = [
             ...$data,
-            'class' => $class . ($data['class'] !== '' ? ' ' . $data['class'] : ''),
+            'class' => $class . ($preDefinedClasses !== '' ? ' ' . $preDefinedClasses : ''),
         ];
         ksort($data);
 

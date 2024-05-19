@@ -1,5 +1,5 @@
 import { startStimulusApp } from '@symfony/stimulus-bridge';
-import Clipboard from 'stimulus-clipboard';
+import Clipboard from '@stimulus-components/clipboard';
 import '@tabler/core';
 
 // Registers Stimulus controllers from controllers.json and in the controllers/ directory

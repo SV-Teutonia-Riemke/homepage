@@ -33,3 +33,6 @@ services:
   App\Infrastructure\Menu\Extension\OrderExtension:
     tags:
       - { name: knp_menu.factory_extension, priority: -1001 }
+
+  Shlinkio\Shlink\SDK\ShlinkClient:
+    factory: '@App\Infrastructure\Shlink\ShlinkClientFactory'
