@@ -15,6 +15,7 @@ use Shlinkio\Shlink\SDK\ShlinkClient;
 use Shlinkio\Shlink\SDK\ShortUrls\ShortUrlsClient;
 use Shlinkio\Shlink\SDK\Tags\TagsClient;
 use Shlinkio\Shlink\SDK\Visits\VisitsClient;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class ShlinkClientFactory
 {
@@ -22,15 +23,21 @@ class ShlinkClientFactory
         private readonly ClientInterface $httpClient,
         private readonly RequestFactoryInterface $requestFactory,
         private readonly StreamFactoryInterface $streamFactory,
+        #[Autowire(env: 'SHLINK_URL')]
+        private readonly string $baseUrl,
+        #[Autowire(env: 'SHLINK_API_KEY')]
+        private readonly string $apiKey,
+        #[Autowire(env: 'SHLINK_VERSION')]
+        private readonly string $version,
     ) {
     }
 
     public function __invoke(): ShlinkClient
     {
         $config = ShlinkConfig::fromArray([
-            'baseUrl' => ' https://svtr.link',
-            'apiKey' => '4fd14c2c-8c67-463b-8e02-a3c8c47d7524',
-            'version' => '3',
+            'baseUrl' => $this->baseUrl,
+            'apiKey' => $this->apiKey,
+            'version' => $this->version,
         ]);
 
         $httpClient = new HttpClient(
