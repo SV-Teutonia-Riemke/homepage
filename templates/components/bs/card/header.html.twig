@@ -1,6 +1,6 @@
 <div{{ attributes.defaults({class: 'card-header'}) }}>
     {% if title %}
-        <twig:bs:card:title title="{{ title }}"/>
+        <twig:bs:card:title :title="title" :icon="icon" />
     {% endif %}
     {%- block content %}
     {% endblock -%}

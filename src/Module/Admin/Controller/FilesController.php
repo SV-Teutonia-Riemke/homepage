@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
+use App\Domain\Role;
 use App\Module\Admin\Form\Type\Forms\DirectoryType;
 use App\Module\Admin\Form\Type\Forms\FileEditType;
 use App\Module\Admin\Form\Type\Forms\FileUploadType;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Uid\Uuid;
 
@@ -31,6 +33,7 @@ use function Symfony\Component\String\u;
 use const PATHINFO_FILENAME;
 
 #[AsController]
+#[IsGranted(Role::MANAGE_FILES->value)]
 #[Route('/files', name: 'files_')]
 final class FilesController extends AbstractController
 {

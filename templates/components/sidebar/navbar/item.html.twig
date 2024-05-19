@@ -1,12 +1,15 @@
-{% props icon, title, href %}
+{% props icon, title, href, granted = null %}
 
-<li{{ attributes.defaults({
-    class: 'nav-item'
-}) }}>
-    <a class="nav-link" href="{{ href }}">
+
+{% if granted is null or is_granted(granted) %}
+    <li{{ attributes.defaults({
+        class: 'nav-item'
+    }) }}>
+        <a class="nav-link" href="{{ href }}">
         <span class="nav-link-icon d-md-none d-lg-inline-block">
-            <twig:ux:icon class="icon" :name="icon" />
+            <twig:ux:icon class="icon" :name="icon"/>
         </span>
-        <span class="nav-link-title">{{ title }}</span>
-    </a>
-</li>
+            <span class="nav-link-title">{{ title }}</span>
+        </a>
+    </li>
+{% endif %}

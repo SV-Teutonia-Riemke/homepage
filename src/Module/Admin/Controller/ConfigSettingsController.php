@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
+use App\Domain\Role;
 use App\Infrastructure\Config\ConfigBuilder;
 use App\Infrastructure\Config\ConfigSettingProvider;
 use App\Module\Admin\Form\Type\Forms\ConfigType;
@@ -13,8 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[AsController]
+#[IsGranted(Role::MANAGE_SETTINGS->value)]
 #[Route('/config', name: 'config_settings')]
 class ConfigSettingsController extends AbstractController
 {

@@ -1,3 +1,8 @@
-<h3{{ attributes.defaults({class: 'card-title'}) }}>
-    {% block content %}{{ title }}{% endblock %}
-</h3>
+<h5{{ attributes.defaults({class: 'card-title'}) }}>
+    {% block content %}
+        {% if icon %}
+            <twig:ux:icon class="icon" :name="icon"/>
+        {% endif %}
+        {{ title }}
+    {% endblock %}
+</h5>

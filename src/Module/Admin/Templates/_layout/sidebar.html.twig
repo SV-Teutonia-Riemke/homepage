@@ -3,22 +3,22 @@
 
     <twig:sidebar:navbar:item href="{{ path('app_admin_user_index') }}" title="Benutzer" icon="fa6-solid:users" class="mt-3"/>
 
-    <twig:sidebar:navbar:item href="{{ path('app_admin_article_index') }}" title="Artikel" icon="fa6-solid:newspaper" class="mt-3"/>
-    <twig:sidebar:navbar:item href="{{ path('app_admin_link_index') }}" title="Links" icon="fa6-solid:link"/>
-    <twig:sidebar:navbar:item href="{{ path('app_admin_download_index') }}" title="Downloads" icon="fa6-solid:download"/>
-    <twig:sidebar:navbar:item href="{{ path('app_admin_notification_index') }}" title="Notifications" icon="fa6-solid:bell"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_article_index') }}" title="Artikel" icon="fa6-solid:newspaper" class="mt-3" granted="ROLE_MANAGE_ARTICLES" />
+    <twig:sidebar:navbar:item href="{{ path('app_admin_link_index') }}" title="Links" icon="fa6-solid:link" granted="ROLE_MANAGE_LINKS" />
+    <twig:sidebar:navbar:item href="{{ path('app_admin_download_index') }}" title="Downloads" icon="fa6-solid:download" granted="ROLE_MANAGE_DOWNLOADS" />
+    <twig:sidebar:navbar:item href="{{ path('app_admin_notification_index') }}" title="Notifications" icon="fa6-solid:bell" granted="ROLE_MANAGE_NOTIFICATIONS" />
 
-    <twig:sidebar:navbar:item href="{{ path('app_admin_team_index') }}" title="Teams" icon="fluent:people-team-20-filled" class="mt-3"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_team_index') }}" title="Teams" icon="fluent:people-team-20-filled" class="mt-3" granted="ROLE_MANAGE_TEAMS" />
 
-    <twig:sidebar:navbar:item href="{{ path('app_admin_person_index') }}" title="Personen" icon="fa6-solid:person" class="mt-3"/>
-    <twig:sidebar:navbar:item href="{{ path('app_admin_person_group_index') }}" title="Personen Gruppen" icon="fa6-solid:people-group"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_person_index') }}" title="Personen" icon="fa6-solid:person" class="mt-3" granted="ROLE_MANAGE_PERSON" />
+    <twig:sidebar:navbar:item href="{{ path('app_admin_person_group_index') }}" title="Personen Gruppen" icon="fa6-solid:people-group" granted="ROLE_MANAGE_PERSON_GROUPS"/>
 
-    <twig:sidebar:navbar:item href="{{ path('app_admin_page_index') }}" title="Seiten" icon="iconoir:multiple-pages" class="mt-3"/>
-    <twig:sidebar:navbar:item href="{{ path('app_admin_menu_item_index') }}" title="Menü" icon="tabler:menu-deep"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_page_index') }}" title="Seiten" icon="iconoir:multiple-pages" class="mt-3" granted="ROLE_MANAGE_PAGES"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_menu_item_index') }}" title="Menü" icon="tabler:menu-deep" granted="ROLE_MANAGE_MENU"/>
 
-    <twig:sidebar:navbar:item href="{{ path('app_admin_shorturl_index') }}" title="Short URLs" icon="simple-icons:curl" class="mt-3"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_shorturl_index') }}" title="Short URLs" icon="simple-icons:curl" class="mt-3" granted="ROLE_MANAGE_SHORT_URLS"/>
 
-    <twig:sidebar:navbar:item href="{{ path('app_admin_sponsor_index') }}" title="Sponsoren" icon="fa6-solid:heart" class="mt-3"/>
-    <twig:sidebar:navbar:item href="{{ path('app_admin_files_index') }}" title="Dateien" icon="fa6-solid:folder" class="mt-3"/>
-    <twig:sidebar:navbar:item href="{{ path('app_admin_config_settings') }}" title="Einstellungen" icon="fa6-solid:gears" class="mt-3"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_sponsor_index') }}" title="Sponsoren" icon="fa6-solid:heart" class="mt-3" granted="ROLE_MANAGE_SPONSORS"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_files_index') }}" title="Dateien" icon="fa6-solid:folder" class="mt-3" granted="ROLE_MANAGE_FILES"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_config_settings') }}" title="Einstellungen" icon="fa6-solid:gears" class="mt-3" granted="ROLE_MANAGE_SETTINGS"/>
 </twig:sidebar:navbar>

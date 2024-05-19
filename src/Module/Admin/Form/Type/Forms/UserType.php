@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Form\Type\Forms;
 
+use App\Form\Type\Widgets\RoleType;
 use App\Storage\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -15,8 +16,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class UserType extends AbstractType
 {
-    public const FIELD_EMAIL    = 'email';
-    public const FIELD_PASSWORD = 'password';
+    public const string FIELD_EMAIL    = 'email';
+    public const string FIELD_PASSWORD = 'password';
 
     /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -29,8 +30,9 @@ final class UserType extends AbstractType
             ])
             ->add(self::FIELD_PASSWORD, PasswordType::class, [
                 'required' => false,
-                'mapped'   => false,
-            ]);
+                'mapped' => false,
+            ])
+            ->add('roles', RoleType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

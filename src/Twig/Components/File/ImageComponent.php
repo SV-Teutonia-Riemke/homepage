@@ -21,8 +21,9 @@ class ImageComponent extends AbstractComponent
     public File $file;
     public string $filter = 'default';
 
-    public int|null $width  = null;
-    public int|null $height = null;
+    public int|null $width              = null;
+    public int|null $height             = null;
+    public string|null $backgroundColor = null;
 
     public function __construct(
         private readonly FileRepository $fileRepository,
@@ -58,6 +59,10 @@ class ImageComponent extends AbstractComponent
 
         if ($this->height !== null) {
             $config['relative_resize']['heighten'] = $this->height;
+        }
+
+        if ($this->backgroundColor !== null) {
+            $config['background']['color'] = $this->backgroundColor;
         }
 
         return $config;

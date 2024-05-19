@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
+use App\Domain\Role;
 use App\Module\Admin\Crud\CrudConfig;
 use App\Module\Admin\Crud\CrudConfigBuilder;
 use App\Module\Admin\Crud\Handler\CRUDHandler;
@@ -19,10 +20,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use function iterator_to_array;
 
 /** @template-extends AbstractCrudController<ShortUrl> */
 #[AsController]
+#[IsGranted(Role::MANAGE_SHORT_URLS->value)]
 #[Route('/shorturl', name: 'shorturl_')]
 class ShortUrlController extends AbstractCrudController
 {

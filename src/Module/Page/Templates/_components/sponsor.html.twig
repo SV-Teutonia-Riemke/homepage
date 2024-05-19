@@ -1,0 +1,13 @@
+<div{{ attributes.defaults(this.defaultAttributes) }}>
+    {% set image %}
+        <twig:file:image file="{{ sponsor.image }}" filter="{{ this.filterName }}" backgroundColor="{{ sponsor.backgroundColor|default(this.defaultBackgroundColor) }}" class="img-thumbnail rounded"/>
+    {% endset %}
+
+    {% if sponsor.url is null %}
+        {{ image|raw }}
+    {% else %}
+        <a href="{{ sponsor.url|short_url(['sponsor']) }}" target="_blank" rel="noreferrer">
+            {{ image|raw }}
+        </a>
+    {% endif %}
+</div>
