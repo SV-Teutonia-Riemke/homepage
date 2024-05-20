@@ -12,7 +12,9 @@ use App\Storage\Repository\FileRepository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
+use Twig\TwigTest;
 
+use function in_array;
 use function is_int;
 
 final class FileExtension extends AbstractExtension
@@ -22,6 +24,21 @@ final class FileExtension extends AbstractExtension
         private readonly DirectoryRepository $directoryRepository,
         private readonly FileRepository $fileRepository,
     ) {
+    }
+
+    /** @inheritDoc */
+    public function getTests(): array
+    {
+        return [
+            new TwigTest(
+                'image',
+                static fn (File $value): bool => in_array(
+                    $value->getExtension(),
+                    ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+                    true,
+                ),
+            ),
+        ];
     }
 
     /** @inheritDoc */

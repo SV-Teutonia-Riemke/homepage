@@ -15,10 +15,20 @@
                     <div class="card h-100"
                             {% if personAvailable == false %} data-bs-toggle="tooltip" data-bs-title="Du hast Interesse diese Position zu übernehmen? Dann meld dich bei uns unter info@teutonia-riemke.de" data-bs-placement="top"{% endif %}>
                         <div class="card-body p-4 text-center">
-                            {% set imagePath = personAvailable == false or member.person.image is null
-                                ? placeholderImage
-                                : member.person.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 160 } }) %}
-                            <img src="{{ imagePath }}" class="rounded mb-3"/>
+                            {% set imageAvailable = personAvailable != false and member.person.image is not null %}
+                            {% set imagePath = imageAvailable
+                                ? member.person.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 160 } })
+                                : placeholderImage %}
+
+                            {% if imageAvailable %}
+                                <twig:lightbox file="{{ member.person.image }}" lightbox="person">
+                                    <img src="{{ imagePath }}" class="rounded mb-3"/>
+                                </twig:lightbox>
+                            {% else %}
+                                <img src="{{ imagePath }}" class="rounded mb-3"/>
+                            {% endif %}
+
+
                             <h3 class="m-0 mb-1 fw-bold">{{ personAvailable ? member.person : 'Wir suchen dich!' }}</h3>
                             {% if member.jobTitle is not null %}
                                 <div class="mt-3">
@@ -34,12 +44,12 @@
                         <div class="d-flex">
                             {% if personAvailable and member.person.emailAddress is not null %}
                                 <a href="mailto:{{ member.person.emailAddress }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.emailAddress }}" data-bs-placement="top">
-                                    <twig:ux:icon class="icon me-2" name="fa6-solid:at" />
+                                    <twig:ux:icon class="icon me-2" name="fa6-solid:at"/>
                                 </a>
                             {% endif %}
                             {% if personAvailable and member.person.phoneNumber is not null %}
                                 <a href="tel:{{ member.person.phoneNumber|phone_number_format }}" class="card-btn" data-bs-toggle="tooltip" data-bs-title="{{ member.person.phoneNumber|phone_number_format }}" data-bs-placement="top">
-                                    <twig:ux:icon class="icon me-2" name="fa6-solid:phone" />
+                                    <twig:ux:icon class="icon me-2" name="fa6-solid:phone"/>
                                 </a>
                             {% endif %}
                         </div>

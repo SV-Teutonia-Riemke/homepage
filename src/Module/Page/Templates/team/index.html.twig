@@ -36,19 +36,19 @@
 {%- block pageTitleActionsButtons -%}
     {% if team.emailAddress is not null %}
         <a class="btn btn-ghost-primary" href="mailto:{{ team.emailAddress }}" data-bs-toggle="tooltip" data-bs-title="{{ team.emailAddress }}" data-bs-placement="top">
-            <twig:ux:icon class="icon" name="fa6-solid:at" />
+            <twig:ux:icon class="icon" name="fa6-solid:at"/>
             E-Mail
         </a>
     {% endif %}
     {% if team.instagram is not null %}
-        <a class="btn btn-ghost-instagram" href="https://instagram.com/{{ team.instagram }}" target="_blank" rel="nofollow">
-            <twig:ux:icon class="icon" name="fa6-brands:instagram" />
+        <a class="btn btn-outline-instagram" href="https://instagram.com/{{ team.instagram }}" target="_blank" rel="nofollow">
+            <twig:ux:icon class="icon" name="fa6-brands:instagram"/>
             Instagram
         </a>
     {% endif %}
     {% if team.facebook is not null %}
-        <a class="btn btn-ghost-facebook" href="https://facebook.com/{{ team.facebook }}" target="_blank" rel="nofollow">
-            <twig:ux:icon class="icon" name="fa6-brands:facebook" />
+        <a class="btn btn-outline-facebook" href="https://facebook.com/{{ team.facebook }}" target="_blank" rel="nofollow">
+            <twig:ux:icon class="icon" name="fa6-brands:facebook"/>
             Facebook
         </a>
     {% endif %}
@@ -65,7 +65,7 @@
                     <div class="list-group list-group-flush">
                         {% if team.emailAddress is not null %}
                             <a href="mailto:{{ team.emailAddress }}" class="list-group-item list-group-item-action">
-                                <twig:ux:icon class="icon me-2" name="fa6-solid:at" />
+                                <twig:ux:icon class="icon me-2" name="fa6-solid:at"/>
                                 {{ team.emailAddress }}
                             </a>
                         {% endif %}
@@ -119,7 +119,9 @@
                     </div>
                     {% if team.image is not null %}
                         <div class="card-img-bottom">
-                            <img src="{{ team.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 950 } }) }}"/>
+                            <twig:lightbox file="{{ team.image }}" lightbox="team">
+                                <twig:file:image file="{{ team.image }}" filter="optimized" width="950"/>
+                            </twig:lightbox>
                         </div>
                     {% endif %}
                 </div>
@@ -195,12 +197,12 @@
                         <td class="text-end">
                             {% if player.person.instagram is not null %}
                                 <a href="{{ player.person.instagram }}" class="btn btn-sm btn-icon btn-link text-instagram">
-                                    <twig:ux:icon class="icon" name="fa6-brands:instagram" />
+                                    <twig:ux:icon class="icon" name="fa6-brands:instagram"/>
                                 </a>
                             {% endif %}
                             {% if player.person.facebook is not null %}
                                 <a href="{{ player.person.facebook }}" class="btn btn-sm btn-icon btn-link text-facebook">
-                                    <twig:ux:icon class="icon" name="fa6-brands:facebook" />
+                                    <twig:ux:icon class="icon" name="fa6-brands:facebook"/>
                                 </a>
                             {% endif %}
                         </td>
@@ -216,11 +218,17 @@
     <div class="row row-cards">
 
         {% for player in team.getPlayersByNumber %}
-            {% set filePath = player.image ? player.image.filePath : asset('build/images/handball.jpg') %}
-
             <div class="col-sm-6 col-lg-4">
                 <div class="card card-sm">
-                    <a href="#" class="d-block"><img src="{{ filePath|imagine_filter('optimized', { downscale: { max: [400] } }) }}" class="card-img-top"></a>
+                    <a href="#" class="d-block">
+                        {% if player.image is not null %}
+                            <twig:lightbox file="{{ player.image }}" lightbox="team">
+                                <twig:file:image file="{{ player.image }}" filter="optimized" width="400" class="card-img-top"/>
+                            </twig:lightbox>
+                        {% else %}
+                            <img src="{{ asset('build/images/handball.jpg')|imagine_filter('optimized', { downscale: { max: [400] } }) }}" class="card-img-top">
+                        {% endif %}
+                    </a>
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div>

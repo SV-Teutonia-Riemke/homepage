@@ -32,7 +32,9 @@ final class UserType extends AbstractType
                 'required' => false,
                 'mapped' => false,
             ])
-            ->add('roles', RoleType::class);
+            ->add('roles', RoleType::class, [
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

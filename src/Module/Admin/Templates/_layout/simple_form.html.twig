@@ -2,10 +2,13 @@
 
 {% block formCancel %}
     {% if formCancelLink is defined and formCancelLink is not empty %}
-        <a href="{{ formCancelLink }}" class="btn btn-outline-danger">
-            <twig:ux:icon class="icon" name="{{ formCancelIcon ?? 'fa-solid:times' }}" />
-            {{ (formCancelLabel ?? 'Abbrechen')|trans }}
-        </a>
+        {{ component('bs:button', {
+            href: formCancelLink,
+            title: formCancelLabel ?? 'Abbrechen',
+            icon: formCancelIcon ?? 'fa-solid:times',
+            type: 'danger',
+            outline: true,
+        }) }}
     {% endif %}
 {% endblock %}
 

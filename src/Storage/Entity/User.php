@@ -85,9 +85,12 @@ class User extends AbstractEntity implements PasswordAuthenticatedUserInterface,
             return;
         }
 
-        $key = array_search($role, $this->getRoles(), true);
+        $roles = $this->getRoles();
 
-        unset($this->roles[$key]);
+        $key = array_search($role, $roles, true);
+        unset($roles[$key]);
+
+        $this->roles = array_values($roles);
     }
 
     public function eraseCredentials(): void

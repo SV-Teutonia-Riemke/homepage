@@ -44,32 +44,38 @@ class RoleType extends AbstractType
     }
 
     /**
-     * @param list<Role|null> $roles
+     * @param list<string>|null $roles
      *
-     * @return list<string>
+     * @return list<Role>
      */
-    private function transform(array $roles): array
+    private function transform(array|null $roles): array
     {
-        return array_filter(
-            array_map(
-                static fn (string $role): Role|null => Role::tryFrom($role),
-                $roles,
+        if ($roles === null) {
+            return [];
+        }
+
+        return array_values(
+            array_filter(
+                array_map(
+                    static fn (string $role): Role|null => Role::tryFrom($role),
+                    $roles,
+                ),
+                static fn (Role|null $role): bool => $role !== null,
             ),
-            static fn (Role|null $role): bool => $role !== null,
         );
     }
 
     /**
-     * @param list<string> $roles
+     * @param list<Role> $roles
      *
-     * @return list<Role>
+     * @return list<string>
      */
     private function reverseTransform(array $roles): array
     {
         // transform the string back to an array
-        return array_values(array_map(
+        return array_map(
             static fn (Role $role): string => $role->value,
             $roles,
-        ));
+        );
     }
 }

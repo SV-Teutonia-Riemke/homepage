@@ -38,6 +38,7 @@
         <table class="table card-table table-vcenter text-nowrap">
             <thead>
             <tr>
+                <th>#</th>
                 <th colspan="2">Name</th>
                 <th>Größe</th>
                 <th>Mime</th>
@@ -47,6 +48,7 @@
             <tbody>
             {% if directory is not null %}
                 <tr>
+                    <td class="w-1">{{ directory.id }}</td>
                     <td class="w-1">
                         <twig:ux:icon name="vscode-icons:default-folder" height="2em" width="2em"/>
                     </td>
@@ -66,6 +68,7 @@
             {% endif %}
             {% for directory in directories %}
                 <tr>
+                    <td class="w-1">{{ directory.id }}</td>
                     <td class="w-1">
                         <twig:ux:icon name="vscode-icons:default-folder" height="2em" width="2em"/>
                     </td>
@@ -88,9 +91,12 @@
             {% endfor %}
             {% for file in files %}
                 <tr>
+                    <td class="w-1">{{ file.id }}</td>
                     <td class="w-1">
-                        {% if file.extension in ['jpg', 'jpeg', 'png', 'gif'] %}
-                            <twig:file:image file="{{ file }}" width="32" height="32"/>
+                        {% if file is image %}
+                            <twig:lightbox file="{{ file }}" lightbox="gallery">
+                                <twig:file:image file="{{ file }}" width="32" height="32"/>
+                            </twig:lightbox>
                         {% else %}
                             {% if file.extension == 'pdf' %}
                                 {% set icon = 'vscode-icons:file-type-pdf2' %}
@@ -102,7 +108,17 @@
                             <twig:ux:icon name="{{ icon }}" height="2em" width="2em"/>
                         {% endif %}
                     </td>
-                    <td>{{ file }}</td>
+                    <td>
+                        {% if file is image %}
+                            <twig:lightbox file="{{ file }}" lightbox="link">
+                                {{ file }}
+                            </twig:lightbox>
+                        {% else %}
+                            <a href="{{ file_url(file) }}" target="_blank">
+                                {{ file }}
+                            </a>
+                        {% endif %}
+                    </td>
                     <td></td>
                     <td>{{ file.mimeType }}</td>
                     <td class="text-end">
