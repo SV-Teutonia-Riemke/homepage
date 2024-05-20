@@ -21,7 +21,7 @@ security:
 
             oauth:
                 resource_owners:
-                    azure: "/admin/login/check-azure"
+                    azure: azure_login
                 login_path:   app_admin_login
                 use_forward:  false
                 failure_path: app_admin_login
