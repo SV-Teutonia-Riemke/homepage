@@ -19,8 +19,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
-
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+
 use function iterator_to_array;
 
 /** @template-extends AbstractCrudController<ShortUrl> */
