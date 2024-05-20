@@ -19,9 +19,9 @@
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </head>
-<body class="theme-light">
+<body class="theme-light {{ bodyCssClasses|default('') }}">
 
-<div class="page">
+<div class="page {{ pageCssClasses|default('') }}">
     {% block body %}{% endblock %}
 </div>
 

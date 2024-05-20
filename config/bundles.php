@@ -28,4 +28,5 @@ return [
     Shapecode\Bundle\TwigStringLoaderBundle\ShapecodeTwigStringLoaderBundle::class => ['all' => true],
     Symfony\UX\Icons\UXIconsBundle::class => ['all' => true],
     Eckinox\TinymceBundle\TinymceBundle::class => ['all' => true],
+    HWI\Bundle\OAuthBundle\HWIOAuthBundle::class => ['all' => true],
 ];

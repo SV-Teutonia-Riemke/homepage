@@ -3,29 +3,43 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
     providers:
-        users:
-            entity:
-                class: App\Storage\Entity\User
+        # the name of your user provider can be anything
+        your_custom_user_provider:
+            id: App\Security\UserProvider
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js|media)/
             security: false
 
         main:
-            # ...
             form_login:
                 login_path: app_admin_login
                 check_path: app_admin_login
                 enable_csrf: true
                 default_target_path: app_admin_index
 
+            oauth:
+                resource_owners:
+                    azure: "/admin/login/check-azure"
+                login_path:   app_admin_login
+                use_forward:  false
+                failure_path: app_admin_login
+                default_target_path: app_admin_index
+
+                oauth_user_provider:
+                    service: App\Security\UserProvider
+
+            entry_point: form_login
+
             logout:
                 path: app_admin_logout
-                target: app_index
+                target: app_admin_login
 
     access_control:
          - { path: ^/admin/login, roles: PUBLIC_ACCESS }
          - { path: ^/admin, roles: ROLE_USER }
+         - { path: ^/connect, roles: PUBLIC_ACCESS }
 
 when@test:
     security:

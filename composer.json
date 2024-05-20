@@ -19,6 +19,7 @@
         "eckinox/tinymce-bundle": "^5.0",
         "gedmo/doctrine-extensions": "^3.15",
         "giggsey/libphonenumber-for-php": "^8.13",
+        "hwi/oauth-bundle": "^2.2",
         "knplabs/knp-components": "^4.4",
         "knplabs/knp-menu": "^3.5",
         "knplabs/knp-menu-bundle": "^3.4",
@@ -31,10 +32,10 @@
         "odolbeau/phone-number-bundle": "^3.10",
         "oneup/flysystem-bundle": "^4.12",
         "presta/sitemap-bundle": "^4.1",
-        "psr/http-client": "^1.0",
-        "psr/http-factory": "^1.1",
         "psr/clock": "^1.0",
         "psr/event-dispatcher": "^1.0",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.1",
         "psr/log": "^3.0",
         "sentry/sentry-symfony": "^5.0",
         "shapecode/doctrine-dbal-datetimeutc": "^4.0|^5.0",
@@ -191,7 +192,12 @@
         "lint-container": "php bin/console lint:container --ansi",
         "unuse": "vendor/bin/composer-unused",
         "install-pnpm": "sudo npm install -g pnpm",
+        "install-tunnel": "sudo npm install -g localtunnel",
         "install-codestandards": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+        "tunnel": [
+            "Composer\\Config::disableProcessTimeout",
+            "lt --port 80 --subdomain svtr"
+        ],
         "post-install-cmd": [
             "@auto-scripts"
         ],

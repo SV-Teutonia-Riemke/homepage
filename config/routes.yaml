@@ -12,3 +12,6 @@ admin:
 app_admin_logout:
     path: /admin/logout
     methods: GET
+
+azure_login:
+    path: /admin/login/check-azure
