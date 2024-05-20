@@ -57,11 +57,8 @@ jobs:
 #      - name: Validate Schema
 #        run: php bin/console doctrine:schema:validate
 
-      - name: Composer Require Checker
-        run: composer crc
-
-      - name: Composer Unused
-        run: php vendor/bin/composer-unused
+      - name: Composer dependency analyser
+        run: composer cda
 
       - name: CS Check
         run: composer cs-check-all
