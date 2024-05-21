@@ -8,6 +8,7 @@
     <arg name="cache" value="./var/cache/.phpcs.cache"/>
 
     <file>bin/</file>
+    <file>config/</file>
     <file>src/</file>
     <file>tests/</file>
 
