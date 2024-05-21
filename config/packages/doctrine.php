@@ -6,6 +6,9 @@ use App\Infrastructure\Doctrine\DBAL\Types\Type\DateType;
 use App\Infrastructure\Doctrine\DBAL\Types\Type\YearGroupType;
 use Shapecode\Doctrine\DBAL\Types\DateTimeUTCType;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Config\Doctrine\Dbal\ConnectionConfig;
+use Symfony\Config\Doctrine\Orm\EntityManagerConfig;
+use Symfony\Config\Doctrine\OrmConfig;
 use Symfony\Config\DoctrineConfig;
 use Symfony\Config\FrameworkConfig;
 
@@ -47,14 +50,28 @@ return new class () {
             ->prefix('App\Storage\Entity')
             ->alias('App');
 
-        if ($containerConfigurator->env() === 'test') {
-            $defaultConnection->dbnameSuffix(sprintf('_test%s', env('TEST_TOKEN')->default('')));
+        if ($this->isTest($containerConfigurator)) {
+            $this->handleTest($defaultConnection);
         }
 
-        if ($containerConfigurator->env() !== 'prod') {
+        if (! $this->isProd($containerConfigurator)) {
             return;
         }
 
+        $this->handleProduction($orm, $defaultEntityManager, $frameworkConfig);
+    }
+
+    private function handleTest(
+        ConnectionConfig $defaultConnection,
+    ): void {
+        $defaultConnection->dbnameSuffix(sprintf('_test%s', env('TEST_TOKEN')->default('')));
+    }
+
+    private function handleProduction(
+        OrmConfig $orm,
+        EntityManagerConfig $defaultEntityManager,
+        FrameworkConfig $frameworkConfig,
+    ): void {
         $orm->autoGenerateProxyClasses(false);
         $defaultEntityManager
             ->queryCacheDriver()
@@ -68,5 +85,15 @@ return new class () {
 
         $frameworkConfig->cache()->pool('doctrine.result_cache_pool')->adapters('cache.app');
         $frameworkConfig->cache()->pool('doctrine.system_cache_pool')->adapters('cache.system');
+    }
+
+    protected function isProd(ContainerConfigurator $containerConfigurator): bool
+    {
+        return $containerConfigurator->env() === 'prod';
+    }
+
+    protected function isTest(ContainerConfigurator $containerConfigurator): bool
+    {
+        return $containerConfigurator->env() === 'test';
     }
 };
