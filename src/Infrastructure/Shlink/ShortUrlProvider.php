@@ -16,13 +16,17 @@ class ShortUrlProvider
 {
     public function __construct(
         private readonly CacheInterface $cache,
-        private readonly ShlinkClient $shlinkClient,
+        private readonly ShlinkClient|null $shlinkClient,
     ) {
     }
 
     /** @param array<string> $tags */
     public function getShortUrl(string $url, array $tags = []): string
     {
+        if ($this->shlinkClient === null) {
+            return $url;
+        }
+
         $hashList = [$url, ...$tags];
         $hash     = sha1(implode('|', $hashList));
 
@@ -36,6 +40,10 @@ class ShortUrlProvider
     /** @param array<string> $tags */
     private function createShortUrl(string $url, array $tags = []): string
     {
+        if ($this->shlinkClient === null) {
+            return $url;
+        }
+
         $creation = ShortUrlCreation::forLongUrl($url)
             ->withTags(...$tags)
             ->returnExistingMatchingShortUrl();

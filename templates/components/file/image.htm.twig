@@ -1,5 +1,3 @@
-<a data-fslightbox="gallery" href="{{ file|file_url }}">
-    <img{{ attributes.defaults({
-        src: this.getFilePath | imagine_filter(filter, this.filterConfig),
-    }) }}>
-</a>
+<img{{ attributes.defaults({
+    src: this.getFilePath | imagine_filter(filter, this.filterConfig),
+}) }}>

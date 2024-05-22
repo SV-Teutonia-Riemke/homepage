@@ -1,16 +1,18 @@
 {% extends '@admin/_layout/layout.html.twig' %}
 
-{% set pagePreTitle = 'List' %}
+{% set pagePreTitle = 'Liste' %}
 {% set pageTitle = directory is null ? 'Files' : directory.name %}
 
 {% block pageTitleActionsButtons %}
     {% if directory is null %}
-        <a class="btn btn-primary" href="{{ path('app_admin_files_directory_create') }}">Create directory</a>
-        <a class="btn btn-primary" href="{{ path('app_admin_files_upload') }}">Upload file</a>
+        {% set createDirectoryPath = path('app_admin_files_directory_create') %}
+        {% set uploadFilePath = path('app_admin_files_upload') %}
     {% else %}
-        <a class="btn btn-primary" href="{{ path('app_admin_files_directory_create_parent', { directory: directory.id }) }}">Create directory</a>
-        <a class="btn btn-primary" href="{{ path('app_admin_files_upload_directory', { directory: directory.id }) }}">Upload file</a>
+        {% set createDirectoryPath = path('app_admin_files_directory_create_parent', { directory: directory.id }) %}
+        {% set uploadFilePath = path('app_admin_files_upload_directory', { directory: directory.id }) %}
     {% endif %}
+    <a class="btn btn-primary" href="{{ createDirectoryPath }}">Ordner erstellen</a>
+    <a class="btn btn-primary" href="{{ uploadFilePath }}">Datei hochladen</a>
 {% endblock %}
 
 {% block breadcrumbInner %}
@@ -35,111 +37,113 @@
                 Files
             </h3>
         </div>
-        <table class="table card-table table-vcenter text-nowrap">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th colspan="2">Name</th>
-                <th>Größe</th>
-                <th>Mime</th>
-                <th class="w-1"></th>
-            </tr>
-            </thead>
-            <tbody>
-            {% if directory is not null %}
+        <div class="table-responsive">
+            <table class="table card-table table-vcenter text-nowrap">
+                <thead>
                 <tr>
-                    <td class="w-1">{{ directory.id }}</td>
-                    <td class="w-1">
-                        <twig:ux:icon name="vscode-icons:default-folder" height="2em" width="2em"/>
-                    </td>
-                    <td colspan="3">
-                        <a
-                                {% if directory.parent is not null %}
-                                    href="{{ path('app_admin_files_directory', { directory: directory.parent.id }) }}"
-                                {% else %}
-                                    href="{{ path('app_admin_files_index') }}"
-                                {% endif %}
-                        >
-                            ..
-                        </a>
-                    </td>
-                    <td></td>
+                    <th>#</th>
+                    <th colspan="2">Name</th>
+                    <th>Größe</th>
+                    <th>Mime</th>
+                    <th class="w-1"></th>
                 </tr>
-            {% endif %}
-            {% for directory in directories %}
-                <tr>
-                    <td class="w-1">{{ directory.id }}</td>
-                    <td class="w-1">
-                        <twig:ux:icon name="vscode-icons:default-folder" height="2em" width="2em"/>
-                    </td>
-                    <td colspan="3">
-                        <a href="{{ path('app_admin_files_directory', { directory: directory.id }) }}">
-                            {{ directory.name }}
-                        </a>
-                    </td>
-                    <td class="text-end">
-                        <div class="btn-group btn-group-sm">
-                            <a class="btn btn-outline-primary" href="{{ path('app_admin_files_directory_edit', { directory: directory.id }) }}">
-                                <twig:ux:icon name="fa6-solid:pencil"/>
+                </thead>
+                <tbody>
+                {% if directory is not null %}
+                    <tr>
+                        <td class="w-1">{{ directory.id }}</td>
+                        <td class="w-1">
+                            <twig:ux:icon name="vscode-icons:default-folder" height="2em" width="2em"/>
+                        </td>
+                        <td colspan="3">
+                            <a
+                                    {% if directory.parent is not null %}
+                                        href="{{ path('app_admin_files_directory', { directory: directory.parent.id }) }}"
+                                    {% else %}
+                                        href="{{ path('app_admin_files_index') }}"
+                                    {% endif %}
+                            >
+                                ..
                             </a>
-                            <a class="btn btn-outline-danger" href="{{ path('app_admin_files_directory_remove', { directory: directory.id }) }}">
-                                <twig:ux:icon name="fa6-solid:trash"/>
+                        </td>
+                        <td></td>
+                    </tr>
+                {% endif %}
+                {% for directory in directories %}
+                    <tr>
+                        <td class="w-1">{{ directory.id }}</td>
+                        <td class="w-1">
+                            <twig:ux:icon name="vscode-icons:default-folder" height="2em" width="2em"/>
+                        </td>
+                        <td colspan="3">
+                            <a href="{{ path('app_admin_files_directory', { directory: directory.id }) }}">
+                                {{ directory.name }}
                             </a>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            {% for file in files %}
-                <tr>
-                    <td class="w-1">{{ file.id }}</td>
-                    <td class="w-1">
-                        {% if file is image %}
-                            <twig:lightbox file="{{ file }}" lightbox="gallery">
-                                <twig:file:image file="{{ file }}" width="32" height="32"/>
-                            </twig:lightbox>
-                        {% else %}
-                            {% if file.extension == 'pdf' %}
-                                {% set icon = 'vscode-icons:file-type-pdf2' %}
-                            {% elseif file.extension == 'zip' %}
-                                {% set icon = 'vscode-icons:file-type-zip' %}
+                        </td>
+                        <td class="text-end">
+                            <div class="btn-group btn-group-sm">
+                                <a class="btn btn-outline-primary" href="{{ path('app_admin_files_directory_edit', { directory: directory.id }) }}">
+                                    <twig:ux:icon name="fa6-solid:pencil"/>
+                                </a>
+                                <a class="btn btn-outline-danger" href="{{ path('app_admin_files_directory_remove', { directory: directory.id }) }}">
+                                    <twig:ux:icon name="fa6-solid:trash"/>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% for file in files %}
+                    <tr>
+                        <td class="w-1">{{ file.id }}</td>
+                        <td class="w-1">
+                            {% if file is image %}
+                                <twig:lightbox file="{{ file }}" lightbox="gallery">
+                                    <twig:file:image file="{{ file }}" width="32" height="32"/>
+                                </twig:lightbox>
                             {% else %}
-                                {% set icon = 'vscode-icons:file-type-text' %}
+                                {% if file.extension == 'pdf' %}
+                                    {% set icon = 'vscode-icons:file-type-pdf2' %}
+                                {% elseif file.extension == 'zip' %}
+                                    {% set icon = 'vscode-icons:file-type-zip' %}
+                                {% else %}
+                                    {% set icon = 'vscode-icons:file-type-text' %}
+                                {% endif %}
+                                <twig:ux:icon name="{{ icon }}" height="2em" width="2em"/>
                             {% endif %}
-                            <twig:ux:icon name="{{ icon }}" height="2em" width="2em"/>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if file is image %}
-                            <twig:lightbox file="{{ file }}" lightbox="link">
-                                {{ file }}
-                            </twig:lightbox>
-                        {% else %}
-                            <a href="{{ file_url(file) }}" target="_blank">
-                                {{ file }}
-                            </a>
-                        {% endif %}
-                    </td>
-                    <td></td>
-                    <td>{{ file.mimeType }}</td>
-                    <td class="text-end">
-                        <div class="btn-group btn-group-sm">
+                        </td>
+                        <td>
+                            {% if file is image %}
+                                <twig:lightbox file="{{ file }}" lightbox="link">
+                                    {{ file }}
+                                </twig:lightbox>
+                            {% else %}
+                                <a href="{{ file_url(file) }}" target="_blank">
+                                    {{ file }}
+                                </a>
+                            {% endif %}
+                        </td>
+                        <td></td>
+                        <td>{{ file.mimeType }}</td>
+                        <td class="text-end">
+                            <div class="btn-group btn-group-sm">
                             <span class="btn btn-outline-primary copy-to-clipboard" data-clipboard-text="{{ file_url(file) }}">
                                 <twig:ux:icon name="fa6-solid:copy"/>
                             </span>
-                            <a class="btn btn-outline-primary" href="{{ file_url(file) }}" target="_blank">
-                                <twig:ux:icon name="fa6-solid:arrow-up-right-from-square"/>
-                            </a>
-                            <a class="btn btn-outline-primary" href="{{ path('app_admin_files_file_edit', { file: file.id }) }}">
-                                <twig:ux:icon name="fa6-solid:pencil"/>
-                            </a>
-                            <a class="btn btn-outline-danger" href="{{ path('app_admin_files_file_remove', { file: file.id }) }}">
-                                <twig:ux:icon name="fa6-solid:trash"/>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                                <a class="btn btn-outline-primary" href="{{ file_url(file) }}" target="_blank">
+                                    <twig:ux:icon name="fa6-solid:arrow-up-right-from-square"/>
+                                </a>
+                                <a class="btn btn-outline-primary" href="{{ path('app_admin_files_file_edit', { file: file.id }) }}">
+                                    <twig:ux:icon name="fa6-solid:pencil"/>
+                                </a>
+                                <a class="btn btn-outline-danger" href="{{ path('app_admin_files_file_remove', { file: file.id }) }}">
+                                    <twig:ux:icon name="fa6-solid:trash"/>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}

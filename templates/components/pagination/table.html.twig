@@ -31,16 +31,18 @@
                     {{ form(form) }}
                 </twig:bs:card:body>
             {% endif %}
-            <table class="table card-table table-vcenter text-nowrap">
-                <thead>
-                <tr>
-                    {{ tableHeader }}
-                </tr>
-                </thead>
-                <tbody>
-                {{ paginationRowWrapper }}
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap">
+                    <thead>
+                    <tr>
+                        {{ tableHeader }}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{ paginationRowWrapper }}
+                    </tbody>
+                </table>
+            </div>
         </twig:block>
 
         <twig:block name="footer">

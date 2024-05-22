@@ -32,8 +32,12 @@ class ShlinkClientFactory
     ) {
     }
 
-    public function __invoke(): ShlinkClient
+    public function __invoke(): ShlinkClient|null
     {
+        if ($this->baseUrl === '' || $this->apiKey === '') {
+            return null;
+        }
+
         $config = ShlinkConfig::fromArray([
             'baseUrl' => $this->baseUrl,
             'apiKey' => $this->apiKey,

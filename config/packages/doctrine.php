@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Infrastructure\DependencyInjection\AbstractConfigurator;
 use App\Infrastructure\Doctrine\DBAL\Types\Type\DateType;
 use App\Infrastructure\Doctrine\DBAL\Types\Type\YearGroupType;
 use Shapecode\Doctrine\DBAL\Types\DateTimeUTCType;
@@ -14,11 +15,12 @@ use Symfony\Config\FrameworkConfig;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
-return new class () {
+return new class () extends AbstractConfigurator {
     public function __invoke(
         DoctrineConfig $doctrineConfig,
         FrameworkConfig $frameworkConfig,
         ContainerConfigurator $containerConfigurator,
+        string $env,
     ): void {
         $dbal = $doctrineConfig->dbal();
         $dbal->defaultConnection('default');
@@ -50,11 +52,11 @@ return new class () {
             ->prefix('App\Storage\Entity')
             ->alias('App');
 
-        if ($this->isTest($containerConfigurator)) {
+        if ($this->isTest($env)) {
             $this->handleTest($defaultConnection);
         }
 
-        if (! $this->isProd($containerConfigurator)) {
+        if (! $this->isProduction($env)) {
             return;
         }
 
@@ -85,15 +87,5 @@ return new class () {
 
         $frameworkConfig->cache()->pool('doctrine.result_cache_pool')->adapters('cache.app');
         $frameworkConfig->cache()->pool('doctrine.system_cache_pool')->adapters('cache.system');
-    }
-
-    protected function isProd(ContainerConfigurator $containerConfigurator): bool
-    {
-        return $containerConfigurator->env() === 'prod';
-    }
-
-    protected function isTest(ContainerConfigurator $containerConfigurator): bool
-    {
-        return $containerConfigurator->env() === 'test';
     }
 };

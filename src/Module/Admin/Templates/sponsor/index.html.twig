@@ -1,7 +1,7 @@
 {% extends '@admin/_layout/layout.html.twig' %}
 
-{% set pagePreTitle = 'List' %}
-{% set pageTitle = 'Sponsor' %}
+{% set pagePreTitle = 'Liste' %}
+{% set pageTitle = 'Sponsoren' %}
 
 {% block pageTitleActionsButtons %}
     <twig:crud:create crud="{{ crud }}" />
@@ -26,7 +26,13 @@
                 <td>
                     <a href="{{ object.url }}" target="_blank">{{ object.url }}</a>
                 </td>
-                <td>{{ object.image is null ? '' : object.image.pathName }}</td>
+                <td>
+                    {% if object.image is not null %}
+                        <twig:lightbox file="{{ object.image }}">
+                            <twig:file:image file="{{ object.image }}" width="32" height="32" backgroundColor="{{ object.backgroundColor }}"></twig:file:image>
+                        </twig:lightbox>
+                    {% endif %}
+                </td>
             </twig:crud:row>
         </twig:block>
     </twig:pagination:table>
