@@ -20,6 +20,9 @@ return $config
     // applies only to directory scanning, not directly listed files
     ->setFileExtensions(['php'])
 
+    ->ignoreUnknownClassesRegex('/Symfony\\\\Config\\\\.+/')
+    ->ignoreUnknownFunctionsRegex('/Symfony\\\\Component\\\\DependencyInjection\\\\Loader\\\\Configurator\\\\.+/')
+
     // Ignoring errors on specific packages
     ->ignoreErrorsOnPackages([
         'symfony/apache-pack',
@@ -33,7 +36,6 @@ return $config
         'symfony/yaml',
         'twig/intl-extra',
         'twig/string-extra',
-        'nyholm/psr7',
     ], [ErrorType::UNUSED_DEPENDENCY])
 
     // ignore errors on packages that are only used in dev but found in prod. example in bundles.php
