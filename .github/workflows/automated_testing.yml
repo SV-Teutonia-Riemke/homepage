@@ -48,6 +48,9 @@ jobs:
           dependency-versions: ${{ matrix.dependencies }}
           composer-options: --prefer-dist --no-progress --no-suggest --no-scripts
 
+      - name: Warmup cache
+        run: php bin/console cache:warmup
+
 #      - name: Run Migration
 #        run: |
 #          php bin/console doctrine:database:drop --if-exists --force --no-interaction
