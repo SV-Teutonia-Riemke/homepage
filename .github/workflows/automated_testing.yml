@@ -49,7 +49,7 @@ jobs:
           composer-options: --prefer-dist --no-progress --no-suggest --no-scripts
 
       - name: Warmup cache
-        run: php bin/console cache:warmup
+        run: bin/console cache:warmup
 
 #      - name: Run Migration
 #        run: |
