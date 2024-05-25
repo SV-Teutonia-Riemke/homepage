@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Sitemap;
 
 use App\Storage\Repository\ArticleRepository;
+use App\Storage\Repository\PageRepository;
 use App\Storage\Repository\TeamRepository;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Service\UrlContainerInterface;
@@ -19,6 +20,7 @@ class SitemapSubscriber
     public function __construct(
         private readonly TeamRepository $teamRepository,
         private readonly ArticleRepository $articleRepository,
+        private readonly PageRepository $pageRepository,
         private readonly SluggerInterface $slugger,
     ) {
     }
@@ -27,6 +29,7 @@ class SitemapSubscriber
     {
         $this->registerTeams($event->getUrlContainer(), $event->getUrlGenerator());
         $this->registerArticles($event->getUrlContainer(), $event->getUrlGenerator());
+        $this->registerPages($event->getUrlContainer(), $event->getUrlGenerator());
     }
 
     public function registerTeams(UrlContainerInterface $urls, UrlGeneratorInterface $router): void
@@ -66,6 +69,27 @@ class SitemapSubscriber
                     ),
                 ),
                 'article',
+            );
+        }
+    }
+
+    public function registerPages(UrlContainerInterface $urls, UrlGeneratorInterface $router): void
+    {
+        $pages = $this->pageRepository->findEnabled();
+
+        foreach ($pages as $page) {
+            $urls->addUrl(
+                new UrlConcrete(
+                    $router->generate(
+                        'app_page',
+                        [
+                            'page' => $page->getId(),
+                            'slug' => $page->getSlug($this->slugger),
+                        ],
+                        UrlGeneratorInterface::ABSOLUTE_URL,
+                    ),
+                ),
+                'page',
             );
         }
     }

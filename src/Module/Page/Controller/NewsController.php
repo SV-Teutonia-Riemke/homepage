@@ -30,9 +30,14 @@ final class NewsController extends AbstractController
             ->where('p.enabled = true')
             ->orderBy('p.id', 'DESC');
 
+        $page = $request->query->getInt('page', 1);
+        if ($page < 1) {
+            $page = 1;
+        }
+
         $pagination = $this->paginator->paginate(
             $query,
-            $request->query->getInt('page', 1),
+            $page,
         );
 
         return $this->render('@page/news/index.html.twig', [

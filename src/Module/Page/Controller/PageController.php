@@ -33,7 +33,6 @@ final class PageController extends AbstractController
         path: '-{slug}',
         name: '',
         options: [
-            'sitemap' => true,
             'section' => 'page',
         ],
     )]
