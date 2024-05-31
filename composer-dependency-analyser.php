@@ -12,13 +12,9 @@ return $config
     ->addPathsToScan([
         __DIR__ . '/bin',
         __DIR__ . '/public',
-        __DIR__ . '/src',
         __DIR__ . '/config',
     ], false)
     ->addPathToScan(__DIR__ . '/tests', true)
-
-    // applies only to directory scanning, not directly listed files
-    ->setFileExtensions(['php'])
 
     ->ignoreUnknownClassesRegex('/Symfony\\\\Config\\\\.+/')
     ->ignoreUnknownFunctionsRegex('/Symfony\\\\Component\\\\DependencyInjection\\\\Loader\\\\Configurator\\\\.+/')
