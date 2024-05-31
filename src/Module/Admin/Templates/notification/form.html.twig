@@ -4,12 +4,21 @@
 {% set formCancelLink = path('app_admin_notification_index') %}
 
 {% block pageBody %}
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Notification</h3>
-        </div>
-        <div class="card-body">
-            {{ form(form) }}
-        </div>
-    </div>
+    <twig:bs:row cards>
+        <twig:bs:col>
+            <twig:bs:card>
+                {{ form_row(form.title) }}
+            </twig:bs:card>
+        </twig:bs:col>
+        <twig:bs:col>
+            <twig:bs:card header="Einstellungen">
+                {{ form_row(form.enabled) }}
+            </twig:bs:card>
+        </twig:bs:col>
+        <twig:bs:col>
+            <twig:bs:card header="{{ form.content.vars.label }}">
+                {{ form_widget(form.content) }}
+            </twig:bs:card>
+        </twig:bs:col>
+    </twig:bs:row>
 {% endblock %}

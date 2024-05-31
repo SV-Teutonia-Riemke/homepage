@@ -1,36 +1,56 @@
 <div {{ attributes }}>
 
     <div class="space-y">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Team</h3>
-            </div>
-            <div class="card-body">
-                {{ form_row(form.name) }}
-                {{ form_row(form.enabled) }}
-                {{ form_row(form.portraits) }}
-                {{ form_row(form.gender) }}
-                {{ form_row(form.season) }}
-                {{ form_row(form.league) }}
-                {{ form_row(form.ageCategory) }}
-                {{ form_row(form.ageGroup) }}
-                {{ form_row(form.juniorAge) }}
-                {{ form_row(form.image) }}
-                {{ form_row(form.currentMatchday) }}
-                {{ form_row(form.handballNetId, { attr: { placeholder: 'handball4all.westfalen.867086' } }) }}
-                {{ form_row(form.facebook) }}
-                {{ form_row(form.instagram) }}
-                {{ form_row(form.emailAddress) }}
-            </div>
-        </div>
+        <twig:bs:card header="Team">
+            <twig:bs:row>
+                <twig:bs:col md="6">{{ form_row(form.name) }}</twig:bs:col>
+                <twig:bs:col md="6">{{ form_row(form.image) }}</twig:bs:col>
+            </twig:bs:row>
+        </twig:bs:card>
+
+        <twig:bs:card header="Liga">
+            <twig:bs:row>
+                <twig:bs:col md="6">{{ form_row(form.league) }}</twig:bs:col>
+                <twig:bs:col md="6">{{ form_row(form.season) }}</twig:bs:col>
+            </twig:bs:row>
+        </twig:bs:card>
+
+        <twig:bs:card header="Alter">
+            <twig:bs:row>
+                <twig:bs:col md="4">{{ form_row(form.ageCategory) }}</twig:bs:col>
+                <twig:bs:col md="4">{{ form_row(form.ageGroup) }}</twig:bs:col>
+                <twig:bs:col md="4">{{ form_row(form.juniorAge) }}</twig:bs:col>
+            </twig:bs:row>
+        </twig:bs:card>
+
+        <twig:bs:card header="Verlinkungen">
+            <twig:bs:row>
+                <twig:bs:col md="6">{{ form_row(form.currentMatchday) }}</twig:bs:col>
+                <twig:bs:col md="6">{{ form_row(form.handballNetId, { attr: { placeholder: 'handball4all.westfalen.867086' } }) }}</twig:bs:col>
+            </twig:bs:row>
+        </twig:bs:card>
+
+        <twig:bs:card header="Social Media und Kontakt">
+            <twig:bs:row>
+                <twig:bs:col md="4">{{ form_row(form.facebook) }}</twig:bs:col>
+                <twig:bs:col md="4">{{ form_row(form.instagram) }}</twig:bs:col>
+                <twig:bs:col md="4">{{ form_row(form.emailAddress) }}</twig:bs:col>
+            </twig:bs:row>
+        </twig:bs:card>
+
+        <twig:bs:card header="Einstellungen">
+            {{ form_row(form.gender) }}
+            {{ form_row(form.enabled) }}
+            {{ form_row(form.portraits) }}
+        </twig:bs:card>
 
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Players</h3>
+                <h3 class="card-title">Spieler</h3>
                 <div class="card-actions">
                     <button data-action="live#action" data-live-action-param="addPlayer" type="button" class="btn btn-outline-primary">
                         <twig:ux:icon class="icon" name="fa6-solid:circle-plus" />
-                        Add
+                        Hinzufügen
                     </button>
                 </div>
             </div>
@@ -38,9 +58,9 @@
                 <thead>
                 <tr>
                     <th>Person</th>
-                    <th>Number</th>
+                    <th>Nummer</th>
                     <th>Position</th>
-                    <th>Image</th>
+                    <th>Bild</th>
                     <th class="w-1"></th>
                 </tr>
                 </thead>
@@ -63,7 +83,7 @@
             <div class="card-footer d-flex justify-content-right">
                 <button data-action="live#action" data-live-action-param="addPlayer" type="button" class="btn btn-outline-primary ms-auto">
                     <twig:ux:icon class="icon" name="fa6-solid:circle-plus" />
-                    Add
+                    Hinzufügen
                 </button>
             </div>
         </div>
@@ -74,7 +94,7 @@
                 <div class="card-actions">
                     <button data-action="live#action" data-live-action-param="addStaff" type="button" class="btn btn-outline-primary">
                         <twig:ux:icon class="icon" name="fa6-solid:circle-plus" />
-                        Add
+                        Hinzufügen
                     </button>
                 </div>
             </div>
@@ -83,7 +103,7 @@
                 <tr>
                     <th>Person</th>
                     <th>Position</th>
-                    <th>Image</th>
+                    <th>Bild</th>
                     <th class="w-1"></th>
                 </tr>
                 </thead>
@@ -105,7 +125,7 @@
             <div class="card-footer d-flex justify-content-right">
                 <button data-action="live#action" data-live-action-param="addStaff" type="button" class="btn btn-outline-primary ms-auto">
                     <twig:ux:icon class="icon" name="fa6-solid:circle-plus" />
-                    Add
+                    Hinzufügen
                 </button>
             </div>
         </div>

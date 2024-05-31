@@ -1,9 +1,9 @@
 {% if crud is crud_has_create %}
     {% component 'bs:button' with {
-        type: 'primary',
-        icon: 'fa6-solid:plus',
-        href: crud_url_create(crud),
         title: title,
+        icon: icon,
+        type: type,
+        href: crud_url_create(crud),
     } %}
     {% endcomponent %}
 {% endif %}

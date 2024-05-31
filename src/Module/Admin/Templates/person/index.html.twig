@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block pageBody %}
-    <twig:pagination:table title="Persons">
+    <twig:pagination:table :title="pageTitle">
         <twig:block name="tableHeader">
             <th class="w-1">Id</th>
             <th>Vorname</th>

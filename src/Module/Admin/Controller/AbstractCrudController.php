@@ -140,6 +140,8 @@ abstract class AbstractCrudController extends AbstractController
 
         $callable($request, $form, $data);
 
+        $this->addFlash('success', 'Daten wurden erfolgreich gespeichert');
+
         if ($form->has(AbstractForm::BUTTON_SUBMIT_AND_NEW)) {
             $submitAndNew = $form->get(AbstractForm::BUTTON_SUBMIT_AND_NEW);
             assert($submitAndNew instanceof SubmitButton);
@@ -159,6 +161,8 @@ abstract class AbstractCrudController extends AbstractController
 
         $this->doRemoving($entity);
 
+        $this->addFlash('success', 'Erfolgreich gelöscht');
+
         return $this->redirectToRoute($crudConfig->getListRouteName());
     }
 
@@ -172,6 +176,12 @@ abstract class AbstractCrudController extends AbstractController
         $entity->setEnabled($enabled);
 
         $this->doPersisting($entity);
+
+        if ($enabled) {
+            $this->addFlash('success', 'Erfolgreich aktiviert');
+        } else {
+            $this->addFlash('success', 'Erfolgreich deaktiviert');
+        }
 
         return $this->redirectToRoute($this->getCrudConfig()->getListRouteName());
     }

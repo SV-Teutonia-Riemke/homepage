@@ -4,24 +4,31 @@
 {% endset %}
 
 <twig:bs:card class="mb-3" statusTop="primary">
-    <twig:bs:card:header title="{{ article.title }}">
-        <twig:bs:card:actions>
-            <twig:bs:button type="link" class="btn-icon copy-to-clipboard" data-clipboard-text="{{ url('app_news_article', { id: article.id }) }}" icon="fa6-solid:share-nodes"/>
-        </twig:bs:card:actions>
-    </twig:bs:card:header>
-    {% if article.image is not null %}
-        <div class="card-img-top d-md-none">
-            <twig:file:image file="{{ article.image }}" width="450"/>
-        </div>
-    {% endif %}
-    <twig:bs:card:body>
+    <twig:block name="header">
+        <twig:bs:card:header title="{{ article.title }}">
+            {{ title }}
+            <twig:bs:card:actions>
+                <twig:bs:button type="link" class="btn-icon copy-to-clipboard" data-clipboard-text="{{ url('app_news_article', { id: article.id }) }}" icon="fa6-solid:share-nodes"/>
+            </twig:bs:card:actions>
+        </twig:bs:card:header>
+    </twig:block>
+    <twig:block name="body">
         {% if article.image is not null %}
-            <twig:file:image file="{{ article.image.id }}" class="float-start rounded me-2 d-none d-md-block" style="width: 35%" width="450"/>
+            <div class="card-img-top d-md-none">
+                <twig:file:image file="{{ article.image }}" width="450"/>
+            </div>
         {% endif %}
-        <twig:bs:card:text content="{{ article.content }}"/>
-        <twig:bs:card:text>
-            <small class="text-muted">Erstellt am {{ article.createdAt|format_datetime }}</small>
-        </twig:bs:card:text>
-    </twig:bs:card:body>
-    {{ cardFooter }}
+        <twig:bs:card:body>
+            {% if article.image is not null %}
+                <twig:file:image file="{{ article.image.id }}" class="float-start rounded me-2 d-none d-md-block" style="width: 35%" width="450"/>
+            {% endif %}
+            <twig:bs:card:text content="{{ article.content }}"/>
+            <twig:bs:card:text>
+                <small class="text-muted">Erstellt am {{ article.createdAt|format_datetime }}</small>
+            </twig:bs:card:text>
+        </twig:bs:card:body>
+    </twig:block>
+    <twig:block name="footer">
+        {{ cardFooter }}
+    </twig:block>
 </twig:bs:card>

@@ -16,4 +16,6 @@ class CrudCreate
     /** @var CrudConfig<object> */
     public CrudConfig $crud;
     public string $title = 'Erstellen';
+    public string $icon  = 'fa6-solid:plus';
+    public string $type  = 'primary';
 }

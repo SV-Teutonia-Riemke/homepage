@@ -22,14 +22,17 @@ final class LinkType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Name',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('enabled', CheckboxType::class, [
+                'label' => 'Aktiviert',
                 'required' => false,
             ])
             ->add('uri', UrlType::class, [
+                'label' => 'URL',
                 'constraints' => [
                     new NotBlank(),
                     new Url(),

@@ -21,18 +21,22 @@ final class PlayerType extends AbstractType
     {
         $builder
             ->add('person', PersonEntityType::class, [
+                'label' => 'Person',
                 'required'    => false,
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('image', FileEntityType::class, [
+                'label' => 'Profilfoto',
                 'required' => false,
             ])
             ->add('position', GamePositionType::class, [
+                'label' => 'Position',
                 'required' => false,
             ])
             ->add('number', IntegerType::class, [
+                'label' => 'Rückennummer',
                 'required' => false,
             ]);
     }

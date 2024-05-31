@@ -24,15 +24,18 @@ final class UserType extends AbstractType
     {
         $builder
             ->add(self::FIELD_EMAIL, EmailType::class, [
+                'label' => 'E-Mail-Adresse',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add(self::FIELD_PASSWORD, PasswordType::class, [
+                'label' => 'Passwort',
                 'required' => false,
                 'mapped' => false,
             ])
             ->add('roles', RoleType::class, [
+                'label' => 'Berechtigungen',
                 'required' => false,
             ]);
     }

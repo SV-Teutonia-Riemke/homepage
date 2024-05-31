@@ -20,11 +20,13 @@ final class DirectoryType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Name',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('parent', DirectoryEntityType::class, [
+                'label' => 'Übergeordnetes Verzeichnis',
                 'required' => false,
             ]);
     }

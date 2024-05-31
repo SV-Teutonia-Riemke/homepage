@@ -1,4 +1,33 @@
 {% extends '@admin/_layout/layout.html.twig' %}
 
 {% block pageBody %}
+    {% if visitsOverview is not null %}
+        <h2 class="border-bottom">Short URLs</h2>
+        <div class="row">
+            <div class="col-3">
+                <twig:bs:card class="text-center" stamp="akar-icons:statistic-up">
+                    <div class="fs-2 text-uppercase fw-bold text-muted">Besuche</div>
+                    <div class="display-5 fw-bold">{{ visitsOverview.nonOrphanVisits.nonBots|number_format }}</div>
+                </twig:bs:card>
+            </div>
+            <div class="col-3">
+                <twig:bs:card class="text-center" stamp="akar-icons:statistic-up">
+                    <div class="fs-2 text-uppercase fw-bold text-muted">Eindeutige Besuche</div>
+                    <div class="display-5 fw-bold">{{ visitsOverview.orphanVisits.nonBots|number_format }}</div>
+                </twig:bs:card>
+            </div>
+            <div class="col-3">
+                <twig:bs:card class="text-center" stamp="fa6-solid:calculator">
+                    <div class="fs-2 text-uppercase fw-bold text-muted">Short URLs</div>
+                    <div class="display-5 fw-bold">{{ shortUrlsCount|number_format }}</div>
+                </twig:bs:card>
+            </div>
+            <div class="col-3">
+                <twig:bs:card class="text-center" stamp="fa6-solid:tags">
+                    <div class="fs-2 text-uppercase fw-bold text-muted">Tags</div>
+                    <div class="display-5 fw-bold">{{ tagsCount|number_format }}</div>
+                </twig:bs:card>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

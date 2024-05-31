@@ -23,26 +23,32 @@ final class MenuItemType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+                'label' => 'Titel',
                 'required' => false,
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('icon', TextType::class, [
+                'label' => 'Icon',
+                'help' => 'Der Name des Icons von der Seite https://icon-sets.iconify.design/.',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('enabled', CheckboxType::class, [
+                'label' => 'Aktiviert',
                 'required' => false,
             ])
             ->add('type', EnumType::class, [
+                'label' => 'Typ',
                 'class' => MenuType::class,
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('group', EnumType::class, [
+                'label' => 'Gruppe',
                 'class' => MenuGroup::class,
                 'constraints' => [
                     new NotBlank(),

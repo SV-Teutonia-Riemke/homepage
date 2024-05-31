@@ -13,6 +13,7 @@ final class PlayerCollectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'label' => 'Spieler',
             'entry_type'   => PlayerType::class,
             'allow_add'    => true,
             'allow_delete' => true,

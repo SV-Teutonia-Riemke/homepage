@@ -28,60 +28,77 @@ final class TeamType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Name',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('enabled', CheckboxType::class, [
+                'label' => 'Aktiviert',
                 'required' => false,
             ])
             ->add('portraits', CheckboxType::class, [
+                'label' => 'Portrait Modus verwenden',
+                'help' => 'Erfordert Bilder für Spieler und Trainer.',
                 'required' => false,
             ])
             ->add('gender', GenderType::class, [
+                'label' => 'Geschlecht des Teams',
+                'expanded' => true,
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('season', YearGroupType::class, [
+                'label' => 'Saison',
                 'placeholder' => '',
                 'required'    => false,
             ])
             ->add('league', TextType::class, [
+                'label' => 'Liga',
                 'required'    => false,
             ])
             ->add('ageGroup', YearGroupType::class, [
+                'label' => 'Altersgruppe',
                 'required'    => false,
                 'placeholder' => '',
             ])
             ->add('juniorAge', TeamJuniorAgeType::class, [
+                'label' => 'Junioren Alterskategorie',
                 'required'    => false,
                 'placeholder' => '',
             ])
             ->add('ageCategory', TeamAgeCategoryType::class, [
+                'label' => 'Alterskategorie',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('currentMatchday', TextType::class, [
+                'label' => 'Handball4All Link',
                 'required'    => false,
                 'constraints' => [
                     new Url(protocols: ['https']),
                 ],
             ])
             ->add('handballNetId', TextType::class, [
+                'label' => 'handball.net ID',
                 'required'    => false,
             ])
             ->add('facebook', TextType::class, [
+                'label' => 'Facebook URL',
                 'required' => false,
             ])
             ->add('instagram', TextType::class, [
+                'label' => 'Instagram URL',
                 'required' => false,
             ])
             ->add('emailAddress', EmailType::class, [
+                'label' => 'E-Mail Adresse',
                 'required' => false,
             ])
             ->add('image', FileEntityType::class, [
+                'label' => 'Teamfoto',
                 'required' => false,
             ])
             ->add('players', PlayerCollectionType::class, [

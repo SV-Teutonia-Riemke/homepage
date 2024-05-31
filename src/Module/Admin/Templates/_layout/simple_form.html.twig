@@ -1,60 +1,75 @@
 {% extends '@admin/_layout/layout.html.twig' %}
 
-{% block formCancel %}
+{% set formId = random() %}
+{% set formSubmitIcon = formSubmitIcon|default('fa6-solid:floppy-disk') %}
+{% set formCancelIcon = formCancelIcon|default('fa-solid:times') %}
+{% set formSubmitLabel = formSubmitLabel|default('Speichern') %}
+{% set formSubmitAndNewLabel = formSubmitAndNewLabel|default('Speichern & Neu') %}
+{% set formCancelLabel = formCancelLabel|default('Abbrechen') %}
+
+{% set formActions %}
     {% if formCancelLink is defined and formCancelLink is not empty %}
         {{ component('bs:button', {
             href: formCancelLink,
-            title: formCancelLabel ?? 'Abbrechen',
-            icon: formCancelIcon ?? 'fa-solid:times',
+            title: formCancelLabel,
+            icon: formCancelIcon,
             type: 'danger',
             outline: true,
         }) }}
     {% endif %}
-{% endblock %}
 
-{% block formSubmit %}
     {% if form.submit is defined %}
         {% set submitLabel %}
-            <twig:ux:icon class="icon" name="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}" />
-            {{ (formSubmitLabel ?? 'Speichern')|trans }}
+            <twig:ux:icon class="icon" name="{{ formSubmitIcon }}"/>
+            {{ formSubmitLabel|trans }}
         {% endset %}
+
         {{ form_widget(form.submit, {
             label: submitLabel,
-            label_html: true
+            label_html: true,
+            attr: {
+                form: formId,
+            }
         }) }}
-    {% else %}
-        <button type="submit" class="btn btn-primary">
-            <twig:ux:icon class="icon" name="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}" />
-            {{ (formSubmitLabel ?? 'Speichern')|trans }}
-        </button>
     {% endif %}
 
     {% if form.submitAndNew is defined %}
         {% set submitAndNewLabel %}
-            <twig:ux:icon class="icon" name="{{ formSubmitIcon ?? 'fa6-solid:floppy-disk' }}" />
-            {{ (formSubmitAndNewLabel ?? 'Speichern & Neu')|trans }}
+            <twig:ux:icon class="icon" name="{{ formSubmitIcon }}"/>
+            {{ formSubmitAndNewLabel|trans }}
         {% endset %}
+
         {{ form_widget(form.submitAndNew, {
             label: submitAndNewLabel,
-            label_html: true
+            label_html: true,
+            attr: {
+                form: formId,
+            }
         }) }}
     {% endif %}
-{% endblock %}
-
-{% block formActions %}
-    {{ block('formCancel') }}
-    {{ block('formSubmit') }}
-{% endblock %}
+{% endset %}
 
 {% block pageTitleActionsButtons %}
-    {{ block('formActions') }}
+    {{ formActions|raw }}
 {% endblock %}
 
-{% block pageWrapper %}
-    {{ form_start(form) }}
-    {{ parent() }}
+{% block pageBodyWrapper %}
+    {{ form_start(form, {'attr': {'id': formId}}) }}
+
+    {{ block('pageBody') }}
+
     <div class="d-none">
         {{ form_rest(form) }}
     </div>
+
     {{ form_end(form) }}
+
+    {%- set pageTitleActionsBlock = block('pageTitleActions') -%}
+    {% if pageTitleActionsBlock is not empty %}
+        <div class="row mt-3">
+            <div class="col-12 col-md-auto ms-auto d-print-none">
+                {{ pageTitleActionsBlock|raw }}
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

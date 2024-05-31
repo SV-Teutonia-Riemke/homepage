@@ -19,14 +19,17 @@ final class ShortUrlType extends AbstractType
     {
         $builder
             ->add('longUrl', UrlType::class, [
+                'label' => 'URL',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('shortCode', TextType::class, [
+                'label' => 'Code',
                 'required' => false,
             ])
             ->add('tags', TextType::class, [
+                'label' => 'Tags',
                 'required' => false,
             ]);
     }

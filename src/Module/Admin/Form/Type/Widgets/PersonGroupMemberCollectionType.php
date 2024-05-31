@@ -13,6 +13,7 @@ final class PersonGroupMemberCollectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'label' => 'Mitglieder',
             'entry_type'   => PersonGroupMemberType::class,
             'allow_add'    => true,
             'allow_delete' => true,

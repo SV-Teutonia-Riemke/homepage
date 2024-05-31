@@ -20,13 +20,19 @@ final class PersonGroupMemberType extends AbstractType
     {
         $builder
             ->add('person', PersonEntityType::class, [
+                'label' => 'Person',
                 'required'    => false,
             ])
             ->add('jobTitle', TextType::class, [
+                'label' => 'Aufgabe / Funktion',
                 'required' => false,
             ])
-            ->add('provisional', CheckboxType::class)
-            ->add('position', IntegerType::class, []);
+            ->add('provisional', CheckboxType::class, [
+                'label' => 'Provisorisch',
+            ])
+            ->add('position', IntegerType::class, [
+                'label' => 'Sortierung',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

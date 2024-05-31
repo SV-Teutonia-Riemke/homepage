@@ -15,21 +15,22 @@ use Symfony\UX\TwigComponent\Attribute\PreMount;
 )]
 final class CardComponent
 {
-    public string|null $header = null;
-    public string|null $body   = null;
-    public string|null $footer = null;
+    public string|null $header;
+    public string|null $body;
+    public string|null $footer;
 
-    public string|null $statusTop = null;
+    public string|null $statusTop;
 
     /** @var array{ src ?: ?string, alt ?: ?string, title ?: ?string, position ?: "top" | "bottom" | "overlay" } */
-    public array $image = [];
+    public array $image;
 
-    public string|null $imageSrc   = null;
-    public string|null $imageAlt   = null;
-    public string|null $imageTitle = null;
+    public string|null $imageSrc;
+    public string|null $imageAlt;
+    public string|null $imageTitle;
+    public string|null $stamp;
 
     /** @var "top"|"bottom"|"overlay" */
-    public string $imagePosition = 'top';
+    public string $imagePosition;
 
     /**
      * @param array<string, string> $data
@@ -46,12 +47,13 @@ final class CardComponent
             'header' => null,
             'body' => null,
             'footer' => null,
-            'statusTop' => null,
+            'statusTop' => 'primary',
             'image' => [],
             'imagePosition' => 'top',
             'imageSrc' => null,
             'imageAlt' => null,
             'imageTitle' => null,
+            'stamp' => null,
         ]);
 
         $resolver->setAllowedTypes('header', ['null', 'string']);
@@ -62,6 +64,7 @@ final class CardComponent
         $resolver->setAllowedTypes('imageSrc', ['null', 'string']);
         $resolver->setAllowedTypes('imageAlt', ['null', 'string']);
         $resolver->setAllowedTypes('imageTitle', ['null', 'string']);
+        $resolver->setAllowedTypes('stamp', ['null', 'string']);
 
         $resolver->setAllowedValues('imagePosition', ['top', 'bottom', 'overlay']);
 

@@ -3,20 +3,27 @@
 declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Config\TwigConfig;
 
-return static function (TwigConfig $twigConfig, ContainerConfigurator $containerConfigurator): void {
-    $twigConfig
-        ->defaultPath('%kernel.project_dir%/templates')
-        ->path('%kernel.project_dir%/src/Module/Admin/Templates', 'admin')
-        ->path('%kernel.project_dir%/src/Module/Page/Templates', 'page')
-        ->formThemes([
+return static function (
+    ContainerConfigurator $containerConfigurator,
+    string $env,
+): void {
+    $containerConfigurator->extension('twig', [
+        'default_path' => '%kernel.project_dir%/templates',
+        'form_themes' => [
             'bootstrap_5_layout.html.twig',
-        ]);
+        ],
+        'paths' => [
+            '%kernel.project_dir%/src/Module/Admin/Templates' => 'admin',
+            '%kernel.project_dir%/src/Module/Page/Templates' => 'page',
+        ],
+    ]);
 
-    if ($containerConfigurator->env() !== 'test') {
+    if ($env !== 'test') {
         return;
     }
 
-    $twigConfig->strictVariables(true);
+    $containerConfigurator->extension('twig', [
+        'strict_variables' => true,
+    ]);
 };

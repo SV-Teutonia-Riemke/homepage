@@ -1,12 +1,20 @@
 {% apply spaceless %}
     <div{{ attributes.defaults({class: 'card'}) }}>
+        {% if stamp is not null %}
+            <div class="card-stamp">
+                <div class="card-stamp-icon bg-white text-primary">
+                    <twig:ux:icon name="{{ stamp }}" />
+                </div>
+            </div>
+        {% endif %}
+
         {% if statusTop %}
             <div class="card-status-top bg-{{ statusTop }}"></div>
         {% endif %}
 
         {% block header %}
             {% if header is not empty %}
-                <twig:bs:card:header>{{ header }}</twig:bs:card:header>
+                <twig:bs:card:header title="{{ header }}"/>
             {% endif %}
         {% endblock %}
         {% block img_top %}
@@ -15,15 +23,18 @@
             {% endif %}
         {% endblock %}
         {% block body %}
-            {% if body is empty %}
-                {% set body %}
-                    {% block body_content %}{% endblock %}
-                {% endset %}
-            {% endif %}
             {% if image.position | default('top') == 'overlay' %}
                 <div class="card-img-overlay">{{ body }}</div>
+            {% endif %}
+            {% if body is null %}
+                {% set content %}
+                    {% block content %}{% endblock %}
+                {% endset %}
+                <twig:bs:card:body>
+                    {{ content }}
+                </twig:bs:card:body>
             {% else %}
-                {% block content %}{% endblock %}
+                {{ body }}
             {% endif %}
         {% endblock %}
         {% block img_bottom %}

@@ -19,6 +19,7 @@ final class StaffType extends AbstractType
     {
         $builder
             ->add('person', PersonEntityType::class, [
+                'label' => 'Person',
                 'required'    => false,
                 'constraints' => [
                     new NotBlank(),
@@ -28,6 +29,7 @@ final class StaffType extends AbstractType
 //                'required' => false,
 //            ])
             ->add('position', StaffPositionType::class, [
+                'label' => 'Position',
                 'required' => false,
             ]);
     }

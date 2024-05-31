@@ -21,17 +21,21 @@ final class PageType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+                'label' => 'Titel',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('subTitle', TextType::class, [
+                'label' => 'Untertitel',
                 'required' => false,
             ])
             ->add('enabled', CheckboxType::class, [
+                'label' => 'Aktiviert',
                 'required' => false,
             ])
             ->add('content', TextareaType::class, [
+                'label' => 'Inhalt',
                 'attr' => [
                     'class' => 'monaco-editor',
                     'data-language' => 'twig',

@@ -16,6 +16,7 @@ final class FileEntityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'label' => 'Datei',
             'class'        => File::class,
             'choice_label' => static fn (File $file): string => $file->getPathName(),
         ]);

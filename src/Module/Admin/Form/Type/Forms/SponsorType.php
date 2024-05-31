@@ -23,31 +23,37 @@ final class SponsorType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Name',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('url', TextType::class, [
+                'label' => 'URL',
                 'required'    => false,
                 'constraints' => [
                     new Url(),
                 ],
             ])
             ->add('level', SponsorLevelType::class, [
+                'label' => 'Sponsorenstufe',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('enabled', CheckboxType::class, [
+                'label' => 'Aktiviert',
                 'required' => false,
             ])
             ->add('image', FileEntityType::class, [
+                'label' => 'Logo',
                 'required'    => true,
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('backgroundColor', ColorType::class, [
+                'label' => 'Hintergrundfarbe des Logos',
                 'required' => false,
                 'html5'    => true,
             ]);

@@ -22,6 +22,7 @@ final class MenuItemPageType extends AbstractType
         $builder
             ->remove('type')
             ->add('page', EntityType::class, [
+                'label' => 'Seite',
                 'class' => Page::class,
                 'constraints' => [
                     new NotBlank(),

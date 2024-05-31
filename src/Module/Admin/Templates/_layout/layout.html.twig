@@ -47,6 +47,19 @@
 
             <div class="page-body">
                 <div class="container-xl">
+                    {% set flashes = app.flashes %}
+
+                    {% if flashes|length > 0 %}
+                        <div class="row">
+                            <div class="col">
+                                {% for type, messages in flashes %}
+                                    {% for message in messages %}
+                                        <twig:bs:alert type="{{ type }}" message="{{ message }}" important/>
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
                     <div class="row">
                         <div class="col">
                             {% block pageBodyWrapper %}

@@ -25,18 +25,22 @@ final class DownloadType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Name',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('enabled', CheckboxType::class, [
+                'label' => 'Aktiviert',
                 'required' => false,
             ])
             ->add('file', FileEntityType::class, [
+                'label' => 'Datei',
                 'required' => false,
             ])
             ->add('uri', UrlType::class, [
-                'required'    => false,
+                'label' => 'URL',
+                'required' => false,
                 'constraints' => [
                     new Url(),
                 ],
@@ -46,8 +50,8 @@ final class DownloadType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class'  => Download::class,
-            'empty_data'  => static fn (FormInterface $form): Download => new Download(
+            'data_class' => Download::class,
+            'empty_data' => static fn (FormInterface $form): Download => new Download(
                 $form->get('name')->getData() ?? '',
                 $form->get('uri')->getData(),
                 $form->get('file')->getData(),

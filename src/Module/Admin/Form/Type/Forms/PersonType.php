@@ -23,31 +23,39 @@ final class PersonType extends AbstractType
     {
         $builder
             ->add('firstName', TextType::class, [
+                'label' => 'Vorname',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('lastName', TextType::class, [
+                'label' => 'Nachname',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('anonymizeLastName', CheckboxType::class, [
+                'label' => 'Nachname anonymisieren',
                 'required' => false,
             ])
             ->add('image', FileEntityType::class, [
+                'label' => 'Profilbild',
                 'required' => false,
             ])
             ->add('phoneNumber', PhoneNumberType::class, [
+                'label' => 'Telefonnummer',
                 'required' => false,
             ])
             ->add('emailAddress', EmailType::class, [
+                'label' => 'E-Mail-Adresse',
                 'required' => false,
             ])
             ->add('facebook', TextType::class, [
+                'label' => 'Facebook URL',
                 'required' => false,
             ])
             ->add('instagram', TextType::class, [
+                'label' => 'Instagram URL',
                 'required' => false,
             ]);
     }

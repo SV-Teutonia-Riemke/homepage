@@ -13,15 +13,14 @@
 <div{{ attributes }}>
     <twig:bs:card>
         <twig:block name="header">
-            <twig:bs:card:header>
-                <span class="badge bg-secondary text-white">
+            <twig:bs:card:header :title="title">
+                <span class="badge bg-secondary text-white ms-1">
                     {% if iterable is pagination %}
                         {{ iterable.getTotalItemCount }}
                     {% else %}
                         {{ iterable|length }}
                     {% endif %}
                 </span>
-                {{ title }}
             </twig:bs:card:header>
         </twig:block>
 

@@ -21,6 +21,7 @@ final class MenuItemUrlType extends AbstractType
         $builder
             ->remove('type')
             ->add('url', UrlType::class, [
+                'label' => 'URL',
                 'constraints' => [
                     new NotBlank(),
                 ],

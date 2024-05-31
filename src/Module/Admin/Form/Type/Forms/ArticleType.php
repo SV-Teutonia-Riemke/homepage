@@ -22,17 +22,21 @@ final class ArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+                'label' => 'Titel',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('enabled', CheckboxType::class, [
+                'label' => 'Aktiviert',
                 'required' => false,
             ])
             ->add('image', FileEntityType::class, [
+                'label' => 'Bild',
                 'required' => false,
             ])
             ->add('content', TinymceType::class, [
+                'label' => 'Inhalt',
                 'constraints' => [
                     new NotBlank(),
                 ],

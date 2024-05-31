@@ -21,16 +21,19 @@ final class NotificationType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+                'label' => 'Titel',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('content', TinymceType::class, [
+                'label' => 'Inhalt',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('enabled', CheckboxType::class, [
+                'label' => 'Aktiviert',
                 'required' => false,
             ]);
     }

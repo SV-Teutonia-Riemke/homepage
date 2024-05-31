@@ -19,11 +19,13 @@ final class FileEditType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Name',
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('directory', DirectoryEntityType::class, [
+                'label' => 'Ordner',
                 'required' => false,
             ]);
     }

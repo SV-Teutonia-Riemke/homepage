@@ -28,8 +28,8 @@ final class ChangePasswordType extends AbstractType
                 'constraints'    => [
                     new NotBlank(),
                 ],
-                'first_options'  => ['label' => 'Passwort'],
-                'second_options' => ['label' => 'Passwort wiederholen'],
+                'first_options'  => ['label' => 'Neues Passwort'],
+                'second_options' => ['label' => 'Neues Passwort wiederholen'],
             ]);
     }
 }
