@@ -20,6 +20,7 @@ class ColComponent
     public int|null $md  = null;
     public int|null $sm  = null;
 
+    /** @return array<string, string> */
     public function getDefaults(): array
     {
         return [
@@ -27,6 +28,7 @@ class ColComponent
         ];
     }
 
+    /** @return list<string> */
     public function getClasses(): array
     {
         $classes = [];

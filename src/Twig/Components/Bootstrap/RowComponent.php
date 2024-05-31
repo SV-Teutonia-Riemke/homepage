@@ -16,6 +16,7 @@ class RowComponent
 {
     public bool $cards = false;
 
+    /** @return array<string, string> */
     public function getDefaults(): array
     {
         return [
@@ -23,6 +24,7 @@ class RowComponent
         ];
     }
 
+    /** @return list<string> */
     public function getClasses(): array
     {
         $classes = [
