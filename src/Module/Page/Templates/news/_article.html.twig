@@ -12,20 +12,21 @@
         </twig:bs:card:header>
     </twig:block>
     <twig:block name="body">
-        {% if article.image is not null %}
-            <div class="card-img-top d-md-none">
-                <twig:file:image file="{{ article.image }}" width="450"/>
-            </div>
-        {% endif %}
-        <twig:bs:card:body>
+        <div class="row">
             {% if article.image is not null %}
-                <twig:file:image file="{{ article.image.id }}" class="float-start rounded me-2 d-none d-md-block" style="width: 35%" width="450"/>
+                <div class="col-12 col-md-5">
+                    <twig:file:image file="{{ article.image }}" width="450"/>
+                </div>
             {% endif %}
-            <twig:bs:card:text content="{{ article.content }}"/>
-            <twig:bs:card:text>
-                <small class="text-muted">Erstellt am {{ article.createdAt|format_datetime }}</small>
-            </twig:bs:card:text>
-        </twig:bs:card:body>
+            <div class="col-12{% if article.image is not null %} col-md{% endif %}">
+                <twig:bs:card:body>
+                    <twig:bs:card:text content="{{ article.content }}"/>
+                    <twig:bs:card:text>
+                        <small class="text-muted">Erstellt am {{ article.createdAt|format_datetime }}</small>
+                    </twig:bs:card:text>
+                </twig:bs:card:body>
+            </div>
+        </div>
     </twig:block>
     <twig:block name="footer">
         {{ cardFooter }}

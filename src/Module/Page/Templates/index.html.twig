@@ -35,13 +35,7 @@
             {% endfor %}
 
             {% for article in articles %}
-                {% embed '@page/news/_article.html.twig' with { article: article } %}
-                    {% block cardFooter %}
-                        <div class="card-footer">
-                            <a href="{{ path('app_news') }}" class="btn btn-primary">Weitere Artikel zum Nachlesen</a>
-                        </div>
-                    {% endblock %}
-                {% endembed %}
+                {% embed '@page/news/_article.html.twig' with { article: article } %}{% endembed %}
             {% endfor %}
         </div>
         <div class="col-12 col-md-3">
