@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="{{ asset('build/manifest.json') }}">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('build/images/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('build/images/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('build/images/favicon-16x16.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/apple-touch-icon.png', 'vite') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon-32x32.png', 'vite') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon-16x16.png', 'vite') }}">
 
     <title>{% block title %}SV Teutonia 1919 Bochum-Riemke Handball e.V.{% endblock %}</title>
 
     {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
+        {{ vite_entry_link_tags('app') }}
+{#        {{ encore_entry_link_tags('app') }}#}
     {% endblock %}
 
     {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+        {{ vite_entry_script_tags('app') }}
+{#        {{ encore_entry_script_tags('app') }}#}
     {% endblock %}
 </head>
 <body class="theme-light {{ bodyCssClasses|default('') }}">

@@ -1,14 +1,14 @@
-import { startStimulusApp } from '@symfony/stimulus-bridge';
+import { startStimulusApp, registerControllers } from "vite-plugin-symfony/stimulus/helpers"
 import Clipboard from '@stimulus-components/clipboard';
 import '@tabler/core';
 import '@tabler/core/dist/libs/fslightbox';
 
-// Registers Stimulus controllers from controllers.json and in the controllers/ directory
-const app = startStimulusApp(require.context(
-    '@symfony/stimulus-bridge/lazy-controller-loader!./controllers',
-    true,
-    /\.[jt]sx?$/
-));
+const app = startStimulusApp();
+registerControllers(
+    app,
+    import.meta.glob('./controllers/*_(lazy)\?controller.[jt]s(x)\?')
+)
+
 app.register('clipboard', Clipboard)
 
 export { app };

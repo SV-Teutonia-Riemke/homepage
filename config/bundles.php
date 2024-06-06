@@ -11,6 +11,7 @@ use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
 use Liip\ImagineBundle\LiipImagineBundle;
 use Misd\PhoneNumberBundle\MisdPhoneNumberBundle;
 use Oneup\FlysystemBundle\OneupFlysystemBundle;
+use Pentatrion\ViteBundle\PentatrionViteBundle;
 use Presta\SitemapBundle\PrestaSitemapBundle;
 use Sentry\SentryBundle\SentryBundle;
 use Shapecode\Bundle\TwigStringLoaderBundle\ShapecodeTwigStringLoaderBundle;
@@ -60,4 +61,5 @@ return [
     UXIconsBundle::class => ['all' => true],
     TinymceBundle::class => ['all' => true],
     HWIOAuthBundle::class => ['all' => true],
+    PentatrionViteBundle::class => ['all' => true],
 ];

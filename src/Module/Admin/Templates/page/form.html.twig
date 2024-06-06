@@ -2,12 +2,12 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {{ encore_entry_script_tags('monaco') }}
+    {{ vite_entry_script_tags('monaco') }}
 {% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
-    {{ encore_entry_link_tags('monaco') }}
+    {{ vite_entry_link_tags('monaco') }}
 {% endblock %}
 
 {% set pageTitle = 'Seite' %}

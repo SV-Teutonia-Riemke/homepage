@@ -226,7 +226,7 @@
                                 <twig:file:image file="{{ player.image }}" filter="optimized" width="400" class="card-img-top"/>
                             </twig:lightbox>
                         {% else %}
-                            <img src="{{ asset('build/images/handball.jpg')|imagine_filter('optimized', { downscale: { max: [400] } }) }}" class="card-img-top">
+                            <img src="{{ asset('assets/images/handball.jpg', 'vite')|imagine_filter('optimized', { downscale: { max: [400] } }) }}" class="card-img-top">
                         {% endif %}
                     </a>
                     <div class="card-body">

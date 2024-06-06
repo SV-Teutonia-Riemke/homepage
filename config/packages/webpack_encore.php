@@ -14,8 +14,4 @@ return static function (
         ->scriptAttributes('defer', true)
         ->scriptAttributes('data-turbo-track', 'reload')
         ->linkAttributes('data-turbo-track', 'reload');
-
-    $frameworkConfig
-        ->assets()
-            ->jsonManifestPath('%kernel.project_dir%/public/build/manifest.json');
 };
