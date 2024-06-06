@@ -12,18 +12,6 @@ jobs:
       APP_ENV: test
       APP_DEBUG: true
 
-    services:
-      mariadb:
-        image: mariadb:lts
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_USER: test
-          MYSQL_PASSWORD: test
-          MYSQL_DATABASE: test
-          MYSQL_ROOT_PASSWORD: test
-        options: --health-cmd="healthcheck.sh --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
-
     strategy:
       matrix:
         php-versions: [ '8.3' ]
@@ -41,6 +29,14 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           coverage: none
 
+      - uses: shogo82148/actions-setup-mysql@v1
+        name: Setup MySQL
+        with:
+          distribution: "mariadb"
+          mysql-version: "10.11"
+          user: test
+          password: test
+
       - name: Validate composer.json and composer.lock
         run: composer validate --strict -n
 
@@ -52,14 +48,6 @@ jobs:
 
       - name: Warmup cache
         run: bin/console cache:warmup
-
-      - name: Verify MariaDB connection
-        env:
-          PORT: ${{ job.services.mariadb.ports[3306] }}
-        run: |
-          while ! mysqladmin ping -h"localhost" -P"$PORT" --silent; do
-            sleep 1
-          done  
 
       - name: Run Migration
         run: |
