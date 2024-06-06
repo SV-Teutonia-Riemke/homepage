@@ -8,7 +8,7 @@ on:
 jobs:
   automatic_test:
     env:
-      DATABASE_URL: mysql://test:test@localhost:3306/test
+      DATABASE_URL: mysql://test:test@localhost:3306/test?unix_socket=/tmp/mysql.sock
       APP_ENV: test
       APP_DEBUG: true
 
