@@ -26,7 +26,7 @@ return static function (
         ->logging(false)
         ->defaultTableOption('charset', 'utf8mb4')
         ->defaultTableOption('collate', 'utf8mb4_unicode_ci')
-        ->serverVersion('10.5.0-MariaDB');
+        ->serverVersion('10.11.0-MariaDB');
 
     $orm = $doctrineConfig->orm();
     $orm
