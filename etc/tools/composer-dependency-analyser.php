@@ -10,11 +10,11 @@ $config = new Configuration();
 return $config
     // Adjusting scanned paths
     ->addPathsToScan([
-        __DIR__ . '/bin',
-        __DIR__ . '/public',
-        __DIR__ . '/config',
+        __DIR__ . '/../../bin',
+        __DIR__ . '/../../public',
+        __DIR__ . '/../../config',
     ], false)
-    ->addPathToScan(__DIR__ . '/tests', true)
+    ->addPathToScan(__DIR__ . '/../../tests', true)
 
     ->ignoreUnknownClassesRegex('/Symfony\\\\Config\\\\.+/')
     ->ignoreUnknownFunctionsRegex('/Symfony\\\\Component\\\\DependencyInjection\\\\Loader\\\\Configurator\\\\.+/')
