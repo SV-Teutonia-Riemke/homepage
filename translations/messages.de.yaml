@@ -1,10 +1,12 @@
 staff_position_trainer: Trainer/in
 staff_position_co_trainer: Co-Trainer/in
+staff_position_goalkeeper_trainer: Torwart-Trainer/in
 staff_position_team_responsible: Teamverantwortliche/r
 game_position_goal_keeper: Torhüter/in
 game_position_far_left: Links Außen
 game_position_half_left: Halb Links
 game_position_center: Mitte
+game_position_back: Rückraum
 game_position_half_right: Halb Rechts
 game_position_far_right: Rechts Außen
 game_position_circle_runner: Kreisläufer/in

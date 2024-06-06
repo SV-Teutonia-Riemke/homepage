@@ -62,6 +62,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ],
         ],
     ]);
+
     if ($containerConfigurator->env() !== 'test') {
         return;
     }

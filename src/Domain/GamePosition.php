@@ -14,6 +14,7 @@ enum GamePosition: string
     case FAR_LEFT      = 'far_left';
     case HALF_LEFT     = 'half_left';
     case CENTER        = 'center';
+    case BACK          = 'back';
     case HALF_RIGHT    = 'half_right';
     case FAR_RIGHT     = 'far_right';
     case CIRCLE_RUNNER = 'circle_runner';
