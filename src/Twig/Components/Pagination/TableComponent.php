@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Twig\Components\Pagination;
 
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent(
@@ -18,5 +18,5 @@ class TableComponent
     /** @var iterable<array-key, mixed> */
     public iterable $iterable;
 
-    public FormInterface|null $form = null;
+    public FormView|null $form = null;
 }
