@@ -15,7 +15,9 @@
         <div class="row">
             {% if article.image is not null %}
                 <div class="col-12 col-md-5">
-                    <twig:file:image file="{{ article.image }}" width="450"/>
+                    <twig:lightbox file="{{ article.image }}" lightbox="news">
+                        <twig:file:image file="{{ article.image }}" width="450"/>
+                    </twig:lightbox>
                 </div>
             {% endif %}
             <div class="col-12{% if article.image is not null %} col-md{% endif %}">

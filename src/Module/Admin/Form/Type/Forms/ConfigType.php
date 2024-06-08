@@ -22,20 +22,30 @@ final class ConfigType extends AbstractType
     {
         $collection = $this->configBuilder->build();
 
+        $wrapper = $builder->create('wrapper', options: ['compound' => true]);
+
         foreach ($collection as $child) {
             $form = $builder->create($child->getName(), ConfigTreeType::class, [
                 'label' => $child->getLabel(),
-                'tree'  => $child,
+                'tree' => $child,
             ]);
 
-            $builder->add($form);
+            $wrapper->add($form);
         }
+
+        $builder->add($wrapper);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'label' => false,
+            'submit_new_button' => false,
         ]);
+    }
+
+    public function getParent(): string
+    {
+        return AbstractForm::class;
     }
 }

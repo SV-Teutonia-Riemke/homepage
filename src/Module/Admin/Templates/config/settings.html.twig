@@ -7,7 +7,7 @@
         <div class="col-3">
             <div class="card">
                 <div class="list-group list-group-flush">
-                    {% for category in form %}
+                    {% for category in form.wrapper %}
                         {% if category.children.items is defined or category.children.categories is defined %}
                             <a class="list-group-item list-group-item-action" data-bs-toggle="collapse" href="#collapse{{ category.vars.id }}" role="button" aria-expanded="false" aria-controls="collapse{{ category.vars.id }}">
                                 {{ category.vars.label|trans }}
@@ -19,7 +19,7 @@
         </div>
         <div class="col-9">
             <div id="collapse-group">
-                {% for category in form %}
+                {% for category in form.wrapper %}
                     {% if category.children.items is defined or category.children.categories is defined %}
                         <div class="collapse{% if loop.first %} show{% endif %}" id="collapse{{ category.vars.id }}" data-bs-parent="#collapse-group">
                             <div class="card">

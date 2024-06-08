@@ -1,9 +1,23 @@
 <div class="container">
     <footer class="row py-4 my-4 border-top">
         <div class="col-12 col-md-4 mb-3 mb-md-0">
-            <a href="{{ path('app_index') }}" class="d-none d-md-flex align-items-center mb-3 link-dark text-decoration-none">
-                <img src="{{ asset('assets/images/logo.png', 'vite') }}" width="40" height="32" alt="Tabler" class="navbar-brand-image">
-            </a>
+            <div class="text-muted mb-3">
+                <div>Made with <twig:ux:icon name="noto:red-heart"></twig:ux:icon> by <b>Nikita Loges</b>.</div>
+                <div class="fs-3">
+                    <a href="https://loges.one" target="_blank">
+                        <twig:ux:icon name="iconoir:www"></twig:ux:icon>
+                    </a>
+                    <a href="https://github.com/nicklog" target="_blank">
+                        <twig:ux:icon name="fa6-brands:github"></twig:ux:icon>
+                    </a>
+                    <a href="https://www.linkedin.com/in/nikita-loges-84293185" target="_blank">
+                        <twig:ux:icon name="fa6-brands:linkedin"></twig:ux:icon>
+                    </a>
+                    <a href="https://www.xing.com/profile/Nikita_Loges" target="_blank">
+                        <twig:ux:icon name="fa6-brands:xing"></twig:ux:icon>
+                    </a>
+                </div>
+            </div>
             <p class="text-muted">
                 © {{ 'now'|date('Y') }} www.teutonia-riemke.de<br>
                 Alle Rechte vorbehalten.
