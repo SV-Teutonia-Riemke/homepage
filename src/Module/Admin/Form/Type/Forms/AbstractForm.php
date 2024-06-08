@@ -21,7 +21,7 @@ final class AbstractForm extends AbstractType
             $builder->add(self::BUTTON_SUBMIT, SubmitType::class);
         }
 
-        if (! $options['submit_new_button'] === true) {
+        if ($options['submit_new_button'] === false) {
             return;
         }
 
