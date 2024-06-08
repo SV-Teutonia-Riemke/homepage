@@ -31,13 +31,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                     '!doctrine',
                 ],
             ],
-            'deprecation' => [
-                'type' => 'stream',
-                'channels' => [
-                    'deprecation',
-                ],
-                'path' => 'php://stderr',
-            ],
         ],
     ]);
 };
