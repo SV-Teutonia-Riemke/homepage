@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block pageBody %}
-    <twig:pagination:table :title="pageTitle">
+    <twig:pagination:table :title="pageTitle" :iterable="iterable">
         <twig:block name="tableHeader">
             <th class="w-1"></th>
             <th>Short URL</th>
@@ -20,7 +20,7 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:crud:row>
+            <twig:crud:row :crud="crud" :object="object">
                 <td>
                     <twig:bs:button size="sm" type="primary" outline class="btn-icon copy-to-clipboard" data-clipboard-text="{{ object.shortUrl }}" icon="fa6-solid:copy" tooltip="In die Zwischenablage kopieren" />
                 </td>

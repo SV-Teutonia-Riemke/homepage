@@ -1,10 +1,7 @@
 {
     "devDependencies": {
-        "@babel/core": "^7.24.6",
-        "@babel/preset-env": "^7.24.6",
         "@hotwired/stimulus": "^3.2.2",
         "@hotwired/turbo": "^8.0.4",
-        "@lcdp/offline-plugin": "^5.1.1",
         "@stimulus-components/clipboard": "^5.0.0",
         "@symfony/stimulus-bridge": "^3.2.2",
         "@symfony/stimulus-bundle": "file:vendor/symfony/stimulus-bundle/assets",
@@ -12,36 +9,24 @@
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/assets",
         "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
         "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/assets",
-        "@symfony/webpack-encore": "^4.6.1",
         "@tabler/core": "1.0.0-beta20",
         "bootstrap": "^5.3.3",
         "clipboard": "^2.0.11",
-        "core-js": "^3.37.1",
-        "css-loader": "^7.1.2",
-        "file-loader": "^6.2.0",
         "monaco-editor": "^0.49.0",
         "monaco-editor-webpack-plugin": "^7.1.0",
-        "offline-plugin": "^5.0.7",
-        "regenerator-runtime": "^0.14.1",
         "sass": "^1.77.4",
-        "sass-loader": "^14.2.1",
         "tom-select": "^2.3.1",
-        "ts-loader": "^9.5.1",
         "typescript": "^5.4.5",
-        "vite": "^5.2.12",
+        "vite": "^5.2.13",
         "vite-plugin-monaco-editor": "^1.1.0",
-        "vite-plugin-symfony": "^6.4.7",
-        "webpack": "^5.91.0",
-        "webpack-cli": "^5.1.4",
-        "webpack-notifier": "^1.15.0"
+        "vite-plugin-pwa": "^0.20.0",
+        "vite-plugin-symfony": "^6.4.7"
     },
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server",
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "encore production --progress",
-        "vite-dev": "vite build --mode development"
+        "dev-server": "vite",
+        "dev": "vite build --mode development",
+        "build": "vite build"
     }
 }

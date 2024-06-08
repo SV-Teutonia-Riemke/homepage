@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block pageBody %}
-    <twig:pagination:table :title="pageTitle">
+    <twig:pagination:table :title="pageTitle" :iterable="iterable">
         <twig:block name="tableHeader">
             <th class="w-1"></th>
             <th class="w-1">Id</th>
@@ -17,7 +17,7 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:crud:row enabled="{{ object.enabled }}">
+            <twig:crud:row :crud="crud" :object="object" enabled="{{ object.enabled }}">
                 <td>{{ object.id }}</td>
                 <td>{{ object.title }}</td>
             </twig:crud:row>

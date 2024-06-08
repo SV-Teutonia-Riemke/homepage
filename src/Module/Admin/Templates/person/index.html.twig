@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block pageBody %}
-    <twig:pagination:table :title="pageTitle" :form="form">
+    <twig:pagination:table :title="pageTitle" :form="form" :iterable="iterable">
         <twig:block name="tableHeader">
             <th class="w-1">Id</th>
             <th>Vorname</th>
@@ -18,7 +18,7 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:crud:row>
+            <twig:crud:row :crud="crud" :object="object">
                 <td>{{ object.id }}</td>
                 <td>{{ object.firstName }}</td>
                 <td>{{ object.lastName }}</td>

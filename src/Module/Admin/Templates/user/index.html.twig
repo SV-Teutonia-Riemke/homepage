@@ -8,14 +8,14 @@
 {% endblock %}
 
 {% block pageBody %}
-    <twig:pagination:table :title="pageTitle">
+    <twig:pagination:table :title="pageTitle" :iterable="iterable">
         <twig:block name="tableHeader">
             <th class="w-1">Id</th>
             <th>Email</th>
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:crud:row>
+            <twig:crud:row :crud="crud" :object="object">
                 <td>{{ object.id }}</td>
                 <td>{{ object.email }}</td>
             </twig:crud:row>
