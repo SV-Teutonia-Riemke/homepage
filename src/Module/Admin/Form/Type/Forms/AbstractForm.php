@@ -17,11 +17,11 @@ final class AbstractForm extends AbstractType
     /** @inheritDoc */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        if ($options['submit_button']) {
+        if ($options['submit_button'] === true) {
             $builder->add(self::BUTTON_SUBMIT, SubmitType::class);
         }
 
-        if (! $options['submit_new_button']) {
+        if (! $options['submit_new_button'] === true) {
             return;
         }
 
