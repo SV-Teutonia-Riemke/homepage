@@ -15,6 +15,7 @@ RUN sudo rm -rf \
     assets \
     docker \
     docs \
+    etc \
     node_modules \
     tests \
     .env.test \
@@ -24,6 +25,7 @@ RUN sudo rm -rf \
     composer-require-checker.json \
     composer-unused.php \
     docker-compose.yml \
+    features \
     package.json \
     phpcs.xml \
     phpstan.neon \
@@ -34,7 +36,8 @@ RUN sudo rm -rf \
     symfony.lock \
     tsconfig.ts \
     webpack.config.js \
-    rector.php
+    rector.php \
+    vite.config.js
 
 RUN sudo mkdir -p \
     /var/www/html/public/media \
