@@ -5,14 +5,18 @@
     enable = null,
     disable = null,
     remove = null,
-    edit = null %}
+    edit = null,
+    preCta = null %}
 
-{% set preCta %}
-    {% block preCta %}
-    {% endblock %}
-{% endset %}
+{% if preCta is null %}
+    {% set preCta %}
+        {% block preCta %}
+        {% endblock %}
+    {% endset %}
+{% endif %}
 
 <tr{{ attributes }}>
+
     {% block enabled %}
         {% if enabled is not null %}
             <td>
@@ -24,7 +28,6 @@
     {% block cta %}
         {% if preCta or up or down or enabled or enable is not null or disable or remove or edit %}
             <td class="text-end">
-                {{ preCta }}
                 {% if up or down or enabled or enable is not null or disable or remove or edit %}
                     <twig:pagination:cta
                             :up="up"
@@ -34,6 +37,7 @@
                             :disable="disable"
                             :remove="remove"
                             :edit="edit"
+                            :preElements="preCta"
                     />
                 {% endif %}
             </td>

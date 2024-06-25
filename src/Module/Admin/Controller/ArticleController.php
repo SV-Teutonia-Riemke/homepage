@@ -22,7 +22,7 @@ final class ArticleController extends AbstractCrudController
 {
     use FullHandler;
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder): void
+    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
     {
         $builder->setMandatory(
             Article::class,

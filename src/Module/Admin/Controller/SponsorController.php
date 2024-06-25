@@ -24,7 +24,7 @@ final class SponsorController extends AbstractCrudController
     use FullHandler;
     use PositionHandler;
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder): void
+    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
     {
         $builder->setMandatory(
             Sponsor::class,

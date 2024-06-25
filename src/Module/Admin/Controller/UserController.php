@@ -29,7 +29,7 @@ final class UserController extends AbstractCrudController
     ) {
     }
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder): void
+    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
     {
         $builder->setMandatory(
             User::class,

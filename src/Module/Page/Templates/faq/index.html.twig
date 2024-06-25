@@ -1,0 +1,33 @@
+{% extends '@page/_layout/layout.html.twig' %}
+
+{% block pageSubBody %}
+    <div class="row">
+        <div class="col-3">
+            <div class="card">
+                <div class="list-group list-group-flush">
+                    {% for c in categories %}
+                        <a class="list-group-item list-group-item-action" href="{{ path('app_faq_category', { category: c.id }) }}">
+                            {{ c.title }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            {% for article in articles %}
+                <div class="card mb-2">
+                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#collapse{{ article.id }}">
+                        <h3 class="card-title">{{ article.title }}</h3>
+                    </div>
+                    <div class="collapse{% if loop.first %} show{% endif %}" id="collapse{{ article.id }}">
+                        <div class="card-body">
+                            {{ article.content|raw }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

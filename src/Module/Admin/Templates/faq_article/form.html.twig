@@ -1,0 +1,24 @@
+{% extends '@admin/_layout/simple_form.html.twig' %}
+
+{% set pageTitle = 'FAQ Artikel' %}
+{% set formCancelLink = path('app_admin_faq_article_index', { category: app.request.attributes.get('category') }) %}
+
+{% block pageBody %}
+    <twig:bs:row cards>
+        <twig:bs:col>
+            <twig:bs:card>
+                {{ form_row(form.title) }}
+            </twig:bs:card>
+        </twig:bs:col>
+        <twig:bs:col>
+            <twig:bs:card header="Einstellungen">
+                {{ form_row(form.enabled) }}
+            </twig:bs:card>
+        </twig:bs:col>
+        <twig:bs:col>
+            <twig:bs:card header="{{ form.content.vars.label }}">
+                {{ form_widget(form.content) }}
+            </twig:bs:card>
+        </twig:bs:col>
+    </twig:bs:row>
+{% endblock %}

@@ -10,6 +10,7 @@ use App\Module\Admin\Form\Type\Forms\AbstractForm;
 use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Entity\Common\PositionInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use Knp\Component\Pager\PaginatorInterface;
 use LogicException;
 use RuntimeException;
@@ -35,10 +36,13 @@ abstract class AbstractCrudController extends AbstractController
 
     public function handleList(Request $request): Response
     {
-        $crudConfig = $this->getCrudConfig();
+        $crudConfig = $this->getCrudConfig($request);
         $form       = null;
 
         $list = $this->doLoadList($crudConfig);
+        if ($list instanceof QueryBuilder) {
+            $this->doConfigureQueryBuilder($list, $request);
+        }
 
         $searchType = $this->getSearchType();
         if ($searchType !== null) {
@@ -74,12 +78,18 @@ abstract class AbstractCrudController extends AbstractController
 
     protected function handleCreate(Request $request): Response
     {
-        $crudConfig = $this->getCrudConfig();
+        $crudConfig = $this->getCrudConfig($request);
 
         $formType = $this->getFormType($request);
 
+        $formOptions = [];
+
+        if ($crudConfig->formEmptyDataCallable !== null) {
+            $formOptions['empty_data'] = $crudConfig->formEmptyDataCallable;
+        }
+
         $form = $this
-            ->createForm($formType)
+            ->createForm($formType, null, $formOptions)
             ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -94,7 +104,7 @@ abstract class AbstractCrudController extends AbstractController
 
     public function handleEdit(Request $request): Response
     {
-        $crudConfig = $this->getCrudConfig();
+        $crudConfig = $this->getCrudConfig($request);
 
         $object = $this->loadObject($request);
 
@@ -136,7 +146,7 @@ abstract class AbstractCrudController extends AbstractController
     private function handleValidForm(Request $request, FormInterface $form, callable $callable): Response
     {
         $data       = $form->getData();
-        $crudConfig = $this->getCrudConfig();
+        $crudConfig = $this->getCrudConfig($request);
 
         $callable($request, $form, $data);
 
@@ -147,23 +157,32 @@ abstract class AbstractCrudController extends AbstractController
             assert($submitAndNew instanceof SubmitButton);
 
             if ($submitAndNew->isClicked()) {
-                return $this->redirectToRoute($crudConfig->getCreateRouteName());
+                return $this->redirectToRoute(
+                    $crudConfig->getCreateRouteName(),
+                    $crudConfig->getDefaultRouteParams(),
+                );
             }
         }
 
-        return $this->redirectToRoute($crudConfig->getListRouteName());
+        return $this->redirectToRoute(
+            $crudConfig->getListRouteName(),
+            $crudConfig->getDefaultRouteParams(),
+        );
     }
 
     public function handleRemove(Request $request): Response
     {
         $entity     = $this->loadObject($request);
-        $crudConfig = $this->getCrudConfig();
+        $crudConfig = $this->getCrudConfig($request);
 
         $this->doRemoving($entity);
 
         $this->addFlash('success', 'Erfolgreich gelöscht');
 
-        return $this->redirectToRoute($crudConfig->getListRouteName());
+        return $this->redirectToRoute(
+            $crudConfig->getListRouteName(),
+            $crudConfig->getDefaultRouteParams(),
+        );
     }
 
     public function handleEnabled(Request $request, bool $enabled): Response
@@ -183,7 +202,12 @@ abstract class AbstractCrudController extends AbstractController
             $this->addFlash('success', 'Erfolgreich deaktiviert');
         }
 
-        return $this->redirectToRoute($this->getCrudConfig()->getListRouteName());
+        $crudConfig = $this->getCrudConfig($request);
+
+        return $this->redirectToRoute(
+            $crudConfig->getListRouteName(),
+            $crudConfig->getDefaultRouteParams(),
+        );
     }
 
     public function handlePosition(Request $request, int $position): Response
@@ -197,7 +221,12 @@ abstract class AbstractCrudController extends AbstractController
 
         $this->doPersisting($entity);
 
-        return $this->redirectToRoute($this->getCrudConfig()->getListRouteName());
+        $crudConfig = $this->getCrudConfig($request);
+
+        return $this->redirectToRoute(
+            $crudConfig->getListRouteName(),
+            $crudConfig->getDefaultRouteParams(),
+        );
     }
 
     /** @return Entity */
@@ -208,7 +237,7 @@ abstract class AbstractCrudController extends AbstractController
             throw new RuntimeException('Object identifier is not set', 1715881423158);
         }
 
-        $crudConfig = $this->getCrudConfig();
+        $crudConfig = $this->getCrudConfig($request);
 
         $dtoClass = $crudConfig->dtoClass;
         if (! class_exists($dtoClass)) {
@@ -227,6 +256,10 @@ abstract class AbstractCrudController extends AbstractController
     protected function doLoadList(CrudConfig $crudConfig): mixed
     {
         return $this->getEntityManager()->getRepository($crudConfig->dtoClass)->createQueryBuilder('p');
+    }
+
+    protected function doConfigureQueryBuilder(QueryBuilder $queryBuilder, Request $request): void
+    {
     }
 
     /**
@@ -316,12 +349,12 @@ abstract class AbstractCrudController extends AbstractController
     ): string;
 
     /** @return CrudConfig<Entity> */
-    final protected function getCrudConfig(): CrudConfig
+    final protected function getCrudConfig(Request $request): CrudConfig
     {
         if ($this->crudConfig === null) {
             /** @var CrudConfigBuilder<Entity> $builder */
             $builder = new CrudConfigBuilder();
-            $this->configureCrudConfig($builder);
+            $this->configureCrudConfig($builder, $request);
 
             $this->crudConfig = $builder->build();
         }
@@ -330,7 +363,7 @@ abstract class AbstractCrudController extends AbstractController
     }
 
     /** @param CrudConfigBuilder<Entity> $builder */
-    abstract protected function configureCrudConfig(CrudConfigBuilder $builder): void;
+    abstract protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void;
 
     protected function getEntityManager(): EntityManagerInterface
     {

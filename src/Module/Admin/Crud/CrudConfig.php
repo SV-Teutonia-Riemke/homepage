@@ -13,7 +13,10 @@ use function sprintf;
 /** @template Entity of object */
 final class CrudConfig
 {
-    /** @param class-string<Entity> $dtoClass */
+    /**
+     * @param class-string<Entity> $dtoClass
+     * @param array<string, mixed> $defaultRouteParams
+     */
     public function __construct(
         public readonly string $dtoClass,
         private readonly string $baseRouteName,
@@ -25,6 +28,7 @@ final class CrudConfig
         private readonly string|null $downRouteName = null,
         private readonly string|null $enableRouteName = null,
         private readonly string|null $disableRouteName = null,
+        private readonly array $defaultRouteParams = [],
         private readonly string|null $baseTemplateName = null,
         private readonly string|null $listTemplateName = null,
         private readonly string|null $createTemplateName = null,
@@ -32,6 +36,7 @@ final class CrudConfig
         public readonly string|null $defaultSortFieldName = null,
         public readonly string|null $defaultSortDirection = null,
         private readonly Closure|null $objectIdentifierCallable = null,
+        public readonly Closure|null $formEmptyDataCallable = null,
     ) {
     }
 
@@ -88,6 +93,12 @@ final class CrudConfig
     public function getEditTemplateName(): string
     {
         return $this->editTemplateName ?? $this->buildTemplateName('edit');
+    }
+
+    /** @return array<string, mixed> */
+    public function getDefaultRouteParams(): array
+    {
+        return $this->defaultRouteParams;
     }
 
     private function buildRouteName(string $suffix): string

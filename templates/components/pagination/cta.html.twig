@@ -1,7 +1,9 @@
 <div{{ attributes }}>
     {% block preElements %}
         {% if preElements is not null %}
-            {{ preElements }}
+            <twig:bs:button:group size="sm" class="me-1">
+                {{ preElements|raw }}
+            </twig:bs:button:group>
         {% endif %}
     {% endblock %}
 
@@ -28,7 +30,7 @@
 
         {% if remove is not null %}
             <twig:bs:button:group size="sm" class="me-1">
-                <twig:bs:button type="danger" href="{{ remove }}" tooltip="Löschen" icon="fa6-solid:trash" confirmation />
+                <twig:bs:button type="danger" href="{{ remove }}" tooltip="Löschen" icon="fa6-solid:trash" confirmation/>
             </twig:bs:button:group>
         {% endif %}
     {% endblock %}

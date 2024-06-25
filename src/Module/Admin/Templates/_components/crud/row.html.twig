@@ -5,6 +5,11 @@
     {% endblock %}
 {% endset %}
 
+{% set preCta %}
+    {% block preCta %}
+    {% endblock %}
+{% endset %}
+
 {% component 'pagination:row' with {
     edit: crud is crud_has_edit ? crud_url_edit(crud, object) : null,
     remove: crud is crud_has_remove ? crud_url_remove(crud, object) : null,
@@ -13,6 +18,7 @@
     enabled: enabled,
     enable: crud is crud_has_enable ? crud_url_enable(crud, object) : null,
     disable: crud is crud_has_disable ? crud_url_disable(crud, object) : null,
+    preCta: preCta,
 } %}
     {% block content %}{{ content }}{% endblock %}
 {% endcomponent %}

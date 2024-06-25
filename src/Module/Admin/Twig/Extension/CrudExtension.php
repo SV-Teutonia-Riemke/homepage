@@ -52,13 +52,19 @@ class CrudExtension extends AbstractExtension
     /** @param CrudConfig<T> $crudConfig */
     private function getListUrl(CrudConfig $crudConfig): string
     {
-        return $this->urlGenerator->generate($crudConfig->getListRouteName());
+        return $this->urlGenerator->generate(
+            $crudConfig->getListRouteName(),
+            $crudConfig->getDefaultRouteParams(),
+        );
     }
 
     /** @param CrudConfig<T> $crudConfig */
     private function getCreateUrl(CrudConfig $crudConfig): string
     {
-        return $this->urlGenerator->generate($crudConfig->getCreateRouteName());
+        return $this->urlGenerator->generate(
+            $crudConfig->getCreateRouteName(),
+            $crudConfig->getDefaultRouteParams(),
+        );
     }
 
     /**
@@ -67,7 +73,10 @@ class CrudExtension extends AbstractExtension
      */
     private function getEditUrl(CrudConfig $crudConfig, object $object): string
     {
-        return $this->urlGenerator->generate($crudConfig->getEditRouteName(), $this->getObjectParameters($crudConfig, $object));
+        return $this->urlGenerator->generate(
+            $crudConfig->getEditRouteName(),
+            $this->getObjectParameters($crudConfig, $object),
+        );
     }
 
     /**
@@ -124,6 +133,7 @@ class CrudExtension extends AbstractExtension
     private function getObjectParameters(CrudConfig $crudConfig, object $object): array
     {
         return [
+            ...$crudConfig->getDefaultRouteParams(),
             'object' => $crudConfig->getObjectIdentifier($object),
         ];
     }

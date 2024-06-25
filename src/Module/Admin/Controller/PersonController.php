@@ -23,7 +23,7 @@ final class PersonController extends AbstractCrudController
 {
     use CRUDHandler;
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder): void
+    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
     {
         $builder->setMandatory(
             Person::class,
