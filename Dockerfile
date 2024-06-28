@@ -1,8 +1,6 @@
-ARG PHP_EXTENSIONS="pdo_mysql imagick gd intl bcmath"
+FROM thecodingmachine/php:8.3-v4-apache
 
 COPY --chown=docker:docker . /var/www/html/
-
-FROM thecodingmachine/php:8.3-v4-apache
 
 ENV TEMPLATE_PHP_INI="production"
 ENV PHP_EXTENSIONS="pdo_mysql imagick gd intl bcmath"

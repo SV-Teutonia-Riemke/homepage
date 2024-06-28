@@ -8,6 +8,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
+  PNPM_VERSION: 9
 
 jobs:
   build-and-push-image:
@@ -33,7 +34,7 @@ jobs:
       - name: Setup pnpm and Install
         uses: seepine/action-setup-pnpm@v1
         with:
-          verison: 9
+          verison: ${{ env.PNPM_VERSION }}
 
       - name: Build assets
         run: pnpm build
@@ -46,30 +47,18 @@ jobs:
             .github
             .pnpm-store
             assets
-            docker
-            docs
             etc
             node_modules
             tests
             .env.test
-            .env.local.dist
             .editorconfig
             .gitignore
-            composer-require-checker.json
-            composer-unused.php
             docker-compose.yml
             features
             package.json
-            phpcs.xml
-            phpstan.neon
-            phpstan-baseline.neon
-            phpunit.xml.dist
-            phpunit.xml
             pnpm-lock.yaml
             symfony.lock
             tsconfig.ts
-            webpack.config.js
-            rector.php
             vite.config.js
 
       - name: Create needed directories
