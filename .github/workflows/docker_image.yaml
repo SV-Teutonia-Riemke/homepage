@@ -30,11 +30,10 @@ jobs:
         with:
           composer-options: --prefer-dist --no-suggest --no-scripts --ignore-platform-reqs --optimize-autoloader
 
-      - name: Install node and pnpm
-        uses: N0tExisting/setup-pnpm@v1
+      - name: Setup pnpm and Install
+        uses: seepine/action-setup-pnpm@v1
         with:
-          node-version: 22
-          pnpm-version: 9
+          verison: 9
 
       - name: Build assets
         run: pnpm build
