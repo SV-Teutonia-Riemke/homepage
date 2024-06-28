@@ -6,7 +6,6 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigura
 
 return static function (
     ContainerConfigurator $containerConfigurator,
-    string $env,
 ): void {
     $containerConfigurator->extension('twig', [
         'default_path' => '%kernel.project_dir%/templates',
@@ -17,13 +16,5 @@ return static function (
             '%kernel.project_dir%/src/Module/Admin/Templates' => 'admin',
             '%kernel.project_dir%/src/Module/Page/Templates' => 'page',
         ],
-    ]);
-
-    if ($env !== 'test') {
-        return;
-    }
-
-    $containerConfigurator->extension('twig', [
-        'strict_variables' => true,
     ]);
 };

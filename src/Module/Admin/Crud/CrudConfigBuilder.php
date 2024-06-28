@@ -6,8 +6,10 @@ namespace App\Module\Admin\Crud;
 
 use Closure;
 use RuntimeException;
+use Symfony\Component\DependencyInjection\Attribute\Exclude;
 
 /** @template Entity of object */
+#[Exclude]
 class CrudConfigBuilder
 {
     /** @var class-string<Entity>|null */

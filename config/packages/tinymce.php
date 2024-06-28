@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Config\TinymceConfig;
 
-return static function (TinymceConfig $config, ContainerConfigurator $containerConfigurator): void {
+return static function (TinymceConfig $config): void {
     $plugins = [
         'advlist',
         'autolink',

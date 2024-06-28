@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Config\KnpPaginatorConfig;
 
-return static function (KnpPaginatorConfig $config, ContainerConfigurator $containerConfigurator): void {
+return static function (KnpPaginatorConfig $config): void {
     $config->pageRange(5);
     $config->defaultOptions()
         ->pageName('page')

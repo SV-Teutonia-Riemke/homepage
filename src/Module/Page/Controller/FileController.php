@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Page\Controller;
 
 use App\Infrastructure\Asset\AssetUrlGenerator;
-use App\Storage\Repository\FileRepository;
+use App\Storage\Entity\File;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\HeaderUtils;
@@ -14,17 +14,24 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Routing\Requirement\Requirement;
 
 use function fopen;
 use function stream_copy_to_stream;
 
 #[AsController]
-#[Route('/f/{uuid}/{name}.{extension}', name: 'file')]
+#[Route(
+    path: '/f/{uuid:file}/{name}.{extension}',
+    name: 'file',
+    requirements: [
+        'uuid' => Requirement::UUID,
+        'name' => Requirement::ASCII_SLUG,
+        'extension' => Requirement::ASCII_SLUG,
+    ],
+)]
 final class FileController extends AbstractController
 {
     public function __construct(
-        private readonly FileRepository $fileRepository,
         private readonly FilesystemOperator $defaultFilesystem,
         private readonly AssetUrlGenerator $assetUrlGenerator,
     ) {
@@ -32,18 +39,10 @@ final class FileController extends AbstractController
 
     public function __invoke(
         Request $request,
-        Uuid $uuid,
+        File $file,
         string $name,
         string $extension,
     ): Response {
-        $file = $this->fileRepository->findOneBy([
-            'uuid' => $uuid,
-        ]);
-
-        if ($file === null) {
-            throw $this->createNotFoundException();
-        }
-
         $download = $request->query->getBoolean('download');
 
         if (

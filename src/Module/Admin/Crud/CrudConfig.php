@@ -6,11 +6,13 @@ namespace App\Module\Admin\Crud;
 
 use Closure;
 use RuntimeException;
+use Symfony\Component\DependencyInjection\Attribute\Exclude;
 
 use function method_exists;
 use function sprintf;
 
 /** @template Entity of object */
+#[Exclude]
 final class CrudConfig
 {
     /**

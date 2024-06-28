@@ -9,7 +9,15 @@ use App\Infrastructure\Menu\Type\TypeResolver;
 use App\Storage\Repository\MenuItemRepository;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 
+#[AutoconfigureTag(
+    'knp_menu.menu_builder',
+    [
+        'method' => 'main',
+        'alias' => 'main',
+    ],
+)]
 final class Navbar
 {
     public function __construct(

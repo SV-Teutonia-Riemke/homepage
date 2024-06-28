@@ -7,7 +7,9 @@ namespace App\Module\Admin\Form\Model;
 use App\Infrastructure\Menu\MenuGroup;
 use App\Infrastructure\Menu\MenuType;
 use App\Storage\Entity\Page;
+use Symfony\Component\DependencyInjection\Attribute\Exclude;
 
+#[Exclude]
 class MenuItem
 {
     public string|null $title    = null;

@@ -10,7 +10,6 @@ return static function (
 ): void {
     $frameworkConfig
         ->assets()
-//            ->jsonManifestPath('%kernel.project_dir%/public/build/manifest.json')
             ->package('vite')
                 ->versionStrategy(ViteAssetVersionStrategy::class);
 };

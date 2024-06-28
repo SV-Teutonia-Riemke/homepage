@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Infrastructure\Menu\Event;
 
 use Knp\Menu\ItemInterface;
+use Symfony\Component\DependencyInjection\Attribute\Exclude;
 use Symfony\Contracts\EventDispatcher\Event;
 
 use function in_array;
 
+#[Exclude]
 final class ConfigureMenuEvent extends Event
 {
     public function __construct(

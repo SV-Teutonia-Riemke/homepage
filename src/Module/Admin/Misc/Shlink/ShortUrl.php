@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Module\Admin\Misc\Shlink;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\DependencyInjection\Attribute\Exclude;
 use Symfony\Component\String\AbstractString;
 use Symfony\Component\String\UnicodeString;
 
 use function count;
 use function implode;
 
+#[Exclude]
 class ShortUrl
 {
     public function __construct(
