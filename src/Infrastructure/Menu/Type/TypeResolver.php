@@ -7,6 +7,7 @@ namespace App\Infrastructure\Menu\Type;
 use App\Infrastructure\Menu\MenuType;
 use App\Infrastructure\Menu\Type\Resolver\ClubResolver;
 use App\Infrastructure\Menu\Type\Resolver\DownloadsResolver;
+use App\Infrastructure\Menu\Type\Resolver\FaqResolver;
 use App\Infrastructure\Menu\Type\Resolver\ImprintResolver;
 use App\Infrastructure\Menu\Type\Resolver\LinksResolver;
 use App\Infrastructure\Menu\Type\Resolver\MainResolver;
@@ -26,6 +27,7 @@ class TypeResolver
         private readonly FactoryInterface $factory,
         private readonly ClubResolver $clubResolver,
         private readonly DownloadsResolver $downloadsResolver,
+        private readonly FaqResolver $faqResolver,
         private readonly ImprintResolver $imprintResolver,
         private readonly LinksResolver $linksResolver,
         private readonly MainResolver $mainResolver,
@@ -43,6 +45,7 @@ class TypeResolver
         $resolver = match ($menuItem->getType()) {
             MenuType::CLUB => fn () => $this->clubResolver,
             MenuType::DOWNLOADS => fn () => $this->downloadsResolver,
+            MenuType::FAQ => fn () => $this->faqResolver,
             MenuType::IMPRINT => fn () => $this->imprintResolver,
             MenuType::LINKS => fn () => $this->linksResolver,
             MenuType::MAIN => fn () => $this->mainResolver,

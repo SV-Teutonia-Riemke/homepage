@@ -36,18 +36,6 @@ services:
       internal:
         ipv4_address: 192.168.19.11
 
-  mailpit:
-    image: axllent/mailpit
-    networks:
-      internal:
-        ipv4_address: 192.168.19.12
-
-  dragonfly:
-    image: docker.dragonflydb.io/dragonflydb/dragonfly
-    networks:
-      internal:
-        ipv4_address: 192.168.19.13
-
 networks:
   internal:
     driver: bridge
