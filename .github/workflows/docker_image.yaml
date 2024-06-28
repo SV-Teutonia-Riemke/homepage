@@ -20,6 +20,62 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "latest"
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v3
+        with:
+          composer-options: --prefer-dist --no-suggest --no-scripts --ignore-platform-reqs --optimize-autoloader
+
+      - name: Install node and pnpm
+        uses: N0tExisting/setup-pnpm@v1
+        with:
+          node-version: 22
+          pnpm-version: 9
+
+      - name: Build assets
+        run: pnpm build
+
+      - name: Remove File
+        uses: Lyoko-Jeremie/js-rm-github-action@master
+        with:
+          path: |
+            .git
+            .github
+            .pnpm-store
+            assets
+            docker
+            docs
+            etc
+            node_modules
+            tests
+            .env.test
+            .env.local.dist
+            .editorconfig
+            .gitignore
+            composer-require-checker.json
+            composer-unused.php
+            docker-compose.yml
+            features
+            package.json
+            phpcs.xml
+            phpstan.neon
+            phpstan-baseline.neon
+            phpunit.xml.dist
+            phpunit.xml
+            pnpm-lock.yaml
+            symfony.lock
+            tsconfig.ts
+            webpack.config.js
+            rector.php
+            vite.config.js
+
+      - name: Create needed directories
+        run: mkdir -p var/cache var/log var/flysystem public/media
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
