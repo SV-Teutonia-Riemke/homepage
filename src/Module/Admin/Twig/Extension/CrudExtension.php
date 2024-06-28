@@ -132,9 +132,11 @@ class CrudExtension extends AbstractExtension
      */
     private function getObjectParameters(CrudConfig $crudConfig, object $object): array
     {
+        $objects = ['object' => $crudConfig->getObjectIdentifier($object)];
+
         return [
             ...$crudConfig->getDefaultRouteParams(),
-            'object' => $crudConfig->getObjectIdentifier($object),
+            ...$objects,
         ];
     }
 
