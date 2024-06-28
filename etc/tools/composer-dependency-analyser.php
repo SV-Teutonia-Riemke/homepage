@@ -23,6 +23,7 @@ return $config
     ->ignoreErrorsOnPackages([
         'symfony/apache-pack',
         'symfony/asset',
+        'symfony/clock',
         'symfony/flex',
         'symfony/http-client',
         'symfony/mime',

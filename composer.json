@@ -23,7 +23,6 @@
         "knplabs/knp-menu": "^3.5",
         "knplabs/knp-menu-bundle": "^3.4",
         "knplabs/knp-paginator-bundle": "^6.4",
-        "lcobucci/clock": "^3.2",
         "league/flysystem": "^3.28",
         "liip/imagine-bundle": "^2.13",
         "nesbot/carbon": "^3.6",
