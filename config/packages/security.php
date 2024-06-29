@@ -21,6 +21,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'pattern' => '^/(_(profiler|wdt)|css|images|js|media)/',
                 'security' => false,
             ],
+            'image_resolver' => [
+                'pattern' => '^/media/cache/resolve',
+                'security' => false,
+            ],
             'main' => [
                 'form_login' => [
                     'login_path' => 'app_admin_login',

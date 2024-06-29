@@ -31,9 +31,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $containerConfigurator->extension('liip_imagine', [
         'driver' => 'imagick',
-        'default_filter_set_settings' => [
-            'format' => 'webp',
-        ],
         'resolvers' => [
             'generic' => [
                 'web_path' => [
@@ -66,11 +63,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'cache' => 'psr_cache',
         'filter_sets' => [
             'default' => null,
-            'optimized' => [
-                'quality' => 99,
-            ],
+            'optimized' => null,
             'sponsor_index' => [
-                'quality' => 90,
                 'filters' => [
                     'thumbnail' => [
                         'size' => [
@@ -90,7 +84,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 ],
             ],
             'sponsor_index_main' => [
-                'quality' => 90,
                 'filters' => [
                     'thumbnail' => [
                         'size' => [
@@ -110,7 +103,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 ],
             ],
             'sponsor_main' => [
-                'quality' => 90,
                 'filters' => [
                     'thumbnail' => [
                         'size' => [
@@ -129,7 +121,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 ],
             ],
             'sponsor_page' => [
-                'quality' => 90,
                 'filters' => [
                     'thumbnail' => [
                         'size' => [
