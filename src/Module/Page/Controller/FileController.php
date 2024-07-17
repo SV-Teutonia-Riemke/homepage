@@ -24,7 +24,7 @@ use function stream_copy_to_stream;
     path: '/f/{uuid:file}/{name}.{extension}',
     name: 'file',
     requirements: [
-        'uuid' => Requirement::UUID,
+        'uuid' => Requirement::UID_RFC4122,
         'name' => Requirement::ASCII_SLUG,
         'extension' => Requirement::ASCII_SLUG,
     ],

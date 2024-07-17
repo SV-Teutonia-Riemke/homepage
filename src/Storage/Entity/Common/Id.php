@@ -11,7 +11,7 @@ trait Id
 {
     #[ORM\Column(type: Types::INTEGER, options: ['unsigned' => true])]
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: 'AUTO')]
+    #[ORM\GeneratedValue]
     protected int|null $id = null;
 
     public function getId(): int|null

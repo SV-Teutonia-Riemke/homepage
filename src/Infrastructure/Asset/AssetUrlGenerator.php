@@ -19,7 +19,7 @@ final class AssetUrlGenerator
         return $this->urlGenerator->generate(
             'app_file',
             [
-                'uuid'      => $file->getUuid()->__toString(),
+                'uuid'      => $file->getUuid()->toRfc4122(),
                 'name'      => $file->getSafeName(),
                 'extension' => $file->getExtension(),
                 'download'  => $download === true ? 1 : null,

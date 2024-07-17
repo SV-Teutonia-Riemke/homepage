@@ -8,6 +8,7 @@ use App\Storage\Repository\FileRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Stringable;
+use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Uid\Uuid;
 
 use function implode;
@@ -28,7 +29,7 @@ class File extends AbstractEntity implements Stringable
     #[ORM\Column(type: Types::STRING, nullable: true)]
     private string|null $mimeType;
 
-    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\Column(type: UuidType::NAME, unique: true)]
     private Uuid $uuid;
 
     #[ORM\Column(type: Types::STRING, unique: true)]

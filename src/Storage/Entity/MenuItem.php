@@ -16,6 +16,7 @@ use App\Storage\Repository\MenuItemRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\MappedSuperclass]
 #[ORM\Entity(repositoryClass: MenuItemRepository::class)]
 #[ORM\InheritanceType('JOINED')]
 #[ORM\DiscriminatorColumn(name: 'discriminator')]
