@@ -17,7 +17,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /** @template-extends AbstractCrudController<FaqCategory> */
 #[AsController]
-#[IsGranted(Role::MANAGE_NOTIFICATIONS->value)]
+#[IsGranted(Role::MANAGE_FAQ->value)]
 #[Route('/faq/category', name: 'faq_category_')]
 final class FaqCategoryController extends AbstractCrudController
 {

@@ -18,7 +18,7 @@
         <div class="col-9">
             {% for article in articles %}
                 <div class="card mb-2">
-                    <div class="card-header" data-bs-toggle="collapse" data-bs-target="#collapse{{ article.id }}">
+                    <div class="card-header cursor-pointer" data-bs-toggle="collapse" data-bs-target="#collapse{{ article.id }}">
                         <h3 class="card-title">{{ article.title }}</h3>
                     </div>
                     <div class="collapse{% if loop.first %} show{% endif %}" id="collapse{{ article.id }}">

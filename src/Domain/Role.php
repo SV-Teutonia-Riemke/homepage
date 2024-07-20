@@ -21,25 +21,27 @@ enum Role: string
     case MANAGE_SPONSORS      = 'ROLE_MANAGE_SPONSORS';
     case MANAGE_FILES         = 'ROLE_MANAGE_FILES';
     case MANAGE_SETTINGS      = 'ROLE_MANAGE_SETTINGS';
+    case MANAGE_FAQ           = 'ROLE_MANAGE_FAQ';
 
     public function getTranslation(): string
     {
         return match ($this) {
-            self::ADMIN                => 'Administrator',
-            self::MANAGE_USERS         => 'Benutzer verwalten',
-            self::MANAGE_ARTICLES      => 'Artikel verwalten',
-            self::MANAGE_LINKS         => 'Links verwalten',
-            self::MANAGE_DOWNLOADS     => 'Downloads verwalten',
+            self::ADMIN => 'Administrator',
+            self::MANAGE_USERS => 'Benutzer verwalten',
+            self::MANAGE_ARTICLES => 'Artikel verwalten',
+            self::MANAGE_LINKS => 'Links verwalten',
+            self::MANAGE_DOWNLOADS => 'Downloads verwalten',
             self::MANAGE_NOTIFICATIONS => 'Benachrichtigungen verwalten',
-            self::MANAGE_TEAMS         => 'Teams verwalten',
-            self::MANAGE_PERSONS       => 'Personen verwalten',
+            self::MANAGE_TEAMS => 'Teams verwalten',
+            self::MANAGE_PERSONS => 'Personen verwalten',
             self::MANAGE_PERSON_GROUPS => 'Personengruppen verwalten',
-            self::MANAGE_PAGES         => 'Seiten verwalten',
-            self::MANAGE_MENU          => 'Menüs verwalten',
-            self::MANAGE_SHORT_URLS    => 'Short URLs verwalten',
-            self::MANAGE_SPONSORS      => 'Sponsoren verwalten',
-            self::MANAGE_FILES         => 'Dateien verwalten',
-            self::MANAGE_SETTINGS      => 'Einstellungen verwalten',
+            self::MANAGE_PAGES => 'Seiten verwalten',
+            self::MANAGE_MENU => 'Menüs verwalten',
+            self::MANAGE_SHORT_URLS => 'Short URLs verwalten',
+            self::MANAGE_SPONSORS => 'Sponsoren verwalten',
+            self::MANAGE_FILES => 'Dateien verwalten',
+            self::MANAGE_SETTINGS => 'Einstellungen verwalten',
+            self::MANAGE_FAQ => 'FAQ verwalten',
         };
     }
 }

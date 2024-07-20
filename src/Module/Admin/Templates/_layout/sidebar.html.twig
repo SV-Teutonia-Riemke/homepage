@@ -20,7 +20,7 @@
         <twig:sidebar:navbar:item href="{{ path('app_admin_shorturl_index') }}" title="Short URLs" icon="simple-icons:curl" class="mt-3" granted="ROLE_MANAGE_SHORT_URLS"/>
     {% endif %}
 
-    <twig:sidebar:navbar:item href="{{ path('app_admin_faq_category_index') }}" title="FAQ" icon="wpf:faq" class="mt-3"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_faq_category_index') }}" title="FAQ" icon="wpf:faq" class="mt-3" granted="ROLE_MANAGE_FAQ"/>
 
     <twig:sidebar:navbar:item href="{{ path('app_admin_sponsor_index') }}" title="Sponsoren" icon="fa6-solid:heart" class="mt-3" granted="ROLE_MANAGE_SPONSORS"/>
     <twig:sidebar:navbar:item href="{{ path('app_admin_files_index') }}" title="Dateien" icon="fa6-solid:folder" class="mt-3" granted="ROLE_MANAGE_FILES"/>

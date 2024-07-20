@@ -13,6 +13,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\AbstractString;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[ORM\Entity(repositoryClass: FaqCategoryRepository::class)]
 class FaqCategory extends AbstractEntity implements EnabledInterface, PositionInterface
@@ -49,5 +51,10 @@ class FaqCategory extends AbstractEntity implements EnabledInterface, PositionIn
     public function getArticles(): Collection
     {
         return $this->articles;
+    }
+
+    public function getSlug(SluggerInterface $slugger): AbstractString
+    {
+        return $slugger->slug($this->getTitle());
     }
 }

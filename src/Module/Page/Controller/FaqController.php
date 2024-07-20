@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Requirement\Requirement;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 use function sprintf;
 
@@ -22,6 +24,7 @@ class FaqController extends AbstractController
     public function __construct(
         private readonly FaqCategoryRepository $faqCategoryRepository,
         private readonly FaqArticleRepository $faqArticleRepository,
+        private readonly SluggerInterface $slugger,
     ) {
     }
 
@@ -39,13 +42,31 @@ class FaqController extends AbstractController
         );
     }
 
-    #[Route('/category/{category}', name: 'category')]
+    #[Route(
+        path: '/category/{category}',
+        name: 'category',
+        requirements: ['category' => Requirement::DIGITS],
+    )]
+    #[Route(
+        path: '/category/{category}-{slug}',
+        name: 'category_slug',
+        requirements: ['category' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG],
+    )]
     public function category(
         Request $request,
         FaqCategory $category,
+        string $slug = '',
     ): Response {
         if (! $category->isEnabled()) {
             throw $this->createNotFoundException();
+        }
+
+        $slugToBe = $category->getSlug($this->slugger);
+        if (! $slugToBe->equalsTo($slug)) {
+            return $this->redirectToRoute('app_faq_category_slug', [
+                'category' => $category->getId(),
+                'slug' => $slugToBe,
+            ]);
         }
 
         $categories = $this->faqCategoryRepository->findEnabled();
