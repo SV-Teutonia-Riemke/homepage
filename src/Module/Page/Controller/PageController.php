@@ -36,8 +36,10 @@ final class PageController extends AbstractController
             'section' => 'page',
         ],
     )]
-    public function news(Page $page, string $slug): Response
-    {
+    public function news(
+        Page $page,
+        string $slug,
+    ): Response {
         if (! $page->isEnabled()) {
             throw $this->createNotFoundException();
         }

@@ -24,7 +24,7 @@ class FaqCategory extends AbstractEntity implements EnabledInterface, PositionIn
     private string $title;
 
     /** @var Collection<array-key, FaqArticle> */
-    #[ORM\OneToMany(mappedBy: 'group', targetEntity: FaqArticle::class)]
+    #[ORM\OneToMany(targetEntity: FaqArticle::class, mappedBy: 'group')]
     #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $articles;
 

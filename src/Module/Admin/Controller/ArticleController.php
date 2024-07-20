@@ -22,8 +22,10 @@ final class ArticleController extends AbstractCrudController
 {
     use FullHandler;
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
-    {
+    protected function configureCrudConfig(
+        CrudConfigBuilder $builder,
+        Request $request,
+    ): void {
         $builder->setMandatory(
             Article::class,
             'article',
@@ -32,8 +34,10 @@ final class ArticleController extends AbstractCrudController
         $builder->defaultSortDirection = 'desc';
     }
 
-    protected function getFormType(Request $request, object|null $object = null): string
-    {
+    protected function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string {
         return ArticleType::class;
     }
 }

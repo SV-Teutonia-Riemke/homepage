@@ -51,8 +51,10 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface, 
         return $class === User::class;
     }
 
-    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
-    {
+    public function upgradePassword(
+        PasswordAuthenticatedUserInterface $user,
+        string $newHashedPassword,
+    ): void {
         if (! $user instanceof User) {
             throw new UnsupportedUserException(sprintf('Invalid user class "%s".', $user::class));
         }

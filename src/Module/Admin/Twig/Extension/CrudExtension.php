@@ -71,8 +71,10 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getEditUrl(CrudConfig $crudConfig, object $object): string
-    {
+    private function getEditUrl(
+        CrudConfig $crudConfig,
+        object $object,
+    ): string {
         return $this->urlGenerator->generate(
             $crudConfig->getEditRouteName(),
             $this->getObjectParameters($crudConfig, $object),
@@ -83,8 +85,10 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getRemoveUrl(CrudConfig $crudConfig, object $object): string
-    {
+    private function getRemoveUrl(
+        CrudConfig $crudConfig,
+        object $object,
+    ): string {
         return $this->urlGenerator->generate($crudConfig->getRemoveRouteName(), $this->getObjectParameters($crudConfig, $object));
     }
 
@@ -92,8 +96,10 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getUpUrl(CrudConfig $crudConfig, object $object): string
-    {
+    private function getUpUrl(
+        CrudConfig $crudConfig,
+        object $object,
+    ): string {
         return $this->urlGenerator->generate($crudConfig->getUpRouteName(), $this->getObjectParameters($crudConfig, $object));
     }
 
@@ -101,8 +107,10 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getDownUrl(CrudConfig $crudConfig, object $object): string
-    {
+    private function getDownUrl(
+        CrudConfig $crudConfig,
+        object $object,
+    ): string {
         return $this->urlGenerator->generate($crudConfig->getDownRouteName(), $this->getObjectParameters($crudConfig, $object));
     }
 
@@ -110,8 +118,10 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getEnableUrl(CrudConfig $crudConfig, object $object): string
-    {
+    private function getEnableUrl(
+        CrudConfig $crudConfig,
+        object $object,
+    ): string {
         return $this->urlGenerator->generate($crudConfig->getEnableRouteName(), $this->getObjectParameters($crudConfig, $object));
     }
 
@@ -119,8 +129,10 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getDisableUrl(CrudConfig $crudConfig, object $object): string
-    {
+    private function getDisableUrl(
+        CrudConfig $crudConfig,
+        object $object,
+    ): string {
         return $this->urlGenerator->generate($crudConfig->getDisableRouteName(), $this->getObjectParameters($crudConfig, $object));
     }
 
@@ -130,8 +142,10 @@ class CrudExtension extends AbstractExtension
      *
      * @return array<string, string|int>
      */
-    private function getObjectParameters(CrudConfig $crudConfig, object $object): array
-    {
+    private function getObjectParameters(
+        CrudConfig $crudConfig,
+        object $object,
+    ): array {
         $objects = ['object' => $crudConfig->getObjectIdentifier($object)];
 
         return [

@@ -15,8 +15,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 final class ShortUrlType extends AbstractType
 {
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $builder
             ->add('longUrl', UrlType::class, [
                 'label' => 'URL',

@@ -19,8 +19,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 final class PersonType extends AbstractType
 {
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $builder
             ->add('firstName', TextType::class, [
                 'label' => 'Vorname',

@@ -16,8 +16,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class PersonGroupMemberType extends AbstractType
 {
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $builder
             ->add('person', PersonEntityType::class, [
                 'label' => 'Person',

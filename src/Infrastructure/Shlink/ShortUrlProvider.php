@@ -21,8 +21,10 @@ class ShortUrlProvider
     }
 
     /** @param array<string> $tags */
-    public function getShortUrl(string $url, array $tags = []): string
-    {
+    public function getShortUrl(
+        string $url,
+        array $tags = [],
+    ): string {
         if ($this->shlinkClient === null) {
             return $url;
         }
@@ -38,8 +40,10 @@ class ShortUrlProvider
     }
 
     /** @param array<string> $tags */
-    private function createShortUrl(string $url, array $tags = []): string
-    {
+    private function createShortUrl(
+        string $url,
+        array $tags = [],
+    ): string {
         if ($this->shlinkClient === null) {
             return $url;
         }

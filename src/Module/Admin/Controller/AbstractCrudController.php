@@ -125,8 +125,10 @@ abstract class AbstractCrudController extends AbstractController
         ]);
     }
 
-    private function handleValidCreateForm(Request $request, FormInterface $form): Response
-    {
+    private function handleValidCreateForm(
+        Request $request,
+        FormInterface $form,
+    ): Response {
         return $this->handleValidForm(
             $request,
             $form,
@@ -134,8 +136,10 @@ abstract class AbstractCrudController extends AbstractController
         );
     }
 
-    private function handleValidEditForm(Request $request, FormInterface $form): Response
-    {
+    private function handleValidEditForm(
+        Request $request,
+        FormInterface $form,
+    ): Response {
         return $this->handleValidForm(
             $request,
             $form,
@@ -143,8 +147,11 @@ abstract class AbstractCrudController extends AbstractController
         );
     }
 
-    private function handleValidForm(Request $request, FormInterface $form, callable $callable): Response
-    {
+    private function handleValidForm(
+        Request $request,
+        FormInterface $form,
+        callable $callable,
+    ): Response {
         $data       = $form->getData();
         $crudConfig = $this->getCrudConfig($request);
 
@@ -185,8 +192,10 @@ abstract class AbstractCrudController extends AbstractController
         );
     }
 
-    public function handleEnabled(Request $request, bool $enabled): Response
-    {
+    public function handleEnabled(
+        Request $request,
+        bool $enabled,
+    ): Response {
         $entity = $this->loadObject($request);
         if (! $entity instanceof EnabledInterface) {
             throw $this->createNotFoundException();
@@ -210,8 +219,10 @@ abstract class AbstractCrudController extends AbstractController
         );
     }
 
-    public function handlePosition(Request $request, int $position): Response
-    {
+    public function handlePosition(
+        Request $request,
+        int $position,
+    ): Response {
         $entity = $this->loadObject($request);
         if (! $entity instanceof PositionInterface) {
             throw $this->createNotFoundException();
@@ -258,8 +269,10 @@ abstract class AbstractCrudController extends AbstractController
         return $this->getEntityManager()->getRepository($crudConfig->dtoClass)->createQueryBuilder('p');
     }
 
-    protected function doConfigureQueryBuilder(QueryBuilder $queryBuilder, Request $request): void
-    {
+    protected function doConfigureQueryBuilder(
+        QueryBuilder $queryBuilder,
+        Request $request,
+    ): void {
     }
 
     /**
@@ -267,8 +280,10 @@ abstract class AbstractCrudController extends AbstractController
      *
      * @return Entity|null
      */
-    protected function doLoadObject(CrudConfig $crudConfig, string|int $objectIdentifier): object|null
-    {
+    protected function doLoadObject(
+        CrudConfig $crudConfig,
+        string|int $objectIdentifier,
+    ): object|null {
         $entity = $this->getEntityManager()->getRepository($crudConfig->dtoClass)->find($objectIdentifier);
         if ($entity === null) {
             return null;
@@ -287,18 +302,27 @@ abstract class AbstractCrudController extends AbstractController
         return $object;
     }
 
-    protected function doHandleValidCreateForm(Request $request, FormInterface $form, mixed $data): void
-    {
+    protected function doHandleValidCreateForm(
+        Request $request,
+        FormInterface $form,
+        mixed $data,
+    ): void {
         $this->doHandleValidForm($request, $form, $data);
     }
 
-    protected function doHandleValidEditForm(Request $request, FormInterface $form, mixed $data): void
-    {
+    protected function doHandleValidEditForm(
+        Request $request,
+        FormInterface $form,
+        mixed $data,
+    ): void {
         $this->doHandleValidForm($request, $form, $data);
     }
 
-    protected function doHandleValidForm(Request $request, FormInterface $form, mixed $data): void
-    {
+    protected function doHandleValidForm(
+        Request $request,
+        FormInterface $form,
+        mixed $data,
+    ): void {
         $this->doPersisting($data);
     }
 
@@ -333,8 +357,10 @@ abstract class AbstractCrudController extends AbstractController
      *
      * @return array<string, mixed>
      */
-    protected function enrichPaginationOptions(Request $request, array $options): array
-    {
+    protected function enrichPaginationOptions(
+        Request $request,
+        array $options,
+    ): array {
         return $options;
     }
 
@@ -363,7 +389,10 @@ abstract class AbstractCrudController extends AbstractController
     }
 
     /** @param CrudConfigBuilder<Entity> $builder */
-    abstract protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void;
+    abstract protected function configureCrudConfig(
+        CrudConfigBuilder $builder,
+        Request $request,
+    ): void;
 
     protected function getEntityManager(): EntityManagerInterface
     {

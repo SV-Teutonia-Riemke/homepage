@@ -20,8 +20,10 @@ final class UserType extends AbstractType
     public const string FIELD_PASSWORD = 'password';
 
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $builder
             ->add(self::FIELD_EMAIL, EmailType::class, [
                 'label' => 'E-Mail-Adresse',

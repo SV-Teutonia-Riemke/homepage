@@ -22,16 +22,20 @@ final class PageController extends AbstractCrudController
 {
     use FullHandler;
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
-    {
+    protected function configureCrudConfig(
+        CrudConfigBuilder $builder,
+        Request $request,
+    ): void {
         $builder->setMandatory(
             Page::class,
             'page',
         );
     }
 
-    protected function getFormType(Request $request, object|null $object = null): string
-    {
+    protected function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string {
         return PageType::class;
     }
 }

@@ -14,8 +14,10 @@ final class AssetUrlGenerator
     ) {
     }
 
-    public function __invoke(File $file, bool $download = false): string
-    {
+    public function __invoke(
+        File $file,
+        bool $download = false,
+    ): string {
         return $this->urlGenerator->generate(
             'app_file',
             [

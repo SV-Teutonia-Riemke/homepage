@@ -38,8 +38,10 @@ final class YearGroup implements Stringable
         return self::fromYears($start, $end);
     }
 
-    public static function fromYears(int $start, int $end): self
-    {
+    public static function fromYears(
+        int $start,
+        int $end,
+    ): self {
         return new self($start, $end);
     }
 

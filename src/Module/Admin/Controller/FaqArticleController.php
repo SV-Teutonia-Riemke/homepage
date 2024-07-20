@@ -32,8 +32,10 @@ final class FaqArticleController extends AbstractCrudController
     ) {
     }
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
-    {
+    protected function configureCrudConfig(
+        CrudConfigBuilder $builder,
+        Request $request,
+    ): void {
         $builder->setMandatory(
             FaqArticle::class,
             'faq_article',
@@ -56,8 +58,10 @@ final class FaqArticleController extends AbstractCrudController
         };
     }
 
-    protected function doConfigureQueryBuilder(QueryBuilder $queryBuilder, Request $request): void
-    {
+    protected function doConfigureQueryBuilder(
+        QueryBuilder $queryBuilder,
+        Request $request,
+    ): void {
         $category = $this->faqCategoryRepository->find($request->attributes->get('category'));
         if ($category === null) {
             throw $this->createNotFoundException();
@@ -68,8 +72,10 @@ final class FaqArticleController extends AbstractCrudController
             ->setParameter('category', $category->getId());
     }
 
-    protected function getFormType(Request $request, object|null $object = null): string
-    {
+    protected function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string {
         return FaqArticleType::class;
     }
 }

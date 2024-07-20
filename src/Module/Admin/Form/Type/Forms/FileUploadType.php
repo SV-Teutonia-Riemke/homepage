@@ -14,8 +14,10 @@ use Symfony\Component\Validator\Constraints\File;
 final class FileUploadType extends AbstractType
 {
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $builder
             ->add('directory', DirectoryEntityType::class, [
                 'label'    => 'Ordner',

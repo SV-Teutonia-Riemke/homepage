@@ -32,8 +32,10 @@ class SitemapSubscriber
         $this->registerPages($event->getUrlContainer(), $event->getUrlGenerator());
     }
 
-    public function registerTeams(UrlContainerInterface $urls, UrlGeneratorInterface $router): void
-    {
+    public function registerTeams(
+        UrlContainerInterface $urls,
+        UrlGeneratorInterface $router,
+    ): void {
         $teams = $this->teamRepository->findAllEnabled();
 
         foreach ($teams as $team) {
@@ -53,8 +55,10 @@ class SitemapSubscriber
         }
     }
 
-    public function registerArticles(UrlContainerInterface $urls, UrlGeneratorInterface $router): void
-    {
+    public function registerArticles(
+        UrlContainerInterface $urls,
+        UrlGeneratorInterface $router,
+    ): void {
         $teams = $this->articleRepository->findLatestEnabled();
 
         foreach ($teams as $team) {
@@ -73,8 +77,10 @@ class SitemapSubscriber
         }
     }
 
-    public function registerPages(UrlContainerInterface $urls, UrlGeneratorInterface $router): void
-    {
+    public function registerPages(
+        UrlContainerInterface $urls,
+        UrlGeneratorInterface $router,
+    ): void {
         $pages = $this->pageRepository->findEnabled();
 
         foreach ($pages as $page) {

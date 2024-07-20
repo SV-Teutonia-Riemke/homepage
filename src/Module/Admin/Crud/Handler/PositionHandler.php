@@ -12,8 +12,10 @@ trait PositionHandler
 {
     #[Route('/{object}/up', name: 'up', defaults: ['position' => -1])]
     #[Route('/{object}/down', name: 'down', defaults: ['position' => 1])]
-    public function position(Request $request, int $position): Response
-    {
+    public function position(
+        Request $request,
+        int $position,
+    ): Response {
         return $this->handlePosition($request, $position);
     }
 }

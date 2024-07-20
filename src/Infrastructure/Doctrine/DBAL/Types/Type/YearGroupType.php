@@ -20,14 +20,18 @@ final class YearGroupType extends Type
     }
 
     /** @inheritdoc */
-    public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
-    {
+    public function getSQLDeclaration(
+        array $column,
+        AbstractPlatform $platform,
+    ): string {
         return $platform->getStringTypeDeclarationSQL($column);
     }
 
     /** @inheritdoc */
-    public function convertToPHPValue($value, AbstractPlatform $platform): YearGroup|null
-    {
+    public function convertToPHPValue(
+        $value,
+        AbstractPlatform $platform,
+    ): YearGroup|null {
         if ($value === null) {
             return null;
         }
@@ -48,8 +52,10 @@ final class YearGroupType extends Type
     }
 
     /** @inheritdoc */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): string|null
-    {
+    public function convertToDatabaseValue(
+        $value,
+        AbstractPlatform $platform,
+    ): string|null {
         if ($value === null) {
             return null;
         }

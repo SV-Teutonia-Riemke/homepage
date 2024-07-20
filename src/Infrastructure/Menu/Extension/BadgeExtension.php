@@ -25,8 +25,10 @@ final class BadgeExtension implements ExtensionInterface
     }
 
     /** @inheritDoc */
-    public function buildItem(ItemInterface $item, array $options): void
-    {
+    public function buildItem(
+        ItemInterface $item,
+        array $options,
+    ): void {
         $item->setExtra(self::KEY_NAME, $options[self::KEY_NAME] ?? null);
     }
 }

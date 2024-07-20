@@ -36,8 +36,10 @@ class ShortUrlController extends AbstractCrudController
     ) {
     }
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
-    {
+    protected function configureCrudConfig(
+        CrudConfigBuilder $builder,
+        Request $request,
+    ): void {
         $builder->setMandatory(
             ShortUrl::class,
             'shorturl',
@@ -50,13 +52,18 @@ class ShortUrlController extends AbstractCrudController
         return iterator_to_array($this->shlinkClient->listShortUrls());
     }
 
-    protected function doLoadObject(CrudConfig $crudConfig, mixed $objectIdentifier): object|null
-    {
+    protected function doLoadObject(
+        CrudConfig $crudConfig,
+        mixed $objectIdentifier,
+    ): object|null {
         return $this->shlinkClient->getShortUrl(ShortUrlIdentifier::fromShortCode($objectIdentifier));
     }
 
-    protected function doHandleValidCreateForm(Request $request, FormInterface $form, mixed $data): void
-    {
+    protected function doHandleValidCreateForm(
+        Request $request,
+        FormInterface $form,
+        mixed $data,
+    ): void {
         if (! $data instanceof \App\Module\Admin\Misc\Shlink\ShortUrl) {
             throw new RuntimeException('Invalid data type', 1716126888221);
         }
@@ -75,8 +82,11 @@ class ShortUrlController extends AbstractCrudController
         $this->shlinkClient->createShortUrl($creation);
     }
 
-    protected function doHandleValidEditForm(Request $request, FormInterface $form, mixed $data): void
-    {
+    protected function doHandleValidEditForm(
+        Request $request,
+        FormInterface $form,
+        mixed $data,
+    ): void {
         if (! $data instanceof \App\Module\Admin\Misc\Shlink\ShortUrl) {
             throw new RuntimeException('Invalid data type', 1716126888220);
         }
@@ -117,8 +127,10 @@ class ShortUrlController extends AbstractCrudController
         );
     }
 
-    protected function getFormType(Request $request, object|null $object = null): string
-    {
+    protected function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string {
         return ShortUrlType::class;
     }
 

@@ -68,8 +68,10 @@ class ImageComponent extends AbstractComponent
         return $config;
     }
 
-    private function normalizeFile(Options $options, int|File|null $fileOrId): File
-    {
+    private function normalizeFile(
+        Options $options,
+        int|File|null $fileOrId,
+    ): File {
         $fileOrId = $options['id'] ?? $fileOrId;
 
         if ($fileOrId instanceof File) {

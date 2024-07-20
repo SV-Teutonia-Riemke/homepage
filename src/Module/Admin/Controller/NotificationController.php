@@ -22,16 +22,20 @@ final class NotificationController extends AbstractCrudController
 {
     use FullHandler;
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
-    {
+    protected function configureCrudConfig(
+        CrudConfigBuilder $builder,
+        Request $request,
+    ): void {
         $builder->setMandatory(
             Notification::class,
             'notification',
         );
     }
 
-    protected function getFormType(Request $request, object|null $object = null): string
-    {
+    protected function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string {
         return NotificationType::class;
     }
 }

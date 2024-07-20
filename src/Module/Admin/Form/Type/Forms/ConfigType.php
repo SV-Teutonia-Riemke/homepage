@@ -18,8 +18,10 @@ final class ConfigType extends AbstractType
     }
 
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $collection = $this->configBuilder->build();
 
         $wrapper = $builder->create('wrapper', options: ['compound' => true]);

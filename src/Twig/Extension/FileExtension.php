@@ -62,8 +62,10 @@ final class FileExtension extends AbstractExtension
     }
 
     /** @return iterable<File> */
-    private function findFilesOfDirectory(int|Directory $directory, bool $deepFiles = true): iterable
-    {
+    private function findFilesOfDirectory(
+        int|Directory $directory,
+        bool $deepFiles = true,
+    ): iterable {
         if (is_int($directory)) {
             $directory = $this->directoryRepository->find($directory);
         }

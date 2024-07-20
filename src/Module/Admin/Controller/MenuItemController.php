@@ -27,8 +27,10 @@ final class MenuItemController extends AbstractCrudController
     use FullHandler;
     use PositionHandler;
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
-    {
+    protected function configureCrudConfig(
+        CrudConfigBuilder $builder,
+        Request $request,
+    ): void {
         $builder->setMandatory(
             MenuItem::class,
             'menu_item',
@@ -37,8 +39,10 @@ final class MenuItemController extends AbstractCrudController
         $builder->defaultSortDirection = 'asc';
     }
 
-    protected function getFormType(Request $request, object|null $object = null): string
-    {
+    protected function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string {
         if ($object instanceof MenuItem) {
             return match ($object->getType()) {
                 MenuType::PAGE => MenuItemPageType::class,

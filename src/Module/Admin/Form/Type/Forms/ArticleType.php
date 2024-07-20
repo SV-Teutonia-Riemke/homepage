@@ -18,8 +18,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 final class ArticleType extends AbstractType
 {
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $builder
             ->add('title', TextType::class, [
                 'label' => 'Titel',

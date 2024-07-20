@@ -21,8 +21,10 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 final class DownloadType extends AbstractType
 {
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Name',

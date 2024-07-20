@@ -15,8 +15,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 final class StaffType extends AbstractType
 {
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $builder
             ->add('person', PersonEntityType::class, [
                 'label' => 'Person',

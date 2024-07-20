@@ -29,21 +29,28 @@ final class UserController extends AbstractCrudController
     ) {
     }
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
-    {
+    protected function configureCrudConfig(
+        CrudConfigBuilder $builder,
+        Request $request,
+    ): void {
         $builder->setMandatory(
             User::class,
             'user',
         );
     }
 
-    protected function getFormType(Request $request, object|null $object = null): string
-    {
+    protected function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string {
         return UserType::class;
     }
 
-    protected function doHandleValidForm(Request $request, FormInterface $form, mixed $data): void
-    {
+    protected function doHandleValidForm(
+        Request $request,
+        FormInterface $form,
+        mixed $data,
+    ): void {
         $password = $form->get(UserType::FIELD_PASSWORD)->getData();
         if ($password !== null) {
             $data->setPassword($this->userPasswordHasher->hashPassword($data, $password));

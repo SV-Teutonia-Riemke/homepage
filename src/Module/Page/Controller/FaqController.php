@@ -40,8 +40,10 @@ class FaqController extends AbstractController
     }
 
     #[Route('/category/{category}', name: 'category')]
-    public function category(Request $request, FaqCategory $category): Response
-    {
+    public function category(
+        Request $request,
+        FaqCategory $category,
+    ): Response {
         if (! $category->isEnabled()) {
             throw $this->createNotFoundException();
         }

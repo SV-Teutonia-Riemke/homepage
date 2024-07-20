@@ -15,8 +15,10 @@ final class AbstractForm extends AbstractType
     public const BUTTON_SUBMIT_AND_NEW = 'submitAndNew';
 
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         if ($options['submit_button'] === true) {
             $builder->add(self::BUTTON_SUBMIT, SubmitType::class);
         }

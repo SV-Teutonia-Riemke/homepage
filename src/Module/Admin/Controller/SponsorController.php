@@ -24,8 +24,10 @@ final class SponsorController extends AbstractCrudController
     use FullHandler;
     use PositionHandler;
 
-    protected function configureCrudConfig(CrudConfigBuilder $builder, Request $request): void
-    {
+    protected function configureCrudConfig(
+        CrudConfigBuilder $builder,
+        Request $request,
+    ): void {
         $builder->setMandatory(
             Sponsor::class,
             'sponsor',
@@ -34,8 +36,10 @@ final class SponsorController extends AbstractCrudController
         $builder->defaultSortDirection = 'asc';
     }
 
-    protected function getFormType(Request $request, object|null $object = null): string
-    {
+    protected function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string {
         return SponsorType::class;
     }
 }

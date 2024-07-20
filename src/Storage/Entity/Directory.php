@@ -32,8 +32,10 @@ class Directory extends AbstractEntity implements Stringable
     #[ORM\OneToMany(mappedBy: 'directory', targetEntity: File::class)]
     private Collection $files;
 
-    public function __construct(string $name, Directory|null $parent)
-    {
+    public function __construct(
+        string $name,
+        Directory|null $parent,
+    ) {
         $this->name     = $name;
         $this->parent   = $parent;
         $this->children = new ArrayCollection();

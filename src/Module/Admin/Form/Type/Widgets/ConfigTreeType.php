@@ -20,8 +20,10 @@ final class ConfigTreeType extends AbstractType
     }
 
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $tree = $options['tree'];
         assert($tree instanceof ConfigTree);
 

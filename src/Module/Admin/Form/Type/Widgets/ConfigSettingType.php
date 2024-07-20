@@ -17,8 +17,10 @@ use function assert;
 final class ConfigSettingType extends AbstractType
 {
     /** @inheritDoc */
-    public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
         $configItem = $options['config_item'];
         assert($configItem instanceof ConfigItem);
 

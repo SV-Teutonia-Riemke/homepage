@@ -26,8 +26,10 @@ class Link extends AbstractEntity implements Stringable, PositionInterface, Enab
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
 
-    public function __construct(string $name, string $uri)
-    {
+    public function __construct(
+        string $name,
+        string $uri,
+    ) {
         $this->name = $name;
         $this->uri  = $uri;
     }
