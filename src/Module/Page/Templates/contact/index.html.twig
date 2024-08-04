@@ -25,22 +25,22 @@
                         <div class="row gy-2 p-4 p-xl-5">
                             <div class="col-12 col-md-6">
                                 <div class="row">
-                                    <div class="col-12">{{ form_row(form.firstName) }}</div>
-                                    <div class="col-12">{{ form_row(form.lastName) }}</div>
+                                    <div class="col-12 col-md-6">{{ form_row(form.firstName) }}</div>
+                                    <div class="col-12 col-md-6">{{ form_row(form.lastName) }}</div>
                                     <div class="col-12">{{ form_row(form.email) }}</div>
                                     <div class="col-12">{{ form_row(form.phoneNumber) }}</div>
+                                    <div class="col-12">
+                                        Wir verarbeiten die von Dir über das Kontaktformular mitgeteilte Informationen ausschließlich für die Bearbeitung Deines konkreten Anliegens.
+                                        Die Daten der Nutzerin oder des Nutzers werden gelöscht, sobald sie für die Erreichung des Zwecks nicht mehr erforderlich sind.
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                {{ form_row(form.content, { attr: { rows: 14 } }) }}
+                                {{ form_row(form.content, { attr: { rows: 15 } }) }}
                             </div>
-                            <div class="col-12">
-                                Wir verarbeiten die von Dir über das Kontaktformular mitgeteilte Informationen ausschließlich für die Bearbeitung Deines konkreten Anliegens.
-                                Die Daten der Nutzerin oder des Nutzers werden gelöscht, sobald sie für die Erreichung des Zwecks nicht mehr erforderlich sind.
-                            </div>
-                            <div class="col-12">
+                            <div class="col-12 mt-3">
                                 <div class="d-grid">
-                                    <button class="btn btn-primary btn-lg" type="submit">Abschicken</button>
+                                    <button class="btn btn-primary" type="submit">Abschicken</button>
                                 </div>
                             </div>
                         </div>

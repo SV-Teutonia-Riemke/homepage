@@ -6,6 +6,7 @@ namespace App\Module\Page\Form\Type\Forms;
 
 use App\Module\Page\Form\Model\Contact;
 use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -27,14 +28,14 @@ class ContactForm extends AbstractType
                 'label' => 'Vorname',
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['max' => 100]),
+                    new Length(min: 2, max: 100),
                 ],
             ])
             ->add('lastName', TextType::class, [
                 'label' => 'Nachname',
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['max' => 100]),
+                    new Length(min: 2, max: 100),
                 ],
             ])
             ->add('email', EmailType::class, [
@@ -42,7 +43,7 @@ class ContactForm extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                     new Email(),
-                    new Length(['max' => 250]),
+                    new Length(max: 100),
                 ],
             ])
             ->add('phoneNumber', PhoneNumberType::class, [
@@ -50,18 +51,18 @@ class ContactForm extends AbstractType
                 'default_region' => 'DE',
                 'required' => false,
                 'widget' => PhoneNumberType::WIDGET_SINGLE_TEXT,
-                'country_display_type' => PhoneNumberType::DISPLAY_COUNTRY_SHORT,
-                'country_display_emoji_flag' => true,
-                'preferred_country_choices' => ['DE'],
+                'attr' => [
+                    'placeholder' => '+49 123 456789',
+                ],
                 'constraints' => [
-                    new NotBlank(),
+                    new PhoneNumber(),
                 ],
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Dein Anliegen',
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['min' => 10, 'max' => 50000]),
+                    new Length(min: 2, max: 50000),
                 ],
             ]);
     }
