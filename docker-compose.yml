@@ -1,6 +1,6 @@
 services:
   app:
-    image: thecodingmachine/php:8.3-v4-apache-node20
+    image: thecodingmachine/php:8.3-v4-apache-node22
     volumes:
       - .:/var/www/html
       - ./var/.bash_history:/home/docker/.bash_history
@@ -35,6 +35,17 @@ services:
     networks:
       internal:
         ipv4_address: 192.168.19.11
+
+  mailpit:
+    image: axllent/mailpit
+    container_name: mailpit
+    restart: unless-stopped
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    networks:
+      internal:
+        ipv4_address: 192.168.19.12
 
 networks:
   internal:

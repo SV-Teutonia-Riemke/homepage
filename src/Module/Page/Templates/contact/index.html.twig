@@ -1,0 +1,56 @@
+{% extends '@page/_layout/layout.html.twig' %}
+
+{# {% set pageTitle = 'Kontakt' %} #}
+
+{% block pageSubBody %}
+    <section class="py-3 py-md-5">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
+                    <h2 class="mb-4 display-5 text-center">Kontakt</h2>
+                    <p class="text-secondary mb-5 text-center">
+                        Am besten nimmst Du mit uns Kontakt auf, indem Du unser Kontaktformular verwendest.
+                        Bitte fülle alle erforderlichen Felder aus und wir werden uns so schnell wie möglich bei Dir melden.
+                    </p>
+                    <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
+                </div>
+            </div>
+        </div>
+
+        {{ form_start(form) }}
+        <div class="container">
+            <div class="row justify-content-lg-center">
+                <div class="col-12 col-lg-9">
+                    <div class="bg-white border rounded shadow-sm overflow-hidden">
+                        <div class="row gy-2 p-4 p-xl-5">
+                            <div class="col-12 col-md-6">
+                                <div class="row">
+                                    <div class="col-12">{{ form_row(form.subject) }}</div>
+                                    <div class="col-12 col-md-6">{{ form_row(form.firstName) }}</div>
+                                    <div class="col-12 col-md-6">{{ form_row(form.lastName) }}</div>
+                                    <div class="col-12">{{ form_row(form.email) }}</div>
+                                    <div class="col-12">{{ form_row(form.phoneNumber) }}</div>
+                                    <div class="col-12">
+                                        Wir verarbeiten die von Dir über das Kontaktformular mitgeteilte Informationen ausschließlich für die Bearbeitung Deines konkreten Anliegens.
+                                        Die Daten der Nutzerin oder des Nutzers werden gelöscht, sobald sie für die Erreichung des Zwecks nicht mehr erforderlich sind.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {{ form_row(form.content, { attr: { rows: 15 } }) }}
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="d-grid">
+                                    <button class="btn btn-primary" type="submit">Abschicken</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+    </section>
+
+{% endblock %}

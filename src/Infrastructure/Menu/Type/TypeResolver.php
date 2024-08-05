@@ -6,6 +6,7 @@ namespace App\Infrastructure\Menu\Type;
 
 use App\Infrastructure\Menu\MenuType;
 use App\Infrastructure\Menu\Type\Resolver\ClubResolver;
+use App\Infrastructure\Menu\Type\Resolver\ContactResolver;
 use App\Infrastructure\Menu\Type\Resolver\DownloadsResolver;
 use App\Infrastructure\Menu\Type\Resolver\FaqResolver;
 use App\Infrastructure\Menu\Type\Resolver\ImprintResolver;
@@ -26,6 +27,7 @@ class TypeResolver
     public function __construct(
         private readonly FactoryInterface $factory,
         private readonly ClubResolver $clubResolver,
+        private readonly ContactResolver $contact,
         private readonly DownloadsResolver $downloadsResolver,
         private readonly FaqResolver $faqResolver,
         private readonly ImprintResolver $imprintResolver,
@@ -44,6 +46,7 @@ class TypeResolver
     {
         $resolver = match ($menuItem->getType()) {
             MenuType::CLUB => fn () => $this->clubResolver,
+            MenuType::CONTACT => fn () => $this->contact,
             MenuType::DOWNLOADS => fn () => $this->downloadsResolver,
             MenuType::FAQ => fn () => $this->faqResolver,
             MenuType::IMPRINT => fn () => $this->imprintResolver,

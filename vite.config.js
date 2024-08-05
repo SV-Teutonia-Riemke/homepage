@@ -50,5 +50,12 @@ export default defineConfig(({mode}) => {
                 },
             }
         },
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    quietDeps: true
+                },
+            }
+        },
     }
 });
