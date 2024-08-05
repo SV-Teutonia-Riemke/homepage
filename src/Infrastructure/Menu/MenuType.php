@@ -18,4 +18,5 @@ enum MenuType: string
     case SPONSOR   = 'sponsor';
     case TEAMS     = 'teams';
     case FAQ       = 'faq';
+    case CONTACT   = 'contact';
 }

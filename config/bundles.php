@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use Eckinox\TinymceBundle\TinymceBundle;
+use EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle;
 use HWI\Bundle\OAuthBundle\HWIOAuthBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
@@ -60,4 +61,5 @@ return [
     TinymceBundle::class => ['all' => true],
     HWIOAuthBundle::class => ['all' => true],
     PentatrionViteBundle::class => ['all' => true],
+    EWZRecaptchaBundle::class => ['all' => true],
 ];
