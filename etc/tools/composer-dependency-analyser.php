@@ -26,7 +26,6 @@ return $config
         'symfony/clock',
         'symfony/flex',
         'symfony/http-client',
-        'symfony/mime',
         'symfony/psr-http-message-bridge',
         'symfony/runtime',
         'symfony/security-csrf',
