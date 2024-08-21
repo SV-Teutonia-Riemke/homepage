@@ -10,6 +10,7 @@ use App\Module\Admin\Crud\Handler\CRUDHandler;
 use App\Module\Admin\Form\Type\Forms\PersonSearchType;
 use App\Module\Admin\Form\Type\Forms\PersonType;
 use App\Storage\Entity\Person;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
@@ -40,6 +41,7 @@ final class PersonController extends AbstractCrudController
         return PersonType::class;
     }
 
+    /** @return class-string<FormTypeInterface> */
     protected function getSearchType(): string
     {
         return PersonSearchType::class;

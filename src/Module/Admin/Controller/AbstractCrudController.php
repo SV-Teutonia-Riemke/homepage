@@ -17,6 +17,7 @@ use RuntimeException;
 use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -364,11 +365,13 @@ abstract class AbstractCrudController extends AbstractController
         return $options;
     }
 
+    /** @return class-string<FormTypeInterface>|null */
     protected function getSearchType(): string|null
     {
         return null;
     }
 
+    /** @return class-string<FormTypeInterface> */
     abstract protected function getFormType(
         Request $request,
         object|null $object = null,
