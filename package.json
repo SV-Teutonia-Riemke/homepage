@@ -17,10 +17,10 @@
         "sass": "^1.77.8",
         "tom-select": "^2.3.1",
         "typescript": "^5.5.4",
-        "vite": "^5.3.5",
+        "vite": "^5.4.2",
         "vite-plugin-monaco-editor": "^1.1.0",
         "vite-plugin-pwa": "^0.20.1",
-        "vite-plugin-symfony": "^6.4.7"
+        "vite-plugin-symfony": "^6.5.3"
     },
     "license": "UNLICENSED",
     "private": true,
