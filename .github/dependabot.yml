@@ -17,7 +17,7 @@ updates:
         dependency-type: production
         applies-to: version-updates
 
-  - package-ecosystem: "pnpm"
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "daily"
