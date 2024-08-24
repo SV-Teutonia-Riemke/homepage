@@ -69,6 +69,9 @@ class Team extends AbstractEntity implements PositionInterface, EnabledInterface
     private string|null $instagram = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
+    private string|null $tiktok = null;
+
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     private string|null $emailAddress = null;
 
     #[ORM\Column(type: Types::STRING, nullable: true)]
@@ -187,6 +190,16 @@ class Team extends AbstractEntity implements PositionInterface, EnabledInterface
     public function setInstagram(string|null $instagram): void
     {
         $this->instagram = $instagram;
+    }
+
+    public function getTiktok(): string|null
+    {
+        return $this->tiktok;
+    }
+
+    public function setTiktok(string|null $tiktok): void
+    {
+        $this->tiktok = $tiktok;
     }
 
     public function getEmailAddress(): string|null

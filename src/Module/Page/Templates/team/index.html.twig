@@ -35,21 +35,23 @@
 
 {%- block pageTitleActionsButtons -%}
     {% if team.emailAddress is not null %}
-        <a class="btn btn-ghost-primary" href="mailto:{{ team.emailAddress }}" data-bs-toggle="tooltip" data-bs-title="{{ team.emailAddress }}" data-bs-placement="top">
+        <a class="btn btn-primary btn-icon" href="mailto:{{ team.emailAddress }}" data-bs-toggle="tooltip" data-bs-title="{{ team.emailAddress }}" data-bs-placement="top">
             <twig:ux:icon class="icon" name="fa6-solid:at"/>
-            E-Mail
+        </a>
+    {% endif %}
+    {% if team.tiktok is not null %}
+        <a class="btn btn-tiktok btn-icon" href="https://www.tiktok.com/@{{ team.tiktok }}" target="_blank" rel="nofollow">
+            <twig:ux:icon class="icon" name="fa6-brands:tiktok"/>
         </a>
     {% endif %}
     {% if team.instagram is not null %}
-        <a class="btn btn-outline-instagram" href="https://instagram.com/{{ team.instagram }}" target="_blank" rel="nofollow">
+        <a class="btn btn-instagram btn-icon" href="https://instagram.com/{{ team.instagram }}" target="_blank" rel="nofollow">
             <twig:ux:icon class="icon" name="fa6-brands:instagram"/>
-            Instagram
         </a>
     {% endif %}
     {% if team.facebook is not null %}
-        <a class="btn btn-outline-facebook" href="https://facebook.com/{{ team.facebook }}" target="_blank" rel="nofollow">
+        <a class="btn btn-facebook btn-icon" href="https://facebook.com/{{ team.facebook }}" target="_blank" rel="nofollow">
             <twig:ux:icon class="icon" name="fa6-brands:facebook"/>
-            Facebook
         </a>
     {% endif %}
 {%- endblock -%}
@@ -74,13 +76,6 @@
                         {% endif %}
                         {% if team.handballNetId is not null %}
                             <a href="https://www.handball.net/mannschaften/{{ team.handballNetId }}/tabelle" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">handball.net</a>
-                        {% endif %}
-                        {#                        <a href="#" class="list-group-item list-group-item-action">Trainingszeiten</a> #}
-                        {% if team.facebook is not null %}
-                            <a href="https://facebook.com/{{ team.facebook }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Facebook</a>
-                        {% endif %}
-                        {% if team.instagram is not null %}
-                            <a href="https://instagram.com/{{ team.instagram }}" class="list-group-item list-group-item-action" target="_blank" rel="nofollow">Instagram</a>
                         {% endif %}
                     </div>
                 </div>

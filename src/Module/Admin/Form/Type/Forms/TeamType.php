@@ -88,11 +88,15 @@ final class TeamType extends AbstractType
                 'required'    => false,
             ])
             ->add('facebook', TextType::class, [
-                'label' => 'Facebook URL',
+                'label' => 'Facebook Name',
                 'required' => false,
             ])
             ->add('instagram', TextType::class, [
-                'label' => 'Instagram URL',
+                'label' => 'Instagram Name',
+                'required' => false,
+            ])
+            ->add('tiktok', TextType::class, [
+                'label' => 'TikTok Name',
                 'required' => false,
             ])
             ->add('emailAddress', EmailType::class, [
