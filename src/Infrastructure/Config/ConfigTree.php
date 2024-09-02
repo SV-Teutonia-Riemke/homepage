@@ -11,7 +11,7 @@ use function sprintf;
 
 final class ConfigTree
 {
-    private self|null $parent;
+    private self|null $parent = null;
 
     private int $level = 0;
 
