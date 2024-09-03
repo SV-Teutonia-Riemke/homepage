@@ -2555,20 +2555,20 @@
         },
         {
             "name": "knplabs/knp-paginator-bundle",
-            "version": "v6.4.0",
+            "version": "v6.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "a9cbcb3c6be5868a2e16a599c7438149c40b4bda"
+                "reference": "f2462bcb0585c50f927ede5910e6da36b965d480"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/a9cbcb3c6be5868a2e16a599c7438149c40b4bda",
-                "reference": "a9cbcb3c6be5868a2e16a599c7438149c40b4bda",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/f2462bcb0585c50f927ede5910e6da36b965d480",
+                "reference": "f2462bcb0585c50f927ede5910e6da36b965d480",
                 "shasum": ""
             },
             "require": {
-                "knplabs/knp-components": "^4.1",
+                "knplabs/knp-components": "^4.4 || ^5.0",
                 "php": "^8.1",
                 "symfony/config": "^6.4 || ^7.0",
                 "symfony/dependency-injection": "^6.4 || ^7.0",
@@ -2581,14 +2581,14 @@
             },
             "require-dev": {
                 "phpstan/phpstan": "^1.11",
-                "phpunit/phpunit": "^9.6",
+                "phpunit/phpunit": "^10.5 || ^11.3",
                 "symfony/expression-language": "^6.4 || ^7.0",
                 "symfony/templating": "^6.4 || ^7.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.x-dev"
+                    "dev-master": "6.x-dev"
                 }
             },
             "autoload": {
@@ -2623,9 +2623,9 @@
             ],
             "support": {
                 "issues": "https://github.com/KnpLabs/KnpPaginatorBundle/issues",
-                "source": "https://github.com/KnpLabs/KnpPaginatorBundle/tree/v6.4.0"
+                "source": "https://github.com/KnpLabs/KnpPaginatorBundle/tree/v6.5.0"
             },
-            "time": "2024-05-21T16:15:16+00:00"
+            "time": "2024-09-03T06:34:25+00:00"
         },
         {
             "name": "league/flysystem",
@@ -4399,16 +4399,16 @@
         },
         {
             "name": "shlinkio/shlink-php-sdk",
-            "version": "v2.2.0",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shlinkio/shlink-php-sdk.git",
-                "reference": "5a6d77d5b60bb9820f170c5de24df2c88a395421"
+                "reference": "5bca4a999a0ac1009fd2eafac241f8780a18b185"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shlinkio/shlink-php-sdk/zipball/5a6d77d5b60bb9820f170c5de24df2c88a395421",
-                "reference": "5a6d77d5b60bb9820f170c5de24df2c88a395421",
+                "url": "https://api.github.com/repos/shlinkio/shlink-php-sdk/zipball/5bca4a999a0ac1009fd2eafac241f8780a18b185",
+                "reference": "5bca4a999a0ac1009fd2eafac241f8780a18b185",
                 "shasum": ""
             },
             "require": {
@@ -4447,9 +4447,9 @@
             "description": "A PHP SDK to consume Shlink's REST API",
             "support": {
                 "issues": "https://github.com/shlinkio/shlink-php-sdk/issues",
-                "source": "https://github.com/shlinkio/shlink-php-sdk/tree/v2.2.0"
+                "source": "https://github.com/shlinkio/shlink-php-sdk/tree/v2.3.0"
             },
-            "time": "2024-08-15T08:45:38+00:00"
+            "time": "2024-09-03T16:43:55+00:00"
         },
         {
             "name": "spiriitlabs/form-filter-bundle",
