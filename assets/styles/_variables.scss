@@ -1,7 +1,9 @@
+@use 'sass:color';
+
 $primary: #009146;
 $success: $primary;
 
-$dark: darken($primary, 20);
+$dark: color.adjust($primary, $lightness: -20%);
 
 $h3-font-size: 1rem;
 

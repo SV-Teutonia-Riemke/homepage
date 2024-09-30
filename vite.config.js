@@ -13,6 +13,9 @@ export default defineConfig(({mode}) => {
             }),
             monacoEditorPlugin([]),
             VitePWA({
+                workbox: {
+                    maximumFileSizeToCacheInBytes: 15000000
+                },
                 injectRegister: 'auto',
                 includeAssets: [
                     './assets/images/apple-touch-icon.png',
