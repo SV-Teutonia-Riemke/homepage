@@ -1,6 +1,5 @@
 import {defineConfig} from "vite";
 import symfonyPlugin from "vite-plugin-symfony";
-import monacoEditorPlugin from 'vite-plugin-monaco-editor';
 import {VitePWA} from 'vite-plugin-pwa';
 
 export default defineConfig(({mode}) => {
@@ -11,7 +10,6 @@ export default defineConfig(({mode}) => {
             symfonyPlugin({
                 stimulus: true,
             }),
-            monacoEditorPlugin([]),
             VitePWA({
                 workbox: {
                     maximumFileSizeToCacheInBytes: 15000000
@@ -31,27 +29,27 @@ export default defineConfig(({mode}) => {
                             src: './assets/images/logo.png',
                             sizes: '192x192',
                             type: 'image/png'
-                        }, {
-                            src: './assets/images/logo.png',
-                            sizes: '512x512',
-                            type: 'image/png'
-                        }
+                    }, {
+                        src: './assets/images/logo.png',
+                        sizes: '512x512',
+                        type: 'image/png'
+                    }
                     ]
                 }
             })
         ],
-        build: {
-            assetsInlineLimit: 0,
-            outputDir: "public/build",
-            sourcemap: isDevelopment,
-            emptyOutDir: true,
-            rollupOptions: {
-                input: {
-                    app: "./assets/app.ts",
-                    admin: "./assets/admin.ts",
-                    monaco: "./assets/monaco.js"
-                },
-            }
+    build: {
+        assetsInlineLimit: 0,
+        outputDir: "public/build",
+        sourcemap: isDevelopment,
+        emptyOutDir: true,
+        rollupOptions: {
+            input: {
+                app: "./assets/app.ts",
+                admin: "./assets/admin.ts",
+                monaco: "./assets/monaco.js"
+            },
+        }
         },
         css: {
             preprocessorOptions: {
