@@ -27,7 +27,7 @@ class Article extends AbstractEntity implements EnabledInterface
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private File|null $image = null;
 
-    #[ORM\OneToOne(targetEntity: Person::class)]
+    #[ORM\ManyToOne(targetEntity: Person::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private Person|null $author = null;
 
