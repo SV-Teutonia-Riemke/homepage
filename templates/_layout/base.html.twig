@@ -12,12 +12,10 @@
 
     {% block stylesheets %}
         {{ vite_entry_link_tags('app') }}
-{#        {{ encore_entry_link_tags('app') }}#}
     {% endblock %}
 
     {% block javascripts %}
         {{ vite_entry_script_tags('app') }}
-{#        {{ encore_entry_script_tags('app') }}#}
     {% endblock %}
 </head>
 <body class="theme-light {{ bodyCssClasses|default('') }}">

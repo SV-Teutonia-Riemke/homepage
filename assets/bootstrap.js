@@ -6,7 +6,10 @@ import '@tabler/core/dist/libs/fslightbox';
 const app = startStimulusApp();
 registerControllers(
     app,
-    import.meta.glob('./controllers/*_(lazy)\?controller.[jt]s(x)\?')
+    import.meta.glob('./controllers/*_controller.js', {
+        query: "?stimulus",
+        eager: true,
+    })
 )
 
 app.register('clipboard', Clipboard)
