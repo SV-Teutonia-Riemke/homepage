@@ -6,6 +6,7 @@ namespace App\Storage\Entity\Common;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use RuntimeException;
 use Shapecode\Doctrine\DBAL\Types\DateTimeUTCType;
 
 trait Modified
@@ -21,8 +22,12 @@ trait Modified
         $this->createdAt = $createdAt;
     }
 
-    public function getCreatedAt(): DateTimeInterface|null
+    public function getCreatedAt(): DateTimeInterface
     {
+        if ($this->createdAt === null) {
+            throw new RuntimeException('The created at date is not set yet.');
+        }
+
         return $this->createdAt;
     }
 

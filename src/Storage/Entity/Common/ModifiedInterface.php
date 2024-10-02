@@ -10,7 +10,7 @@ interface ModifiedInterface
 {
     public function setCreatedAt(DateTimeInterface $createdAt): void;
 
-    public function getCreatedAt(): DateTimeInterface|null;
+    public function getCreatedAt(): DateTimeInterface;
 
     public function setUpdatedAt(DateTimeInterface $updatedAt): void;
 

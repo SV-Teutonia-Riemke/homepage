@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Form\Type\Entities\FileEntityType;
+use App\Form\Type\Entities\PersonEntityType;
 use App\Storage\Entity\Article;
 use Eckinox\TinymceBundle\Form\Type\TinymceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -31,6 +33,14 @@ final class ArticleType extends AbstractType
             ])
             ->add('enabled', CheckboxType::class, [
                 'label' => 'Aktiviert',
+                'required' => false,
+            ])
+            ->add('author', PersonEntityType::class, [
+                'label' => 'Author',
+                'required' => false,
+            ])
+            ->add('publishedAt', DateType::class, [
+                'label' => 'Veröffentlicht am',
                 'required' => false,
             ])
             ->add('image', FileEntityType::class, [

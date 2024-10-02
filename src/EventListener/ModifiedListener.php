@@ -29,7 +29,10 @@ final class ModifiedListener
             return;
         }
 
-        $this->setDates($entity);
+        $now = $this->clock->now();
+
+        $entity->setCreatedAt($now);
+        $entity->setUpdatedAt($now);
     }
 
     /** @param LifecycleEventArgs<EntityManagerInterface> $args */
@@ -41,16 +44,7 @@ final class ModifiedListener
             return;
         }
 
-        $this->setDates($entity);
-    }
-
-    private function setDates(ModifiedInterface $entity): void
-    {
         $now = $this->clock->now();
-
-        if ($entity->getCreatedAt() === null) {
-            $entity->setCreatedAt($now);
-        }
 
         $entity->setUpdatedAt($now);
     }
