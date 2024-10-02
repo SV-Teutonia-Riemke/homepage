@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Page\Controller;
 
 use App\Storage\Repository\ArticleRepository;
+use App\Storage\Repository\ExternalArticleRepository;
 use App\Storage\Repository\NotificationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +19,7 @@ final class IndexController extends AbstractController
 {
     public function __construct(
         private readonly ArticleRepository $articleRepository,
+        private readonly ExternalArticleRepository $externalArticleRepository,
         private readonly NotificationRepository $notificationRepository,
     ) {
     }
@@ -26,6 +28,7 @@ final class IndexController extends AbstractController
     {
         return $this->render('@page/index.html.twig', [
             'articles'      => $this->articleRepository->findLatestEnabled(3),
+            'externalArticles' => $this->externalArticleRepository->findLatestEnabled(3),
             'notifications' => $this->notificationRepository->findEnabled(),
         ]);
     }

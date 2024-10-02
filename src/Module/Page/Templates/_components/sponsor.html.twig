@@ -1,6 +1,6 @@
 <div{{ attributes.defaults(this.defaultAttributes) }}>
     {% set image %}
-        <twig:file:image file="{{ sponsor.image }}" filter="{{ this.filterName }}" backgroundColor="{{ sponsor.backgroundColor|default(this.defaultBackgroundColor) }}" class="img-thumbnail rounded"/>
+        <twig:file:image file="{{ sponsor.image }}" filter="{{ this.filterName }}" backgroundColor="{{ sponsor.backgroundColor|default(this.defaultBackgroundColor) }}" class="rounded border"/>
     {% endset %}
 
     {% if sponsor.url is null %}

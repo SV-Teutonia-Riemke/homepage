@@ -27,7 +27,33 @@
 
 {% block pageSubBody %}
     <div class="row row-cards">
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-3">
+            <div class="row row-cards">
+                {% for article in externalArticles %}
+                    {% set shortUrl = article.url|short_url(['news']) %}
+                    <div class="space-y">
+                        <div class="card">
+                            {% if article.imageUrl is not null %}
+                                <img src="{{ article.imageUrl }}" alt="{{ article.title }}" class="card-img-top">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ shortUrl }}" target="_blank">{{ article.title }}</a>
+                                </h5>
+                                <p class="card-text">{{ article.description }}</p>
+                                <p class="card-text">
+                                    <small class="text-body-secondary">
+                                        Veröffentlicht {{ article.publishedAt|format_date }} - <a href="{{ article.authorUrl }}" target="_blank">{{ article.authorName }}</a>
+                                    </small>
+                                </p>
+                                <twig:bs:button href="{{ shortUrl }}" title="Zum ganzen Artikel" icon="fa-solid:external-link-alt" size="sm" target="_blank"/>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
             {% for notification in notifications %}
                 <twig:bs:alert title="{{ notification.title }}" icon="fa6-solid:circle-info">
                     {{ notification.content|striptags('<br><a><b><strong><span>')|raw }}
