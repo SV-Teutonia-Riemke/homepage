@@ -46,4 +46,26 @@
         </div>
     </div>
     {{ form_end(form) }}
+
+    <twig:pagination:table :title="pageTitle" :iterable="iterable" class="mt-3">
+        <twig:block name="tableHeader">
+            <th class="w-1"></th>
+            <th class="w-1">Id</th>
+            <th>Titel</th>
+            <th></th>
+        </twig:block>
+        <twig:block name="tableRow">
+            <twig:pagination:row
+                enabled="{{ object.enabled }}"
+                enable="{{ path('app_admin_external_articles_enable', { object: object.id }) }}"
+                disable="{{ path('app_admin_external_articles_disable', { object: object.id }) }}"
+                remove="{{ path('app_admin_external_articles_remove', { object: object.id }) }}"
+            >
+                <td>{{ object.id }}</td>
+                <td>
+                    <a href="{{ object.url }}" target="_blank">{{ object.title }}</a>
+                </td>
+            </twig:pagination:row>
+        </twig:block>
+    </twig:pagination:table>
 {% endblock %}

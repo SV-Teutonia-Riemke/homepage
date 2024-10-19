@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Storage\Repository;
 
-use App\Storage\Entity\Article;
 use App\Storage\Entity\ExternalArticle;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,7 +16,7 @@ final class ExternalArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, ExternalArticle::class);
     }
 
-    /** @return array<Article> */
+    /** @return array<ExternalArticle> */
     public function findLatestEnabled(int|null $limit = null): array
     {
         return $this->findBy(

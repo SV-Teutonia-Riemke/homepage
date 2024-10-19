@@ -27,7 +27,7 @@
 
 {% block pageSubBody %}
     <div class="row row-cards">
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 order-md-0 order-1">
             <div class="row row-cards">
                 {% for article in externalArticles %}
                     {% set shortUrl = article.url|short_url(['news']) %}
@@ -53,7 +53,7 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 order-md-1 order-0">
             {% for notification in notifications %}
                 <twig:bs:alert title="{{ notification.title }}" icon="fa6-solid:circle-info">
                     {{ notification.content|striptags('<br><a><b><strong><span>')|raw }}
@@ -64,7 +64,7 @@
                 {% embed '@page/news/_article.html.twig' with { article: article } %}{% endembed %}
             {% endfor %}
         </div>
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 order-md-2 order-2">
             <div class="row row-cards">
                 {% include '@page/_partials/sponsors.html.twig' %}
 

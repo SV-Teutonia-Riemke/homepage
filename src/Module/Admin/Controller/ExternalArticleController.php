@@ -7,8 +7,10 @@ namespace App\Module\Admin\Controller;
 use App\Domain\EmbedArticle;
 use App\Domain\Role;
 use App\Storage\Entity\ExternalArticle;
+use App\Storage\Repository\ExternalArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Embed\Embed;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -29,6 +31,8 @@ final class ExternalArticleController extends AbstractController
     public function __construct(
         private readonly Embed $embed,
         private readonly EntityManagerInterface $entityManager,
+        private readonly PaginatorInterface $paginator,
+        private readonly ExternalArticleRepository $externalArticleRepository,
     ) {
     }
 
@@ -65,9 +69,15 @@ final class ExternalArticleController extends AbstractController
             $article = new EmbedArticle($this->embed->get($url));
         }
 
+        $pagination = $this->paginator->paginate(
+            $this->externalArticleRepository->createQueryBuilder('p'),
+            $request->query->getInt('page', 1),
+        );
+
         return $this->render('@admin/external_article/index.html.twig', [
             'form' => $form,
             'article' => $article ?? null,
+            'iterable' => $pagination,
         ]);
     }
 
@@ -86,6 +96,29 @@ final class ExternalArticleController extends AbstractController
         );
 
         $this->entityManager->persist($externalArticle);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_external_articles_index');
+    }
+
+    #[Route('/{object}/enable', name: 'enable', defaults: ['enabled' => true])]
+    #[Route('/{object}/disable', name: 'disable', defaults: ['enabled' => false])]
+    public function changeEnabled(
+        bool $enabled,
+        ExternalArticle $object,
+    ): Response {
+        $object->setEnabled($enabled);
+
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_external_articles_index');
+    }
+
+    #[Route('/{object}/remove', name: 'remove')]
+    public function remove(
+        ExternalArticle $object,
+    ): Response {
+        $this->entityManager->remove($object);
         $this->entityManager->flush();
 
         return $this->redirectToRoute('app_admin_external_articles_index');

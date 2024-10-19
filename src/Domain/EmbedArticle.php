@@ -7,6 +7,7 @@ namespace App\Domain;
 use DateTime;
 use Embed\Extractor;
 use Psr\Http\Message\UriInterface;
+use RuntimeException;
 
 class EmbedArticle
 {
@@ -17,6 +18,10 @@ class EmbedArticle
 
     public function getTitle(): string
     {
+        if ($this->extractor->title === null) {
+            throw new RuntimeException('Title is missing');
+        }
+
         return $this->extractor->title;
     }
 

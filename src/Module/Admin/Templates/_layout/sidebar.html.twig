@@ -4,6 +4,7 @@
     <twig:sidebar:navbar:item href="{{ path('app_admin_user_index') }}" title="Benutzer" icon="fa6-solid:users" class="mt-3"/>
 
     <twig:sidebar:navbar:item href="{{ path('app_admin_article_index') }}" title="Artikel" icon="fa6-solid:newspaper" class="mt-3" granted="ROLE_MANAGE_ARTICLES"/>
+    <twig:sidebar:navbar:item href="{{ path('app_admin_external_articles_index') }}" title="Externe Artikel" icon="fa6-solid:newspaper" granted="ROLE_MANAGE_ARTICLES"/>
     <twig:sidebar:navbar:item href="{{ path('app_admin_link_index') }}" title="Links" icon="fa6-solid:link" granted="ROLE_MANAGE_LINKS"/>
     <twig:sidebar:navbar:item href="{{ path('app_admin_download_index') }}" title="Downloads" icon="fa6-solid:download" granted="ROLE_MANAGE_DOWNLOADS"/>
     <twig:sidebar:navbar:item href="{{ path('app_admin_notification_index') }}" title="Notifications" icon="fa6-solid:bell" granted="ROLE_MANAGE_NOTIFICATIONS"/>
