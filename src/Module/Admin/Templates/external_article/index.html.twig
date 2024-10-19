@@ -1,0 +1,71 @@
+{% extends '@admin/_layout/layout.html.twig' %}
+
+{% set pagePreTitle = 'Liste' %}
+{% set pageTitle = 'Externe Artikel' %}
+
+{% block pageBody %}
+
+    {{ form_start(form) }}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                Externen Artikel hinzufügen
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    {{ form_row(form.url) }}
+                </div>
+                {% if article is not null %}
+                    <div class="col-6">
+                        <div class="card">
+                            {% if article.image is not null %}
+                                <img src="{{ article.image }}" alt="{{ article.title }}" class="card-img-top">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
+
+                                </h5>
+                                <p class="card-text">{{ article.description }}</p>
+                                <p class="card-text">
+                                    <small class="text-body-secondary">
+                                        Veröffentlicht am {{ article.publishedTime|format_date }} von <a href="{{ article.authorUrl }}" target="_blank">{{ article.author }}</a>
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-footer">
+            {{ form_widget(form.submit) }}
+            {{ form_widget(form.submit_and_safe) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    <twig:pagination:table :title="pageTitle" :iterable="iterable" class="mt-3">
+        <twig:block name="tableHeader">
+            <th class="w-1"></th>
+            <th class="w-1">Id</th>
+            <th>Titel</th>
+            <th></th>
+        </twig:block>
+        <twig:block name="tableRow">
+            <twig:pagination:row
+                enabled="{{ object.enabled }}"
+                enable="{{ path('app_admin_external_articles_enable', { object: object.id }) }}"
+                disable="{{ path('app_admin_external_articles_disable', { object: object.id }) }}"
+                remove="{{ path('app_admin_external_articles_remove', { object: object.id }) }}"
+            >
+                <td>{{ object.id }}</td>
+                <td>
+                    <a href="{{ object.url }}" target="_blank">{{ object.title }}</a>
+                </td>
+            </twig:pagination:row>
+        </twig:block>
+    </twig:pagination:table>
+{% endblock %}

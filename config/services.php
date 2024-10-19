@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Infrastructure\Shlink\ShlinkClientFactory;
+use Embed\Embed;
 use Shlinkio\Shlink\SDK\ShlinkClient;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -29,4 +30,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(ShlinkClient::class)
         ->factory(service(ShlinkClientFactory::class));
+
+    $services->set(Embed::class);
 };
