@@ -1913,16 +1913,16 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.13.47",
+            "version": "8.13.48",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "717d328bb7154f439c33136e93da37d614c14432"
+                "reference": "0965dd46e34934ca24922be75f940defb213f73c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/717d328bb7154f439c33136e93da37d614c14432",
-                "reference": "717d328bb7154f439c33136e93da37d614c14432",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/0965dd46e34934ca24922be75f940defb213f73c",
+                "reference": "0965dd46e34934ca24922be75f940defb213f73c",
                 "shasum": ""
             },
             "require": {
@@ -1986,7 +1986,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php"
             },
-            "time": "2024-10-08T09:43:12+00:00"
+            "time": "2024-10-22T09:06:42+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -3698,16 +3698,16 @@
         },
         {
             "name": "pentatrion/vite-bundle",
-            "version": "v7.0.4",
+            "version": "v7.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lhapaipai/vite-bundle.git",
-                "reference": "3b3f12546bab03d569b241ee95d4c1d6971bbf01"
+                "reference": "d5d94e68a38ddfec857df7edade323e7b81e5d10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lhapaipai/vite-bundle/zipball/3b3f12546bab03d569b241ee95d4c1d6971bbf01",
-                "reference": "3b3f12546bab03d569b241ee95d4c1d6971bbf01",
+                "url": "https://api.github.com/repos/lhapaipai/vite-bundle/zipball/d5d94e68a38ddfec857df7edade323e7b81e5d10",
+                "reference": "d5d94e68a38ddfec857df7edade323e7b81e5d10",
                 "shasum": ""
             },
             "require": {
@@ -3753,9 +3753,9 @@
             ],
             "support": {
                 "issues": "https://github.com/lhapaipai/vite-bundle/issues",
-                "source": "https://github.com/lhapaipai/vite-bundle/tree/v7.0.4"
+                "source": "https://github.com/lhapaipai/vite-bundle/tree/v7.0.5"
             },
-            "time": "2024-08-27T18:32:41+00:00"
+            "time": "2024-10-21T19:40:28+00:00"
         },
         {
             "name": "presta/sitemap-bundle",
@@ -13940,6 +13940,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
