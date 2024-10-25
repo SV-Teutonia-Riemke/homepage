@@ -5,6 +5,11 @@
   --bs-body-bg: #f5f7fb;
 }
 
+// fix for icons not shown; see: https://github.com/tabler/tabler/issues/1981
+img, svg {
+  max-width: none !important;
+}
+
 .hb-embed {
   .hb-embed__title-container,
   .hb-embed__branding,

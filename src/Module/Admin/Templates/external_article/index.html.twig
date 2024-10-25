@@ -52,6 +52,7 @@
             <th class="w-1"></th>
             <th class="w-1">Id</th>
             <th>Titel</th>
+            <th>Short-URL</th>
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
@@ -64,6 +65,9 @@
                 <td>{{ object.id }}</td>
                 <td>
                     <a href="{{ object.url }}" target="_blank">{{ object.title }}</a>
+                </td>
+                <td>
+                    <a href="{{ object.url|short_url(['news']) }}" target="_blank">{{ object.url|short_url(['news']) }}</a>
                 </td>
             </twig:pagination:row>
         </twig:block>

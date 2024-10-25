@@ -10,7 +10,7 @@
         "@symfony/ux-dropzone": "file:vendor/symfony/ux-dropzone/assets",
         "@symfony/ux-live-component": "file:vendor/symfony/ux-live-component/assets",
         "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/assets",
-        "@tabler/core": "1.0.0-beta20",
+        "@tabler/core": "1.0.0-beta21",
         "bootstrap": "^5.3.3",
         "clipboard": "^2.0.11",
         "monaco-editor": "^0.52.0",
