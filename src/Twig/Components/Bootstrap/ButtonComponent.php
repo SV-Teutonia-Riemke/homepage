@@ -15,13 +15,20 @@ use function sprintf;
 )]
 final class ButtonComponent
 {
-    public string|null $href    = null;
-    public string $type         = 'primary';
-    public bool $outline        = false;
-    public string|null $title   = null;
-    public string|null $icon    = null;
-    public bool $confirmation   = false;
-    public string|null $size    = null;
+    public string|null $href = null;
+
+    public string $type = 'primary';
+
+    public bool $outline = false;
+
+    public string|null $title = null;
+
+    public string|null $icon = null;
+
+    public bool $confirmation = false;
+
+    public string|null $size = null;
+
     public string|null $tooltip = null;
 
     /** @return list<string> */

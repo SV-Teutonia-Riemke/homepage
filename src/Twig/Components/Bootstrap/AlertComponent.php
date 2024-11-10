@@ -13,10 +13,14 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 final class AlertComponent
 {
     public string|null $message = null;
-    public string|null $title   = null;
-    public string $type         = 'info';
-    public string|null $icon    = null;
-    public bool $important      = false;
+
+    public string|null $title = null;
+
+    public string $type = 'info';
+
+    public string|null $icon = null;
+
+    public bool $important = false;
 
     public function getBackgroundClass(): string
     {

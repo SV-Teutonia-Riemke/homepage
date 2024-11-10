@@ -13,19 +13,30 @@ use Symfony\Component\DependencyInjection\Attribute\Exclude;
 class CrudConfigBuilder
 {
     /** @var class-string<Entity>|null */
-    public string|null $dtoClass        = null;
-    public string|null $listTemplate    = null;
-    public string|null $createTemplate  = null;
-    public string|null $editTemplate    = null;
-    public string|null $baseRouteName   = null;
-    public string|null $listRouteName   = null;
+    public string|null $dtoClass = null;
+
+    public string|null $listTemplate = null;
+
+    public string|null $createTemplate = null;
+
+    public string|null $editTemplate = null;
+
+    public string|null $baseRouteName = null;
+
+    public string|null $listRouteName = null;
+
     public string|null $createRouteName = null;
+
     /** @var array<string, mixed>  */
-    public array $defaultRouteParams              = [];
-    public string|null $defaultSortFieldName      = null;
-    public string|null $defaultSortDirection      = null;
+    public array $defaultRouteParams = [];
+
+    public string|null $defaultSortFieldName = null;
+
+    public string|null $defaultSortDirection = null;
+
     public Closure|null $objectIdentifierCallable = null;
-    public Closure|null $formEmptyDataCallable    = null;
+
+    public Closure|null $formEmptyDataCallable = null;
 
     /**
      * @param class-string<Entity> $dtoClass

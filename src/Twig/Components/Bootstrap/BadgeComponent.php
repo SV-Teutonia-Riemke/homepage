@@ -19,7 +19,8 @@ use function ksort;
 final class BadgeComponent
 {
     public string|null $label = null;
-    public string $type       = 'primary';
+
+    public string $type = 'primary';
 
     public string|null $visuallyHiddenLabel = null;
 

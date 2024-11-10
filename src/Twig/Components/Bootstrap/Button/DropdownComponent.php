@@ -13,5 +13,6 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class DropdownComponent
 {
     public string $title;
+
     public string|null $type = null;
 }

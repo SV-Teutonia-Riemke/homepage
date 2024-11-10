@@ -15,5 +15,6 @@ class CrudRow
 {
     /** @var CrudConfig<object> */
     public CrudConfig $crud;
+
     public object $object;
 }

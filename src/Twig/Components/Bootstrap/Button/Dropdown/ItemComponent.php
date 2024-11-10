@@ -13,5 +13,6 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class ItemComponent
 {
     public string $title;
+
     public string $href;
 }

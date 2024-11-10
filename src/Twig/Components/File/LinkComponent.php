@@ -20,8 +20,10 @@ use Symfony\UX\TwigComponent\Attribute\PreMount;
 class LinkComponent
 {
     public File $file;
+
     public string|null $label = null;
-    public bool $download     = false;
+
+    public bool $download = false;
 
     public function __construct(
         private readonly AssetUrlGenerator $assetUrlGenerator,

@@ -19,10 +19,13 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class ImageComponent extends AbstractComponent
 {
     public File $file;
+
     public string $filter = 'default';
 
-    public int|null $width              = null;
-    public int|null $height             = null;
+    public int|null $width = null;
+
+    public int|null $height = null;
+
     public string|null $backgroundColor = null;
 
     public function __construct(

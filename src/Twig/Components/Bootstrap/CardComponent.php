@@ -16,7 +16,9 @@ use Symfony\UX\TwigComponent\Attribute\PreMount;
 final class CardComponent
 {
     public string|null $header;
+
     public string|null $body;
+
     public string|null $footer;
 
     public string|null $statusTop;
@@ -25,8 +27,11 @@ final class CardComponent
     public array $image;
 
     public string|null $imageSrc;
+
     public string|null $imageAlt;
+
     public string|null $imageTitle;
+
     public string|null $stamp;
 
     /** @var "top"|"bottom"|"overlay" */

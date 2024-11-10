@@ -16,9 +16,12 @@ use function sprintf;
 class ColComponent
 {
     public int|null $col = 12;
-    public int|null $lg  = null;
-    public int|null $md  = null;
-    public int|null $sm  = null;
+
+    public int|null $lg = null;
+
+    public int|null $md = null;
+
+    public int|null $sm = null;
 
     /** @return array<string, string> */
     public function getDefaults(): array

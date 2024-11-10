@@ -12,11 +12,17 @@ use Symfony\Component\DependencyInjection\Attribute\Exclude;
 #[Exclude]
 class MenuItem
 {
-    public string|null $title    = null;
-    public string|null $icon     = null;
-    public string|null $url      = null;
-    public bool $enabled         = true;
-    public Page|null $page       = null;
-    public MenuType|null $type   = null;
+    public string|null $title = null;
+
+    public string|null $icon = null;
+
+    public string|null $url = null;
+
+    public bool $enabled = true;
+
+    public Page|null $page = null;
+
+    public MenuType|null $type = null;
+
     public MenuGroup|null $group = null;
 }

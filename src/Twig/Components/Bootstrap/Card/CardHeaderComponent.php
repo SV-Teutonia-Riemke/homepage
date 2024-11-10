@@ -13,5 +13,6 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class CardHeaderComponent
 {
     public string|null $title = null;
-    public string|null $icon  = null;
+
+    public string|null $icon = null;
 }

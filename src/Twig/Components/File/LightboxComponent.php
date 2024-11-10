@@ -14,5 +14,6 @@ use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 class LightboxComponent
 {
     public File $file;
+
     public string $lightbox = 'default';
 }

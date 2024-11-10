@@ -16,10 +16,15 @@ use function sprintf;
 class SponsorComponent
 {
     public Sponsor $sponsor;
-    public int|null $mainColumn    = null;
+
+    public int|null $mainColumn = null;
+
     public int|null $defaultColumn = null;
+
     public string $mainFilter;
+
     public string $defaultFilter;
+
     public string $defaultBackgroundColor = '#ffffff';
 
     /** @return array<string, mixed> */
