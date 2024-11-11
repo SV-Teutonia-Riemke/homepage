@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "77aa0b646d55c7889292e048c09908a9",
+    "content-hash": "8e97e6f1b96e5fa63859a1ab92d3fed6",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -9627,16 +9627,16 @@
         },
         {
             "name": "symfony/ux-icons",
-            "version": "v2.20.0",
+            "version": "v2.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-icons.git",
-                "reference": "07328c6d3cf480f7d5dafdf621f0d54323e23035"
+                "reference": "c3b3fd29b3f90e977b267251ef15ea06f3cec553"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-icons/zipball/07328c6d3cf480f7d5dafdf621f0d54323e23035",
-                "reference": "07328c6d3cf480f7d5dafdf621f0d54323e23035",
+                "url": "https://api.github.com/repos/symfony/ux-icons/zipball/c3b3fd29b3f90e977b267251ef15ea06f3cec553",
+                "reference": "c3b3fd29b3f90e977b267251ef15ea06f3cec553",
                 "shasum": ""
             },
             "require": {
@@ -9645,7 +9645,8 @@
                 "symfony/twig-bundle": "^6.4|^7.0"
             },
             "conflict": {
-                "symfony/flex": "<1.13"
+                "symfony/flex": "<1.13",
+                "symfony/ux-twig-component": "<2.21"
             },
             "require-dev": {
                 "psr/log": "^2|^3",
@@ -9695,7 +9696,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-icons/tree/v2.20.0"
+                "source": "https://github.com/symfony/ux-icons/tree/v2.21.0"
             },
             "funding": [
                 {
@@ -9711,7 +9712,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-18T14:55:01+00:00"
+            "time": "2024-10-21T19:01:22+00:00"
         },
         {
             "name": "symfony/ux-live-component",
@@ -13950,6 +13951,6 @@
         "ext-ctype": "*",
         "ext-iconv": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
