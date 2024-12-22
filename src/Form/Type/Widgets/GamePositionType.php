@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatableMessage;
 
+/** @extends AbstractType<GamePosition> */
 final class GamePositionType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void

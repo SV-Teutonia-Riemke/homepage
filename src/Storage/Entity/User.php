@@ -7,6 +7,7 @@ namespace App\Storage\Entity;
 use App\Storage\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use LogicException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -99,6 +100,10 @@ class User extends AbstractEntity implements PasswordAuthenticatedUserInterface,
 
     public function getUserIdentifier(): string
     {
+        if ($this->email === '') {
+            throw new LogicException('The email of the user is null or empty. This should never happen.', 1734785239424);
+        }
+
         return $this->email;
     }
 }

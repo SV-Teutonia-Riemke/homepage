@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use function sprintf;
 
+/** @extends AbstractType<array{name: string}> */
 final class PersonSearchType extends AbstractType
 {
     /** @inheritDoc */

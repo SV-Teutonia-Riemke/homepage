@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use function strtoupper;
 
+/** @extends AbstractType<TeamJuniorAge> */
 final class TeamJuniorAgeType extends AbstractType
 {
     public function configureOptions(OptionsResolver $resolver): void

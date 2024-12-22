@@ -15,6 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Url;
 
+/** @extends AbstractType<Link> */
 final class LinkType extends AbstractType
 {
     /** @inheritDoc */

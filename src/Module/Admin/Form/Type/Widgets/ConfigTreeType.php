@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use function assert;
 
+/** @extends AbstractType<ConfigTree> */
 final class ConfigTreeType extends AbstractType
 {
     public function __construct(

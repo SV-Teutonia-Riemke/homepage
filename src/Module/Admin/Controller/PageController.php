@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-/** @template-extends AbstractCrudController<Page> */
+/** @template-extends AbstractCrudController<Page, PageType, null> */
 #[AsController]
 #[IsGranted(Role::MANAGE_PAGES->value)]
 #[Route('/page', name: 'page_')]

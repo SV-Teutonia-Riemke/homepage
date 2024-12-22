@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
+/** @extends AbstractType<Directory> */
 #[AsEntityAutocompleteField]
 final class DirectoryEntityType extends AbstractType
 {

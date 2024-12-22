@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @extends AbstractType<array> */
 final class ConfigType extends AbstractType
 {
     public function __construct(
@@ -17,7 +18,11 @@ final class ConfigType extends AbstractType
     ) {
     }
 
-    /** @inheritDoc */
+    /**
+     * @phpstan-param FormBuilderInterface<array<mixed>|null> $builder
+     *
+     * @inheritDoc
+     */
     public function buildForm(
         FormBuilderInterface $builder,
         array $options,

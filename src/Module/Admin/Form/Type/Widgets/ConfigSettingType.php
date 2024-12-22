@@ -14,6 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use function assert;
 
+/** @extends AbstractType<ConfigSetting> */
 final class ConfigSettingType extends AbstractType
 {
     /** @inheritDoc */

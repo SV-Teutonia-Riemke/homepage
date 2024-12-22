@@ -16,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Url;
 
+/** @extends AbstractType<Sponsor> */
 final class SponsorType extends AbstractType
 {
     /** @inheritDoc */

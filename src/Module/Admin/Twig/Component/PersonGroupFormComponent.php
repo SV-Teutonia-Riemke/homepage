@@ -25,6 +25,7 @@ final class PersonGroupFormComponent extends AbstractController
     #[LiveProp(fieldName: 'data')]
     public PersonGroup|null $personGroup;
 
+    /** @return FormInterface<PersonGroup|null> */
     protected function instantiateForm(): FormInterface
     {
         return $this->createForm(

@@ -66,6 +66,7 @@ class LinkComponent
         );
     }
 
+    /** @phpstan-param Options<array{id: string|null}> $options */
     private function normalizeFile(
         Options $options,
         int|File|null $fileOrId,

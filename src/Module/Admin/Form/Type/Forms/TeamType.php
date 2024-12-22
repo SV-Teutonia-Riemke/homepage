@@ -21,6 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Url;
 
+/** @extends AbstractType<Team> */
 final class TeamType extends AbstractType
 {
     /** @inheritDoc */

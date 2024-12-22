@@ -9,12 +9,17 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/** @extends AbstractType<array> */
 final class AbstractForm extends AbstractType
 {
     public const BUTTON_SUBMIT         = 'submit';
     public const BUTTON_SUBMIT_AND_NEW = 'submitAndNew';
 
-    /** @inheritDoc */
+    /**
+     * @phpstan-param FormBuilderInterface<array<mixed>|null> $builder
+     *
+     * @inheritDoc
+     */
     public function buildForm(
         FormBuilderInterface $builder,
         array $options,

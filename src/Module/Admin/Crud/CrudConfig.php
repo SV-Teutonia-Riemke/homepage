@@ -97,7 +97,7 @@ final class CrudConfig
         return $this->editTemplateName ?? $this->buildTemplateName('edit');
     }
 
-    /** @return array<string, mixed> */
+    /** @return array<string, string|int> */
     public function getDefaultRouteParams(): array
     {
         return $this->defaultRouteParams;

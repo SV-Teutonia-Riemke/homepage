@@ -15,6 +15,7 @@ use function array_filter;
 use function array_map;
 use function array_values;
 
+/** @extends AbstractType<Role> */
 class RoleType extends AbstractType
 {
     /** @inheritDoc */

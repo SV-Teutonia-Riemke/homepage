@@ -18,7 +18,10 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 use function sprintf;
 
-/** @template-implements UserProviderInterface<User> */
+/**
+ * @implements UserProviderInterface<User>
+ * @implements PasswordUpgraderInterface<User>
+ */
 class UserProvider implements UserProviderInterface, PasswordUpgraderInterface, OAuthAwareUserProviderInterface
 {
     public function __construct(
@@ -55,10 +58,6 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface, 
         PasswordAuthenticatedUserInterface $user,
         string $newHashedPassword,
     ): void {
-        if (! $user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Invalid user class "%s".', $user::class));
-        }
-
         $user->setPassword($newHashedPassword);
 
         $this->entityManager->persist($user);

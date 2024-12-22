@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Form\Type\Entities\DirectoryEntityType;
+use App\Storage\Entity\Directory;
+use Symfony\Bridge\PsrHttpMessage\Factory\UploadedFile;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\File;
 
+/** @extends AbstractType<array{directory: Directory, files: list<UploadedFile>}> */
 final class FileUploadType extends AbstractType
 {
     /** @inheritDoc */

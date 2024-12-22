@@ -29,7 +29,11 @@ use function class_exists;
 use function is_a;
 use function sprintf;
 
-/** @template Entity of object */
+/**
+ * @template Entity of object
+ * @template TForm of FormTypeInterface
+ * @template TFormSearch of ?FormTypeInterface
+ */
 abstract class AbstractCrudController extends AbstractController
 {
     /** @var CrudConfig<Entity>|null */
@@ -46,7 +50,7 @@ abstract class AbstractCrudController extends AbstractController
         }
 
         $searchType = $this->getSearchType();
-        if ($searchType !== null) {
+        if ($searchType !== null && is_a($searchType, FormTypeInterface::class, true)) {
             $form = $this->createForm($searchType);
             $form->handleRequest($request);
 
@@ -126,6 +130,7 @@ abstract class AbstractCrudController extends AbstractController
         ]);
     }
 
+    /** @param FormInterface<TForm> $form */
     private function handleValidCreateForm(
         Request $request,
         FormInterface $form,
@@ -137,6 +142,7 @@ abstract class AbstractCrudController extends AbstractController
         );
     }
 
+    /** @param FormInterface<TForm> $form */
     private function handleValidEditForm(
         Request $request,
         FormInterface $form,
@@ -148,6 +154,7 @@ abstract class AbstractCrudController extends AbstractController
         );
     }
 
+    /** @param FormInterface<TForm> $form */
     private function handleValidForm(
         Request $request,
         FormInterface $form,
@@ -303,6 +310,7 @@ abstract class AbstractCrudController extends AbstractController
         return $object;
     }
 
+    /** @param FormInterface<TForm> $form */
     protected function doHandleValidCreateForm(
         Request $request,
         FormInterface $form,
@@ -311,6 +319,7 @@ abstract class AbstractCrudController extends AbstractController
         $this->doHandleValidForm($request, $form, $data);
     }
 
+    /** @param FormInterface<TForm> $form */
     protected function doHandleValidEditForm(
         Request $request,
         FormInterface $form,
@@ -319,6 +328,7 @@ abstract class AbstractCrudController extends AbstractController
         $this->doHandleValidForm($request, $form, $data);
     }
 
+    /** @param FormInterface<TForm> $form */
     protected function doHandleValidForm(
         Request $request,
         FormInterface $form,
@@ -365,13 +375,13 @@ abstract class AbstractCrudController extends AbstractController
         return $options;
     }
 
-    /** @return class-string<FormTypeInterface>|null */
+    /** @phpstan-return (TFormSearch is null ? null : class-string<TFormSearch>) */
     protected function getSearchType(): string|null
     {
         return null;
     }
 
-    /** @return class-string<FormTypeInterface> */
+    /** @return class-string<TForm> */
     abstract protected function getFormType(
         Request $request,
         object|null $object = null,

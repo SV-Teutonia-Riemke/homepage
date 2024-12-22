@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/** @extends AbstractType<array{currentPassword: string, newPassword: string}> */
 final class ChangePasswordType extends AbstractType
 {
     /** @inheritDoc */

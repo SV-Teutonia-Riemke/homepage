@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Url;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
+/** @extends AbstractType<Download> */
 final class DownloadType extends AbstractType
 {
     /** @inheritDoc */

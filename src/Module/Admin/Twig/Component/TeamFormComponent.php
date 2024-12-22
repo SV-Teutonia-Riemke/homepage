@@ -27,6 +27,7 @@ final class TeamFormComponent extends AbstractController
     #[LiveProp(fieldName: 'data')]
     public Team|null $team;
 
+    /** @return FormInterface<Team|null> */
     protected function instantiateForm(): FormInterface
     {
         return $this->createForm(

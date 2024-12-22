@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/** @extends AbstractType<User> */
 final class UserType extends AbstractType
 {
     public const string FIELD_EMAIL    = 'email';
@@ -48,7 +49,7 @@ final class UserType extends AbstractType
             'data_class' => User::class,
             'empty_data' => static function (FormInterface $form): User {
                 return new User(
-                    $form->get(self::FIELD_EMAIL)->getData() ?? '',
+                    $form->get(self::FIELD_EMAIL)->getData() !== null ? (string) $form->get(self::FIELD_EMAIL)->getData() : '',
                 );
             },
         ]);

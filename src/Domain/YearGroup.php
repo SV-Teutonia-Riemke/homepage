@@ -7,6 +7,7 @@ namespace App\Domain;
 use RuntimeException;
 use Stringable;
 
+use function is_array;
 use function sprintf;
 use function sscanf;
 
@@ -33,7 +34,20 @@ final class YearGroup implements Stringable
 
     public static function fromString(string $string): self
     {
-        [$start, $end] = sscanf($string, self::FORMAT);
+        $list = sscanf($string, self::FORMAT);
+
+        if (! is_array($list)) {
+            throw new RuntimeException(
+                sprintf(
+                    'Unable to create year group from string "%s". Format must be "%s".',
+                    $string,
+                    self::FORMAT,
+                ),
+                1666202507743,
+            );
+        }
+
+        [$start, $end] = $list;
 
         return self::fromYears($start, $end);
     }

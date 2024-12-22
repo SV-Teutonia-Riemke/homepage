@@ -18,12 +18,7 @@ class FaqCategoryRepository extends ServiceEntityRepository
 
     public function getFirst(): FaqCategory|null
     {
-        return $this->createQueryBuilder('p')
-            ->where('p.enabled = true')
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult();
+        return $this->findOneBy(['enabled' => true], ['position' => 'ASC']);
     }
 
     /** @return array<FaqCategory> */

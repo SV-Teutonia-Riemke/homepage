@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-/** @template-extends AbstractCrudController<FaqCategory> */
+/** @template-extends AbstractCrudController<FaqCategory, FaqCategoryType, null> */
 #[AsController]
 #[IsGranted(Role::MANAGE_FAQ->value)]
 #[Route('/faq/category', name: 'faq_category_')]

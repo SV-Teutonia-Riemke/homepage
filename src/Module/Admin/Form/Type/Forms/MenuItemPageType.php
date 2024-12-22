@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/** @extends AbstractType<MenuItemPage> */
 final class MenuItemPageType extends AbstractType
 {
     /** @inheritDoc */

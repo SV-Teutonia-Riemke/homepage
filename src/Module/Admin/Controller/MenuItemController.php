@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-/** @template-extends AbstractCrudController<MenuItem> */
+/** @template-extends AbstractCrudController<MenuItem, MenuItemType, null> */
 #[AsController]
 #[IsGranted(Role::MANAGE_MENU->value)]
 #[Route('/menu', name: 'menu_item_')]

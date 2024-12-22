@@ -20,6 +20,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/** @extends AbstractType<Contact> */
 class ContactForm extends AbstractType
 {
     /** @inheritDoc */

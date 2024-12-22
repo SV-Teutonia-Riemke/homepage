@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-/** @template-extends AbstractCrudController<Download> */
+/** @template-extends AbstractCrudController<Download, DownloadType, null> */
 #[AsController]
 #[IsGranted(Role::MANAGE_DOWNLOADS->value)]
 #[Route('/download', name: 'download_')]

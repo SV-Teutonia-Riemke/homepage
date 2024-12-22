@@ -17,6 +17,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/** @extends AbstractType<Article> */
 final class ArticleType extends AbstractType
 {
     /** @inheritDoc */

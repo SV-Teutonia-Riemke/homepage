@@ -1,5 +1,4 @@
 includes:
-    - ../../vendor/phpstan/phpstan/conf/bleedingEdge.neon
     - ../../vendor/phpstan/phpstan-strict-rules/rules.neon
     - ../../vendor/phpstan/phpstan-deprecation-rules/rules.neon
     - ../../vendor/phpstan/phpstan-phpunit/extension.neon
@@ -23,8 +22,8 @@ parameters:
         - ../../src/Infrastructure/PHPCodeSniffer/*
 
     symfony:
-        container_xml_path: '../../var/cache/test/App_KernelTestDebugContainer.xml'
-        console_application_loader: ../../bin/phpstan-console-loader.php
+        containerXmlPath: '../../var/cache/test/App_KernelTestDebugContainer.xml'
+        consoleApplicationLoader: ../../bin/phpstan-console-loader.php
 
     doctrine:
         objectManagerLoader: ../../bin/phpstan-doctrine-loader.php

@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
 use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
+/** @extends AbstractType<File> */
  #[AsEntityAutocompleteField]
 final class FileEntityType extends AbstractType
 {

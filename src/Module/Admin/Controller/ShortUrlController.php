@@ -23,7 +23,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 use function iterator_to_array;
 
-/** @template-extends AbstractCrudController<ShortUrl> */
+/** @template-extends AbstractCrudController<ShortUrl, ShortUrlType, null> */
 #[AsController]
 #[IsGranted(Role::MANAGE_SHORT_URLS->value)]
 #[Route('/shorturl', name: 'shorturl_')]

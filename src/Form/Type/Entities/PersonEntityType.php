@@ -12,6 +12,7 @@ use Symfony\UX\Autocomplete\Form\BaseEntityAutocompleteType;
 
 use function Symfony\Component\String\u;
 
+/** @extends AbstractType<Person> */
 #[AsEntityAutocompleteField]
 final class PersonEntityType extends AbstractType
 {
