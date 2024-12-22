@@ -1,4 +1,4 @@
-FROM thecodingmachine/php:8.3-v4-apache
+FROM thecodingmachine/php:8.4-v4-apache
 
 COPY --chown=docker:docker . /var/www/html/
 
