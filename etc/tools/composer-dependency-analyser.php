@@ -32,6 +32,7 @@ return $config
         'symfony/yaml',
         'twig/intl-extra',
         'twig/string-extra',
+        'cweagans/composer-patches'
     ], [ErrorType::UNUSED_DEPENDENCY])
 
     // ignore errors on packages that are only used in dev but found in prod. example in bundles.php

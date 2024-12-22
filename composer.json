@@ -7,8 +7,6 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.4",
-        "ext-ctype": "*",
-        "ext-iconv": "*",
         "cweagans/composer-patches": "^1.7",
         "doctrine/collections": "^2.2",
         "doctrine/dbal": "^3.9|^4.0",
