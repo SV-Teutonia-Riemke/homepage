@@ -30,7 +30,7 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v3
         with:
-          composer-options: --prefer-dist --no-suggest --no-scripts --ignore-platform-reqs --classmap-authoritative --no-dev
+          composer-options: --prefer-dist --no-scripts --ignore-platform-reqs --classmap-authoritative --no-dev
 
       - name: Setup pnpm and Install
         uses: seepine/action-setup-pnpm@v1
@@ -59,7 +59,7 @@ jobs:
             package.json
             pnpm-lock.yaml
             symfony.lock
-            tsconfig.ts
+            tsconfig.json
             vite.config.js
 
       - name: Create needed directories

@@ -1,6 +1,6 @@
 services:
   app:
-    image: thecodingmachine/php:8.4-v4-apache-node22
+    image: thecodingmachine/php:8.4-v4-apache
     volumes:
       - .:/var/www/html
       - ./var/.bash_history:/home/docker/.bash_history
@@ -22,6 +22,12 @@ services:
     networks:
       internal:
         ipv4_address: 192.168.19.10
+
+  node:
+    image: guergeiro/pnpm:lts-latest-alpine
+    working_dir: /var/www/html/
+    volumes:
+      - .:/var/www/html/
 
   database:
     image: mariadb:lts

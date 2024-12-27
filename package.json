@@ -18,7 +18,7 @@
         "sass": "^1.83.0",
         "tom-select": "^2.4.1",
         "typescript": "^5.7.2",
-        "vite": "^6.0.5",
+        "vite": "^6.0.6",
         "vite-plugin-monaco-editor": "^1.1.0",
         "vite-plugin-pwa": "^0.21.1",
         "vite-plugin-symfony": "^7.1.0"
