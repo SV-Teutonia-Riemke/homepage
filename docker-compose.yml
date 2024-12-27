@@ -29,6 +29,22 @@ services:
     volumes:
       - .:/var/www/html/
 
+  imgproxy:
+    image: ghcr.io/imgproxy/imgproxy
+    container_name: imgproxy
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    environment:
+      IMGPROXY_KEY: 2d5e052902893310f94a568c604a2de540a3966b92da89eed8d153f6ed3b2775787e2e057093ccf1dbb5449bfff14d0b4f74195bfbd22e844e87892f2b032513
+      IMGPROXY_SALT: 01ccf236bc7771b3f4b66a0d6b5d623801fa96b1404b2c7ca91c816f6f20a22644c7dbb926fa4c288f3c458d7425f29fb33763ce8f7a821cde68ec2d22ba9b60
+      IMGPROXY_AUTO_WEBP: true
+      IMGPROXY_AUTO_AVIF: true
+      IMGPROXY_AUTO_JXL: true
+      IMGPROXY_LOG_LEVEL: info
+    networks:
+      - internal
+
   database:
     image: mariadb:lts
     env_file:
@@ -39,8 +55,7 @@ services:
       - MYSQL_PASSWORD=${DATABASE_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
     networks:
-      internal:
-        ipv4_address: 192.168.19.11
+      - internal
 
   mailpit:
     image: axllent/mailpit
