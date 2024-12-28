@@ -10,12 +10,12 @@ final class Filename extends AbstractOption
 {
     public function __construct(private string $name)
     {
-        if (empty($name)) {
+        if ($name === '') {
             throw new InvalidArgumentException('Filename cannot be empty');
         }
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'fn';
     }

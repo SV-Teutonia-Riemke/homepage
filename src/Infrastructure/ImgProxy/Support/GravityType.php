@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use function in_array;
 use function sprintf;
 
-class GravityType
+final readonly class GravityType
 {
     public const NORTH       = 'no';
     public const SOUTH       = 'so';
@@ -39,7 +39,7 @@ class GravityType
 
     public function __construct(private string $type)
     {
-        if (! in_array($type, self::TYPES)) {
+        if (! in_array($type, self::TYPES, true)) {
             throw new InvalidArgumentException(sprintf('Invalid gravity: %s', $type));
         }
     }

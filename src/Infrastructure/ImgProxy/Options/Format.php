@@ -10,12 +10,12 @@ final class Format extends AbstractOption
 {
     public function __construct(private string $extension)
     {
-        if (empty($extension)) {
+        if ($extension === '') {
             throw new InvalidArgumentException('Format cannot be empty');
         }
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'f';
     }

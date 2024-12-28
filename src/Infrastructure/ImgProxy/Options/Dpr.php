@@ -17,7 +17,7 @@ final class Dpr extends AbstractOption
         }
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'dpr';
     }

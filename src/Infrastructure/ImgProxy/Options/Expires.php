@@ -10,7 +10,7 @@ final class Expires extends AbstractOption
     {
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'exp';
     }

@@ -6,23 +6,24 @@ namespace App\Infrastructure\ImgProxy\Options;
 
 use InvalidArgumentException;
 
-use function array_filter;
+use function array_values;
+use function count;
 
 final class Preset extends AbstractOption
 {
-    /** @var string[] */
+    /** @var list<string> */
     private array $presets;
 
     public function __construct(string ...$presets)
     {
-        $this->presets = array_filter($presets);
+        $this->presets = array_values($presets);
 
-        if (empty($this->presets)) {
+        if (count($this->presets) === 0) {
             throw new InvalidArgumentException('At least one preset must be set');
         }
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'pr';
     }

@@ -6,23 +6,24 @@ namespace App\Infrastructure\ImgProxy\Options;
 
 use InvalidArgumentException;
 
-use function array_filter;
+use function array_values;
+use function count;
 
 final class SkipProcessing extends AbstractOption
 {
-    /** @var string[] */
+    /** @var list<string> */
     private array $extensions;
 
     public function __construct(string ...$extensions)
     {
-        $this->extensions = array_filter($extensions);
+        $this->extensions = array_values($extensions);
 
-        if (empty($this->extensions)) {
+        if (count($this->extensions) === 0) {
             throw new InvalidArgumentException('At least one extension must be set');
         }
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'skp';
     }

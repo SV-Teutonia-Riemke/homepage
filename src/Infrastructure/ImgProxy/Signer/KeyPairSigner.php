@@ -23,7 +23,7 @@ final readonly class KeyPairSigner implements Signer
         $this->salt = pack('H*', $salt);
     }
 
-    public function sign(string $string): string
+    public function __invoke(string $string): string
     {
         return Encoder::encode(hash_hmac('sha256', $this->salt . $string, $this->key, true));
     }

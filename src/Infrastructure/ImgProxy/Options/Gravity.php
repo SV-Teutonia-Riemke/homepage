@@ -13,7 +13,7 @@ use function sprintf;
 
 final class Gravity extends AbstractOption
 {
-    private GravityType $type;
+    public readonly GravityType $type;
 
     public function __construct(
         string $type,
@@ -51,7 +51,7 @@ final class Gravity extends AbstractOption
         );
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'g';
     }

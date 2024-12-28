@@ -6,5 +6,5 @@ namespace App\Infrastructure\ImgProxy\Signer;
 
 interface Signer
 {
-    public function sign(string $string): string;
+    public function __invoke(string $string): string;
 }

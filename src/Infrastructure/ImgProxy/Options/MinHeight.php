@@ -13,7 +13,7 @@ final class MinHeight extends AbstractOption
         $this->height = new Height($height);
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'mh';
     }

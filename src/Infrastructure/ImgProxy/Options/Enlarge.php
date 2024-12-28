@@ -10,7 +10,7 @@ final class Enlarge extends AbstractOption
     {
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'el';
     }
@@ -19,7 +19,7 @@ final class Enlarge extends AbstractOption
     public function data(): array
     {
         return [
-            (int) $this->enlarge,
+            $this->enlarge ? 1 : 0,
         ];
     }
 }

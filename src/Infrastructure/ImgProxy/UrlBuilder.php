@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ImgProxy;
 
 use App\Infrastructure\ImgProxy\Options\AbstractOption;
+use App\Infrastructure\ImgProxy\Preset\Preset;
 use App\Infrastructure\ImgProxy\Signer\Signer;
 use App\Infrastructure\ImgProxy\Support\Encoder;
 use App\Infrastructure\ImgProxy\Support\ImageFormat;
@@ -19,9 +20,11 @@ use function wordwrap;
 
 final class UrlBuilder implements Stringable
 {
-    private bool $encoded = false;
+    private bool $encoded = true;
 
-    private int $splitSize = 16;
+    private int $splitSize = 0;
+
+    private Preset|null $preset = null;
 
     /** @var array<AbstractOption> */
     private array $options = [];
@@ -32,15 +35,23 @@ final class UrlBuilder implements Stringable
         private readonly string $baseUrl,
         private readonly Signer $signer,
         private readonly string $source,
-        private readonly string|null $extension = null,
+        string|null $extension = null,
     ) {
-        $this->format = $extension ? new ImageFormat($extension) : null;
+        $this->format = $extension !== null ? new ImageFormat($extension) : null;
     }
 
     public function with(AbstractOption ...$options): self
     {
         $self          = clone $this;
         $self->options = array_merge($this->options, $options);
+
+        return $self;
+    }
+
+    public function withPreset(Preset $preset): self
+    {
+        $self         = clone $this;
+        $self->preset = $preset;
 
         return $self;
     }
@@ -63,7 +74,10 @@ final class UrlBuilder implements Stringable
 
     public function __toString(): string
     {
-        $options = implode('/', $this->options);
+        $options = $this->preset?->options ?? [];
+        $options = array_merge($options, $this->options);
+
+        $options = implode('/', $options);
         $path    = sprintf(
             '/%s/%s',
             $options,
@@ -73,7 +87,7 @@ final class UrlBuilder implements Stringable
         return sprintf(
             '%s/%s%s',
             $this->baseUrl,
-            $this->signer->sign($path),
+            $this->signer->__invoke($path),
             $path,
         );
     }
@@ -94,6 +108,12 @@ final class UrlBuilder implements Stringable
 
         $extension = $this->encoded && $this->format !== null ? $this->format->value() : null;
 
-        return implode($sep, array_filter([$source, $extension]));
+        return implode(
+            $sep,
+            array_filter(
+                [$source, $extension],
+                static fn (string|null $part): bool => $part !== null,
+            ),
+        );
     }
 }

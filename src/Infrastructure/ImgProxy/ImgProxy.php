@@ -21,7 +21,7 @@ final readonly class ImgProxy
         return new self($baseUrl, $signer);
     }
 
-    public function image(
+    public function builder(
         string $sourceUrl,
         string|null $extension = null,
     ): UrlBuilder {

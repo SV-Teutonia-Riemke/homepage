@@ -10,14 +10,15 @@ use function sprintf;
 
 final class Width extends AbstractOption
 {
-    public function __construct(public readonly int $width)
-    {
+    public function __construct(
+        public readonly int $width,
+    ) {
         if ($width < 0) {
             throw new InvalidArgumentException(sprintf('Invalid width: %s', $width));
         }
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'w';
     }

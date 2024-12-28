@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Twig\Components\File;
 
+use App\Infrastructure\ImgProxy\Options\AbstractOption;
+use App\Infrastructure\ImgProxy\Options\Background;
+use App\Infrastructure\ImgProxy\Options\Size;
 use App\Storage\Entity\File;
 use App\Storage\Repository\FileRepository;
 use App\Twig\Components\AbstractComponent;
@@ -51,21 +54,17 @@ class ImageComponent extends AbstractComponent
         return $this->file->getFilePath();
     }
 
-    /** @return array<string, mixed> */
+    /** @return list<AbstractOption> */
     public function getFilterConfig(): array
     {
         $config = [];
 
-        if ($this->width !== null) {
-            $config['relative_resize']['widen'] = $this->width;
-        }
-
-        if ($this->height !== null) {
-            $config['relative_resize']['heighten'] = $this->height;
+        if ($this->width !== null || $this->height !== null) {
+            $config[] = new Size($this->width, $this->height);
         }
 
         if ($this->backgroundColor !== null) {
-            $config['background']['color'] = $this->backgroundColor;
+            $config[] = Background::fromHex($this->backgroundColor);
         }
 
         return $config;

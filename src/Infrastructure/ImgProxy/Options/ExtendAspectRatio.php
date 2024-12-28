@@ -15,7 +15,7 @@ final class ExtendAspectRatio extends AbstractOption
         $this->extend = new Extend($extend, $gravity);
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'exar';
     }

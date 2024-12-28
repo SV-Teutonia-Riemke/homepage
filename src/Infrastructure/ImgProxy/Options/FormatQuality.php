@@ -7,26 +7,32 @@ namespace App\Infrastructure\ImgProxy\Options;
 use InvalidArgumentException;
 
 use function array_merge;
+use function array_values;
+use function count;
 
 final class FormatQuality extends AbstractOption
 {
     /** @var list<mixed> */
-    private array $options = [];
+    private array $options;
 
     /** @param array<string, int> $options */
     public function __construct(array $options)
     {
+        $normalizedOptions = [];
+
         foreach ($options as $format => $quality) {
-            $data            = (new Quality($quality))->data();
-            $this->options[] = [$format, ...$data];
+            $data                = (new Quality($quality))->data();
+            $normalizedOptions[] = [$format, ...$data];
         }
 
-        if (empty($this->options)) {
+        if (count($normalizedOptions) === 0) {
             throw new InvalidArgumentException('At least one format quality must be set');
         }
+
+        $this->options = $normalizedOptions;
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'fq';
     }
@@ -34,6 +40,6 @@ final class FormatQuality extends AbstractOption
     /** @inheritDoc */
     public function data(): array
     {
-        return array_merge(...$this->options);
+        return array_values(array_merge(...$this->options));
     }
 }

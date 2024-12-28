@@ -13,7 +13,7 @@ final class MinWidth extends AbstractOption
         $this->width = new Width($width);
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'mw';
     }

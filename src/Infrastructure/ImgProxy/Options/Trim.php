@@ -11,7 +11,7 @@ use function sprintf;
 
 final class Trim extends AbstractOption
 {
-    private Color|null $color = null;
+    private Color|null $color;
 
     public function __construct(
         private float $threshold,
@@ -23,14 +23,10 @@ final class Trim extends AbstractOption
             throw new InvalidArgumentException(sprintf('Invalid threshold: %s', $threshold));
         }
 
-        if ($color === null) {
-            return;
-        }
-
-        $this->color = Color::fromHex($color);
+        $this->color = $color === null ? null : Color::fromHex($color);
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 't';
     }

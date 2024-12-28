@@ -10,12 +10,12 @@ final class CacheBuster extends AbstractOption
 {
     public function __construct(private string $value)
     {
-        if (empty($value)) {
+        if ($value === '') {
             throw new InvalidArgumentException('Cache buster cannot be empty');
         }
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'cb';
     }

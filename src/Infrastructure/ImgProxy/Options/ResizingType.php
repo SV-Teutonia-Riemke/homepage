@@ -27,12 +27,12 @@ final class ResizingType extends AbstractOption
 
     public function __construct(private string $type)
     {
-        if (! in_array($type, self::TYPES)) {
+        if (! in_array($type, self::TYPES, true)) {
             throw new InvalidArgumentException(sprintf('Invalid resizing type: %s', $type));
         }
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'rt';
     }

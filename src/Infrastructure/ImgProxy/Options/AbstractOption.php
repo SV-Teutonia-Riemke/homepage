@@ -14,7 +14,7 @@ abstract class AbstractOption implements Stringable
 {
     private const string SEPARATOR = ':';
 
-    abstract public function name(): string;
+    abstract public static function name(): string;
 
     /** @return list<mixed> */
     abstract public function data(): array;
@@ -23,7 +23,7 @@ abstract class AbstractOption implements Stringable
     {
         $data = $this->data();
 
-        array_unshift($data, $this->name());
+        array_unshift($data, $this::name());
 
         // Remove empty options from end.
         return rtrim(

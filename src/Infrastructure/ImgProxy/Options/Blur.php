@@ -17,7 +17,7 @@ final class Blur extends AbstractOption
         }
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'bl';
     }

@@ -10,7 +10,7 @@ final class ReturnAttachment extends AbstractOption
     {
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'att';
     }
@@ -19,7 +19,7 @@ final class ReturnAttachment extends AbstractOption
     public function data(): array
     {
         return [
-            (int) $this->value,
+            $this->value ? 1 : 0,
         ];
     }
 }

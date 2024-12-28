@@ -5,31 +5,92 @@ declare(strict_types=1);
 namespace App\Infrastructure\ImgProxy\Options;
 
 use function array_merge;
+use function is_string;
 
 final class Resize extends AbstractOption
 {
     private ResizingType $type;
 
-    private Size|null $size = null;
-
     public function __construct(
-        string $type,
+        ResizingType|string $type,
+        private int|null $width = null,
+        private int|null $height = null,
+        private bool|null $enlarge = null,
+        private bool|null $extend = null,
+    ) {
+        $this->type = is_string($type) ? new ResizingType($type) : $type;
+    }
+
+    public static function create(ResizingType|string $resizingType): self
+    {
+        return new self($resizingType);
+    }
+
+    public function with(
+        ResizingType|string|null $type = null,
         int|null $width = null,
         int|null $height = null,
         bool|null $enlarge = null,
         bool|null $extend = null,
-    ) {
-        $this->type = new ResizingType($type);
+    ): self {
+        $clone = clone $this;
 
-        $leastOnOf = $width ?? $height ?? $enlarge ?? $extend;
-        if ($leastOnOf === null) {
-            return;
+        if ($type !== null) {
+            $clone->type = is_string($type) ? new ResizingType($type) : $type;
         }
 
-        $this->size = new Size($width, $height, $enlarge, $extend);
+        if ($width !== null) {
+            $clone->width = $width;
+        }
+
+        if ($height !== null) {
+            $clone->height = $height;
+        }
+
+        if ($enlarge !== null) {
+            $clone->enlarge = $enlarge;
+        }
+
+        if ($extend !== null) {
+            $clone->extend = $extend;
+        }
+
+        return $clone;
     }
 
-    public function name(): string
+    public function width(int $width): self
+    {
+        $clone        = clone $this;
+        $clone->width = $width;
+
+        return $clone;
+    }
+
+    public function height(int $height): self
+    {
+        $clone         = clone $this;
+        $clone->height = $height;
+
+        return $clone;
+    }
+
+    public function enlarge(bool $enlarge = true): self
+    {
+        $clone          = clone $this;
+        $clone->enlarge = $enlarge;
+
+        return $clone;
+    }
+
+    public function extend(bool $extend = true): self
+    {
+        $clone         = clone $this;
+        $clone->extend = $extend;
+
+        return $clone;
+    }
+
+    public static function name(): string
     {
         return 'rs';
     }
@@ -37,9 +98,13 @@ final class Resize extends AbstractOption
     /** @inheritDoc */
     public function data(): array
     {
+        $leastOnOf = $this->width ?? $this->height ?? $this->enlarge ?? $this->extend;
+
+        $size = $leastOnOf === null ? null : new Size($this->width, $this->height, $this->enlarge, $this->extend);
+
         return array_merge(
             $this->type->data(),
-            $this->size ? $this->size->data() : [],
+            $size?->data() ?? [],
         );
     }
 }

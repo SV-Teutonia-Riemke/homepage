@@ -10,7 +10,7 @@ final class AutoRotate extends AbstractOption
     {
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'ar';
     }
@@ -19,7 +19,7 @@ final class AutoRotate extends AbstractOption
     public function data(): array
     {
         return [
-            (int) $this->rotate,
+            $this->rotate ? 1 : 0,
         ];
     }
 }

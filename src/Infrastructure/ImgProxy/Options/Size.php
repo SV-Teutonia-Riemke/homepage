@@ -8,9 +8,9 @@ use InvalidArgumentException;
 
 final class Size extends AbstractOption
 {
-    private Width|null $width = null;
+    private Width|null $width;
 
-    private Height|null $height = null;
+    private Height|null $height;
 
     public function __construct(
         int|null $width = null,
@@ -23,18 +23,11 @@ final class Size extends AbstractOption
             throw new InvalidArgumentException('At least one size argument must be set');
         }
 
-        if ($width !== null) {
-            $this->width = new Width($width);
-        }
-
-        if ($height === null) {
-            return;
-        }
-
-        $this->height = new Height($height);
+        $this->width  = $width === null ? null : new Width($width);
+        $this->height = $height === null ? null : new Height($height);
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 's';
     }

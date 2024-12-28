@@ -20,7 +20,19 @@ final class Padding extends AbstractOption
         }
     }
 
-    public function name(): string
+    public static function all(int $value): self
+    {
+        return new self($value, $value, $value, $value);
+    }
+
+    public static function xy(
+        int $x,
+        int $y,
+    ): self {
+        return new self($y, $x, $y, $x);
+    }
+
+    public static function name(): string
     {
         return 'pd';
     }

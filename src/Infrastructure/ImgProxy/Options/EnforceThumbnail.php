@@ -10,7 +10,7 @@ final class EnforceThumbnail extends AbstractOption
     {
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'eth';
     }
@@ -19,7 +19,7 @@ final class EnforceThumbnail extends AbstractOption
     public function data(): array
     {
         return [
-            $this->format ?: true,
+            $this->format ?? true,
         ];
     }
 }

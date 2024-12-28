@@ -13,7 +13,7 @@ use function sprintf;
 
 final class Watermark extends AbstractOption
 {
-    private const REPLICATE_POSITION = 're';
+    private const string REPLICATE_POSITION = 're';
 
     public function __construct(
         private float $opacity,
@@ -30,12 +30,12 @@ final class Watermark extends AbstractOption
             throw new InvalidArgumentException(sprintf('Invalid watermark scale: %s', $scale));
         }
 
-        if ($position !== null && ! in_array($position, $this->positions())) {
+        if ($position !== null && ! in_array($position, $this->positions(), true)) {
             throw new InvalidArgumentException(sprintf('Invalid watermark position: %s', $position));
         }
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'wm';
     }

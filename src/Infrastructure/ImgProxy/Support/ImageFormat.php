@@ -33,30 +33,15 @@ class ImageFormat
 
     public function __construct(string $extension)
     {
-        $this->extension = $this->cast($extension);
+        $this->extension = strtolower(trim($extension));
 
-        if (! self::isSupported($this->extension)) {
+        if (! in_array($extension, self::SUPPORTED, true)) {
             throw new InvalidArgumentException(sprintf('Invalid image format: %s', $extension));
         }
-    }
-
-    public static function isSupported(string $value): bool
-    {
-        return in_array($value, self::SUPPORTED);
-    }
-
-    public function isEquals(self $extension): bool
-    {
-        return $this->extension === $extension->extension;
     }
 
     public function value(): string
     {
         return $this->extension;
-    }
-
-    private function cast(string $extension): string
-    {
-        return strtolower(trim($extension));
     }
 }

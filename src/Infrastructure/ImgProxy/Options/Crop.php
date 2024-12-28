@@ -13,7 +13,7 @@ final class Crop extends AbstractOption
 
     private Height $height;
 
-    private Gravity|null $gravity = null;
+    private Gravity|null $gravity;
 
     public function __construct(
         int $width,
@@ -25,7 +25,7 @@ final class Crop extends AbstractOption
         $this->gravity = is_string($gravity) ? Gravity::fromString($gravity) : $gravity;
     }
 
-    public function name(): string
+    public static function name(): string
     {
         return 'c';
     }
@@ -36,7 +36,7 @@ final class Crop extends AbstractOption
         return array_merge(
             $this->width->data(),
             $this->height->data(),
-            $this->gravity ? $this->gravity->data() : [],
+            $this->gravity?->data() ?? [],
         );
     }
 }
