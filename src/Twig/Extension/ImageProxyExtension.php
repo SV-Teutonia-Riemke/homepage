@@ -37,10 +37,12 @@ class ImageProxyExtension extends AbstractExtension
         ];
     }
 
+    /** @param list<AbstractOption> $options */
     public function imgproxy(
         string $path,
         string|null $presetName = null,
-        AbstractOption ...$options,
+        bool $useExtension = false,
+        array $options = [],
     ): string {
         $builder = $this->imgProxy->builder($path);
 
@@ -52,6 +54,8 @@ class ImageProxyExtension extends AbstractExtension
         if (count($options) > 0) {
             $builder = $builder->with(...$options);
         }
+
+        $builder = $builder->useExtension($useExtension);
 
         return $builder->__toString();
     }

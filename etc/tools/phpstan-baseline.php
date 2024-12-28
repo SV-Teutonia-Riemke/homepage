@@ -14,6 +14,12 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Domain/YearGroup.php',
 ];
 $ignoreErrors[] = [
+	'message' => '#^Using nullsafe property access "\\?\\-\\>options" on left side of \\?\\? is unnecessary\\. Use \\-\\> instead\\.$#',
+	'identifier' => 'nullsafe.neverNull',
+	'count' => 1,
+	'path' => __DIR__ . '/../../src/Infrastructure/ImgProxy/UrlBuilder.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^PHPDoc tag @return contains unresolvable type\\.$#',
 	'identifier' => 'return.unresolvableType',
 	'count' => 1,

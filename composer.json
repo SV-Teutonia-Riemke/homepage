@@ -27,7 +27,6 @@
         "knplabs/knp-menu-bundle": "^3.4",
         "knplabs/knp-paginator-bundle": "^6.6",
         "league/flysystem": "^3.29",
-        "liip/imagine-bundle": "^2.13",
         "nesbot/carbon": "^3.8",
         "nyholm/psr7": "^1.8",
         "odolbeau/phone-number-bundle": "^4.0",

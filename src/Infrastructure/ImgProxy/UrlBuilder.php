@@ -14,13 +14,20 @@ use Stringable;
 use function array_filter;
 use function array_merge;
 use function implode;
+use function parse_url;
+use function pathinfo;
 use function sprintf;
 use function str_replace;
 use function wordwrap;
 
+use const PATHINFO_EXTENSION;
+use const PHP_URL_PATH;
+
 final class UrlBuilder implements Stringable
 {
     private bool $encoded = true;
+
+    private bool $addExtension = false;
 
     private int $splitSize = 0;
 
@@ -72,6 +79,14 @@ final class UrlBuilder implements Stringable
         return $self;
     }
 
+    public function useExtension(bool $useExtension = true): self
+    {
+        $self               = clone $this;
+        $self->addExtension = $useExtension;
+
+        return $self;
+    }
+
     public function __toString(): string
     {
         $options = $this->preset?->options ?? [];
@@ -108,6 +123,10 @@ final class UrlBuilder implements Stringable
 
         $extension = $this->encoded && $this->format !== null ? $this->format->value() : null;
 
+        if ($extension === null && $this->addExtension) {
+            $extension = $this->extension($this->source);
+        }
+
         return implode(
             $sep,
             array_filter(
@@ -115,5 +134,15 @@ final class UrlBuilder implements Stringable
                 static fn (string|null $part): bool => $part !== null,
             ),
         );
+    }
+
+    private function extension(string $src): string
+    {
+        $parsed = parse_url($src, PHP_URL_PATH);
+        if ($parsed === false || $parsed === null) {
+            return '';
+        }
+
+        return pathinfo($parsed, PATHINFO_EXTENSION);
     }
 }
