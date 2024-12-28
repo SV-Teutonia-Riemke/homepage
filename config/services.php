@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Infrastructure\Asset\ImageProxyFactory;
+use App\Infrastructure\ImgProxy\ImgProxy;
+use App\Infrastructure\ImgProxy\PresetManager;
 use App\Infrastructure\Shlink\ShlinkClientFactory;
 use Embed\Embed;
 use Shlinkio\Shlink\SDK\ShlinkClient;
@@ -30,6 +33,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(ShlinkClient::class)
         ->factory(service(ShlinkClientFactory::class));
+
+    $services->set(ImgProxy::class)
+        ->factory(service(ImageProxyFactory::class));
+
+    $services->set(PresetManager::class);
 
     $services->set(Embed::class);
 };

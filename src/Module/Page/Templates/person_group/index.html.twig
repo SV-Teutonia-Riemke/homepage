@@ -17,7 +17,7 @@
                         <div class="card-body p-4 text-center">
                             {% set imageAvailable = personAvailable != false and member.person.image is not null %}
                             {% set imagePath = imageAvailable
-                                ? member.person.image.filePath|imagine_filter('optimized', { relative_resize: { widen: 160 } })
+                                ? member.person.image|file_url|imgproxy('person_portrait')
                                 : placeholderImage %}
 
                             {% if imageAvailable %}

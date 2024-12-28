@@ -47,7 +47,7 @@
         </div>
         <div class="col-12 col-lg-6 col-xl-8 d-none d-lg-block">
             {% set cover = 'assets/images/login/cover_%d.jpg'|format(random(1, 9)) %}
-            <div class="bg-cover h-100 min-vh-100" style="background-image: url({{ asset(cover, 'vite')|imagine_filter('optimized', { downscale: { max: [1280] } }) }})"></div>
+            <div class="bg-cover h-100 min-vh-100" style="background-image: url({{ absolute_url(asset(cover, 'vite'))|imgproxy('login_cover') }})"></div>
         </div>
     </div>
 {% endblock %}

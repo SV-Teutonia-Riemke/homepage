@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Infrastructure\Asset;
+
+use App\Infrastructure\ImgProxy\ImgProxy;
+use App\Infrastructure\ImgProxy\Signer\KeyPairSigner;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+
+class ImageProxyFactory
+{
+    public function __construct(
+        #[Autowire(env: 'IMGPROXY_BASE_URL')]
+        private readonly string $baseUrl,
+        #[Autowire(env: 'IMGPROXY_KEY')]
+        private readonly string $key,
+        #[Autowire(env: 'IMGPROXY_SALT')]
+        private readonly string $salt,
+    ) {
+    }
+
+    public function __invoke(): ImgProxy
+    {
+        return ImgProxy::create(
+            $this->baseUrl,
+            new KeyPairSigner(
+                $this->key,
+                $this->salt,
+            ),
+        );
+    }
+}

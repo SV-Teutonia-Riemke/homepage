@@ -9,7 +9,6 @@ use EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle;
 use HWI\Bundle\OAuthBundle\HWIOAuthBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
-use Liip\ImagineBundle\LiipImagineBundle;
 use Misd\PhoneNumberBundle\MisdPhoneNumberBundle;
 use Oneup\FlysystemBundle\OneupFlysystemBundle;
 use Pentatrion\ViteBundle\PentatrionViteBundle;
@@ -49,7 +48,6 @@ return [
     LiveComponentBundle::class => ['all' => true],
     AutocompleteBundle::class => ['all' => true],
     DropzoneBundle::class => ['all' => true],
-    LiipImagineBundle::class => ['all' => true],
     MisdPhoneNumberBundle::class => ['all' => true],
     SentryBundle::class => ['all' => true],
     StofDoctrineExtensionsBundle::class => ['all' => true],
