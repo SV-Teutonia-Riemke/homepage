@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use function in_array;
 use function sprintf;
 
-final class ResizingType extends AbstractOption
+final readonly class ResizingType extends AbstractOption
 {
     public const FIT       = 'fit';
     public const FILL      = 'fill';
@@ -25,11 +25,17 @@ final class ResizingType extends AbstractOption
         self::AUTO,
     ];
 
-    public function __construct(private string $type)
-    {
+    public function __construct(
+        private string $type,
+    ) {
         if (! in_array($type, self::TYPES, true)) {
             throw new InvalidArgumentException(sprintf('Invalid resizing type: %s', $type));
         }
+    }
+
+    public static function fromStringOrSelf(string|self $type): self
+    {
+        return $type instanceof self ? $type : new self($type);
     }
 
     public static function name(): string

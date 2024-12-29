@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\ImgProxy\Support;
+namespace App\Infrastructure\ImgProxy\Helper;
 
 use function base64_encode;
 use function rtrim;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Asset;
 
 use App\Infrastructure\ImgProxy\ImgProxy;
-use App\Infrastructure\ImgProxy\Signer\KeyPairSigner;
+use App\Infrastructure\ImgProxy\Signer\KeyPair;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class ImageProxyFactory
@@ -24,7 +24,7 @@ class ImageProxyFactory
     {
         return ImgProxy::create(
             $this->baseUrl,
-            new KeyPairSigner(
+            new KeyPair(
                 $this->key,
                 $this->salt,
             ),

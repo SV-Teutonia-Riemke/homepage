@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy;
 
+use App\Infrastructure\ImgProxy\Domain\Preset;
+use App\Infrastructure\ImgProxy\Options\Builder\ResizeBuilder;
 use App\Infrastructure\ImgProxy\Options\Padding;
 use App\Infrastructure\ImgProxy\Options\Quality;
-use App\Infrastructure\ImgProxy\Options\Resize;
 use App\Infrastructure\ImgProxy\Options\ResizingType;
 use App\Infrastructure\ImgProxy\Options\Width;
-use App\Infrastructure\ImgProxy\Preset\Preset;
 use InvalidArgumentException;
 
 use function sprintf;
@@ -25,14 +25,13 @@ class PresetManager
     }
 
     public function add(
-        string $name,
         Preset $preset,
     ): void {
-        if ($this->has($name)) {
-            throw new InvalidArgumentException(sprintf('Preset "%s" already exists.', $name));
+        if ($this->has($preset->name)) {
+            throw new InvalidArgumentException(sprintf('Preset "%s" already exists.', $preset->name));
         }
 
-        $this->presets[$name] = $preset;
+        $this->presets[$preset->name] = $preset;
     }
 
     public function get(string $name): Preset
@@ -51,47 +50,55 @@ class PresetManager
 
     private function addDefaults(): void
     {
-        $resize = Resize::create(ResizingType::FIT)->enlarge()->extend();
+        $resize = ResizeBuilder::create(ResizingType::FIT)->enlarge()->extend();
 
-        $this->add('optimized', Preset::create(
+        $this->add(Preset::create(
+            'optimized',
             new Quality(80),
         ));
 
-        $this->add('sponsor_index', Preset::create(
+        $this->add(Preset::create(
+            'sponsor_index',
             new Quality(80),
             $resize->width(118)->height(60),
             Padding::all(2),
         ));
 
-        $this->add('sponsor_index_main', Preset::create(
+        $this->add(Preset::create(
+            'sponsor_index_main',
             new Quality(80),
             $resize->width(260)->height(130),
             Padding::all(2),
         ));
 
-        $this->add('sponsor_main', Preset::create(
+        $this->add(Preset::create(
+            'sponsor_main',
             new Quality(80),
             $resize->width(420)->height(220),
             Padding::xy(20, 15),
         ));
 
-        $this->add('sponsor_page', Preset::create(
+        $this->add(Preset::create(
+            'sponsor_page',
             new Quality(80),
             $resize->width(260)->height(130),
             Padding::xy(10, 10),
         ));
 
-        $this->add('login_cover', Preset::create(
+        $this->add(Preset::create(
+            'login_cover',
             new Quality(75),
             new Width(1280),
         ));
 
-        $this->add('team_player_portrait', Preset::create(
+        $this->add(Preset::create(
+            'team_player_portrait',
             new Quality(75),
             new Width(400),
         ));
 
-        $this->add('person_portrait', Preset::create(
+        $this->add(Preset::create(
+            'person_portrait',
             new Quality(75),
             new Width(160),
         ));

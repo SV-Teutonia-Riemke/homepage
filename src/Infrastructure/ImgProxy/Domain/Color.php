@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\ImgProxy\Support;
+namespace App\Infrastructure\ImgProxy\Domain;
 
 use InvalidArgumentException;
 
+use function ltrim;
 use function preg_match;
 use function sprintf;
 use function strtolower;
-use function trim;
 
 final readonly class Color
 {
-    private string $color;
+    public string $color;
 
     public function __construct(string $color)
     {
-        $color = trim($color, '#');
+        $color = ltrim($color, '#');
 
         if (! self::isValidHexColor($color)) {
             throw new InvalidArgumentException(sprintf('Invalid color: %s', $color));
@@ -26,17 +26,21 @@ final readonly class Color
         $this->color = strtolower($color);
     }
 
-    public static function fromHex(string $color): self
+    public static function fromString(string $color): self
     {
         return new self($color);
     }
 
-    public function value(): string
+    public static function fromStringOrSelf(string|self $color): self
     {
-        return $this->color;
+        if ($color instanceof self) {
+            return $color;
+        }
+
+        return self::fromString($color);
     }
 
-    private static function isValidHexColor(string $color): bool
+    public static function isValidHexColor(string $color): bool
     {
         return preg_match('/^[a-f0-9]{6}$/i', $color) !== false;
     }

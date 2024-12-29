@@ -4,22 +4,18 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-use Stringable;
-
 use function array_unshift;
 use function implode;
 use function rtrim;
 
-abstract class AbstractOption implements Stringable
+abstract readonly class AbstractOption implements OptionNamed
 {
-    private const string SEPARATOR = ':';
-
-    abstract public static function name(): string;
+    public const string SEPARATOR = ':';
 
     /** @return list<mixed> */
     abstract public function data(): array;
 
-    final public function value(): string
+    final public function __toString(): string
     {
         $data = $this->data();
 
@@ -33,10 +29,5 @@ abstract class AbstractOption implements Stringable
             ),
             self::SEPARATOR,
         );
-    }
-
-    public function __toString(): string
-    {
-        return $this->value();
     }
 }

@@ -8,7 +8,7 @@ use InvalidArgumentException;
 
 use function sprintf;
 
-final class Sharpen extends AbstractOption
+final readonly class Sharpen extends AbstractOption
 {
     public function __construct(private float $sigma)
     {

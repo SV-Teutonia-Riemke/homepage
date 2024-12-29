@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-use App\Infrastructure\ImgProxy\Support\GravityType;
+use App\Infrastructure\ImgProxy\Domain\GravityType;
 use InvalidArgumentException;
 
 use function explode;
 use function is_numeric;
 use function sprintf;
 
-final class Gravity extends AbstractOption
+final readonly class Gravity extends AbstractOption
 {
     public readonly GravityType $type;
 
@@ -20,7 +20,7 @@ final class Gravity extends AbstractOption
         private float|null $x = null,
         private float|null $y = null,
     ) {
-        $this->type = new GravityType($type);
+        $this->type = GravityType::from($type);
 
         if ($x < 0) {
             throw new InvalidArgumentException(sprintf('Invalid gravity X: %s', $x));
@@ -34,7 +34,7 @@ final class Gravity extends AbstractOption
     /** @return static */
     public static function fromString(string $gravity): self
     {
-        $params = explode(':', $gravity, 3);
+        $params = explode(AbstractOption::SEPARATOR, $gravity, 3);
 
         if (isset($params[1]) && ! is_numeric($params[1])) {
             throw new InvalidArgumentException('Gravity X should be numeric');
@@ -51,6 +51,16 @@ final class Gravity extends AbstractOption
         );
     }
 
+    public static function fromStringOrSelf(string|self $gravity): self
+    {
+        return $gravity instanceof self ? $gravity : self::fromString($gravity);
+    }
+
+    public static function fromMixed(string|self|null $gravity): self|null
+    {
+        return $gravity === null ? null : self::fromStringOrSelf($gravity);
+    }
+
     public static function name(): string
     {
         return 'g';
@@ -60,7 +70,7 @@ final class Gravity extends AbstractOption
     public function data(): array
     {
         return [
-            $this->type->value(),
+            $this->type->value,
             $this->x,
             $this->y,
         ];

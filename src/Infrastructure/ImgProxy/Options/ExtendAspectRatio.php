@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-final class ExtendAspectRatio extends AbstractOption
+final readonly class ExtendAspectRatio extends AbstractOption
 {
     private Extend $extend;
 

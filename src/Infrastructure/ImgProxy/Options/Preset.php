@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use function array_values;
 use function count;
 
-final class Preset extends AbstractOption
+final readonly class Preset extends AbstractOption
 {
     /** @var list<string> */
     private array $presets;

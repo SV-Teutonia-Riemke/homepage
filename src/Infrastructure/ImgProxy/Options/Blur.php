@@ -8,7 +8,7 @@ use InvalidArgumentException;
 
 use function sprintf;
 
-final class Blur extends AbstractOption
+final readonly class Blur extends AbstractOption
 {
     public function __construct(private float $sigma)
     {

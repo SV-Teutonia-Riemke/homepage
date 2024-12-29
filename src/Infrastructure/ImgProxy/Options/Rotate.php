@@ -8,11 +8,12 @@ use InvalidArgumentException;
 
 use function sprintf;
 
-final class Rotate extends AbstractOption
+final readonly class Rotate extends AbstractOption
 {
+    /** @param int<0, 360> $angle */
     public function __construct(private int $angle)
     {
-        if ($angle < 0 || $angle % 90 !== 0) {
+        if ($angle % 90 !== 0) {
             throw new InvalidArgumentException(sprintf('Invalid angle: %s', $angle));
         }
     }

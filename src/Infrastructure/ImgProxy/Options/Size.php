@@ -6,12 +6,16 @@ namespace App\Infrastructure\ImgProxy\Options;
 
 use InvalidArgumentException;
 
-final class Size extends AbstractOption
+final readonly class Size extends AbstractOption
 {
     private Width|null $width;
 
     private Height|null $height;
 
+    /**
+     * @param int<0, max>|null $width
+     * @param int<0, max>|null $height
+     */
     public function __construct(
         int|null $width = null,
         int|null $height = null,

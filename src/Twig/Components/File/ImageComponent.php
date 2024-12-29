@@ -25,8 +25,10 @@ class ImageComponent extends AbstractComponent
 
     public string $filter = 'default';
 
+    /** @var int<0, max>|null */
     public int|null $width = null;
 
+    /** @var int<0, max>|null */
     public int|null $height = null;
 
     public string|null $backgroundColor = null;
@@ -64,7 +66,7 @@ class ImageComponent extends AbstractComponent
         }
 
         if ($this->backgroundColor !== null) {
-            $config[] = Background::fromHex($this->backgroundColor);
+            $config[] = Background::fromString($this->backgroundColor);
         }
 
         return $config;

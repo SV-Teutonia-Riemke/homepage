@@ -4,17 +4,11 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-use InvalidArgumentException;
-
-use function sprintf;
-
-final class Quality extends AbstractOption
+final readonly class Quality extends AbstractOption
 {
+    /** @param int<0, 100> $quality */
     public function __construct(private int $quality)
     {
-        if ($quality < 0 || $quality > 100) {
-            throw new InvalidArgumentException(sprintf('Invalid quality: %s', $quality));
-        }
     }
 
     public static function name(): string

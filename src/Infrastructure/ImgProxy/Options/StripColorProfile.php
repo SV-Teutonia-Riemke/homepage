@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-final class StripColorProfile extends AbstractOption
+final readonly class StripColorProfile extends AbstractOption
 {
-    public function __construct(private bool $strip = true)
-    {
+    public function __construct(
+        private bool $strip = true,
+    ) {
     }
 
     public static function name(): string
@@ -19,7 +20,7 @@ final class StripColorProfile extends AbstractOption
     public function data(): array
     {
         return [
-            (int) $this->strip,
+            $this->strip ? 1 : 0,
         ];
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ImgProxy;
 
 use App\Infrastructure\ImgProxy\Signer\Signer;
+use App\Infrastructure\ImgProxy\Url\UrlBuilder;
 
 final readonly class ImgProxy
 {

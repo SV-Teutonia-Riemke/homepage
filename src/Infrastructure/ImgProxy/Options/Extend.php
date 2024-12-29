@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Infrastructure\ImgProxy\Options;
 
 use function array_merge;
-use function is_string;
 
-final class Extend extends AbstractOption
+final readonly class Extend extends AbstractOption
 {
     private Gravity|null $gravity;
 
@@ -15,7 +14,7 @@ final class Extend extends AbstractOption
         private bool $extend = true,
         Gravity|string|null $gravity = null,
     ) {
-        $this->gravity = is_string($gravity) ? Gravity::fromString($gravity) : $gravity;
+        $this->gravity = Gravity::fromMixed($gravity);
     }
 
     public static function name(): string
@@ -27,7 +26,7 @@ final class Extend extends AbstractOption
     public function data(): array
     {
         return array_merge(
-            [(int) $this->extend],
+            [$this->extend ? 1 : 0],
             $this->gravity?->data() ?? [],
         );
     }

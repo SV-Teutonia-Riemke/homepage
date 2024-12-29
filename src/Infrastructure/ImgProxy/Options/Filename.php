@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-use InvalidArgumentException;
-
-final class Filename extends AbstractOption
+final readonly class Filename extends AbstractOption
 {
+    /** @param non-empty-string $name */
     public function __construct(private string $name)
     {
-        if ($name === '') {
-            throw new InvalidArgumentException('Filename cannot be empty');
-        }
     }
 
     public static function name(): string

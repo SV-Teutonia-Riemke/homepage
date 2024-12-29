@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace App\Infrastructure\ImgProxy\Options;
 
 use function array_merge;
-use function is_string;
 
-final class Resize extends AbstractOption
+final readonly class Resize extends AbstractOption
 {
     private ResizingType $type;
 
+    /**
+     * @param int<0, max>|null $width
+     * @param int<0, max>|null $height
+     */
     public function __construct(
         ResizingType|string $type,
         private int|null $width = null,
@@ -18,76 +21,12 @@ final class Resize extends AbstractOption
         private bool|null $enlarge = null,
         private bool|null $extend = null,
     ) {
-        $this->type = is_string($type) ? new ResizingType($type) : $type;
+        $this->type = ResizingType::fromStringOrSelf($type);
     }
 
     public static function create(ResizingType|string $resizingType): self
     {
         return new self($resizingType);
-    }
-
-    public function with(
-        ResizingType|string|null $type = null,
-        int|null $width = null,
-        int|null $height = null,
-        bool|null $enlarge = null,
-        bool|null $extend = null,
-    ): self {
-        $clone = clone $this;
-
-        if ($type !== null) {
-            $clone->type = is_string($type) ? new ResizingType($type) : $type;
-        }
-
-        if ($width !== null) {
-            $clone->width = $width;
-        }
-
-        if ($height !== null) {
-            $clone->height = $height;
-        }
-
-        if ($enlarge !== null) {
-            $clone->enlarge = $enlarge;
-        }
-
-        if ($extend !== null) {
-            $clone->extend = $extend;
-        }
-
-        return $clone;
-    }
-
-    public function width(int $width): self
-    {
-        $clone        = clone $this;
-        $clone->width = $width;
-
-        return $clone;
-    }
-
-    public function height(int $height): self
-    {
-        $clone         = clone $this;
-        $clone->height = $height;
-
-        return $clone;
-    }
-
-    public function enlarge(bool $enlarge = true): self
-    {
-        $clone          = clone $this;
-        $clone->enlarge = $enlarge;
-
-        return $clone;
-    }
-
-    public function extend(bool $extend = true): self
-    {
-        $clone         = clone $this;
-        $clone->extend = $extend;
-
-        return $clone;
     }
 
     public static function name(): string

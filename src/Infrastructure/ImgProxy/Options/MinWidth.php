@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-final class MinWidth extends AbstractOption
+final readonly class MinWidth extends AbstractOption
 {
     private Width $width;
 
+    /** @param int<0, max> $width */
     public function __construct(int $width)
     {
         $this->width = new Width($width);

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-final class MinHeight extends AbstractOption
+final readonly class MinHeight extends AbstractOption
 {
     private Height $height;
 
+    /** @param int<0, max> $height */
     public function __construct(int $height)
     {
         $this->height = new Height($height);

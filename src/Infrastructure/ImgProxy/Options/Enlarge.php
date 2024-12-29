@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-final class Enlarge extends AbstractOption
+final readonly class Enlarge extends AbstractOption
 {
     public function __construct(private bool $enlarge = true)
     {

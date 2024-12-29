@@ -8,7 +8,7 @@ use InvalidArgumentException;
 
 use function sprintf;
 
-final class Zoom extends AbstractOption
+final readonly class Zoom extends AbstractOption
 {
     public function __construct(
         private float $x,

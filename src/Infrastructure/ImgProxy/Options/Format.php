@@ -4,15 +4,11 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-use InvalidArgumentException;
-
-final class Format extends AbstractOption
+final readonly class Format extends AbstractOption
 {
+    /** @param non-empty-string $extension */
     public function __construct(private string $extension)
     {
-        if ($extension === '') {
-            throw new InvalidArgumentException('Format cannot be empty');
-        }
     }
 
     public static function name(): string
