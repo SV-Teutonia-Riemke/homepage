@@ -6,7 +6,7 @@ namespace App\Infrastructure\ImgProxy\Options;
 
 use InvalidArgumentException;
 
-final class Padding extends AbstractOption
+final readonly class Padding extends AbstractOption
 {
     public function __construct(
         private int|null $top = null,

@@ -10,12 +10,12 @@ use function array_merge;
 use function array_values;
 use function count;
 
-final class FormatQuality extends AbstractOption
+final readonly class FormatQuality extends AbstractOption
 {
     /** @var list<mixed> */
     private array $options;
 
-    /** @param array<string, int> $options */
+    /** @param array<string, int<0, 100>> $options */
     public function __construct(array $options)
     {
         $normalizedOptions = [];

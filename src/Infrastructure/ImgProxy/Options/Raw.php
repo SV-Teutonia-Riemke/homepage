@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-final class Raw extends AbstractOption
+final readonly class Raw extends AbstractOption
 {
-    public function __construct(private bool $raw = true)
-    {
+    public function __construct(
+        private bool $raw = true,
+    ) {
     }
 
     public static function name(): string
@@ -19,7 +20,7 @@ final class Raw extends AbstractOption
     public function data(): array
     {
         return [
-            (int) $this->raw,
+            $this->raw ? 1 : 0,
         ];
     }
 }

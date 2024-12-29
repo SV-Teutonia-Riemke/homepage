@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-use App\Infrastructure\ImgProxy\Support\GravityType;
+use App\Infrastructure\ImgProxy\Domain\GravityType;
 use InvalidArgumentException;
 
+use function array_map;
 use function array_merge;
 use function in_array;
 use function sprintf;
 
-final class Watermark extends AbstractOption
+final readonly class Watermark extends AbstractOption
 {
     private const string REPLICATE_POSITION = 're';
 
@@ -55,6 +56,11 @@ final class Watermark extends AbstractOption
     /** @return array<string> */
     private function positions(): array
     {
-        return array_merge(GravityType::TYPES, [self::REPLICATE_POSITION]);
+        $cases = array_map(
+            static fn (GravityType $position) => $position->value,
+            GravityType::cases(),
+        );
+
+        return array_merge($cases, [self::REPLICATE_POSITION]);
     }
 }

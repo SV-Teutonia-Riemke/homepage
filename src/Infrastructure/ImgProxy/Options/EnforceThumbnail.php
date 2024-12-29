@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-final class EnforceThumbnail extends AbstractOption
+final readonly class EnforceThumbnail extends AbstractOption
 {
     public function __construct(private string|null $format = null)
     {

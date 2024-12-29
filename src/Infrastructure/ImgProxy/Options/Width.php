@@ -4,18 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-use InvalidArgumentException;
-
-use function sprintf;
-
-final class Width extends AbstractOption
+final readonly class Width extends AbstractOption
 {
+    /** @param int<0, max> $width */
     public function __construct(
         public readonly int $width,
     ) {
-        if ($width < 0) {
-            throw new InvalidArgumentException(sprintf('Invalid width: %s', $width));
-        }
     }
 
     public static function name(): string

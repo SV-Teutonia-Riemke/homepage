@@ -6,7 +6,7 @@ namespace App\Infrastructure\ImgProxy\Options;
 
 use InvalidArgumentException;
 
-final class CacheBuster extends AbstractOption
+final readonly class CacheBuster extends AbstractOption
 {
     public function __construct(private string $value)
     {

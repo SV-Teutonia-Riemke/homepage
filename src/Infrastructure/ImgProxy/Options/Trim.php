@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-use App\Infrastructure\ImgProxy\Support\Color;
+use App\Infrastructure\ImgProxy\Domain\Color;
 use InvalidArgumentException;
 
 use function sprintf;
 
-final class Trim extends AbstractOption
+final readonly class Trim extends AbstractOption
 {
     private Color|null $color;
 
@@ -23,7 +23,7 @@ final class Trim extends AbstractOption
             throw new InvalidArgumentException(sprintf('Invalid threshold: %s', $threshold));
         }
 
-        $this->color = $color === null ? null : Color::fromHex($color);
+        $this->color = $color === null ? null : Color::fromString($color);
     }
 
     public static function name(): string
@@ -36,9 +36,9 @@ final class Trim extends AbstractOption
     {
         return [
             $this->threshold,
-            $this->color?->value(),
-            isset($this->equalHor) ? (int) $this->equalHor : null,
-            isset($this->equalVer) ? (int) $this->equalVer : null,
+            $this->color?->color,
+            $this->equalHor === null ? null : ($this->equalHor ? 1 : 0),
+            $this->equalVer === null ? null : ($this->equalVer ? 1 : 0),
         ];
     }
 }

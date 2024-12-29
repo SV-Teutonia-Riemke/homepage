@@ -7,7 +7,7 @@ namespace App\Infrastructure\ImgProxy\Options;
 use function array_merge;
 use function is_string;
 
-final class Crop extends AbstractOption
+final readonly class Crop extends AbstractOption
 {
     private Width $width;
 
@@ -15,6 +15,10 @@ final class Crop extends AbstractOption
 
     private Gravity|null $gravity;
 
+    /**
+     * @param int<0, max> $width
+     * @param int<0, max> $height
+     */
     public function __construct(
         int $width,
         int $height,

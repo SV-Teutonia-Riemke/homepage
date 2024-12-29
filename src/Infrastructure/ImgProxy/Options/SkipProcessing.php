@@ -9,7 +9,7 @@ use InvalidArgumentException;
 use function array_values;
 use function count;
 
-final class SkipProcessing extends AbstractOption
+final readonly class SkipProcessing extends AbstractOption
 {
     /** @var list<string> */
     private array $extensions;

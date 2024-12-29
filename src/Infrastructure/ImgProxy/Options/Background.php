@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-use App\Infrastructure\ImgProxy\Support\Color;
+use App\Infrastructure\ImgProxy\Domain\Color;
 
-use function is_string;
-
-final class Background extends AbstractOption
+final readonly class Background extends AbstractOption
 {
     private Color $color;
 
-    public function __construct(Color|string $color)
-    {
-        $this->color = is_string($color) ? new Color($color) : $color;
+    public function __construct(
+        Color|string $color,
+    ) {
+        $this->color = Color::fromStringOrSelf($color);
     }
 
-    public static function fromHex(string $hexColor): self
+    public static function fromString(string $hexColor): self
     {
-        return new self(Color::fromHex($hexColor));
+        return new self(Color::fromString($hexColor));
     }
 
     public static function name(): string
@@ -31,7 +30,7 @@ final class Background extends AbstractOption
     public function data(): array
     {
         return [
-            $this->color->value(),
+            $this->color->color,
         ];
     }
 }

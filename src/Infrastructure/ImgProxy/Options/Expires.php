@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-final class Expires extends AbstractOption
+final readonly class Expires extends AbstractOption
 {
     public function __construct(private int $timestamp)
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy\Options;
 
-final class KeepCopyright extends AbstractOption
+final readonly class KeepCopyright extends AbstractOption
 {
     public function __construct(private bool $keep = true)
     {
@@ -19,7 +19,7 @@ final class KeepCopyright extends AbstractOption
     public function data(): array
     {
         return [
-            (int) $this->keep,
+            $this->keep ? 1 : 0,
         ];
     }
 }
