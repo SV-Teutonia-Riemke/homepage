@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use App\Infrastructure\Asset\ImageProxyFactory;
-use App\Infrastructure\ImgProxy\ImgProxy;
 use App\Infrastructure\ImgProxy\PresetManager;
 use App\Infrastructure\Shlink\ShlinkClientFactory;
 use Embed\Embed;
+use Nicklog\ImgProxy\ImgProxy;
 use Shlinkio\Shlink\SDK\ShlinkClient;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 

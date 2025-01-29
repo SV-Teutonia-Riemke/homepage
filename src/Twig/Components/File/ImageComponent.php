@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Twig\Components\File;
 
-use App\Infrastructure\ImgProxy\Options\AbstractOption;
-use App\Infrastructure\ImgProxy\Options\Background;
-use App\Infrastructure\ImgProxy\Options\Size;
+use Nicklog\ImgProxy\Options\AbstractOption;
+use Nicklog\ImgProxy\Options\Background;
+use Nicklog\ImgProxy\Options\Size;
 use App\Storage\Entity\File;
 use App\Storage\Repository\FileRepository;
 use App\Twig\Components\AbstractComponent;

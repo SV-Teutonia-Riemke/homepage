@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa39890b45b252544129acce4d546e4a",
+    "content-hash": "e467a6614527d86e91f7bd58730b3e01",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3282,6 +3282,91 @@
                 }
             ],
             "time": "2024-12-27T09:25:35+00:00"
+        },
+        {
+            "name": "nicklog/imgproxy",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nicklog/imgproxy.git",
+                "reference": "b5dd21c7274484cb6c8078b16b80140994f2e3f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nicklog/imgproxy/zipball/b5dd21c7274484cb6c8078b16b80140994f2e3f8",
+                "reference": "b5dd21c7274484cb6c8078b16b80140994f2e3f8",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.3"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^12.0",
+                "phpstan/phpstan": "^1.12",
+                "phpstan/phpstan-deprecation-rules": "^1.2",
+                "phpstan/phpstan-phpunit": "^1.4",
+                "phpstan/phpstan-strict-rules": "^1.6",
+                "phpunit/phpunit": "^11.4",
+                "roave/security-advisories": "dev-master",
+                "shipmonk/composer-dependency-analyser": "^1.7",
+                "squizlabs/php_codesniffer": "^3.10"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nicklog\\ImgProxy\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Loges",
+                    "email": "dev@loges.one",
+                    "homepage": "https://loges.one"
+                }
+            ],
+            "description": "This library provides a simple way to generate URLs for imgproxy.",
+            "homepage": "https://github.com/nicklog/imgproxy",
+            "keywords": [
+                "Fit",
+                "crop",
+                "fill",
+                "generator",
+                "image",
+                "imgproxy",
+                "resize",
+                "rotate",
+                "url"
+            ],
+            "support": {
+                "email": "git@loges.one",
+                "issues": "https://github.com/nicklog/imgproxy/issues",
+                "source": "https://github.com/nicklog/imgproxy/releases",
+                "wiki": "https://github.com/nicklog/imgproxy/wiki"
+            },
+            "funding": [
+                {
+                    "url": "http://github.com/sponsors/nicklog",
+                    "type": "github"
+                },
+                {
+                    "url": "https://liberapay.com/nicklog",
+                    "type": "liberapay"
+                },
+                {
+                    "url": "http://paypal.me/nloges",
+                    "type": "paypal"
+                }
+            ],
+            "time": "2024-12-29T15:21:25+00:00"
         },
         {
             "name": "nyholm/psr7",

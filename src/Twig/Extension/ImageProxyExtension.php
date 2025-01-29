@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Twig\Extension;
 
-use App\Infrastructure\ImgProxy\ImgProxy;
-use App\Infrastructure\ImgProxy\Options\AbstractOption;
 use App\Infrastructure\ImgProxy\PresetManager;
+use Nicklog\ImgProxy\ImgProxy;
+use Nicklog\ImgProxy\Options\AbstractOption;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -44,7 +44,7 @@ class ImageProxyExtension extends AbstractExtension
         bool $useExtension = false,
         array $options = [],
     ): string {
-        $builder = $this->imgProxy->builder($path);
+        $builder = $this->imgProxy->urlBuilder($path);
 
         if ($presetName !== null && $this->presetManager->has($presetName)) {
             $preset  = $this->presetManager->get($presetName);

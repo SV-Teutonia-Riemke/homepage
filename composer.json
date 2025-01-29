@@ -28,6 +28,7 @@
         "knplabs/knp-paginator-bundle": "^6.6",
         "league/flysystem": "^3.29",
         "nesbot/carbon": "^3.8",
+        "nicklog/imgproxy": "^1.0",
         "nyholm/psr7": "^1.8",
         "odolbeau/phone-number-bundle": "^4.0",
         "oneup/flysystem-bundle": "^4.12",

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy;
 
-use App\Infrastructure\ImgProxy\Domain\Preset;
-use App\Infrastructure\ImgProxy\Options\Builder\ResizeBuilder;
-use App\Infrastructure\ImgProxy\Options\Padding;
-use App\Infrastructure\ImgProxy\Options\Quality;
-use App\Infrastructure\ImgProxy\Options\ResizingType;
-use App\Infrastructure\ImgProxy\Options\Width;
+use Nicklog\ImgProxy\Domain\Preset;
+use Nicklog\ImgProxy\Options\Builder\ResizeBuilder;
+use Nicklog\ImgProxy\Options\Padding;
+use Nicklog\ImgProxy\Options\Quality;
+use Nicklog\ImgProxy\Options\ResizingType;
+use Nicklog\ImgProxy\Options\Width;
 use InvalidArgumentException;
 
 use function sprintf;

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Asset;
 
-use App\Infrastructure\ImgProxy\ImgProxy;
-use App\Infrastructure\ImgProxy\Signer\KeyPair;
+use Nicklog\ImgProxy\ImgProxy;
+use Nicklog\ImgProxy\Signer\KeyPair;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class ImageProxyFactory
