@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\ImgProxy;
 
+use InvalidArgumentException;
 use Nicklog\ImgProxy\Domain\Preset;
 use Nicklog\ImgProxy\Options\Builder\ResizeBuilder;
 use Nicklog\ImgProxy\Options\Padding;
 use Nicklog\ImgProxy\Options\Quality;
 use Nicklog\ImgProxy\Options\ResizingType;
 use Nicklog\ImgProxy\Options\Width;
-use InvalidArgumentException;
 
 use function sprintf;
 

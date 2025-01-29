@@ -215,11 +215,6 @@
         "symfony": {
             "allow-contrib": false,
             "require": "7.2.*"
-        },
-        "patches": {
-            "hwi/oauth-bundle": {
-                "Make bundle compatible with Symfony 7.2": "https://patch-diff.githubusercontent.com/raw/hwi/HWIOAuthBundle/pull/2022.patch"
-            }
         }
     }
 }

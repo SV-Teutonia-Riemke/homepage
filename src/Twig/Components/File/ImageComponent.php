@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Twig\Components\File;
 
-use Nicklog\ImgProxy\Options\AbstractOption;
-use Nicklog\ImgProxy\Options\Background;
-use Nicklog\ImgProxy\Options\Size;
 use App\Storage\Entity\File;
 use App\Storage\Repository\FileRepository;
 use App\Twig\Components\AbstractComponent;
 use InvalidArgumentException;
+use Nicklog\ImgProxy\Options\AbstractOption;
+use Nicklog\ImgProxy\Options\Background;
+use Nicklog\ImgProxy\Options\Size;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
