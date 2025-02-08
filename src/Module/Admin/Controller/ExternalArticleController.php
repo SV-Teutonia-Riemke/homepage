@@ -69,8 +69,11 @@ final class ExternalArticleController extends AbstractController
             $article = new EmbedArticle($this->embed->get($url));
         }
 
+        $query = $this->externalArticleRepository->createQueryBuilder('p');
+        $query->orderBy('p.id', 'DESC');
+
         $pagination = $this->paginator->paginate(
-            $this->externalArticleRepository->createQueryBuilder('p'),
+            $query,
             $request->query->getInt('page', 1),
         );
 

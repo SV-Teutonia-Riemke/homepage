@@ -10,7 +10,7 @@
 }) %}
 
 <div
-        class="{{ classes.apply({size}, attributes.render('class')) }}"
-        {{ attributes }}>
+    class="{{ classes.apply({size}, attributes.render('class')) }}"
+    {{ attributes }}>
     {% block content %}{% endblock %}
 </div>

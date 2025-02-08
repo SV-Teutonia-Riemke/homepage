@@ -1,7 +1,7 @@
 <div{{ attributes }}>
     {% block preElements %}
         {% if preElements is not null %}
-            <twig:bs:button:group size="sm" class="me-1">
+            <twig:bs:button:group class="me-1">
                 {{ preElements|raw }}
             </twig:bs:button:group>
         {% endif %}
@@ -9,13 +9,13 @@
 
     {% block content %}
         {% if up is not null and down is not null %}
-            <twig:bs:button:group size="sm" class="me-1">
+            <twig:bs:button:group class="me-1">
                 <twig:bs:button href="{{ up }}" tooltip="Nach Oben" icon="fa6-solid:arrow-up"/>
                 <twig:bs:button href="{{ down }}" tooltip="Nach Unten" icon="fa6-solid:arrow-down"/>
             </twig:bs:button:group>
         {% endif %}
 
-        <twig:bs:button:group size="sm" class="me-1">
+        <twig:bs:button:group class="me-1">
             {% if enable is not null and disable is not null and enabled is not null %}
                 {% if enabled %}
                     <twig:bs:button type="success" href="{{ disable }}" tooltip="Deaktivieren" icon="fa6-solid:circle"/>
@@ -29,7 +29,7 @@
         </twig:bs:button:group>
 
         {% if remove is not null %}
-            <twig:bs:button:group size="sm" class="me-1">
+            <twig:bs:button:group class="me-1">
                 <twig:bs:button type="danger" href="{{ remove }}" tooltip="Löschen" icon="fa6-solid:trash" confirmation/>
             </twig:bs:button:group>
         {% endif %}
