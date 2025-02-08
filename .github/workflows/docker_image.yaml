@@ -35,6 +35,7 @@ jobs:
       - name: Setup pnpm and Install
         uses: seepine/action-setup-pnpm@v1
         with:
+          enable-corepack: false
           verison: ${{ env.PNPM_VERSION }}
 
       - name: Build assets
