@@ -8,8 +8,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  PNPM_VERSION: 9
-  PHP_VERSION: 8.3
+  PNPM_VERSION: 10.2
+  PHP_VERSION: 8.4
 
 jobs:
   build-and-push-image:
