@@ -17,6 +17,8 @@
     {% block javascripts %}
         {{ vite_entry_script_tags('app') }}
     {% endblock %}
+
+    <script src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.js" integrity="sha384-oeUn82QNXPuVkGCkcrInrS1twIxKhkZiFfr2TdiuObZ3n3yIeMiqcRzkIcguaof1" crossorigin="anonymous"></script>
 </head>
 <body class="theme-light {{ bodyCssClasses|default('') }}">
 
