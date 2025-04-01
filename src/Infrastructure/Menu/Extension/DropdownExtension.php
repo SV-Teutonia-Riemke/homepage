@@ -11,7 +11,7 @@ use function array_merge;
 
 final class DropdownExtension implements ExtensionInterface
 {
-    private const KEY_NAME = 'dropdown';
+    private const string KEY_NAME = 'dropdown';
 
     /** @inheritDoc */
     public function buildOptions(array $options): array

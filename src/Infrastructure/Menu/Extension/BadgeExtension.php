@@ -11,7 +11,7 @@ use function array_merge;
 
 final class BadgeExtension implements ExtensionInterface
 {
-    private const KEY_NAME = 'badge';
+    private const string KEY_NAME = 'badge';
 
     /** @inheritDoc */
     public function buildOptions(array $options): array

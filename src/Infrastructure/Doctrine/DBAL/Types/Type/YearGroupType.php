@@ -12,7 +12,7 @@ use Throwable;
 
 final class YearGroupType extends Type
 {
-    public const NAME = 'year_group';
+    public const string NAME = 'year_group';
 
     public function getName(): string
     {

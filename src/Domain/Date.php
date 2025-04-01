@@ -19,7 +19,7 @@ use function sprintf;
 
 final class Date implements JsonSerializable, Stringable
 {
-    private const FORMAT = 'Y-m-d';
+    private const string FORMAT = 'Y-m-d';
 
     private readonly CarbonInterface $carbon;
 

@@ -12,7 +12,7 @@ use Throwable;
 
 final class DateType extends Type
 {
-    public const NAME = 'date';
+    public const string NAME = 'date';
 
     public function getName(): string
     {

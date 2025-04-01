@@ -16,12 +16,10 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+use function method_exists;
 use function sprintf;
 
-/**
- * @implements UserProviderInterface<User>
- * @implements PasswordUpgraderInterface<User>
- */
+/** @implements UserProviderInterface<User> */
 class UserProvider implements UserProviderInterface, PasswordUpgraderInterface, OAuthAwareUserProviderInterface
 {
     public function __construct(
@@ -58,7 +56,9 @@ class UserProvider implements UserProviderInterface, PasswordUpgraderInterface, 
         PasswordAuthenticatedUserInterface $user,
         string $newHashedPassword,
     ): void {
-        $user->setPassword($newHashedPassword);
+        if (method_exists($user, 'setPassword')) {
+            $user->setPassword($newHashedPassword);
+        }
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

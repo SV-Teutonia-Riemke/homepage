@@ -11,7 +11,7 @@ use function array_merge;
 
 final class IconifyExtension implements ExtensionInterface
 {
-    private const KEY_NAME = 'icon';
+    private const string KEY_NAME = 'icon';
 
     /** @inheritDoc */
     public function buildOptions(array $options): array

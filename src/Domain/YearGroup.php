@@ -13,7 +13,7 @@ use function sscanf;
 
 final class YearGroup implements Stringable
 {
-    private const FORMAT = '%d-%d';
+    private const string FORMAT = '%d-%d';
 
     public function __construct(
         public readonly int $start,

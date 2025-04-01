@@ -11,7 +11,7 @@ use function array_merge;
 
 final class OrderExtension implements ExtensionInterface
 {
-    public const KEY_NAME = 'order';
+    public const string KEY_NAME = 'order';
 
     /** @inheritDoc */
     public function buildOptions(array $options): array

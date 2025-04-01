@@ -12,8 +12,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /** @extends AbstractType<array> */
 final class AbstractForm extends AbstractType
 {
-    public const BUTTON_SUBMIT         = 'submit';
-    public const BUTTON_SUBMIT_AND_NEW = 'submitAndNew';
+    public const string BUTTON_SUBMIT         = 'submit';
+    public const string BUTTON_SUBMIT_AND_NEW = 'submitAndNew';
 
     /**
      * @phpstan-param FormBuilderInterface<array<mixed>|null> $builder
