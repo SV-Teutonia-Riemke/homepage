@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Storage\Entity;
 
+use App\Domain\HtmlTruncate;
 use App\Storage\Entity\Common\Enabled;
 use App\Storage\Entity\Common\EnabledInterface;
 use App\Storage\Repository\ArticleRepository;
@@ -34,6 +35,12 @@ class Article extends AbstractEntity implements EnabledInterface
     #[ORM\Column(type: DateTimeUTCType::DATETIMEUTC, nullable: true)]
     protected DateTimeInterface|null $publishedAt = null;
 
+    #[ORM\Column(type: Types::BOOLEAN, options: ['default' => false])]
+    private bool $truncate = false;
+
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    private int|null $truncateMaxLength = null;
+
     public function __construct(
         string $title,
         string $content,
@@ -55,6 +62,31 @@ class Article extends AbstractEntity implements EnabledInterface
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    public function isTruncate(): bool
+    {
+        return $this->truncate && $this->truncateMaxLength !== null;
+    }
+
+    public function setTruncate(bool $truncate): void
+    {
+        $this->truncate = $truncate;
+    }
+
+    public function getTruncateMaxLength(): int|null
+    {
+        return $this->truncateMaxLength;
+    }
+
+    public function setTruncateMaxLength(int|null $truncateMaxLength): void
+    {
+        $this->truncateMaxLength = $truncateMaxLength;
+    }
+
+    public function getHtmlTruncate(): HtmlTruncate
+    {
+        return new HtmlTruncate($this->content, 750);
     }
 
     public function setContent(string $content): void

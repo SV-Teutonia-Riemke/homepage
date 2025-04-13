@@ -49,7 +49,7 @@ final class NewsController extends AbstractController
     public function article(Article $article): Response
     {
         return $this->render('@page/news/article.html.twig', [
-            'article'  => $article,
+            'article' => $article,
         ]);
     }
 }

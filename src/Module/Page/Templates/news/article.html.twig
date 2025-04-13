@@ -1,5 +1,5 @@
 {% extends '@page/news/base.html.twig' %}
 
 {% block newsContent %}
-    {% include '@page/news/_article.html.twig' with { article: article } %}
+    {% include '@page/news/_article.html.twig' with { article: article, doTruncate: 0 } %}
 {% endblock %}

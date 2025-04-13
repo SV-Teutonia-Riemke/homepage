@@ -3,6 +3,8 @@
     {% endblock %}
 {% endset %}
 
+{% set doTruncate = doTruncate|default(1) %}
+
 <twig:bs:card class="mb-3" statusTop="primary" imageSrc="">
 
     <twig:block name="header">
@@ -23,7 +25,17 @@
             {% endif %}
             <div class="col-12{% if article.image is not null %} col-md{% endif %}">
                 <twig:bs:card:body>
-                    <twig:bs:card:text content="{{ article.content }}"/>
+                    <twig:bs:card:text>
+                        {% if doTruncate == 1 and article.truncate %}
+                            {{ article.htmlTruncate.truncatedHtml|raw }}
+
+                            {% if article.htmlTruncate.isTruncated %}
+                                <p><a href="{{ path('app_news_article', { id: article.id }) }}">Weiter lesen</a></p>
+                            {% endif %}
+                        {% else %}
+                            {{ article.content|raw }}
+                        {% endif %}
+                    </twig:bs:card:text>
                     <twig:bs:card:text>
                         <small class="text-muted">
                             Veröffentlicht am {{ article.releaseDate|format_date }}
