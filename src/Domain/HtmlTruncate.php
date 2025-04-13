@@ -11,7 +11,6 @@ use DOMNode;
 use DOMText;
 
 use function in_array;
-use function libxml_use_internal_errors;
 use function mb_convert_encoding;
 use function rtrim;
 use function substr;
