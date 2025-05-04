@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Module\Page\Form\Model;
 
+use App\Module\Page\Domain\ContactType;
+
 class Contact
 {
-    public string $subject;
+    public ContactType $subject;
 
     public string $firstName;
 

@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\Module\Page\Form\Type\Forms;
 
+use App\Module\Page\Domain\ContactType;
 use App\Module\Page\Form\Model\Contact;
 use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaV3Type;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints\IsTrueV3;
 use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,16 +30,11 @@ class ContactForm extends AbstractType
         array $options,
     ): void {
         $builder
-            ->add('subject', ChoiceType::class, [
+            ->add('subject', EnumType::class, [
+                'class' => ContactType::class,
+                'choice_label' => static fn (ContactType $contactType): string => $contactType->getLabel(),
                 'label' => 'Anliegen',
                 'placeholder' => 'Bitte wählen',
-                'choices' => [
-                    'Allgemeine Anfrage' => 'Allgemeine Anfrage',
-                    'Fragen zur Mitgliedschaft' => 'Fragen zur Mitgliedschaft',
-                    'Daten der Mitgliedschaft ändern' => 'Daten der Mitgliedschaft ändern',
-                    'Kündigen' => 'Kündigen',
-                    'Sponsoring' => 'Sponsoring',
-                ],
                 'constraints' => [
                     new NotBlank(),
                 ],

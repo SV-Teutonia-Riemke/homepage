@@ -37,9 +37,9 @@ class ContactController extends AbstractController
 
             $email = (new Email())
                 ->from('noreply@teutonia-riemke.de')
-                ->to('info@teutonia-riemke.de')
+                ->to($data->subject->getSendTo())
                 ->replyTo($data->email)
-                ->subject(sprintf('Neue Anfrage über das Kontaktformular: %s', $data->subject))
+                ->subject(sprintf('Neue Anfrage über das Kontaktformular: %s', $data->subject->getLabel()))
                 ->text(
                     sprintf(
                         <<<'EOF'
@@ -51,7 +51,7 @@ class ContactController extends AbstractController
                         Nachricht:
                         %s
                         EOF,
-                        $data->subject,
+                        $data->subject->getLabel(),
                         $data->firstName,
                         $data->lastName,
                         $data->email,
