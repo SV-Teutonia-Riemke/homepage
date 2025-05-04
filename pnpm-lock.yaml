@@ -18,11 +18,11 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(@hotwired/stimulus@3.2.2)
       '@symfony/stimulus-bridge':
-        specifier: ^3.2.0
-        version: 3.2.3(@hotwired/stimulus@3.2.2)
+        specifier: ^4.0.1
+        version: 4.0.1(@hotwired/stimulus@3.2.2)
       '@symfony/stimulus-bundle':
         specifier: file:vendor/symfony/stimulus-bundle/assets
-        version: file:vendor/symfony/stimulus-bundle/assets(@hotwired/stimulus@3.2.2)(@symfony/stimulus-bridge@3.2.3(@hotwired/stimulus@3.2.2))
+        version: file:vendor/symfony/stimulus-bundle/assets(@hotwired/stimulus@3.2.2)(@symfony/stimulus-bridge@4.0.1(@hotwired/stimulus@3.2.2))
       '@symfony/ux-autocomplete':
         specifier: file:vendor/symfony/ux-autocomplete/assets
         version: file:vendor/symfony/ux-autocomplete/assets(@hotwired/stimulus@3.2.2)(tom-select@2.4.3)
@@ -1015,9 +1015,9 @@ packages:
   '@surma/rollup-plugin-off-main-thread@2.2.3':
     resolution: {integrity: sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ==}
 
-  '@symfony/stimulus-bridge@3.2.3':
-    resolution: {integrity: sha512-36rQTihQ2MGOn8EmdOYCr3DQfP3WS1CNcUUXKTPY5ghtFOeb7OVuhbc32AjRowE2/vaVDOUCPOTv3VLf5VtXBA==}
-    engines: {node: ^10.13.0 || >=12.0.0}
+  '@symfony/stimulus-bridge@4.0.1':
+    resolution: {integrity: sha512-+/kSQ4qFXMbZS+HjkhzOxwdN+60pMev7kzzDpQV/Tdm/iIWoxx5GDsVcdLaBb2783BVQHyrBP72JerF2SXTbTg==}
+    engines: {node: ^18.12.0 || ^20.0.0 || >=22.0}
     peerDependencies:
       '@hotwired/stimulus': ^3.0
 
@@ -1807,6 +1807,10 @@ packages:
   loader-utils@2.0.4:
     resolution: {integrity: sha512-xXqpXoINfFhgua9xiqD8fPFHgkoq1mmmpE92WlDbm9rNRd/EbRb+Gqf908T2DMfuHjjJlksiK2RbHVOdD/MqSw==}
     engines: {node: '>=8.9.0'}
+
+  loader-utils@3.3.1:
+    resolution: {integrity: sha512-FMJTLMXfCLMLfJxcX9PFqX5qD88Z5MRGaZCVzfuqeZSPsyiBzs+pahDQjbIWz2QIzPZz0NX9Zy4FX3lmK6YHIg==}
+    engines: {node: '>= 12.13.0'}
 
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
@@ -3374,19 +3378,18 @@ snapshots:
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.12
 
-  '@symfony/stimulus-bridge@3.2.3(@hotwired/stimulus@3.2.2)':
+  '@symfony/stimulus-bridge@4.0.1(@hotwired/stimulus@3.2.2)':
     dependencies:
       '@hotwired/stimulus': 3.2.2
       '@hotwired/stimulus-webpack-helpers': 1.0.1(@hotwired/stimulus@3.2.2)
       '@types/webpack-env': 1.18.8
-      acorn: 8.14.1
-      loader-utils: 2.0.4
-      schema-utils: 3.3.0
+      loader-utils: 3.3.1
+      schema-utils: 4.3.2
 
-  '@symfony/stimulus-bundle@file:vendor/symfony/stimulus-bundle/assets(@hotwired/stimulus@3.2.2)(@symfony/stimulus-bridge@3.2.3(@hotwired/stimulus@3.2.2))':
+  '@symfony/stimulus-bundle@file:vendor/symfony/stimulus-bundle/assets(@hotwired/stimulus@3.2.2)(@symfony/stimulus-bridge@4.0.1(@hotwired/stimulus@3.2.2))':
     dependencies:
       '@hotwired/stimulus': 3.2.2
-      '@symfony/stimulus-bridge': 3.2.3(@hotwired/stimulus@3.2.2)
+      '@symfony/stimulus-bridge': 4.0.1(@hotwired/stimulus@3.2.2)
 
   '@symfony/ux-autocomplete@file:vendor/symfony/ux-autocomplete/assets(@hotwired/stimulus@3.2.2)(tom-select@2.4.3)':
     dependencies:
@@ -4201,6 +4204,8 @@ snapshots:
       big.js: 5.2.2
       emojis-list: 3.0.0
       json5: 2.2.3
+
+  loader-utils@3.3.1: {}
 
   lodash.debounce@4.0.8: {}
 
