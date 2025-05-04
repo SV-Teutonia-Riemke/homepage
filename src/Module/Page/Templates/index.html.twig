@@ -34,7 +34,7 @@
                     <div class="space-y">
                         <div class="card">
                             {% if article.imageUrl is not null %}
-                                <img src="{{ article.imageUrl|imgproxy() }}" alt="{{ article.title }}" class="card-img-top">
+                                <img src="{{ article.imageUrl|imgproxy }}" alt="{{ article.title }}" class="card-img-top">
                             {% endif %}
                             <div class="card-body">
                                 <h5 class="card-title">
