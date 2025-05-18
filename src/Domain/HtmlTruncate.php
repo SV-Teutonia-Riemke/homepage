@@ -9,6 +9,7 @@ use DOMElement;
 use DOMLettersIterator;
 use DOMNode;
 use DOMText;
+use RuntimeException;
 
 use function in_array;
 use function mb_convert_encoding;
@@ -82,6 +83,10 @@ final class HtmlTruncate
     {
         // Transform multibyte entities which otherwise display incorrectly.
         $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+
+        if ($html === false) {
+            throw new RuntimeException('Unable to convert html to dom document', 1747572074616);
+        }
 
         // Instantiate new DOMDocument object, and then load in UTF-8 HTML.
         $dom           = new DOMDocument();

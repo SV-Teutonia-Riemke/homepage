@@ -18,19 +18,19 @@
         <twig:bs:button:group class="me-1">
             {% if enable is not null and disable is not null and enabled is not null %}
                 {% if enabled %}
-                    <twig:bs:button type="success" href="{{ disable }}" tooltip="Deaktivieren" icon="fa6-solid:circle"/>
+                    <twig:bs:button variant="success" href="{{ disable }}" tooltip="Deaktivieren" icon="fa6-solid:circle"/>
                 {% else %}
-                    <twig:bs:button type="danger" href="{{ enable }}" tooltip="Aktivieren" icon="fa6-solid:circle"/>
+                    <twig:bs:button variant="danger" href="{{ enable }}" tooltip="Aktivieren" icon="fa6-solid:circle"/>
                 {% endif %}
             {% endif %}
             {% if edit is not null %}
-                <twig:bs:button type="primary" href="{{ edit }}" tooltip="Bearbeiten" icon="fa6-solid:pencil"/>
+                <twig:bs:button variant="primary" href="{{ edit }}" tooltip="Bearbeiten" icon="fa6-solid:pencil"/>
             {% endif %}
         </twig:bs:button:group>
 
         {% if remove is not null %}
             <twig:bs:button:group class="me-1">
-                <twig:bs:button type="danger" href="{{ remove }}" tooltip="Löschen" icon="fa6-solid:trash" confirmation/>
+                <twig:bs:button variant="danger" href="{{ remove }}" tooltip="Löschen" icon="fa6-solid:trash" confirmation />
             </twig:bs:button:group>
         {% endif %}
     {% endblock %}

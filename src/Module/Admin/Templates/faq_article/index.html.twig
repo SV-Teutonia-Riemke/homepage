@@ -4,7 +4,7 @@
 {% set pageTitle = 'FAQ Artikel' %}
 
 {% block pageTitleActionsButtons %}
-    <twig:bs:button type="primary" outline href="{{ path('app_admin_faq_category_index') }}" icon="wpf:faq" title="Alle Kategorien"/>
+    <twig:bs:button variant="primary" outline href="{{ path('app_admin_faq_category_index') }}" icon="wpf:faq" title="Alle Kategorien"/>
     <twig:crud:create crud="{{ crud }}"/>
 {% endblock %}
 

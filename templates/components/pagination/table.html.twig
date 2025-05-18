@@ -10,6 +10,23 @@
     {% endblock %}
 {% endset %}
 
+{% set searchForm %}
+    {% if search is not null %}
+        {% block searchFields %}
+            {{ form_widget(search) }}
+        {% endblock %}
+        {% block searchButtons %}
+            <div class="row">
+                <div class="col col-md-auto ms-auto">
+                    <twig:bs:button:group>
+                        <twig:bs:button variant="submit">Suchen</twig:bs:button>
+                    </twig:bs:button:group>
+                </div>
+            </div>
+        {% endblock %}
+    {% endif %}
+{% endset %}
+
 <div{{ attributes }}>
     <twig:bs:card>
         <twig:block name="header">
@@ -25,9 +42,14 @@
         </twig:block>
 
         <twig:block name="body">
-            {% if form is not null %}
+            {% if search is not null %}
                 <twig:bs:card:body>
-                    {{ form(form) }}
+                    {{ form_start(search) }}
+
+                    {{ searchForm }}
+
+                    {{ form_rest(search) }}
+                    {{ form_end(search) }}
                 </twig:bs:card:body>
             {% endif %}
             <div class="table-responsive">

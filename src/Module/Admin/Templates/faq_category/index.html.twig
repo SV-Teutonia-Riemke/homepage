@@ -22,7 +22,7 @@
                     <td>{{ object.title }}</td>
                 </twig:block>
                 <twig:block name="preCta">
-                    <twig:bs:button type="secondary" href="{{ path('app_admin_faq_article_index', { category: object.id }) }}" title="Artikel"/>
+                    <twig:bs:button variant="secondary" href="{{ path('app_admin_faq_article_index', { category: object.id }) }}" title="Artikel"/>
                 </twig:block>
             </twig:crud:row>
         </twig:block>

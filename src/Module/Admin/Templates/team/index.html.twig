@@ -8,7 +8,14 @@
 {% endblock %}
 
 {% block pageBody %}
-    <twig:pagination:table :title="pageTitle" :iterable="iterable">
+    <twig:pagination:table :title="pageTitle" :search="form" :iterable="iterable">
+        <twig:block name="searchFields">
+            <twig:bs:row>
+                <twig:bs:col md="4">{{ form_row(search.name) }}</twig:bs:col>
+                <twig:bs:col md="4">{{ form_row(search.season) }}</twig:bs:col>
+                <twig:bs:col md="4">{{ form_row(search.ageGroup) }}</twig:bs:col>
+            </twig:bs:row>
+        </twig:block>
         <twig:block name="tableHeader">
             <th class="w-1"></th>
             <th class="w-1">Id</th>
@@ -20,7 +27,7 @@
             <th class="w-1"></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:crud:row :crud="crud" :object="object" enabled="{{ object.enabled }}">
+            <twig:crud:row :object="object" enabled="{{ object.enabled }}">
                 <td>{{ object.id }}</td>
                 <td>{{ object.name }}</td>
                 <td>{{ object.gender.value }}</td>

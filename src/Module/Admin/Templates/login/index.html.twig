@@ -16,7 +16,7 @@
                 </h2>
                 <div class="card card-md">
                     <div class="card-body">
-                        <twig:bs:button href="{{ path('hwi_oauth_service_redirect', {'service': 'azure' }) }}" type="azure" class="w-100" icon="skill-icons:azure-light" title="Mit Microsoft anmelden"/>
+                        <twig:bs:button href="{{ path('hwi_oauth_service_redirect', {'service': 'azure' }) }}" variant="azure" class="w-100" icon="skill-icons:azure-light" title="Mit Microsoft anmelden"/>
                     </div>
                     <div class="hr-text">oder</div>
                     <form class="card-body" action="{{ path('app_admin_login') }}" method="post" autocomplete="off">

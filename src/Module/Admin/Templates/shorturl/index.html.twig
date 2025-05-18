@@ -22,7 +22,7 @@
         <twig:block name="tableRow">
             <twig:crud:row :crud="crud" :object="object">
                 <td>
-                    <twig:bs:button size="sm" type="primary" outline class="btn-icon copy-to-clipboard" data-clipboard-text="{{ object.shortUrl }}" icon="fa6-solid:copy" tooltip="In die Zwischenablage kopieren"/>
+                    <twig:bs:button variant="primary" outline class="btn-icon copy-to-clipboard" data-clipboard-text="{{ object.shortUrl }}" icon="fa6-solid:copy" tooltip="In die Zwischenablage kopieren"/>
                 </td>
                 <td>
                     <a href="{{ object.shortUrl }}" target="_blank">

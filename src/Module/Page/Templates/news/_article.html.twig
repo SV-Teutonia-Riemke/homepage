@@ -10,7 +10,7 @@
     <twig:block name="header">
         <twig:bs:card:header title="{{ article.title }}">
             <twig:bs:card:actions>
-                <twig:bs:button type="link" class="btn-icon copy-to-clipboard" data-clipboard-text="{{ url('app_news_article', { id: article.id }) }}" icon="fa6-solid:share-nodes"/>
+                <twig:bs:button variant="link" class="btn-icon copy-to-clipboard" data-clipboard-text="{{ url('app_news_article', { id: article.id }) }}" icon="fa6-solid:share-nodes"/>
             </twig:bs:card:actions>
         </twig:bs:card:header>
     </twig:block>

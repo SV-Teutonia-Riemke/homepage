@@ -17,7 +17,7 @@ final class ButtonComponent
 {
     public string|null $href = null;
 
-    public string $type = 'primary';
+    public string $variant = 'primary';
 
     public bool $outline = false;
 
@@ -38,7 +38,7 @@ final class ButtonComponent
 
         $classes = [
             'btn',
-            sprintf($type, $this->type),
+            sprintf($type, $this->variant),
         ];
 
         if ($this->icon !== null && $this->title === null) {

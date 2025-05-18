@@ -18,5 +18,5 @@ class TableComponent
     /** @var iterable<array-key, mixed> */
     public iterable $iterable;
 
-    public FormView|null $form = null;
+    public FormView|null $search = null;
 }

@@ -7,6 +7,7 @@ namespace App\Module\Admin\Controller;
 use App\Domain\Role;
 use App\Module\Admin\Crud\CrudConfigBuilder;
 use App\Module\Admin\Crud\Handler\FullHandler;
+use App\Module\Admin\Form\Type\Forms\TeamSearchType;
 use App\Module\Admin\Form\Type\Forms\TeamType;
 use App\Storage\Entity\Team;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,6 +31,9 @@ final class TeamController extends AbstractCrudController
             Team::class,
             'team',
         );
+
+        $builder->defaultSortFieldName = 'p.id';
+        $builder->defaultSortDirection = 'desc';
     }
 
     protected function getFormType(
@@ -37,5 +41,10 @@ final class TeamController extends AbstractCrudController
         object|null $object = null,
     ): string {
         return TeamType::class;
+    }
+
+    protected function getSearchType(): string
+    {
+        return TeamSearchType::class;
     }
 }

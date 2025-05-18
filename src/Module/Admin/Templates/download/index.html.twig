@@ -18,7 +18,7 @@
             <th></th>
         </twig:block>
         <twig:block name="tableRow">
-            <twig:crud:row :crud="crud" :object="object" enabled="{{ object.enabled }}">
+            <twig:crud:row crud="{{ crud }}" :object="object" enabled="{{ object.enabled }}">
                 <td>{{ object.id }}</td>
                 <td>{{ object.name }}</td>
                 <td>{{ object.uri }}</td>
