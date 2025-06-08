@@ -14,12 +14,10 @@ use App\Storage\Repository\FaqCategoryRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /** @template-extends AbstractCrudController<FaqArticle, FaqArticleType, null> */
-#[AsController]
 #[IsGranted(Role::MANAGE_FAQ->value)]
 #[Route('/faq/category/{category}/article', name: 'faq_article_')]
 final class FaqArticleController extends AbstractCrudController

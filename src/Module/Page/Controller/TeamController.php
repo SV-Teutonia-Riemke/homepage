@@ -8,14 +8,12 @@ use App\Storage\Entity\Team;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 use function array_filter;
 use function implode;
 
-#[AsController]
 #[Route('/team/{team}', name: 'team')]
 #[Route('/team/{team}/{slug}', name: 'team_slug')]
 final class TeamController extends AbstractController

@@ -10,12 +10,10 @@ use App\Module\Admin\Crud\Handler\FullHandler;
 use App\Module\Admin\Form\Type\Forms\PageType;
 use App\Storage\Entity\Page;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /** @template-extends AbstractCrudController<Page, PageType, null> */
-#[AsController]
 #[IsGranted(Role::MANAGE_PAGES->value)]
 #[Route('/page', name: 'page_')]
 final class PageController extends AbstractCrudController

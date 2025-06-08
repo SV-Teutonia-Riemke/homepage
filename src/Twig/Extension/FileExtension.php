@@ -9,60 +9,57 @@ use App\Storage\Entity\Directory;
 use App\Storage\Entity\File;
 use App\Storage\Repository\DirectoryRepository;
 use App\Storage\Repository\FileRepository;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
-use Twig\TwigFunction;
-use Twig\TwigTest;
+use Twig\Attribute\AsTwigFilter;
+use Twig\Attribute\AsTwigFunction;
+use Twig\Attribute\AsTwigTest;
 
 use function in_array;
 use function is_int;
 
-final class FileExtension extends AbstractExtension
+final readonly class FileExtension
 {
     public function __construct(
-        private readonly AssetUrlGenerator $assetUrlGenerator,
-        private readonly DirectoryRepository $directoryRepository,
-        private readonly FileRepository $fileRepository,
+        private AssetUrlGenerator $assetUrlGenerator,
+        private DirectoryRepository $directoryRepository,
+        private FileRepository $fileRepository,
     ) {
     }
 
-    /** @inheritDoc */
-    public function getTests(): array
+    #[AsTwigTest('image')]
+    public function isImage(File $file): bool
     {
-        return [
-            new TwigTest(
-                'image',
-                static fn (File $value): bool => in_array(
-                    $value->getExtension(),
-                    ['jpg', 'jpeg', 'png', 'gif', 'webp'],
-                    true,
-                ),
-            ),
-        ];
+        return in_array(
+            $file->getExtension(),
+            ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+            true,
+        );
     }
 
-    /** @inheritDoc */
-    public function getFilters(): array
-    {
-        return [
-            new TwigFilter('file_url', $this->assetUrlGenerator->__invoke(...)),
-            new TwigFilter('directory_files', $this->findFilesOfDirectory(...)),
-        ];
+    #[AsTwigFunction('file_url')]
+    #[AsTwigFilter('file_url')]
+    public function fileUrl(
+        File $file,
+        bool $download = false,
+    ): string {
+        return $this->assetUrlGenerator->__invoke($file, $download);
     }
 
-    /** @inheritDoc */
-    public function getFunctions(): array
+    #[AsTwigFunction('find_directory')]
+    public function findDirectory(int $id): Directory|null
     {
-        return [
-            new TwigFunction('file_url', $this->assetUrlGenerator->__invoke(...)),
-            new TwigFunction('directory_files', $this->findFilesOfDirectory(...)),
-            new TwigFunction('find_file', $this->fileRepository->find(...)),
-            new TwigFunction('find_directory', $this->directoryRepository->find(...)),
-        ];
+        return $this->directoryRepository->find($id);
+    }
+
+    #[AsTwigFunction('find_file')]
+    public function findFile(int $id): File|null
+    {
+        return $this->fileRepository->find($id);
     }
 
     /** @return iterable<File> */
-    private function findFilesOfDirectory(
+    #[AsTwigFilter('directory_files')]
+    #[AsTwigFunction('directory_files')]
+    public function findFilesOfDirectory(
         int|Directory $directory,
         bool $deepFiles = true,
     ): iterable {

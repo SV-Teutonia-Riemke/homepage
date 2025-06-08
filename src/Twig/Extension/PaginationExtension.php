@@ -5,32 +5,23 @@ declare(strict_types=1);
 namespace App\Twig\Extension;
 
 use Knp\Component\Pager\Pagination\PaginationInterface;
+use Twig\Attribute\AsTwigFunction;
+use Twig\Attribute\AsTwigTest;
 use Twig\Environment;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
-use Twig\TwigTest;
 
-final class PaginationExtension extends AbstractExtension
+final readonly class PaginationExtension
 {
-    /** @inheritDoc */
-    public function getTests(): array
+    #[AsTwigTest('pagination')]
+    public function isPagination(mixed $object): bool
     {
-        return [
-            new TwigTest('pagination', static fn ($object): bool => $object instanceof PaginationInterface),
-        ];
+        return $object instanceof PaginationInterface;
     }
 
-    /** @inheritDoc */
-    public function getFunctions(): array
-    {
-        return [
-            new TwigFunction('pagination_cta', $this->callToAction(...), [
-                'needs_environment' => true,
-                'is_safe'           => ['html'],
-            ]),
-        ];
-    }
-
+    #[AsTwigFunction(
+        name: 'pagination_cta',
+        needsEnvironment: true,
+        isSafe: ['html'],
+    )]
     private function callToAction(
         Environment $twig,
         object $object,

@@ -12,14 +12,12 @@ use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 
 use function fopen;
 use function stream_copy_to_stream;
 
-#[AsController]
 #[Route(
     path: '/f/{uuid:file}/{name}.{extension}',
     name: 'file',

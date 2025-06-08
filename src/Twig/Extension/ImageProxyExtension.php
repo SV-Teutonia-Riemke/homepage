@@ -7,37 +7,22 @@ namespace App\Twig\Extension;
 use App\Infrastructure\ImgProxy\PresetManager;
 use Nicklog\ImgProxy\ImgProxy;
 use Nicklog\ImgProxy\Options\AbstractOption;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
-use Twig\TwigFunction;
+use Twig\Attribute\AsTwigFilter;
+use Twig\Attribute\AsTwigFunction;
 
 use function count;
 
-class ImageProxyExtension extends AbstractExtension
+final readonly class ImageProxyExtension
 {
     public function __construct(
-        private readonly ImgProxy $imgProxy,
-        private readonly PresetManager $presetManager,
+        private ImgProxy $imgProxy,
+        private PresetManager $presetManager,
     ) {
     }
 
-    /** @inheritDoc */
-    public function getFunctions(): array
-    {
-        return [
-            new TwigFunction('imgproxy', $this->imgproxy(...)),
-        ];
-    }
-
-    /** @inheritDoc */
-    public function getFilters(): array
-    {
-        return [
-            new TwigFilter('imgproxy', $this->imgproxy(...)),
-        ];
-    }
-
     /** @param list<AbstractOption> $options */
+    #[AsTwigFilter('imgproxy')]
+    #[AsTwigFunction('imgproxy')]
     public function imgproxy(
         string $path,
         string|null $presetName = null,

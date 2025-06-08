@@ -5,32 +5,27 @@ declare(strict_types=1);
 namespace App\Twig\Extension;
 
 use App\Infrastructure\Shlink\ShortUrlProvider;
-use Shlinkio\Shlink\SDK\ShlinkClient;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
-use Twig\TwigFunction;
+use Twig\Attribute\AsTwigFilter;
+use Twig\Attribute\AsTwigFunction;
 
-class ShortUrlExtension extends AbstractExtension
+final readonly class ShortUrlExtension
 {
     public function __construct(
-        private readonly ShortUrlProvider $shortUrlProvider,
-        private readonly ShlinkClient|null $shlinkClient,
+        private ShortUrlProvider $shortUrlProvider,
     ) {
     }
 
-    /** @inheritDoc */
-    public function getFilters(): array
-    {
-        return [
-            new TwigFilter('short_url', $this->shortUrlProvider->getShortUrl(...)),
-        ];
+    #[AsTwigFilter('short_url')]
+    public function getShortUrl(
+        string $url,
+        array $tags = [],
+    ): string {
+        return $this->shortUrlProvider->getShortUrl($url, $tags);
     }
 
-    /** @inheritDoc */
-    public function getFunctions(): array
+    #[AsTwigFunction('short_url_enabled')]
+    public function isShortUrlEnabled(): bool
     {
-        return [
-            new TwigFunction('short_url_enabled', fn (): bool => $this->shlinkClient !== null),
-        ];
+        return $this->shortUrlProvider->isShlinkEnabled();
     }
 }

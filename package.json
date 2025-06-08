@@ -15,7 +15,7 @@
         "clipboard": "^2.0.11",
         "monaco-editor": "^0.52.2",
         "monaco-editor-webpack-plugin": "^7.1.0",
-        "sass": "^1.89.0",
+        "sass": "^1.89.1",
         "tom-select": "^2.4.3",
         "typescript": "^5.8.3",
         "vite": "^6.3.5",

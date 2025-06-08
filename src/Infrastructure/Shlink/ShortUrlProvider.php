@@ -12,11 +12,11 @@ use Symfony\Contracts\Cache\ItemInterface;
 use function implode;
 use function sha1;
 
-class ShortUrlProvider
+final readonly class ShortUrlProvider
 {
     public function __construct(
-        private readonly CacheInterface $cache,
-        private readonly ShlinkClient|null $shlinkClient,
+        private CacheInterface $cache,
+        private ShlinkClient|null $shlinkClient,
     ) {
     }
 
@@ -53,5 +53,10 @@ class ShortUrlProvider
             ->returnExistingMatchingShortUrl();
 
         return $this->shlinkClient->createShortUrl($creation)->shortUrl;
+    }
+
+    public function isShlinkEnabled(): bool
+    {
+        return $this->shlinkClient !== null;
     }
 }

@@ -6,28 +6,20 @@ namespace App\Twig\Extension;
 
 use App\Storage\Entity\Sponsor;
 use App\Storage\Repository\SponsorRepository;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
+use Twig\Attribute\AsTwigFunction;
 
 use function usort;
 
-class SponsorExtension extends AbstractExtension
+final readonly class SponsorExtension
 {
     public function __construct(
-        private readonly SponsorRepository $sponsorRepository,
+        private SponsorRepository $sponsorRepository,
     ) {
     }
 
-    /** @inheritDoc */
-    public function getFunctions(): array
-    {
-        return [
-            new TwigFunction('sponsors', $this->findSponsors(...)),
-        ];
-    }
-
     /** @return array<Sponsor> */
-    private function findSponsors(): array
+    #[AsTwigFunction(name: 'sponsors')]
+    public function findSponsors(): array
     {
         $sponsors = $this->sponsorRepository->findEnabled();
         usort(

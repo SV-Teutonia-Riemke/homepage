@@ -10,12 +10,10 @@ use App\Module\Admin\Crud\Handler\FullHandler;
 use App\Module\Admin\Form\Type\Forms\NotificationType;
 use App\Storage\Entity\Notification;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /** @template-extends AbstractCrudController<Notification, NotificationType, null> */
-#[AsController]
 #[IsGranted(Role::MANAGE_NOTIFICATIONS->value)]
 #[Route('/notification', name: 'notification_')]
 final class NotificationController extends AbstractCrudController

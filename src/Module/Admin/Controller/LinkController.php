@@ -11,12 +11,10 @@ use App\Module\Admin\Crud\Handler\PositionHandler;
 use App\Module\Admin\Form\Type\Forms\LinkType;
 use App\Storage\Entity\Link;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /** @template-extends AbstractCrudController<Link, LinkType, null> */
-#[AsController]
 #[IsGranted(Role::MANAGE_LINKS->value)]
 #[Route('/link', name: 'link_')]
 final class LinkController extends AbstractCrudController

@@ -11,12 +11,10 @@ use App\Module\Admin\Form\Type\Forms\TeamSearchType;
 use App\Module\Admin\Form\Type\Forms\TeamType;
 use App\Storage\Entity\Team;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /** @template-extends AbstractCrudController<Team, TeamType, null> */
-#[AsController]
 #[IsGranted(Role::MANAGE_TEAMS->value)]
 #[Route('/team', name: 'team_')]
 final class TeamController extends AbstractCrudController

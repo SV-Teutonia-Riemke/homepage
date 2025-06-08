@@ -9,7 +9,6 @@ use App\Module\Page\Form\Type\Forms\ContactForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,7 +16,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use function assert;
 use function sprintf;
 
-#[AsController]
 #[Route('/contact', name: 'contact')]
 class ContactController extends AbstractController
 {

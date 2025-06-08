@@ -14,12 +14,10 @@ use App\Module\Admin\Form\Type\Forms\MenuItemType;
 use App\Module\Admin\Form\Type\Forms\MenuItemUrlType;
 use App\Storage\Entity\MenuItem;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /** @template-extends AbstractCrudController<MenuItem, MenuItemType, null> */
-#[AsController]
 #[IsGranted(Role::MANAGE_MENU->value)]
 #[Route('/menu', name: 'menu_item_')]
 final class MenuItemController extends AbstractCrudController

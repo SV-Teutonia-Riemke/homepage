@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Config;
 
-final class ConfigProvider
+final readonly class ConfigProvider
 {
     public function __construct(
-        private readonly ConfigSettingProvider $configSettingProvider,
+        private ConfigSettingProvider $configSettingProvider,
     ) {
     }
 

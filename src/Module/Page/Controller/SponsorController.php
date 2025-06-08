@@ -8,12 +8,10 @@ use App\Domain\SponsorLevel;
 use App\Storage\Repository\SponsorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
 
 use function uksort;
 
-#[AsController]
 #[Route('/sponsoren', name: 'sponsor', options: ['sitemap' => true])]
 final class SponsorController extends AbstractController
 {

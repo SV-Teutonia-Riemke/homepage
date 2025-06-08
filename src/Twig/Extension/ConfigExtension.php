@@ -5,22 +5,24 @@ declare(strict_types=1);
 namespace App\Twig\Extension;
 
 use App\Infrastructure\Config\ConfigProvider;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
+use Twig\Attribute\AsTwigFunction;
 
-final class ConfigExtension extends AbstractExtension
+final readonly class ConfigExtension
 {
     public function __construct(
-        private readonly ConfigProvider $configProvider,
+        private ConfigProvider $configProvider,
     ) {
     }
 
-    /** @inheritDoc */
-    public function getFunctions(): array
+    #[AsTwigFunction('config_get')]
+    public function configGet(string $name): mixed
     {
-        return [
-            new TwigFunction('config_get', $this->configProvider->get(...)),
-            new TwigFunction('config_has', $this->configProvider->has(...)),
-        ];
+        return $this->configProvider->get($name);
+    }
+
+    #[AsTwigFunction('config_has')]
+    public function hasConfig(string $name): bool
+    {
+        return $this->configProvider->has($name);
     }
 }

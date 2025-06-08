@@ -7,40 +7,37 @@ namespace App\Twig\Extension;
 use Generator;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\Finder\Finder;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
+use Twig\Attribute\AsTwigFilter;
 
 use function sprintf;
 use function str_replace;
 
-class GlobExtension extends AbstractExtension
+final readonly class GlobExtension
 {
     public function __construct(
         #[Autowire(param: 'kernel.project_dir')]
-        private readonly string $projectDir,
+        private string $projectDir,
     ) {
     }
 
-    /** @inheritDoc */
-    public function getFilters(): array
-    {
+    #[AsTwigFilter('glob')]
+    public function globs(
+        string $directory,
+        string $pattern = '*',
+    ): Generator {
         $publicDir = $this->projectDir . '/public';
 
-        return [
-            new TwigFilter('glob', static function ($directory, $pattern = '*') use ($publicDir): Generator {
-                $directory = str_replace('/', '\/', $directory);
-                $directory = sprintf('%s%s%s', '/', $directory, '/');
+        $directory = str_replace('/', '\/', $directory);
+        $directory = sprintf('%s%s%s', '/', $directory, '/');
 
-                $finder = new Finder();
-                $finder->files()
-                    ->in($publicDir)
-                    ->path($directory)
-                    ->name($pattern);
+        $finder = new Finder();
+        $finder->files()
+            ->in($publicDir)
+            ->path($directory)
+            ->name($pattern);
 
-                foreach ($finder as $item) {
-                    yield $item;
-                }
-            }),
-        ];
+        foreach ($finder as $item) {
+            yield $item;
+        }
     }
 }

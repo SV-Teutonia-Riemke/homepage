@@ -11,13 +11,11 @@ use App\Module\Admin\Form\Type\Forms\UserType;
 use App\Storage\Entity\User;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 /** @template-extends AbstractCrudController<User, UserType, null> */
-#[AsController]
 #[IsGranted(Role::MANAGE_USERS->value)]
 #[Route('/user', name: 'user_')]
 final class UserController extends AbstractCrudController
