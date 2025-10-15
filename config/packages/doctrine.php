@@ -30,7 +30,6 @@ return static function (
 
     $orm = $doctrineConfig->orm();
     $orm
-        ->autoGenerateProxyClasses(true)
         ->defaultEntityManager('default');
 
     $defaultEntityManager = $orm->entityManager('default');
