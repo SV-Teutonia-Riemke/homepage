@@ -6,7 +6,8 @@ namespace App\Infrastructure\Doctrine\DBAL\Types\Type;
 
 use App\Domain\Date;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\InvalidFormat;
+use Doctrine\DBAL\Types\Exception\InvalidType;
 use Doctrine\DBAL\Types\Type;
 use Throwable;
 
@@ -43,7 +44,7 @@ final class DateType extends Type
         try {
             return Date::fromString($value);
         } catch (Throwable) {
-            throw ConversionException::conversionFailedFormat(
+            throw InvalidFormat::new(
                 $value,
                 self::NAME,
                 $platform->getDateFormatString(),
@@ -64,11 +65,6 @@ final class DateType extends Type
             return $value->format($platform->getDateFormatString());
         }
 
-        throw ConversionException::conversionFailedInvalidType($value, self::NAME, ['null', Date::class]);
-    }
-
-    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
-    {
-        return true;
+        throw InvalidType::new($value, self::NAME, ['null', Date::class]);
     }
 }

@@ -16,7 +16,7 @@ final class PersonGroupRepository extends ServiceEntityRepository
         parent::__construct($registry, PersonGroup::class);
     }
 
-    /** @return list<PersonGroup> */
+    /** @return array<int, PersonGroup> */
     public function findEnabled(): array
     {
         return $this->findBy([

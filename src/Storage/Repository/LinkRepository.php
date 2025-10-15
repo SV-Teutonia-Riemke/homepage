@@ -16,7 +16,7 @@ final class LinkRepository extends ServiceEntityRepository
         parent::__construct($registry, Link::class);
     }
 
-    /** @return list<Link> */
+    /** @return array<int, Link> */
     public function findEnabled(): array
     {
         return $this->findBy([

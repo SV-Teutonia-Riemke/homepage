@@ -17,7 +17,7 @@ final class TeamRepository extends ServiceEntityRepository
         parent::__construct($registry, Team::class);
     }
 
-    /** @return list<Team> */
+    /** @return array<int, Team> */
     public function findAllEnabled(): array
     {
         return $this->findBy([
@@ -28,7 +28,7 @@ final class TeamRepository extends ServiceEntityRepository
         ]);
     }
 
-    /** @return list<Team> */
+    /** @return array<int, Team> */
     public function findAllSeniors(): array
     {
         return $this->findBy([
@@ -40,7 +40,7 @@ final class TeamRepository extends ServiceEntityRepository
         ]);
     }
 
-    /** @return list<Team> */
+    /** @return array<int, Team> */
     public function findAllJuniors(): array
     {
         return $this->findBy([

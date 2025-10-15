@@ -16,7 +16,7 @@ final class SponsorRepository extends ServiceEntityRepository
         parent::__construct($registry, Sponsor::class);
     }
 
-    /** @return list<Sponsor> */
+    /** @return array<int, Sponsor> */
     public function findEnabled(): array
     {
         return $this->findBy([

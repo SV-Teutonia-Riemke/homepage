@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\EventListener;
 
 use Doctrine\DBAL\Schema\AbstractAsset;
+use Doctrine\DBAL\Schema\Name;
 use Doctrine\Migrations\Metadata\Storage\TableMetadataStorageConfiguration;
 use Doctrine\Migrations\Tools\Console\Command\DoctrineCommand;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
@@ -17,6 +18,7 @@ use const DEBUG_BACKTRACE_IGNORE_ARGS;
 #[AutoconfigureTag('doctrine.dbal.schema_filter')]
 final class DoctrineMigrationsFilterSubscriber
 {
+    /** @param AbstractAsset<Name>|string $asset */
     public function __invoke(AbstractAsset|string $asset): bool
     {
         if ($asset instanceof AbstractAsset) {

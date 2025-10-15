@@ -6,7 +6,8 @@ namespace App\Infrastructure\Doctrine\DBAL\Types\Type;
 
 use App\Domain\YearGroup;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
+use Doctrine\DBAL\Types\Exception\InvalidFormat;
+use Doctrine\DBAL\Types\Exception\InvalidType;
 use Doctrine\DBAL\Types\Type;
 use Throwable;
 
@@ -43,7 +44,7 @@ final class YearGroupType extends Type
         try {
             return YearGroup::fromString($value);
         } catch (Throwable) {
-            throw ConversionException::conversionFailedFormat(
+            throw InvalidFormat::new(
                 $value,
                 self::NAME,
                 $platform->getDateFormatString(),
@@ -64,11 +65,6 @@ final class YearGroupType extends Type
             return $value->__toString();
         }
 
-        throw ConversionException::conversionFailedInvalidType($value, self::NAME, ['null', YearGroup::class]);
-    }
-
-    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
-    {
-        return true;
+        throw InvalidType::new($value, self::NAME, ['null', YearGroup::class]);
     }
 }

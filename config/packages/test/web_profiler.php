@@ -10,8 +10,8 @@ return static function (
     FrameworkConfig $frameworkConfig,
 ): void {
     $webProfilerConfig
-        ->toolbar(false)
-        ->interceptRedirects(false);
+        ->toolbar()
+            ->enabled(false);
 
     $frameworkConfig->profiler()
         ->collect(false);

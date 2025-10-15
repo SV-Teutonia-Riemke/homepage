@@ -15,6 +15,7 @@ final readonly class ShortUrlExtension
     ) {
     }
 
+    /** @param array<string> $tags */
     #[AsTwigFilter('short_url')]
     public function getShortUrl(
         string $url,

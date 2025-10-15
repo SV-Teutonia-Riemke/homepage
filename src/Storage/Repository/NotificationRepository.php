@@ -16,7 +16,7 @@ final class NotificationRepository extends ServiceEntityRepository
         parent::__construct($registry, Notification::class);
     }
 
-    /** @return list<Notification> */
+    /** @return array<int, Notification> */
     public function findEnabled(): array
     {
         return $this->findBy([

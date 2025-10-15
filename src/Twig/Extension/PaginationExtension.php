@@ -22,7 +22,7 @@ final readonly class PaginationExtension
         needsEnvironment: true,
         isSafe: ['html'],
     )]
-    private function callToAction(
+    public function callToAction(
         Environment $twig,
         object $object,
         string|null $removeLink = null,
