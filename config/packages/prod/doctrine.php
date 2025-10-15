@@ -10,7 +10,6 @@ return static function (
     FrameworkConfig $frameworkConfig,
 ): void {
     $orm = $doctrineConfig->orm();
-    $orm->autoGenerateProxyClasses(false);
 
     $defaultEntityManager = $orm->entityManager('default');
     $defaultEntityManager
