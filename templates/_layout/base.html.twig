@@ -19,10 +19,34 @@
     {% endblock %}
 
     <script src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.js" integrity="sha384-oeUn82QNXPuVkGCkcrInrS1twIxKhkZiFfr2TdiuObZ3n3yIeMiqcRzkIcguaof1" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --bs-body-bg: #f5f7fb; {# fix for dropdown menu #}
+            --tblr-primary: #009146;
+            --tblr-success: var(--tblr-primary);
+        }
+
+        .navbar[data-bs-theme=dark] {
+            --tblr-navbar-bg: #002B15;
+        }
+
+        {# workaround for bug: https://github.com/tabler/tabler/issues/2271 #}
+        @media (min-width: 992px) {
+            :host,
+            :root {
+                margin-left: 0;
+            }
+        }
+
+        body {
+            overflow-y: scroll;
+        }
+    </style>
 </head>
 <body class="theme-light {{ bodyCssClasses|default('') }}">
 
-<div class="page {{ pageCssClasses|default('') }}">
+<div class="{{ pageCssClasses|default('') }}">
     {% block body %}{% endblock %}
 </div>
 

@@ -1,15 +1,6 @@
-@import './_variables.scss';
-@import '@tabler/core/src/scss/core';
+@import "@tabler/core/dist/css/tabler.css";
 
-:root {
-  --bs-body-bg: #f5f7fb;
-}
-
-// fix for icons not shown; see: https://github.com/tabler/tabler/issues/1981
-svg {
-  max-width: none !important;
-}
-
+// handball.net css classes
 .hb-embed {
   .hb-embed__title-container,
   .hb-embed__branding,
@@ -22,8 +13,7 @@ svg {
 
     thead {
       th {
-        border-bottom-color: $border-color !important;
-        border-bottom-width: $border-width !important;
+        border-bottom-color: #dee2e6 !important;
       }
     }
 
@@ -37,11 +27,6 @@ svg {
   }
 
   .hb-embed__schedule-list-item-date {
-    border-bottom-color: $border-color !important;
-    border-bottom-width: $border-width !important;
-  }
-
-  .hb-embed__schedule .hb-embed__schedule-list > *:not(:last-child) {
-    @extend .mb-2;
+    border-bottom-color: #dee2e6 !important;
   }
 }
