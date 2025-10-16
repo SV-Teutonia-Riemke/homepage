@@ -16,11 +16,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ]);
 
     $containerConfigurator->extension('framework', [
-        'trusted_hosts' => [
-            '^(.+\.)?loca\.lt$',
-            '^(.+\.)?svt\.lcl$',
-            '^(.+\.)?teutonia-riemke\.de$',
-        ],
+//        'trusted_hosts' => [
+//            '^(.+\.)?loca\.lt$',
+//            '^(.+\.)?localhost$',
+//            '^(.+\.)?svt\.lcl$',
+//            '^(.+\.)?teutonia-riemke\.de$',
+//        ],
         'trusted_proxies' => '127.0.0.1,REMOTE_ADDR,192.168.0.0/16,172.16.0.0/12,10.0.0.0/8',
         'trusted_headers' => [
             'x-forwarded-for',

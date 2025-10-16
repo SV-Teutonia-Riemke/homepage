@@ -1,18 +1,12 @@
-FROM thecodingmachine/php:8.4-v4-apache
+FROM shinsenter/php:8.4-frankenphp
 
-COPY --chown=docker:docker . /var/www/html/
+ENV APP_USER="app"
+ENV APP_GROUP="app"
+ENV APP_UID="1000"
+ENV APP_GID="1000"
 
-ENV TEMPLATE_PHP_INI="production"
-ENV PHP_EXTENSIONS="pdo_mysql imagick gd intl bcmath"
-ENV APACHE_DOCUMENT_ROOT="public/"
-#ENV APACHE_RUN_USER=www-data
-#ENV APACHE_RUN_GROUP=www-data
+ADD ./etc/startup/00-startup /startup/00-startup
+RUN chmod +x /startup/00-startup
 
-#ENV STARTUP_COMMAND_1="bin/console cache:clear"
-ENV STARTUP_COMMAND_1="bin/console cache:warmup"
-ENV STARTUP_COMMAND_2="bin/console cache:pool:clear --all"
-ENV STARTUP_COMMAND_3="bin/console doctrine:migrations:migrate --no-interaction"
-ENV STARTUP_COMMAND_4="bin/console assets:install public"
-
-WORKDIR /var/www/html
-EXPOSE 80
+COPY --chown=$APP_USER:$APP_GROUP . /var/www/html/
+COPY ./Caddyfile /etc/caddy/Caddyfile

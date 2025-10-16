@@ -1,0 +1,24 @@
+{
+	skip_install_trust
+	auto_https off
+
+	frankenphp {
+	}
+}
+
+:80 {
+	root * public/
+	encode zstd br gzip
+
+	php_server {
+	    root public/
+        env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+	    worker {
+	       file index.php
+	       watch
+           env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+	    }
+	}
+}
+
+# import Caddyfile.d/*.caddyfile

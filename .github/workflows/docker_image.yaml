@@ -65,7 +65,8 @@ jobs:
             .env.test
             .editorconfig
             .gitignore
-            docker-compose.yml
+            Caddyfile
+            compose.yml
             features
             package.json
             pnpm-lock.yaml

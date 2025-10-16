@@ -3,19 +3,13 @@ services:
     image: shinsenter/php:8.4-frankenphp
     volumes:
       - .:/var/www/html
+      - ./Caddyfile:/etc/caddy/Caddyfile
     environment:
-      DOCUMENT_ROOT: public
-      APP_USER: "myapp"
-      APP_GROUP: "myapp"
+      APP_USER: "app"
+      APP_GROUP: "app"
       APP_UID: "1000"
       APP_GID: "1000"
-      SERVER_NAME: "svt.lcl"
-      APP_RUNTIME: Runtime\FrankenPhpSymfony\Runtime
-      FRANKENPHP_CONFIG: |
-        worker {
-        	file  /var/www/html/public/index.php
-        	watch
-        }
+      DISABLE_AUTORUN_COMPOSER_INSTALL: 1
     depends_on:
       - database
     networks:
@@ -54,7 +48,8 @@ services:
       - MYSQL_PASSWORD=${DATABASE_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${DATABASE_PASSWORD}
     networks:
-      - internal
+      internal:
+        ipv4_address: 192.168.19.11
 
   mailpit:
     image: axllent/mailpit

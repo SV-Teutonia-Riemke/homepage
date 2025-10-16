@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+/usr/local/bin/php ${APP_PATH}/bin/console cache:warmup
+/usr/local/bin/php ${APP_PATH}/bin/console cache:pool:clear --all
+/usr/local/bin/php ${APP_PATH}/bin/console doctrine:migrations:migrate --no-interaction
+/usr/local/bin/php ${APP_PATH}/bin/console assets:install
