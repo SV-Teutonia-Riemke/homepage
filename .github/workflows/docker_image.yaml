@@ -59,13 +59,11 @@ jobs:
             .github
             .pnpm-store
             assets
-            etc
             node_modules
             tests
             .env.test
             .editorconfig
             .gitignore
-            Caddyfile
             compose.yml
             features
             package.json
