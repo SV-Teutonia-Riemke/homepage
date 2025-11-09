@@ -15,11 +15,13 @@ RUN rm /etc/hooks/bootstrap/10-create-project && \
     rm /etc/hooks/bootstrap/20-create-index && \
     rm /etc/hooks/bootstrap/30-other-fixes
 
-COPY --chown=$APP_USER:$APP_GROUP . /app
-COPY ./Caddyfile /etc/caddy/Caddyfile
-COPY ./Caddyfile /etc/frankenphp/Caddyfile
-COPY ./etc/startup/00-startup /startup/00-startup
+RUN apt update -q
+RUN apt install -qqy --no-install-recommends --fix-missing \
+    # install base packages
+    nano
 
-RUN chmod +x /startup/00-startup
+COPY --chown=$APP_UID:$APP_GID . /app
+COPY ./Caddyfile /etc/caddy/Caddyfile
+COPY --chmod=+x ./etc/startup/00-startup /startup/
 
 WORKDIR /app
