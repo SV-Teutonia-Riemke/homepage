@@ -15,7 +15,6 @@
         env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
 	    worker {
 	       file index.php
-	       watch
            env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
 	    }
 	}
