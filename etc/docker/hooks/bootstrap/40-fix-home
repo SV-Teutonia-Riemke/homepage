@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Fix app home directory"
+chown -R app:app /home/app

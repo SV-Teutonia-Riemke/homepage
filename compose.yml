@@ -1,26 +1,17 @@
 services:
   app:
-    image: shinsenter/php:8.4-frankenphp
+    build:
+      context: etc/
+      dockerfile: docker/Dockerfile
     volumes:
-      - .:/var/www/html
-      - ./Caddyfile:/etc/caddy/Caddyfile
-    environment:
-      APP_USER: "app"
-      APP_GROUP: "app"
-      APP_UID: "1000"
-      APP_GID: "1000"
-      DISABLE_AUTORUN_COMPOSER_INSTALL: 1
+      - .:/app
+      - ./etc/frankenphp:/etc/caddy
+      - ./etc/docker/hooks/bootstrap/40-fix-home:/etc/hooks/bootstrap/40-fix-home
     depends_on:
       - database
     networks:
       internal:
         ipv4_address: 192.168.19.10
-
-  node:
-    image: guergeiro/pnpm:lts-latest-alpine
-    working_dir: /var/www/html/
-    volumes:
-      - .:/var/www/html/
 
   imgproxy:
     image: ghcr.io/imgproxy/imgproxy
@@ -58,6 +49,7 @@ services:
     environment:
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
+      MP_WEBROOT: /mailpit
     networks:
       internal:
         ipv4_address: 192.168.19.12
