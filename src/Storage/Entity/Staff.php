@@ -27,6 +27,9 @@ class Staff extends AbstractEntity
     #[ORM\Column(type: Types::STRING, nullable: true, enumType: StaffPosition::class)]
     private StaffPosition|null $position = null;
 
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    private string|null $emailAddress = null;
+
     public function getPerson(): Person|null
     {
         return $this->person;
@@ -65,5 +68,20 @@ class Staff extends AbstractEntity
     public function setPosition(StaffPosition|null $position): void
     {
         $this->position = $position;
+    }
+
+    public function getEmailAddress(): string|null
+    {
+        return $this->emailAddress;
+    }
+
+    public function setEmailAddress(string|null $emailAddress): void
+    {
+        $this->emailAddress = $emailAddress;
+    }
+
+    public function getEmailAddressToUse(): string|null
+    {
+        return $this->emailAddress ?? $this->person?->getEmailAddress();
     }
 }

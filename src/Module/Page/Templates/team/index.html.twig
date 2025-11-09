@@ -127,13 +127,19 @@
                             <h5 class="card-title">Trainerstab</h5>
                         </div>
                         <div class="table-responsive">
+                            {% set hasPhones = team.staffs.findFirst((key, staff) => staff.person.phoneNumber is not null) %}
+                            {% set hasMails = team.staffs.findFirst((key, staff) => staff.emailAddressToUse is not null) %}
                             <table class="table card-table table-vcenter text-nowrap">
                                 <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Funktion</th>
-                                    <th>E-Mail</th>
-                                    <th>Telefon</th>
+                                    {% if hasMails %}
+                                        <th>E-Mail</th>
+                                    {% endif %}
+                                    {% if hasPhones %}
+                                        <th>Telefon</th>
+                                    {% endif %}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -141,12 +147,16 @@
                                     <tr>
                                         <td>{{ staff.person }}</td>
                                         <td>{{ staff.position is null ? '' : staff.position.translatable|trans }}</td>
+                                        {% if hasMails %}
                                         <td>
-                                            {% if staff.person.emailAddress is not null %}
-                                                <a href="mailto:{{ staff.person.emailAddress }}">{{ staff.person.emailAddress }}</a>
+                                            {% if staff.emailAddressToUse is not null %}
+                                                <a href="mailto:{{ staff.emailAddressToUse }}">{{ staff.emailAddressToUse }}</a>
                                             {% endif %}
                                         </td>
-                                        <td>{{ staff.person.phoneNumber is null ? '' : staff.person.phoneNumber|phone_number_format }}</td>
+                                        {% endif %}
+                                        {% if hasPhones %}
+                                            <td>{{ staff.person.phoneNumber is null ? '' : staff.person.phoneNumber|phone_number_format }}</td>
+                                        {% endif %}
                                     </tr>
                                 {% endfor %}
                                 </tbody>

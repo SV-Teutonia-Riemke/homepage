@@ -104,7 +104,8 @@
                 <tr>
                     <th>Person</th>
                     <th>Position</th>
-                    <th>Bild</th>
+                    <th>E-Mail-Adresse</th>
+{#                    <th>Bild</th>#}
                     <th class="w-1"></th>
                 </tr>
                 </thead>
@@ -113,6 +114,7 @@
                     <tr>
                         <td>{{ form_row(itemForm.person, { label: false }) }}</td>
                         <td>{{ form_row(itemForm.position, { label: false }) }}</td>
+                        <td>{{ form_row(itemForm.emailAddress, { label: false }) }}</td>
 {#                        <td>{{ form_row(itemForm.image, { label: false }) }}</td>#}
                         <td class="text-end">
                             <button data-action="live#action" data-live-action-param="removeStaff" data-live-index-param="{{ key }}" type="button" class="btn btn-icon btn-outline-danger">

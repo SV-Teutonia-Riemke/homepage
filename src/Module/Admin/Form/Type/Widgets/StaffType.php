@@ -8,8 +8,10 @@ use App\Form\Type\Entities\PersonEntityType;
 use App\Form\Type\Widgets\StaffPositionType;
 use App\Storage\Entity\Staff;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /** @extends AbstractType<Staff> */
@@ -34,6 +36,16 @@ final class StaffType extends AbstractType
             ->add('position', StaffPositionType::class, [
                 'label' => 'Position',
                 'required' => false,
+            ])
+            ->add('emailAddress', EmailType::class, [
+                'label' => 'E-Mail-Adresse',
+                'constraints' => [
+                    new Email(),
+                ],
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'E-Mail-Adresse der Person überschreiben',
+                ],
             ]);
     }
 
