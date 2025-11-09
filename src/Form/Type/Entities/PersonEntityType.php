@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Form\Type\Entities;
 
 use App\Storage\Entity\Person;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
@@ -25,6 +26,7 @@ final class PersonEntityType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return BaseEntityAutocompleteType::class;

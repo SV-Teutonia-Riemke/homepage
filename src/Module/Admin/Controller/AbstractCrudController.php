@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Knp\Component\Pager\PaginatorInterface;
 use LogicException;
+use Override;
 use RuntimeException;
 use Spiriit\Bundle\FormFilterBundle\Filter\FilterBuilderUpdaterInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -65,7 +66,7 @@ abstract class AbstractCrudController extends AbstractController
         ]);
         $paginationOptions = array_filter(
             $paginationOptions,
-            static fn ($value) => $value !== null,
+            static fn ($value): bool => $value !== null,
         );
 
         $pagination = $this->getPaginator()->paginate(
@@ -423,6 +424,7 @@ abstract class AbstractCrudController extends AbstractController
     }
 
     /** @inheritDoc */
+    #[Override]
     public static function getSubscribedServices(): array
     {
         $services = parent::getSubscribedServices();

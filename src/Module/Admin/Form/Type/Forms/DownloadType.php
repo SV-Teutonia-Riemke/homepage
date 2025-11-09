@@ -6,6 +6,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Form\Type\Entities\FileEntityType;
 use App\Storage\Entity\Download;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -73,6 +74,7 @@ final class DownloadType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

@@ -18,12 +18,6 @@ use function implode;
 #[ORM\Entity(repositoryClass: DirectoryRepository::class)]
 class Directory extends AbstractEntity implements Stringable
 {
-    #[ORM\Column(type: Types::STRING)]
-    private string $name;
-
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
-    private self|null $parent;
-
     /** @var Collection<array-key, self> */
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private Collection $children;
@@ -33,11 +27,11 @@ class Directory extends AbstractEntity implements Stringable
     private Collection $files;
 
     public function __construct(
-        string $name,
-        Directory|null $parent,
+        #[ORM\Column(type: Types::STRING)]
+        private string $name,
+        #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
+        private self|null $parent,
     ) {
-        $this->name     = $name;
-        $this->parent   = $parent;
         $this->children = new ArrayCollection();
         $this->files    = new ArrayCollection();
     }
@@ -96,7 +90,7 @@ class Directory extends AbstractEntity implements Stringable
     {
         $parents = $this->getParents();
         $names   = array_map(
-            static fn (self $directory) => $directory->getName(),
+            static fn (self $directory): string => $directory->getName(),
             $parents,
         );
 

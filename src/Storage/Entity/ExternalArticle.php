@@ -17,43 +17,22 @@ class ExternalArticle extends AbstractEntity implements EnabledInterface
 {
     use Enabled;
 
-    #[ORM\Column(type: Types::STRING)]
-    private string $url;
-
-    #[ORM\Column(type: Types::STRING)]
-    private string $title;
-
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    private string|null $description;
-
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    private string|null $imageUrl;
-
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    private string|null $authorName;
-
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    private string|null $authorUrl;
-
-    #[ORM\Column(type: DateTimeUTCType::DATETIMEUTC, nullable: true)]
-    protected DateTimeInterface|null $publishedAt = null;
-
     public function __construct(
-        string $url,
-        string $title,
-        string|null $description,
-        string|null $imageUrl,
-        string|null $authorName,
-        string|null $authorUrl,
-        DateTimeInterface|null $publishedAt = null,
+        #[ORM\Column(type: Types::STRING)]
+        private string $url,
+        #[ORM\Column(type: Types::STRING)]
+        private string $title,
+        #[ORM\Column(type: Types::STRING, nullable: true)]
+        private string|null $description,
+        #[ORM\Column(type: Types::STRING, nullable: true)]
+        private string|null $imageUrl,
+        #[ORM\Column(type: Types::STRING, nullable: true)]
+        private string|null $authorName,
+        #[ORM\Column(type: Types::STRING, nullable: true)]
+        private string|null $authorUrl,
+        #[ORM\Column(type: DateTimeUTCType::DATETIMEUTC, nullable: true)]
+        protected DateTimeInterface|null $publishedAt = null,
     ) {
-        $this->url         = $url;
-        $this->title       = $title;
-        $this->description = $description;
-        $this->imageUrl    = $imageUrl;
-        $this->authorName  = $authorName;
-        $this->authorUrl   = $authorUrl;
-        $this->publishedAt = $publishedAt;
     }
 
     public function getUrl(): string

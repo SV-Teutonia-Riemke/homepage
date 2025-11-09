@@ -15,24 +15,24 @@ use Symfony\UX\TwigComponent\Attribute\PreMount;
 )]
 final class CardComponent
 {
-    public string|null $header;
+    public string|null $header = null;
 
-    public string|null $body;
+    public string|null $body = null;
 
-    public string|null $footer;
+    public string|null $footer = null;
 
-    public string|null $statusTop;
+    public string|null $statusTop = null;
 
     /** @var array{ src ?: ?string, alt ?: ?string, title ?: ?string, position ?: "top" | "bottom" | "overlay" } */
     public array $image;
 
-    public string|null $imageSrc;
+    public string|null $imageSrc = null;
 
-    public string|null $imageAlt;
+    public string|null $imageAlt = null;
 
-    public string|null $imageTitle;
+    public string|null $imageTitle = null;
 
-    public string|null $stamp;
+    public string|null $stamp = null;
 
     /** @var "top"|"bottom"|"overlay" */
     public string $imagePosition;

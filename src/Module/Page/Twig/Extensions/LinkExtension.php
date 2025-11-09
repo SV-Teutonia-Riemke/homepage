@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Page\Twig\Extensions;
 
 use App\Storage\Repository\LinkRepository;
+use Override;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -16,10 +17,11 @@ final class LinkExtension extends AbstractExtension
     }
 
     /** @inheritDoc */
+    #[Override]
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('links', fn () => $this->linkRepository->findEnabled()),
+            new TwigFunction('links', fn (): array => $this->linkRepository->findEnabled()),
         ];
     }
 }

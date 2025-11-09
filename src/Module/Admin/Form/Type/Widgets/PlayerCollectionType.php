@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Form\Type\Widgets;
 
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,6 +23,7 @@ final class PlayerCollectionType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return CollectionType::class;

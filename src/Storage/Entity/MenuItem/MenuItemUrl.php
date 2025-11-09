@@ -14,13 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: MenuItemRepository::class)]
 class MenuItemUrl extends MenuItem
 {
-    #[ORM\Column(type: Types::STRING)]
-    private string $url;
-
     public function __construct(
         string $title,
         string $icon,
-        string $url,
+        #[ORM\Column(type: Types::STRING)]
+        private string $url,
         MenuGroup $group,
     ) {
         parent::__construct(
@@ -29,8 +27,6 @@ class MenuItemUrl extends MenuItem
             MenuType::URL,
             $group,
         );
-
-        $this->url = $url;
     }
 
     public function getUrl(): string

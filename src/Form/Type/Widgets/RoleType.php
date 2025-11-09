@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Form\Type\Widgets;
 
 use App\Domain\Role;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
@@ -41,6 +42,7 @@ class RoleType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return EnumType::class;
@@ -60,7 +62,7 @@ class RoleType extends AbstractType
         return array_values(
             array_filter(
                 array_map(
-                    static fn (string $role): Role|null => Role::tryFrom($role),
+                    Role::tryFrom(...),
                     $roles,
                 ),
                 static fn (Role|null $role): bool => $role !== null,

@@ -26,12 +26,6 @@ $ignoreErrors[] = [
 	'path' => __DIR__ . '/../../src/Module/Admin/Controller/MenuItemController.php',
 ];
 $ignoreErrors[] = [
-	'message' => '#^Method App\\\\Storage\\\\Entity\\\\Person\\:\\:__toString\\(\\) should return string but returns string\\|null\\.$#',
-	'identifier' => 'return.type',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Storage/Entity/Person.php',
-];
-$ignoreErrors[] = [
 	'message' => '#^Method App\\\\Storage\\\\Entity\\\\Person\\:\\:getAnonymizedName\\(\\) should return string but returns string\\|null\\.$#',
 	'identifier' => 'return.type',
 	'count' => 1,

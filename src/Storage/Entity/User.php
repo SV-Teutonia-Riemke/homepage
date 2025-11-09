@@ -19,22 +19,16 @@ use function in_array;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User extends AbstractEntity implements PasswordAuthenticatedUserInterface, UserInterface
 {
-    #[ORM\Column(type: Types::STRING, unique: true)]
-    private string $email;
-
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    private string|null $password;
-
     /** @var list<string> */
     #[ORM\Column(type: 'json', nullable: true)]
     private array|null $roles = [];
 
     public function __construct(
-        string $email,
-        string|null $password = null,
+        #[ORM\Column(type: Types::STRING, unique: true)]
+        private string $email,
+        #[ORM\Column(type: Types::STRING, nullable: true)]
+        private string|null $password = null,
     ) {
-        $this->email    = $email;
-        $this->password = $password;
     }
 
     public function getEmail(): string

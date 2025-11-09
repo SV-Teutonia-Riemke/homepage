@@ -13,10 +13,10 @@ use Psr\Clock\ClockInterface;
 
 #[AsDoctrineListener(Events::prePersist)]
 #[AsDoctrineListener(Events::preUpdate)]
-final class ModifiedListener
+final readonly class ModifiedListener
 {
     public function __construct(
-        private readonly ClockInterface $clock,
+        private ClockInterface $clock,
     ) {
     }
 

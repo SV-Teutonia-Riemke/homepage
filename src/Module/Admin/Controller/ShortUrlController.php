@@ -9,6 +9,7 @@ use App\Module\Admin\Crud\CrudConfig;
 use App\Module\Admin\Crud\CrudConfigBuilder;
 use App\Module\Admin\Crud\Handler\CRUDHandler;
 use App\Module\Admin\Form\Type\Forms\ShortUrlType;
+use Override;
 use RuntimeException;
 use Shlinkio\Shlink\SDK\ShlinkClient;
 use Shlinkio\Shlink\SDK\ShortUrls\Model\ShortUrl;
@@ -45,11 +46,13 @@ class ShortUrlController extends AbstractCrudController
         $builder->objectIdentifierCallable = static fn (ShortUrl $shortUrl): string => $shortUrl->shortCode;
     }
 
+    #[Override]
     protected function doLoadList(CrudConfig $crudConfig): mixed
     {
         return iterator_to_array($this->shlinkClient->listShortUrls());
     }
 
+    #[Override]
     protected function doLoadObject(
         CrudConfig $crudConfig,
         mixed $objectIdentifier,
@@ -57,6 +60,7 @@ class ShortUrlController extends AbstractCrudController
         return $this->shlinkClient->getShortUrl(ShortUrlIdentifier::fromShortCode($objectIdentifier));
     }
 
+    #[Override]
     protected function doHandleValidCreateForm(
         Request $request,
         FormInterface $form,
@@ -80,6 +84,7 @@ class ShortUrlController extends AbstractCrudController
         $this->shlinkClient->createShortUrl($creation);
     }
 
+    #[Override]
     protected function doHandleValidEditForm(
         Request $request,
         FormInterface $form,
@@ -105,19 +110,23 @@ class ShortUrlController extends AbstractCrudController
         );
     }
 
+    #[Override]
     protected function doCreatePersisting(object $object): void
     {
     }
 
+    #[Override]
     protected function doUpdatePersisting(object $object): void
     {
     }
 
+    #[Override]
     protected function doMapToFormDto(object $object): mixed
     {
         return \App\Module\Admin\Misc\Shlink\ShortUrl::fromShlink($object);
     }
 
+    #[Override]
     protected function doRemoving(object $object): void
     {
         $this->shlinkClient->deleteShortUrl(
@@ -132,6 +141,7 @@ class ShortUrlController extends AbstractCrudController
         return ShortUrlType::class;
     }
 
+    #[Override]
     protected function loadObject(Request $request): object
     {
         $objectIdentifier = $request->get('object');

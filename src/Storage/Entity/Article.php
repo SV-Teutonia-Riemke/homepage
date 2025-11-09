@@ -18,12 +18,6 @@ class Article extends AbstractEntity implements EnabledInterface
 {
     use Enabled;
 
-    #[ORM\Column(type: Types::STRING)]
-    private string $title;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private string $content;
-
     #[ORM\OneToOne(targetEntity: File::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private File|null $image = null;
@@ -42,11 +36,11 @@ class Article extends AbstractEntity implements EnabledInterface
     private int|null $truncateMaxLength = null;
 
     public function __construct(
-        string $title,
-        string $content,
+        #[ORM\Column(type: Types::STRING)]
+        private string $title,
+        #[ORM\Column(type: Types::TEXT)]
+        private string $content,
     ) {
-        $this->title   = $title;
-        $this->content = $content;
     }
 
     public function getTitle(): string

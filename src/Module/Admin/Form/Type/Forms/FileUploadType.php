@@ -6,6 +6,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Form\Type\Entities\DirectoryEntityType;
 use App\Storage\Entity\Directory;
+use Override;
 use Symfony\Bridge\PsrHttpMessage\Factory\UploadedFile;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -33,14 +34,13 @@ final class FileUploadType extends AbstractType
                 'multiple'    => true,
                 'constraints' => [
                     new All([
-                        new File([
-                            'maxSize' => '20M',
-                        ]),
+                        new File(maxSize: '20M'),
                     ]),
                 ],
             ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

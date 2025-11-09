@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Form\Type\Entities;
 
 use App\Storage\Entity\Directory;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
@@ -22,6 +23,7 @@ final class DirectoryEntityType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return BaseEntityAutocompleteType::class;

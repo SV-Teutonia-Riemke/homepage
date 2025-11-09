@@ -11,8 +11,9 @@ use DOMNode;
 use DOMText;
 
 use function in_array;
-use function mb_convert_encoding;
+use function is_array;
 use function rtrim;
+use function Safe\mb_convert_encoding;
 use function substr;
 
 final class HtmlTruncate
@@ -61,7 +62,7 @@ final class HtmlTruncate
                 }
 
                 $currentText               = $letters->currentTextPosition();
-                $currentText[0]->nodeValue = substr($currentText[0]->nodeValue, 0, $currentText[1] + 1);
+                $currentText[0]->nodeValue = substr((string) $currentText[0]->nodeValue, 0, $currentText[1] + 1);
 
                 $this->removeProceedingNodes($currentText[0], $body);
 
@@ -82,6 +83,10 @@ final class HtmlTruncate
     {
         // Transform multibyte entities which otherwise display incorrectly.
         $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+
+        if (is_array($html)) {
+            $html = $html[0];
+        }
 
         // Instantiate new DOMDocument object, and then load in UTF-8 HTML.
         $dom           = new DOMDocument();

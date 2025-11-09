@@ -18,12 +18,12 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
         'alias' => 'main',
     ],
 )]
-final class Navbar
+final readonly class Navbar
 {
     public function __construct(
-        private readonly FactoryInterface $factory,
-        private readonly MenuItemRepository $menuItemRepository,
-        private readonly TypeResolver $typeResolver,
+        private FactoryInterface $factory,
+        private MenuItemRepository $menuItemRepository,
+        private TypeResolver $typeResolver,
     ) {
     }
 

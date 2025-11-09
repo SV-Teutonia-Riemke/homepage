@@ -17,11 +17,11 @@ use Throwable;
 
 use function sprintf;
 
-final class Date implements JsonSerializable, Stringable
+final readonly class Date implements JsonSerializable, Stringable
 {
     private const string FORMAT = 'Y-m-d';
 
-    private readonly CarbonInterface $carbon;
+    private CarbonInterface $carbon;
 
     private function __construct(DateTimeInterface $dateTime)
     {

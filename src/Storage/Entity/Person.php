@@ -146,6 +146,6 @@ class Person extends AbstractEntity implements Stringable
             return sprintf('%s %s', $this->firstName, $this->lastName);
         }
 
-        return $this->firstName;
+        return (string) $this->firstName;
     }
 }

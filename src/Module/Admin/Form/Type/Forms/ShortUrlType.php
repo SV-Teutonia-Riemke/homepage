@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Module\Admin\Misc\Shlink\ShortUrl;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -44,6 +45,7 @@ final class ShortUrlType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

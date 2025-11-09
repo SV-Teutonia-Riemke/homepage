@@ -7,6 +7,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 use App\Infrastructure\Menu\MenuGroup;
 use App\Infrastructure\Menu\MenuType;
 use App\Storage\Entity\MenuItem;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
@@ -63,7 +64,7 @@ final class MenuItemType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => MenuItem::class,
-            'empty_data' => static fn (FormInterface $form) => new MenuItem(
+            'empty_data' => static fn (FormInterface $form): MenuItem => new MenuItem(
                 $form->get('title')->getData() ?? '',
                 $form->get('icon')->getData() ?? '',
                 $form->get('type')->getData() ?? '',
@@ -72,6 +73,7 @@ final class MenuItemType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

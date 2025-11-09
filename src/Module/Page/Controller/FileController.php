@@ -15,8 +15,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 
-use function fopen;
-use function stream_copy_to_stream;
+use function Safe\fopen;
+use function Safe\stream_copy_to_stream;
 
 #[Route(
     path: '/f/{uuid:file}/{name}.{extension}',
@@ -55,9 +55,6 @@ final class FileController extends AbstractController
         $mimeType = $this->defaultFilesystem->mimeType($file->getFilePath());
 
         $outputStream = fopen('php://output', 'wb');
-        if ($outputStream === false) {
-            throw $this->createNotFoundException();
-        }
 
         $response = new StreamedResponse(function () use ($file, $outputStream): void {
             $fileStream = $this->defaultFilesystem->readStream($file->getFilePath());

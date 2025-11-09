@@ -33,7 +33,7 @@ class ContactController extends AbstractController
             $data = $form->getData();
             assert($data instanceof Contact);
 
-            $email = (new Email())
+            $email = new Email()
                 ->from('noreply@teutonia-riemke.de')
                 ->to($data->subject->getSendTo())
                 ->replyTo($data->email)

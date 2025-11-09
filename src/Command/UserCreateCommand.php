@@ -14,19 +14,19 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsCommand('app:user:create')]
-final class UserCreateCommand
+final readonly class UserCreateCommand
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
-        private readonly EntityManagerInterface $entityManager,
-        private readonly UserPasswordHasherInterface $passwordHasher,
+        private UserRepository $userRepository,
+        private EntityManagerInterface $entityManager,
+        private UserPasswordHasherInterface $passwordHasher,
     ) {
     }
 
     public function __invoke(
         SymfonyStyle $io,
     ): int {
-        $email = $io->ask('Email?', null, function ($answer) {
+        $email = $io->ask('Email?', null, function (string $answer): string {
             $user = $this->userRepository->loadUserByIdentifier($answer);
             if ($user !== null) {
                 throw new RuntimeException(

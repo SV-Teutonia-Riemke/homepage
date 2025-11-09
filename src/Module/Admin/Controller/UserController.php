@@ -9,6 +9,7 @@ use App\Module\Admin\Crud\CrudConfigBuilder;
 use App\Module\Admin\Crud\Handler\CRUDHandler;
 use App\Module\Admin\Form\Type\Forms\UserType;
 use App\Storage\Entity\User;
+use Override;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -44,6 +45,7 @@ final class UserController extends AbstractCrudController
         return UserType::class;
     }
 
+    #[Override]
     protected function doHandleValidForm(
         Request $request,
         FormInterface $form,

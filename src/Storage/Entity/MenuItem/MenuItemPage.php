@@ -14,14 +14,12 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: MenuItemRepository::class)]
 class MenuItemPage extends MenuItem
 {
-    #[ORM\ManyToOne(targetEntity: Page::class)]
-    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    private Page $page;
-
     public function __construct(
         string $title,
         string $icon,
-        Page $page,
+        #[ORM\ManyToOne(targetEntity: Page::class)]
+        #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+        private Page $page,
         MenuGroup $group,
     ) {
         parent::__construct(
@@ -30,8 +28,6 @@ class MenuItemPage extends MenuItem
             MenuType::PAGE,
             $group,
         );
-
-        $this->page = $page;
     }
 
     public function getPage(): Page

@@ -7,10 +7,10 @@ namespace App\Infrastructure\Asset;
 use App\Storage\Entity\File;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class AssetUrlGenerator
+final readonly class AssetUrlGenerator
 {
     public function __construct(
-        private readonly UrlGeneratorInterface $urlGenerator,
+        private UrlGeneratorInterface $urlGenerator,
     ) {
     }
 
@@ -24,7 +24,7 @@ final class AssetUrlGenerator
                 'uuid'      => $file->getUuid()->toRfc4122(),
                 'name'      => $file->getSafeName(),
                 'extension' => $file->getExtension(),
-                'download'  => $download === true ? 1 : null,
+                'download'  => $download ? 1 : null,
             ],
             UrlGeneratorInterface::ABSOLUTE_URL,
         );

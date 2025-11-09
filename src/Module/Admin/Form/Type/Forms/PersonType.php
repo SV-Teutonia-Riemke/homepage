@@ -7,6 +7,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 use App\Form\Type\Entities\FileEntityType;
 use App\Storage\Entity\Person;
 use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
+use Override;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -73,6 +74,7 @@ final class PersonType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

@@ -12,6 +12,7 @@ use App\Form\Type\Widgets\YearGroupType;
 use App\Module\Admin\Form\Type\Widgets\PlayerCollectionType;
 use App\Module\Admin\Form\Type\Widgets\StaffCollectionType;
 use App\Storage\Entity\Team;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -123,6 +124,7 @@ final class TeamType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

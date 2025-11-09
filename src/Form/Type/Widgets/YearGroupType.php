@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Form\Type\Widgets;
 
 use App\Domain\YearGroup;
+use Override;
 use Psr\Clock\ClockInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -37,6 +38,7 @@ final class YearGroupType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return ChoiceType::class;

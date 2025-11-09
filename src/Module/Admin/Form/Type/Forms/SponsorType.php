@@ -7,6 +7,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 use App\Form\Type\Entities\FileEntityType;
 use App\Form\Type\Widgets\SponsorLevelType;
 use App\Storage\Entity\Sponsor;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ColorType;
@@ -69,6 +70,7 @@ final class SponsorType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

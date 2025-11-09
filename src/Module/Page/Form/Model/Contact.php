@@ -16,7 +16,7 @@ class Contact
 
     public string $email;
 
-    public string|null $phoneNumber;
+    public string|null $phoneNumber = null;
 
     public string $content;
 }

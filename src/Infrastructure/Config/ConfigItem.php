@@ -8,14 +8,14 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 use function sprintf;
 
-final class ConfigItem
+final readonly class ConfigItem
 {
     /** @param array<string, mixed> $formOptions */
     public function __construct(
-        public readonly string $name,
-        public readonly string $formType,
-        public readonly array $formOptions = [],
-        public readonly mixed $default = null,
+        public string $name,
+        public string $formType,
+        public array $formOptions = [],
+        public mixed $default = null,
     ) {
     }
 

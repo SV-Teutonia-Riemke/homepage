@@ -6,6 +6,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Form\Type\Entities\DirectoryEntityType;
 use App\Storage\Entity\File;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,6 +41,7 @@ final class FileEditType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

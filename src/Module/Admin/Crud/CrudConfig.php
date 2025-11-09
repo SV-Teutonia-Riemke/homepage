@@ -13,32 +13,32 @@ use function sprintf;
 
 /** @template Entity of object */
 #[Exclude]
-final class CrudConfig
+final readonly class CrudConfig
 {
     /**
      * @param class-string<Entity> $dtoClass
      * @param array<string, mixed> $defaultRouteParams
      */
     public function __construct(
-        public readonly string $dtoClass,
-        private readonly string $baseRouteName,
-        private readonly string|null $listRouteName = null,
-        private readonly string|null $createRouteName = null,
-        private readonly string|null $editRouteName = null,
-        private readonly string|null $removeRouteName = null,
-        private readonly string|null $upRouteName = null,
-        private readonly string|null $downRouteName = null,
-        private readonly string|null $enableRouteName = null,
-        private readonly string|null $disableRouteName = null,
-        private readonly array $defaultRouteParams = [],
-        private readonly string|null $baseTemplateName = null,
-        private readonly string|null $listTemplateName = null,
-        private readonly string|null $createTemplateName = null,
-        private readonly string|null $editTemplateName = null,
-        public readonly string|null $defaultSortFieldName = null,
-        public readonly string|null $defaultSortDirection = null,
-        private readonly Closure|null $objectIdentifierCallable = null,
-        public readonly Closure|null $formEmptyDataCallable = null,
+        public string $dtoClass,
+        private string $baseRouteName,
+        private string|null $listRouteName = null,
+        private string|null $createRouteName = null,
+        private string|null $editRouteName = null,
+        private string|null $removeRouteName = null,
+        private string|null $upRouteName = null,
+        private string|null $downRouteName = null,
+        private string|null $enableRouteName = null,
+        private string|null $disableRouteName = null,
+        private array $defaultRouteParams = [],
+        private string|null $baseTemplateName = null,
+        private string|null $listTemplateName = null,
+        private string|null $createTemplateName = null,
+        private string|null $editTemplateName = null,
+        public string|null $defaultSortFieldName = null,
+        public string|null $defaultSortDirection = null,
+        private Closure|null $objectIdentifierCallable = null,
+        public Closure|null $formEmptyDataCallable = null,
     ) {
     }
 

@@ -14,7 +14,7 @@ final class ConfigSettingProvider
     /** @var array<string, ConfigSetting>|null */
     private array|null $all = null;
 
-    private ConfigItemCollection $items;
+    private readonly ConfigItemCollection $items;
 
     public function __construct(
         private readonly ConfigSettingRepository $configSettingRepository,

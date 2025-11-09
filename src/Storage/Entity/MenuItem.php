@@ -30,28 +30,16 @@ class MenuItem extends AbstractEntity implements EnabledInterface, PositionInter
     use Enabled;
     use Position;
 
-    #[ORM\Column(type: Types::STRING)]
-    private string $title;
-
-    #[ORM\Column(type: Types::STRING)]
-    private string $icon;
-
-    #[ORM\Column(type: Types::STRING, enumType: MenuType::class)]
-    private MenuType $type;
-
-    #[ORM\Column(name: '`group`', type: Types::STRING, enumType: MenuGroup::class)]
-    private MenuGroup $group;
-
     public function __construct(
-        string $title,
-        string $icon,
-        MenuType $type,
-        MenuGroup $group,
+        #[ORM\Column(type: Types::STRING)]
+        private string $title,
+        #[ORM\Column(type: Types::STRING)]
+        private string $icon,
+        #[ORM\Column(type: Types::STRING, enumType: MenuType::class)]
+        private MenuType $type,
+        #[ORM\Column(name: '`group`', type: Types::STRING, enumType: MenuGroup::class)]
+        private MenuGroup $group,
     ) {
-        $this->title = $title;
-        $this->icon  = $icon;
-        $this->type  = $type;
-        $this->group = $group;
     }
 
     public function getTitle(): string

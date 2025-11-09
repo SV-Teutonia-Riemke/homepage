@@ -6,6 +6,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Form\Type\Widgets\RoleType;
 use App\Storage\Entity\User;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -47,14 +48,13 @@ final class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'empty_data' => static function (FormInterface $form): User {
-                return new User(
-                    $form->get(self::FIELD_EMAIL)->getData() !== null ? (string) $form->get(self::FIELD_EMAIL)->getData() : '',
-                );
-            },
+            'empty_data' => static fn (FormInterface $form): User => new User(
+                $form->get(self::FIELD_EMAIL)->getData() !== null ? (string) $form->get(self::FIELD_EMAIL)->getData() : '',
+            ),
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

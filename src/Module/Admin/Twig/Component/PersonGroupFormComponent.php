@@ -23,7 +23,7 @@ final class PersonGroupFormComponent extends AbstractController
     use DefaultActionTrait;
 
     #[LiveProp(fieldName: 'data')]
-    public PersonGroup|null $personGroup;
+    public PersonGroup|null $personGroup = null;
 
     /** @return FormInterface<PersonGroup|null> */
     protected function instantiateForm(): FormInterface

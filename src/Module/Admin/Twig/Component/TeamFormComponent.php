@@ -25,7 +25,7 @@ final class TeamFormComponent extends AbstractController
     use DefaultActionTrait;
 
     #[LiveProp(fieldName: 'data')]
-    public Team|null $team;
+    public Team|null $team = null;
 
     /** @return FormInterface<Team|null> */
     protected function instantiateForm(): FormInterface

@@ -22,18 +22,15 @@ class FaqCategory extends AbstractEntity implements EnabledInterface, PositionIn
     use Enabled;
     use Position;
 
-    #[ORM\Column(type: Types::STRING)]
-    private string $title;
-
     /** @var Collection<array-key, FaqArticle> */
     #[ORM\OneToMany(targetEntity: FaqArticle::class, mappedBy: 'group')]
     #[ORM\OrderBy(['position' => 'ASC'])]
     private Collection $articles;
 
     public function __construct(
-        string $title,
+        #[ORM\Column(type: Types::STRING)]
+        private string $title,
     ) {
-        $this->title    = $title;
         $this->articles = new ArrayCollection();
     }
 

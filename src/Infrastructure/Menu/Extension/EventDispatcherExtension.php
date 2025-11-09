@@ -9,10 +9,10 @@ use Knp\Menu\Factory\ExtensionInterface;
 use Knp\Menu\ItemInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
-final class EventDispatcherExtension implements ExtensionInterface
+final readonly class EventDispatcherExtension implements ExtensionInterface
 {
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
+        private EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

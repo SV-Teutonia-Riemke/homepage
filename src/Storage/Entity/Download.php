@@ -17,27 +17,18 @@ class Download extends AbstractEntity implements Stringable, PositionInterface, 
 {
     use Position;
 
-    #[ORM\Column(type: Types::STRING)]
-    private string $name;
-
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    private string|null $uri;
-
-    #[ORM\OneToOne(targetEntity: File::class)]
-    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
-    private File|null $file;
-
     #[ORM\Column(type: Types::BOOLEAN, options: ['default' => true])]
     private bool $enabled = true;
 
     public function __construct(
-        string $name,
-        string|null $uri,
-        File|null $file,
+        #[ORM\Column(type: Types::STRING)]
+        private string $name,
+        #[ORM\Column(type: Types::STRING, nullable: true)]
+        private string|null $uri,
+        #[ORM\OneToOne(targetEntity: File::class)]
+        #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+        private File|null $file,
     ) {
-        $this->name = $name;
-        $this->uri  = $uri;
-        $this->file = $file;
     }
 
     public function getName(): string

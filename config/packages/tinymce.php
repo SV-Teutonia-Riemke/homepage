@@ -67,9 +67,7 @@ return static function (TinymceConfig $config): void {
         ],
     ];
 
-    $toolbarAsString = implode(' | ', array_map(static function ($row) {
-        return implode(' ', $row);
-    }, $toolbar));
+    $toolbarAsString = implode(' | ', array_map(static fn ($row): string => implode(' ', $row), $toolbar));
 
     $pluginsAsString = implode(' ', $plugins);
 

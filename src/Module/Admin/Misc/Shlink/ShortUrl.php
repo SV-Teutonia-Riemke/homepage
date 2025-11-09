@@ -43,7 +43,7 @@ class ShortUrl
             return [];
         }
 
-        return (new ArrayCollection((new UnicodeString($this->tags))->split(',')))
+        return new ArrayCollection(new UnicodeString($this->tags)->split(','))
             ->map(static fn (AbstractString $tag): AbstractString => $tag->replace(',', '')->trim())
             ->filter(static fn (AbstractString $tag): bool => ! $tag->isEmpty())
             ->map(static fn (AbstractString $tag): string => $tag->toString())

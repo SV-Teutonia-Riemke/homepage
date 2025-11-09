@@ -11,13 +11,13 @@ use function is_array;
 use function sprintf;
 use function sscanf;
 
-final class YearGroup implements Stringable
+final readonly class YearGroup implements Stringable
 {
     private const string FORMAT = '%d-%d';
 
     public function __construct(
-        public readonly int $start,
-        public readonly int $end,
+        public int $start,
+        public int $end,
     ) {
         if ($this->start > $this->end) {
             throw new RuntimeException(

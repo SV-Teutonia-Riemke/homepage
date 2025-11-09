@@ -19,25 +19,16 @@ class FaqArticle extends AbstractEntity implements EnabledInterface, PositionInt
     use Enabled;
     use Position;
 
-    #[Gedmo\SortableGroup]
-    #[ORM\ManyToOne(targetEntity: FaqCategory::class, inversedBy: 'articles')]
-    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
-    private FaqCategory $group;
-
-    #[ORM\Column(type: Types::STRING)]
-    private string $title;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private string $content;
-
     public function __construct(
-        FaqCategory $group,
-        string $title,
-        string $content,
+        #[Gedmo\SortableGroup]
+        #[ORM\ManyToOne(targetEntity: FaqCategory::class, inversedBy: 'articles')]
+        #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+        private FaqCategory $group,
+        #[ORM\Column(type: Types::STRING)]
+        private string $title,
+        #[ORM\Column(type: Types::TEXT)]
+        private string $content,
     ) {
-        $this->group   = $group;
-        $this->title   = $title;
-        $this->content = $content;
     }
 
     public function getGroup(): FaqCategory

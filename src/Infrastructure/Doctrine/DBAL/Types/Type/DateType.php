@@ -9,6 +9,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Exception\InvalidFormat;
 use Doctrine\DBAL\Types\Exception\InvalidType;
 use Doctrine\DBAL\Types\Type;
+use Override;
 use Throwable;
 
 final class DateType extends Type
@@ -29,6 +30,7 @@ final class DateType extends Type
     }
 
     /** @inheritdoc */
+    #[Override]
     public function convertToPHPValue(
         $value,
         AbstractPlatform $platform,
@@ -53,6 +55,7 @@ final class DateType extends Type
     }
 
     /** @inheritdoc */
+    #[Override]
     public function convertToDatabaseValue(
         $value,
         AbstractPlatform $platform,

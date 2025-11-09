@@ -12,7 +12,7 @@ use RuntimeException;
 class EmbedArticle
 {
     public function __construct(
-        private Extractor $extractor,
+        private readonly Extractor $extractor,
     ) {
     }
 

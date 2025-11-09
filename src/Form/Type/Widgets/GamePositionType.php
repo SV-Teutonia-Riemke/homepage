@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Form\Type\Widgets;
 
 use App\Domain\GamePosition;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,6 +22,7 @@ final class GamePositionType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return EnumType::class;

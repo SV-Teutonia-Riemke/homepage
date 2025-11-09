@@ -18,23 +18,14 @@ class Page extends AbstractEntity implements EnabledInterface, Stringable
 {
     use Enabled;
 
-    #[ORM\Column(type: Types::STRING)]
-    private string $title;
-
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    private string|null $subTitle;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private string $content;
-
     public function __construct(
-        string $title,
-        string|null $subTitle,
-        string $content,
+        #[ORM\Column(type: Types::STRING)]
+        private string $title,
+        #[ORM\Column(type: Types::STRING, nullable: true)]
+        private string|null $subTitle,
+        #[ORM\Column(type: Types::TEXT)]
+        private string $content,
     ) {
-        $this->title    = $title;
-        $this->subTitle = $subTitle;
-        $this->content  = $content;
     }
 
     public function getTitle(): string

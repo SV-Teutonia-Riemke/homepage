@@ -45,19 +45,19 @@ class TypeResolver
     public function resolve(MenuItem $menuItem): ItemInterface
     {
         $resolver = match ($menuItem->getType()) {
-            MenuType::CLUB => fn () => $this->clubResolver,
-            MenuType::CONTACT => fn () => $this->contact,
-            MenuType::DOWNLOADS => fn () => $this->downloadsResolver,
-            MenuType::FAQ => fn () => $this->faqResolver,
-            MenuType::IMPRINT => fn () => $this->imprintResolver,
-            MenuType::LINKS => fn () => $this->linksResolver,
-            MenuType::MAIN => fn () => $this->mainResolver,
-            MenuType::NEWS => fn () => $this->newsResolver,
-            MenuType::PAGE => fn () => $this->pageResolver,
-            MenuType::PRIVACY => fn () => $this->privacyResolver,
-            MenuType::URL => fn () => $this->urlResolver,
-            MenuType::SPONSOR => fn () => $this->sponsorResolver,
-            MenuType::TEAMS => fn () => $this->teamsResolver,
+            MenuType::CLUB => fn (): ClubResolver => $this->clubResolver,
+            MenuType::CONTACT => fn (): ContactResolver => $this->contact,
+            MenuType::DOWNLOADS => fn (): DownloadsResolver => $this->downloadsResolver,
+            MenuType::FAQ => fn (): FaqResolver => $this->faqResolver,
+            MenuType::IMPRINT => fn (): ImprintResolver => $this->imprintResolver,
+            MenuType::LINKS => fn (): LinksResolver => $this->linksResolver,
+            MenuType::MAIN => fn (): MainResolver => $this->mainResolver,
+            MenuType::NEWS => fn (): NewsResolver => $this->newsResolver,
+            MenuType::PAGE => fn (): PageResolver => $this->pageResolver,
+            MenuType::PRIVACY => fn (): PrivacyResolver => $this->privacyResolver,
+            MenuType::URL => fn (): UrlResolver => $this->urlResolver,
+            MenuType::SPONSOR => fn (): SponsorResolver => $this->sponsorResolver,
+            MenuType::TEAMS => fn (): TeamsResolver => $this->teamsResolver,
         };
 
         return $resolver()->__invoke($menuItem, $this->factory);

@@ -8,6 +8,7 @@ use App\Form\Type\Entities\FileEntityType;
 use App\Form\Type\Entities\PersonEntityType;
 use App\Storage\Entity\Article;
 use Eckinox\TinymceBundle\Form\Type\TinymceType;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -80,6 +81,7 @@ final class ArticleType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

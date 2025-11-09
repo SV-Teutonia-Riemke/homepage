@@ -8,49 +8,82 @@ use App\Module\Admin\Crud\CrudConfig;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Throwable;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFunction;
-use Twig\TwigTest;
+use Twig\Attribute\AsTwigFunction;
+use Twig\Attribute\AsTwigTest;
 
 /** @template T of object */
-class CrudExtension extends AbstractExtension
+class CrudExtension
 {
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,
     ) {
     }
 
-    /** @inheritDoc */
-    public function getTests(): array
+    /** @param CrudConfig<T> $crudConfig */
+    #[AsTwigTest('crud_has_create')]
+    public function hasCreate(CrudConfig $crudConfig): bool
     {
-        return [
-            new TwigTest('crud_has_create', fn (CrudConfig $crudConfig): bool => $this->routeExists($crudConfig->getCreateRouteName())),
-            new TwigTest('crud_has_edit', fn (CrudConfig $crudConfig): bool => $this->routeExists($crudConfig->getEditRouteName())),
-            new TwigTest('crud_has_remove', fn (CrudConfig $crudConfig): bool => $this->routeExists($crudConfig->getRemoveRouteName())),
-            new TwigTest('crud_has_up', fn (CrudConfig $crudConfig): bool => $this->routeExists($crudConfig->getUpRouteName())),
-            new TwigTest('crud_has_down', fn (CrudConfig $crudConfig): bool => $this->routeExists($crudConfig->getDownRouteName())),
-            new TwigTest('crud_has_enable', fn (CrudConfig $crudConfig): bool => $this->routeExists($crudConfig->getEnableRouteName())),
-            new TwigTest('crud_has_disable', fn (CrudConfig $crudConfig): bool => $this->routeExists($crudConfig->getDisableRouteName())),
-        ];
-    }
-
-    /** @inheritDoc */
-    public function getFunctions(): array
-    {
-        return [
-            new TwigFunction('crud_url_list', $this->getListUrl(...)),
-            new TwigFunction('crud_url_create', $this->getCreateUrl(...)),
-            new TwigFunction('crud_url_edit', $this->getEditUrl(...)),
-            new TwigFunction('crud_url_remove', $this->getRemoveUrl(...)),
-            new TwigFunction('crud_url_up', $this->getUpUrl(...)),
-            new TwigFunction('crud_url_down', $this->getDownUrl(...)),
-            new TwigFunction('crud_url_enable', $this->getEnableUrl(...)),
-            new TwigFunction('crud_url_disable', $this->getDisableUrl(...)),
-        ];
+        return $this->routeExists($crudConfig->getCreateRouteName());
     }
 
     /** @param CrudConfig<T> $crudConfig */
-    private function getListUrl(CrudConfig $crudConfig): string
+    #[AsTwigTest('crud_has_edit')]
+    public function hasEdit(CrudConfig $crudConfig): bool
+    {
+        return $this->routeExists($crudConfig->getEditRouteName());
+    }
+
+    /** @param CrudConfig<T> $crudConfig */
+    #[AsTwigTest('crud_has_remove')]
+    public function hasRemove(CrudConfig $crudConfig): bool
+    {
+        return $this->routeExists($crudConfig->getRemoveRouteName());
+    }
+
+    /** @param CrudConfig<T> $crudConfig */
+    #[AsTwigTest('crud_has_up')]
+    public function hasUp(CrudConfig $crudConfig): bool
+    {
+        return $this->routeExists($crudConfig->getUpRouteName());
+    }
+
+    /** @param CrudConfig<T> $crudConfig */
+    #[AsTwigTest('crud_has_down')]
+    public function hasDown(CrudConfig $crudConfig): bool
+    {
+        return $this->routeExists($crudConfig->getDownRouteName());
+    }
+
+    /** @param CrudConfig<T> $crudConfig */
+    #[AsTwigTest('crud_has_enable')]
+    public function hasEnable(CrudConfig $crudConfig): bool
+    {
+        return $this->routeExists($crudConfig->getEnableRouteName());
+    }
+
+    /** @param CrudConfig<T> $crudConfig */
+    #[AsTwigTest('crud_has_disable')]
+    public function hasDisable(CrudConfig $crudConfig): bool
+    {
+        return $this->routeExists($crudConfig->getDisableRouteName());
+    }
+
+    private function routeExists(string $routeName): bool
+    {
+        try {
+            $this->urlGenerator->generate($routeName);
+        } catch (RouteNotFoundException) {
+            return false;
+        } catch (Throwable) {
+            return true;
+        }
+
+        return true;
+    }
+
+    /** @param CrudConfig<T> $crudConfig */
+    #[AsTwigFunction('crud_url_list')]
+    public function getListUrl(CrudConfig $crudConfig): string
     {
         return $this->urlGenerator->generate(
             $crudConfig->getListRouteName(),
@@ -59,7 +92,8 @@ class CrudExtension extends AbstractExtension
     }
 
     /** @param CrudConfig<T> $crudConfig */
-    private function getCreateUrl(CrudConfig $crudConfig): string
+    #[AsTwigFunction('crud_url_create')]
+    public function getCreateUrl(CrudConfig $crudConfig): string
     {
         return $this->urlGenerator->generate(
             $crudConfig->getCreateRouteName(),
@@ -71,7 +105,8 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getEditUrl(
+    #[AsTwigFunction('crud_url_edit')]
+    public function getEditUrl(
         CrudConfig $crudConfig,
         object $object,
     ): string {
@@ -85,7 +120,8 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getRemoveUrl(
+    #[AsTwigFunction('crud_url_remove')]
+    public function getRemoveUrl(
         CrudConfig $crudConfig,
         object $object,
     ): string {
@@ -96,7 +132,8 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getUpUrl(
+    #[AsTwigFunction('crud_url_up')]
+    public function getUpUrl(
         CrudConfig $crudConfig,
         object $object,
     ): string {
@@ -107,7 +144,8 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getDownUrl(
+    #[AsTwigFunction('crud_url_down')]
+    public function getDownUrl(
         CrudConfig $crudConfig,
         object $object,
     ): string {
@@ -118,7 +156,8 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getEnableUrl(
+    #[AsTwigFunction('crud_url_enable')]
+    public function getEnableUrl(
         CrudConfig $crudConfig,
         object $object,
     ): string {
@@ -129,7 +168,8 @@ class CrudExtension extends AbstractExtension
      * @param CrudConfig<T> $crudConfig
      * @param T             $object
      */
-    private function getDisableUrl(
+    #[AsTwigFunction('crud_url_disable')]
+    public function getDisableUrl(
         CrudConfig $crudConfig,
         object $object,
     ): string {
@@ -152,18 +192,5 @@ class CrudExtension extends AbstractExtension
             ...$crudConfig->getDefaultRouteParams(),
             ...$objects,
         ];
-    }
-
-    private function routeExists(string $routeName): bool
-    {
-        try {
-            $this->urlGenerator->generate($routeName);
-        } catch (RouteNotFoundException) {
-            return false;
-        } catch (Throwable) {
-            return true;
-        }
-
-        return true;
     }
 }

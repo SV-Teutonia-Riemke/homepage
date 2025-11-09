@@ -25,7 +25,7 @@ final class DoctrineMigrationsFilterSubscriber
             $asset = $asset->getName();
         }
 
-        if ($asset === (new TableMetadataStorageConfiguration())->getTableName()) { // 'doctrine_migration_versions'
+        if ($asset === new TableMetadataStorageConfiguration()->getTableName()) { // 'doctrine_migration_versions'
             foreach (debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS) as $call) {
                 $class = $call['class'] ?? null;
                 if ($class !== null && is_a($class, DoctrineCommand::class, true)) {

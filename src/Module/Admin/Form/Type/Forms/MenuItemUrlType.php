@@ -6,6 +6,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Infrastructure\Menu\MenuGroup;
 use App\Storage\Entity\MenuItem\MenuItemUrl;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,7 +36,7 @@ final class MenuItemUrlType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => MenuItemUrl::class,
-            'empty_data' => static fn (FormInterface $form) => new MenuItemUrl(
+            'empty_data' => static fn (FormInterface $form): MenuItemUrl => new MenuItemUrl(
                 $form->get('title')->getData() ?? '',
                 $form->get('icon')->getData() ?? '',
                 $form->get('url')->getData() ?? '',
@@ -44,6 +45,7 @@ final class MenuItemUrlType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return MenuItemType::class;

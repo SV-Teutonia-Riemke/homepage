@@ -17,43 +17,22 @@ use function sprintf;
 #[ORM\Entity(repositoryClass: FileRepository::class)]
 class File extends AbstractEntity implements Stringable
 {
-    #[ORM\Column(type: Types::STRING)]
-    private string $name;
-
-    #[ORM\Column(type: Types::STRING)]
-    private string $safeName;
-
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    private string|null $extension;
-
-    #[ORM\Column(type: Types::STRING, nullable: true)]
-    private string|null $mimeType;
-
-    #[ORM\Column(type: UuidType::NAME, unique: true)]
-    private Uuid $uuid;
-
-    #[ORM\Column(type: Types::STRING, unique: true)]
-    private string $filePath;
-
-    #[ORM\ManyToOne(targetEntity: Directory::class, inversedBy: 'files')]
-    private Directory|null $directory;
-
     public function __construct(
-        string $name,
-        string $safeName,
-        string|null $extension,
-        string|null $mimeType,
-        Uuid $uuid,
-        string $filePath,
-        Directory|null $directory,
+        #[ORM\Column(type: Types::STRING)]
+        private string $name,
+        #[ORM\Column(type: Types::STRING)]
+        private string $safeName,
+        #[ORM\Column(type: Types::STRING, nullable: true)]
+        private string|null $extension,
+        #[ORM\Column(type: Types::STRING, nullable: true)]
+        private string|null $mimeType,
+        #[ORM\Column(type: UuidType::NAME, unique: true)]
+        private Uuid $uuid,
+        #[ORM\Column(type: Types::STRING, unique: true)]
+        private string $filePath,
+        #[ORM\ManyToOne(targetEntity: Directory::class, inversedBy: 'files')]
+        private Directory|null $directory,
     ) {
-        $this->name      = $name;
-        $this->safeName  = $safeName;
-        $this->extension = $extension;
-        $this->mimeType  = $mimeType;
-        $this->uuid      = $uuid;
-        $this->filePath  = $filePath;
-        $this->directory = $directory;
     }
 
     public function getName(): string

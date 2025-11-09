@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Form\Type\Entities;
 
 use App\Storage\Entity\File;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\UX\Autocomplete\Form\AsEntityAutocompleteField;
@@ -23,6 +24,7 @@ final class FileEntityType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return BaseEntityAutocompleteType::class;

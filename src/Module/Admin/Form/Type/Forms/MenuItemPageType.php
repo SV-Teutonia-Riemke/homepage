@@ -7,6 +7,7 @@ namespace App\Module\Admin\Form\Type\Forms;
 use App\Infrastructure\Menu\MenuGroup;
 use App\Storage\Entity\MenuItem\MenuItemPage;
 use App\Storage\Entity\Page;
+use Override;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -37,7 +38,7 @@ final class MenuItemPageType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => MenuItemPage::class,
-            'empty_data' => static fn (FormInterface $form) => new MenuItemPage(
+            'empty_data' => static fn (FormInterface $form): MenuItemPage => new MenuItemPage(
                 $form->get('title')->getData() ?? '',
                 $form->get('icon')->getData() ?? '',
                 $form->get('page')->getData() ?? '',
@@ -46,6 +47,7 @@ final class MenuItemPageType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return MenuItemType::class;

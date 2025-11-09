@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Module\Admin\Form\Type\Forms;
 
 use App\Storage\Entity\Page;
+use Override;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -61,6 +62,7 @@ final class PageType extends AbstractType
         ]);
     }
 
+    #[Override]
     public function getParent(): string
     {
         return AbstractForm::class;

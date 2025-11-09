@@ -36,11 +36,7 @@ class ColComponent
     {
         $classes = [];
 
-        if ($this->col === null) {
-            $classes[] = 'col';
-        } else {
-            $classes[] = sprintf('col-%d', $this->col);
-        }
+        $classes[] = $this->col === null ? 'col' : sprintf('col-%d', $this->col);
 
         if ($this->lg !== null) {
             $classes[] = sprintf('col-lg-%d', $this->lg);
