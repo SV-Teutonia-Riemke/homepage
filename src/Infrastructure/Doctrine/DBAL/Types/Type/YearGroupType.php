@@ -26,6 +26,8 @@ final class YearGroupType extends Type
         array $column,
         AbstractPlatform $platform,
     ): string {
+        $column['length'] ??= 255;
+
         return $platform->getStringTypeDeclarationSQL($column);
     }
 
