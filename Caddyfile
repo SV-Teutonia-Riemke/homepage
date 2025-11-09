@@ -7,11 +7,11 @@
 }
 
 :80 {
-	root * public/
+	root * /app/public/
 	encode zstd br gzip
 
 	php_server {
-	    root public/
+	    root /app/public/
         env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
 	    worker {
 	       file index.php
