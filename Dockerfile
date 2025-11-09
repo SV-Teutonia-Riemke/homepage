@@ -17,6 +17,7 @@ RUN rm /etc/hooks/bootstrap/10-create-project && \
 
 COPY --chown=$APP_USER:$APP_GROUP . /app
 COPY ./Caddyfile /etc/caddy/Caddyfile
+COPY ./Caddyfile /etc/frankenphp/Caddyfile
 COPY ./etc/startup/00-startup /startup/00-startup
 
 RUN chmod +x /startup/00-startup
