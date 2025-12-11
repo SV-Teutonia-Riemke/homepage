@@ -1,4 +1,4 @@
-FROM shinsenter/php:8.4-frankenphp
+FROM shinsenter/php:8.5-frankenphp
 
 ENV APP_USER="app"
 ENV APP_GROUP="app"
