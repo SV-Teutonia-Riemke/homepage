@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('framework', [
+return App::config([
+    'framework' => [
         'test' => true,
         'session' => [
             'handler_id' => null,
             'storage_factory_id' => 'session.storage.factory.mock_file',
         ],
-    ]);
-};
+    ],
+]);

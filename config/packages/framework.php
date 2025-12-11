@@ -2,26 +2,13 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $services = $containerConfigurator->services();
-
-    $services->set(PdoSessionHandler::class)
-        ->args([
-            env('DATABASE_URL')->string(),
-        ]);
-
-    $containerConfigurator->extension('framework', [
-//        'trusted_hosts' => [
-//            '^(.+\.)?loca\.lt$',
-//            '^(.+\.)?localhost$',
-//            '^(.+\.)?svt\.lcl$',
-//            '^(.+\.)?teutonia-riemke\.de$',
-//        ],
+return App::config([
+    'framework' => [
         'trusted_proxies' => '127.0.0.1,REMOTE_ADDR,192.168.0.0/16,172.16.0.0/12,10.0.0.0/8',
         'trusted_headers' => [
             'x-forwarded-for',
@@ -41,5 +28,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'php_errors' => [
             'log' => true,
         ],
-    ]);
-};
+    ],
+    'services' => [
+        PdoSessionHandler::class => [
+            'arguments' => [
+                env('DATABASE_URL')->string(),
+            ],
+        ],
+    ],
+]);

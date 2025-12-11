@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\FrameworkConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (
-    FrameworkConfig $frameworkConfig,
-): void {
-    $frameworkConfig
-        ->validation()
-            ->emailValidationMode('html5');
-};
+return App::config([
+    'framework' => [
+        'validation' => [
+            'email_validation_mode' => 'html5',
+        ],
+    ],
+]);

@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\FrameworkConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (FrameworkConfig $frameworkConfig): void {
-    $frameworkConfig
-        ->uid()
-            ->defaultUuidVersion(7)
-            ->timeBasedUuidVersion(7);
-};
+return App::config([
+    'framework' => [
+        'uid' => [
+            'default_uuid_version' => 7,
+            'time_based_uuid_version' => 7,
+        ],
+    ],
+]);

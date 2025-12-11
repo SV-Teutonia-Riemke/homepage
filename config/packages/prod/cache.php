@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\FrameworkConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
-return static function (
-    FrameworkConfig $frameworkConfig,
-): void {
-    $frameworkConfig->cache()
-        ->app('cache.adapter.redis')
-        ->defaultRedisProvider(env('REDIS_DSN')->string());
-};
+return App::config([
+    'framework' => [
+        'cache' => [
+            'app' => 'cache.adapter.redis',
+            'default_redis_provider' => env('REDIS_DSN')->string(),
+        ],
+    ],
+]);

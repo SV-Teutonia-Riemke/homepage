@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\FrameworkConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (FrameworkConfig $config): void {
-    $config
-        ->defaultLocale('de')
-        ->translator()
-            ->defaultPath('%kernel.project_dir%/translations')
-            ->fallbacks(['de']);
-};
+return App::config([
+    'framework' => [
+        'default_locale' => 'de',
+        'translator' => [
+            'default_path' => '%kernel.project_dir%/translations',
+            'fallbacks' => ['de'],
+        ],
+    ],
+]);

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('monolog', [
+return App::config([
+    'monolog' => [
         'handlers' => [
             'main' => [
                 'type' => 'fingers_crossed',
@@ -25,5 +25,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'level' => 'debug',
             ],
         ],
-    ]);
-};
+    ],
+]);

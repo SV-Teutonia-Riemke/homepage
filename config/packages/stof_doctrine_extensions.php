@@ -2,10 +2,15 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\StofDoctrineExtensionsConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (StofDoctrineExtensionsConfig $config): void {
-    $config
-        ->defaultLocale('de')
-        ->orm('default')->sortable(true);
-};
+return App::config([
+    'stof_doctrine_extensions' => [
+        'default_locale' => 'de',
+        'orm' => [
+            'default' => [
+                'sortable' => true,
+            ],
+        ],
+    ],
+]);

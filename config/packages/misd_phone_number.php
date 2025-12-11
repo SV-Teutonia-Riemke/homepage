@@ -3,11 +3,14 @@
 declare(strict_types=1);
 
 use Misd\PhoneNumberBundle\Doctrine\DBAL\Types\PhoneNumberType;
-use Symfony\Config\DoctrineConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (
-    DoctrineConfig $doctrineConfig,
-): void {
-    $doctrineConfig->dbal()
-        ->type('phone_number', PhoneNumberType::class);
-};
+return App::config([
+    'doctrine' => [
+        'dbal' => [
+            'types' => [
+                'phone_number' => PhoneNumberType::class,
+            ],
+        ],
+    ],
+]);

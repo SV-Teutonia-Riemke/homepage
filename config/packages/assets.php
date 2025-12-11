@@ -3,13 +3,16 @@
 declare(strict_types=1);
 
 use Pentatrion\ViteBundle\Asset\ViteAssetVersionStrategy;
-use Symfony\Config\FrameworkConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (
-    FrameworkConfig $frameworkConfig,
-): void {
-    $frameworkConfig
-        ->assets()
-            ->package('vite')
-                ->versionStrategy(ViteAssetVersionStrategy::class);
-};
+return App::config([
+    'framework' => [
+        'assets' => [
+            'packages' => [
+                'vite' => [
+                    'version_strategy' => ViteAssetVersionStrategy::class,
+                ],
+            ],
+        ],
+    ],
+]);

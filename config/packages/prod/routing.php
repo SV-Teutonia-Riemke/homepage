@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\FrameworkConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (
-    FrameworkConfig $config,
-): void {
-    $config->router()->strictRequirements(true);
-};
+return App::config([
+    'framework' => [
+        'router' => [
+            'strict_requirements' => true,
+        ],
+    ],
+]);

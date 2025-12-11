@@ -9,9 +9,10 @@
 
     <file>../../bin/</file>
     <file>../../config/</file>
-<!--    <file>public/</file>-->
     <file>../../src/</file>
     <file>../../tests/</file>
+
+    <exclude-pattern>*/config/reference.php</exclude-pattern>
 
     <rule ref="../../vendor/doctrine/coding-standard/lib/Doctrine/ruleset.xml">
         <exclude name="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming.SuperfluousSuffix"/>

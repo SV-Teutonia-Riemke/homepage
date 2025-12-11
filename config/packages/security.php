@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 use App\Security\UserProvider;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('security', [
+return App::config([
+    'security' => [
         'password_hashers' => [
             PasswordAuthenticatedUserInterface::class => 'auto',
         ],
@@ -65,20 +65,5 @@ return static function (ContainerConfigurator $containerConfigurator): void {
                 'roles' => 'PUBLIC_ACCESS',
             ],
         ],
-    ]);
-
-    if ($containerConfigurator->env() !== 'test') {
-        return;
-    }
-
-    $containerConfigurator->extension('security', [
-        'password_hashers' => [
-            PasswordAuthenticatedUserInterface::class => [
-                'algorithm' => 'auto',
-                'cost' => 4,
-                'time_cost' => 3,
-                'memory_cost' => 10,
-            ],
-        ],
-    ]);
-};
+    ],
+]);

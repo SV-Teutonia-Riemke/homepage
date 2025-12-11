@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\UxIconsConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (UxIconsConfig $uxIconsConfig): void {
-    $uxIconsConfig->defaultIconAttributes([
-        'height' => '1.25em',
-        'width' => '1.25em',
-    ]);
-};
+return App::config([
+    'ux_icons' => [
+        'default_icon_attributes' => [
+            'height' => '1.25em',
+            'width' => '1.25em',
+        ],
+    ],
+]);

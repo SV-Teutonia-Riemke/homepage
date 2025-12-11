@@ -9,16 +9,31 @@ use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $services = $containerConfigurator->services();
-
-    $services->alias(RequestFactoryInterface::class, 'nyholm.psr7.psr17_factory');
-    $services->alias(ResponseFactoryInterface::class, 'nyholm.psr7.psr17_factory');
-    $services->alias(ServerRequestFactoryInterface::class, 'nyholm.psr7.psr17_factory');
-    $services->alias(StreamFactoryInterface::class, 'nyholm.psr7.psr17_factory');
-    $services->alias(UploadedFileFactoryInterface::class, 'nyholm.psr7.psr17_factory');
-    $services->alias(UriFactoryInterface::class, 'nyholm.psr7.psr17_factory');
-    $services->set('nyholm.psr7.psr17_factory', Psr17Factory::class);
-};
+return App::config([
+    'services' => [
+        Psr17Factory::class => null,
+        'nyholm.psr7.psr17_factory' => [
+            'alias' => Psr17Factory::class,
+        ],
+        RequestFactoryInterface::class => [
+            'alias' => Psr17Factory::class,
+        ],
+        ResponseFactoryInterface::class => [
+            'alias' => Psr17Factory::class,
+        ],
+        ServerRequestFactoryInterface::class => [
+            'alias' => Psr17Factory::class,
+        ],
+        StreamFactoryInterface::class => [
+            'alias' => Psr17Factory::class,
+        ],
+        UploadedFileFactoryInterface::class => [
+            'alias' => Psr17Factory::class,
+        ],
+        UriFactoryInterface::class => [
+            'alias' => Psr17Factory::class,
+        ],
+    ],
+]);

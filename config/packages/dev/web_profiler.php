@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\FrameworkConfig;
-use Symfony\Config\WebProfilerConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (
-    WebProfilerConfig $webProfilerConfig,
-    FrameworkConfig $frameworkConfig,
-): void {
-    $webProfilerConfig
-        ->toolbar()
-            ->ajaxReplace(true)
-            ->enabled(true);
-    $webProfilerConfig->interceptRedirects(false);
-
-    $frameworkConfig->profiler()
-        ->onlyExceptions(false)
-        ->collectSerializerData(true);
-};
+return App::config([
+    'framework' => [
+        'profiler' => [
+            'only_exceptions' => false,
+            'collect' => true,
+        ],
+    ],
+    'web_profiler' => [
+        'toolbar' => [
+            'enabled' => true,
+            'ajax_replace' => true,
+        ],
+        'intercept_redirects' => false,
+    ],
+]);

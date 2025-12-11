@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Domain\EmbedArticle;
 use App\Domain\Role;
 use App\Storage\Entity\ExternalArticle;
@@ -16,6 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\SubmitButton;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;

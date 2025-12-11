@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-use Symfony\Config\PrestaSitemapConfig;
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
-return static function (PrestaSitemapConfig $config): void {
-    $config->defaults()
-        ->priority(1)
-        ->changefreq('daily')
-        ->lastmod('now');
-
-    $config->defaultSection('default');
-};
+return App::config([
+    'presta_sitemap' => [
+        'default_section' => 'default',
+        'defaults' => [
+            'priority' => 1,
+            'changefreq' => 'daily',
+            'lastmod' => 'now',
+        ],
+    ],
+]);

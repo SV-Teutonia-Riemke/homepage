@@ -5,14 +5,9 @@ declare(strict_types=1);
 use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 
 return App::config([
-    'web_profiler' => [
-        'toolbar' => [
-            'enabled' => false,
-        ],
-    ],
     'framework' => [
-        'profiler' => [
-            'collect' => false,
+        'property_info' => [
+            'with_constructor_extractor' => true,
         ],
     ],
 ]);

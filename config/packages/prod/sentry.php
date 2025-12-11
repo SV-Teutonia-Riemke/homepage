@@ -2,29 +2,32 @@
 
 declare(strict_types=1);
 
+use Symfony\Component\DependencyInjection\Loader\Configurator\App;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Config\SentryConfig;
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
-return static function (
-    SentryConfig $config,
-): void {
-    $config
-        ->dsn(env('SENTRY_DSN')->string())
-        ->options()->tracesSampleRate(env('SENTRY_TRACE')->float());
-
-    $config->tracing()->enabled(true);
-    $config->tracing()->dbal()->enabled(true);
-    $config->tracing()->cache()->enabled(true);
-    $config->tracing()->twig()->enabled(true);
-    $config->messenger()->enabled(true);
-
-    $config->options()->ignoreExceptions([
-        NotFoundHttpException::class,
-        AccessDeniedException::class,
-        BadRequestHttpException::class,
-    ]);
-};
+return App::config([
+    'sentry' => [
+        'dsn' => env('SENTRY_DSN')->string(),
+        'options' => [
+            'traces_sample_rate' => env('SENTRY_TRACE')->float(),
+            'ignore_exceptions' => [
+                NotFoundHttpException::class,
+                AccessDeniedException::class,
+                BadRequestHttpException::class,
+            ],
+        ],
+        'tracing' => [
+            'enabled' => true,
+            'dbal' => true,
+            'cache' => true,
+            'twig' => true,
+        ],
+        'messenger' => [
+            'enabled' => true,
+        ],
+    ],
+]);

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Domain\Role;
 use App\Module\Admin\Form\Type\Forms\DirectoryType;
 use App\Module\Admin\Form\Type\Forms\FileEditType;
@@ -17,6 +16,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use League\Flysystem\FilesystemOperator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;

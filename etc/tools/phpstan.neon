@@ -12,6 +12,7 @@ includes:
 parameters:
     level: 8
     paths:
+        - ../../config
         - ../../src
         - ../../tests
 
