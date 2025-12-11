@@ -16,7 +16,6 @@ return $config
     ], false)
     ->addPathToScan(__DIR__ . '/../../tests', true)
 
-    ->ignoreUnknownClassesRegex('/Symfony\\\\Config\\\\.+/')
     ->ignoreUnknownFunctionsRegex('/Symfony\\\\Component\\\\DependencyInjection\\\\Loader\\\\Configurator\\\\.+/')
 
     // Ignoring errors on specific packages

@@ -131,8 +131,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
-        }
+            "App\\": "src/",
+            "DoctrineMigrations\\": "migrations/"
+        },
+        "files": [
+            "config/reference.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
