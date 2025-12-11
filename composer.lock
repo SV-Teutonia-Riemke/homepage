@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad3b1fde76c88a4e120441458cf83f7b",
+    "content-hash": "6e3354a2f2b67a696c904d7364b791b4",
     "packages": [
         {
             "name": "antoligy/dom-string-iterators",
@@ -196,30 +196,99 @@
             "time": "2025-12-08T15:06:51+00:00"
         },
         {
-            "name": "cweagans/composer-patches",
-            "version": "1.7.3",
+            "name": "cweagans/composer-configurable-plugin",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cweagans/composer-patches.git",
-                "reference": "e190d4466fe2b103a55467dfa83fc2fecfcaf2db"
+                "url": "https://github.com/cweagans/composer-configurable-plugin.git",
+                "reference": "15433906511a108a1806710e988629fd24b89974"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/e190d4466fe2b103a55467dfa83fc2fecfcaf2db",
-                "reference": "e190d4466fe2b103a55467dfa83fc2fecfcaf2db",
+                "url": "https://api.github.com/repos/cweagans/composer-configurable-plugin/zipball/15433906511a108a1806710e988629fd24b89974",
+                "reference": "15433906511a108a1806710e988629fd24b89974",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0 || ^2.0",
-                "php": ">=5.3.0"
+                "php": ">=8.0.0"
             },
             "require-dev": {
-                "composer/composer": "~1.0 || ~2.0",
-                "phpunit/phpunit": "~4.6"
+                "codeception/codeception": "~4.0",
+                "codeception/module-asserts": "^2.0",
+                "composer/composer": "~2.0",
+                "php-coveralls/php-coveralls": "~2.0",
+                "php-parallel-lint/php-parallel-lint": "^1.0.0",
+                "phpro/grumphp": "^1.8.0",
+                "sebastian/phpcpd": "^6.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "cweagans\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Cameron Eagans",
+                    "email": "me@cweagans.net"
+                }
+            ],
+            "description": "Provides a lightweight configuration system for Composer plugins.",
+            "support": {
+                "issues": "https://github.com/cweagans/composer-configurable-plugin/issues",
+                "source": "https://github.com/cweagans/composer-configurable-plugin/tree/2.0.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/cweagans",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-12T04:58:58+00:00"
+        },
+        {
+            "name": "cweagans/composer-patches",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cweagans/composer-patches.git",
+                "reference": "bfa6018a5f864653d9ed899b902ea72f858a2cf7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cweagans/composer-patches/zipball/bfa6018a5f864653d9ed899b902ea72f858a2cf7",
+                "reference": "bfa6018a5f864653d9ed899b902ea72f858a2cf7",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0",
+                "cweagans/composer-configurable-plugin": "^2.0",
+                "ext-json": "*",
+                "php": ">=8.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "~4.0",
+                "codeception/module-asserts": "^2.0",
+                "codeception/module-cli": "^2.0",
+                "codeception/module-filesystem": "^2.0",
+                "composer/composer": "~2.0",
+                "php-coveralls/php-coveralls": "~2.0",
+                "php-parallel-lint/php-parallel-lint": "^1.0.0",
+                "phpro/grumphp": "^1.8.0",
+                "sebastian/phpcpd": "^6.0",
+                "squizlabs/php_codesniffer": "^4.0"
             },
             "type": "composer-plugin",
             "extra": {
-                "class": "cweagans\\Composer\\Patches"
+                "_": "The following two lines ensure that composer-patches is loaded as early as possible.",
+                "class": "cweagans\\Composer\\Plugin\\Patches",
+                "plugin-modifies-downloads": true,
+                "plugin-modifies-install-path": true
             },
             "autoload": {
                 "psr-4": {
@@ -239,9 +308,15 @@
             "description": "Provides a way to patch Composer packages.",
             "support": {
                 "issues": "https://github.com/cweagans/composer-patches/issues",
-                "source": "https://github.com/cweagans/composer-patches/tree/1.7.3"
+                "source": "https://github.com/cweagans/composer-patches/tree/2.0.0"
             },
-            "time": "2022-12-20T22:53:13+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/cweagans",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-10-30T23:44:22+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -601,37 +676,44 @@
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
-            "version": "3.7.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "1e380c6dd8ac8488217f39cff6b77e367f1a644b"
+                "reference": "20505da78735744fb4a42a3bb9a416b345ad6f7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/1e380c6dd8ac8488217f39cff6b77e367f1a644b",
-                "reference": "1e380c6dd8ac8488217f39cff6b77e367f1a644b",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/20505da78735744fb4a42a3bb9a416b345ad6f7c",
+                "reference": "20505da78735744fb4a42a3bb9a416b345ad6f7c",
                 "shasum": ""
             },
             "require": {
-                "doctrine/doctrine-bundle": "^2.4 || ^3.0",
+                "doctrine/dbal": "^4",
+                "doctrine/doctrine-bundle": "^3",
                 "doctrine/migrations": "^3.2",
-                "php": "^7.2 || ^8.0",
-                "symfony/deprecation-contracts": "^2.1 || ^3",
-                "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0 || ^8.0"
+                "php": "^8.4",
+                "psr/log": "^3",
+                "symfony/config": "^6.4 || ^7.0 || ^8.0",
+                "symfony/console": "^6.4 || ^7.0 || ^8.0",
+                "symfony/dependency-injection": "^6.4 || ^7.0 || ^8.0",
+                "symfony/deprecation-contracts": "^3",
+                "symfony/framework-bundle": "^6.4 || ^7.0 || ^8.0",
+                "symfony/http-foundation": "^6.4 || ^7.0 || ^8.0",
+                "symfony/http-kernel": "^6.4 || ^7.0 || ^8.0",
+                "symfony/service-contracts": "^3.0"
             },
             "require-dev": {
                 "composer/semver": "^3.0",
-                "doctrine/coding-standard": "^12 || ^14",
-                "doctrine/orm": "^2.6 || ^3",
-                "phpstan/phpstan": "^1.4 || ^2",
-                "phpstan/phpstan-deprecation-rules": "^1 || ^2",
-                "phpstan/phpstan-phpunit": "^1 || ^2",
-                "phpstan/phpstan-strict-rules": "^1.1 || ^2",
-                "phpstan/phpstan-symfony": "^1.3 || ^2",
-                "phpunit/phpunit": "^8.5 || ^9.5",
-                "symfony/phpunit-bridge": "^6.3 || ^7 || ^8",
-                "symfony/var-exporter": "^5.4 || ^6 || ^7 || ^8"
+                "doctrine/coding-standard": "^14",
+                "doctrine/orm": "^3",
+                "phpstan/phpstan": "^2",
+                "phpstan/phpstan-deprecation-rules": "^2",
+                "phpstan/phpstan-phpunit": "^2",
+                "phpstan/phpstan-strict-rules": "^2",
+                "phpstan/phpstan-symfony": "^2",
+                "phpunit/phpunit": "^12.5",
+                "symfony/var-exporter": "^6.4 || ^7 || ^8"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -666,7 +748,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/DoctrineMigrationsBundle/issues",
-                "source": "https://github.com/doctrine/DoctrineMigrationsBundle/tree/3.7.0"
+                "source": "https://github.com/doctrine/DoctrineMigrationsBundle/tree/4.0.0"
             },
             "funding": [
                 {
@@ -682,7 +764,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-11-15T19:02:59+00:00"
+            "time": "2025-12-05T08:14:38+00:00"
         },
         {
             "name": "doctrine/event-manager",
@@ -1748,53 +1830,52 @@
         },
         {
             "name": "giggsey/libphonenumber-for-php",
-            "version": "8.13.55",
+            "version": "9.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/giggsey/libphonenumber-for-php.git",
-                "reference": "6e28b3d53cf96d7f41c83d9b80b6021ecbd00537"
+                "reference": "bafb1741c3bc351b39652ed570a6adeec7d8032b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/6e28b3d53cf96d7f41c83d9b80b6021ecbd00537",
-                "reference": "6e28b3d53cf96d7f41c83d9b80b6021ecbd00537",
+                "url": "https://api.github.com/repos/giggsey/libphonenumber-for-php/zipball/bafb1741c3bc351b39652ed570a6adeec7d8032b",
+                "reference": "bafb1741c3bc351b39652ed570a6adeec7d8032b",
                 "shasum": ""
             },
             "require": {
-                "giggsey/locale": "^2.0",
-                "php": "^7.4|^8.0",
-                "symfony/polyfill-mbstring": "^1.17"
+                "giggsey/locale": "^2.7",
+                "php": "^8.1",
+                "symfony/polyfill-mbstring": "^1.31"
             },
             "replace": {
                 "giggsey/libphonenumber-for-php-lite": "self.version"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.64",
-                "pear/pear-core-minimal": "^1.10",
-                "pear/pear_exception": "^1.0",
-                "pear/versioncontrol_git": "^0.7",
-                "phing/phing": "^3.0",
-                "php-coveralls/php-coveralls": "^2.0",
-                "phpunit/phpunit": "^9.6",
-                "symfony/console": "^v5.2",
-                "symfony/var-exporter": "^5.2"
+                "ext-dom": "*",
+                "friendsofphp/php-cs-fixer": "^3.71",
+                "infection/infection": "^0.29|^0.31.0",
+                "nette/php-generator": "^4.1",
+                "php-coveralls/php-coveralls": "^2.7",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan": "^2.1.7",
+                "phpstan/phpstan-deprecation-rules": "^2.0.1",
+                "phpstan/phpstan-phpunit": "^2.0.4",
+                "phpstan/phpstan-strict-rules": "^2.0.3",
+                "phpunit/phpunit": "^10.5.45",
+                "symfony/console": "^6.4",
+                "symfony/filesystem": "^6.4",
+                "symfony/process": "^6.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.x-dev"
+                    "dev-master": "9.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "libphonenumber\\": "src/"
-                },
-                "exclude-from-classmap": [
-                    "/src/data/",
-                    "/src/carrier/data/",
-                    "/src/geocoding/data/",
-                    "/src/timezone/data/"
-                ]
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1807,7 +1888,7 @@
                     "homepage": "https://giggsey.com/"
                 }
             ],
-            "description": "PHP Port of Google's libphonenumber",
+            "description": "A library for parsing, formatting, storing and validating international phone numbers, a PHP Port of Google's libphonenumber.",
             "homepage": "https://github.com/giggsey/libphonenumber-for-php",
             "keywords": [
                 "geocoding",
@@ -1821,7 +1902,7 @@
                 "issues": "https://github.com/giggsey/libphonenumber-for-php/issues",
                 "source": "https://github.com/giggsey/libphonenumber-for-php"
             },
-            "time": "2025-02-14T08:14:08+00:00"
+            "time": "2025-12-05T12:07:14+00:00"
         },
         {
             "name": "giggsey/locale",
@@ -3245,23 +3326,25 @@
         },
         {
             "name": "odolbeau/phone-number-bundle",
-            "version": "v4.1.0",
+            "version": "v4.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/odolbeau/phone-number-bundle.git",
-                "reference": "6501d1770339928785da9234e9f718affbef8d4d"
+                "reference": "b7da3dfae7fb455cdd891dcd3d912cdcbdfac6cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/odolbeau/phone-number-bundle/zipball/6501d1770339928785da9234e9f718affbef8d4d",
-                "reference": "6501d1770339928785da9234e9f718affbef8d4d",
+                "url": "https://api.github.com/repos/odolbeau/phone-number-bundle/zipball/b7da3dfae7fb455cdd891dcd3d912cdcbdfac6cb",
+                "reference": "b7da3dfae7fb455cdd891dcd3d912cdcbdfac6cb",
                 "shasum": ""
             },
             "require": {
-                "giggsey/libphonenumber-for-php": "^8.9",
+                "giggsey/libphonenumber-for-php": "^9.0.2",
                 "php": ">=8.1",
-                "symfony/framework-bundle": "^5.4 || ^6.3 || ^7.0",
-                "symfony/intl": "^5.4 || ^6.3 || ^7.0",
+                "symfony/config": "^6.4 || ^7.2 || ^8.0",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/framework-bundle": "^6.4 || ^7.2 || ^8.0",
+                "symfony/intl": "^6.4 || ^7.2 || ^8.0",
                 "symfony/polyfill-mbstring": "^1.28"
             },
             "replace": {
@@ -3269,14 +3352,15 @@
             },
             "require-dev": {
                 "doctrine/doctrine-bundle": "^1.12|^2.0",
-                "phpspec/prophecy-phpunit": "^2.0",
+                "phpspec/prophecy": "^1.20",
+                "phpspec/prophecy-phpunit": "^2.3",
                 "phpunit/phpunit": "^9.6.11",
-                "symfony/form": "^5.4 || ^6.3 || ^7.0",
-                "symfony/phpunit-bridge": "^7.0",
-                "symfony/property-access": "^5.4 || ^6.3 || ^7.0",
-                "symfony/serializer": "^5.4 || ^6.3 || ^7.0",
-                "symfony/twig-bundle": "^5.4 || ^6.3 || ^7.0",
-                "symfony/validator": "^5.4 || ^6.3 || ^7.0"
+                "symfony/form": "^6.4 || ^7.2 || ^8.0",
+                "symfony/phpunit-bridge": "^7.2 || ^8.0",
+                "symfony/property-access": "^6.4 || ^7.2 || ^8.0",
+                "symfony/serializer": "^6.4 || ^7.2 || ^8.0",
+                "symfony/twig-bundle": "^6.4 || ^7.2 || ^8.0",
+                "symfony/validator": "^6.4 || ^7.2 || ^8.0"
             },
             "suggest": {
                 "doctrine/doctrine-bundle": "Add a DBAL mapping type",
@@ -3312,9 +3396,9 @@
             ],
             "support": {
                 "issues": "https://github.com/odolbeau/phone-number-bundle/issues",
-                "source": "https://github.com/odolbeau/phone-number-bundle/tree/v4.1.0"
+                "source": "https://github.com/odolbeau/phone-number-bundle/tree/v4.2.5"
             },
-            "time": "2025-01-09T10:56:51+00:00"
+            "time": "2025-10-14T19:52:30+00:00"
         },
         {
             "name": "oneup/flysystem-bundle",
@@ -4539,16 +4623,16 @@
         },
         {
             "name": "shlinkio/shlink-php-sdk",
-            "version": "v2.5.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shlinkio/shlink-php-sdk.git",
-                "reference": "6945613cce5609beb38b18640569e8c9e825723a"
+                "reference": "1180d8d5e3229a4016c61aca48e65e7602da577c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shlinkio/shlink-php-sdk/zipball/6945613cce5609beb38b18640569e8c9e825723a",
-                "reference": "6945613cce5609beb38b18640569e8c9e825723a",
+                "url": "https://api.github.com/repos/shlinkio/shlink-php-sdk/zipball/1180d8d5e3229a4016c61aca48e65e7602da577c",
+                "reference": "1180d8d5e3229a4016c61aca48e65e7602da577c",
                 "shasum": ""
             },
             "require": {
@@ -4558,13 +4642,13 @@
             },
             "require-dev": {
                 "devster/ubench": "^2.1",
-                "guzzlehttp/guzzle": "^7.9",
+                "guzzlehttp/guzzle": "^7.10",
                 "phpstan/phpstan": "^2.1",
                 "phpstan/phpstan-phpunit": "^2.0",
                 "phpunit/phpcov": "^11.0",
-                "phpunit/phpunit": "^12.2",
+                "phpunit/phpunit": "^12.4",
                 "roave/security-advisories": "dev-master",
-                "shlinkio/php-coding-standard": "~2.4.0",
+                "shlinkio/php-coding-standard": "~2.5.0",
                 "symfony/var-dumper": "^7.3"
             },
             "type": "library",
@@ -4587,9 +4671,9 @@
             "description": "A PHP SDK to consume Shlink's REST API",
             "support": {
                 "issues": "https://github.com/shlinkio/shlink-php-sdk/issues",
-                "source": "https://github.com/shlinkio/shlink-php-sdk/tree/v2.5.0"
+                "source": "https://github.com/shlinkio/shlink-php-sdk/tree/v3.0.1"
             },
-            "time": "2025-07-25T07:10:44+00:00"
+            "time": "2025-11-03T08:07:45+00:00"
         },
         {
             "name": "spiriitlabs/form-filter-bundle",
@@ -7044,33 +7128,32 @@
         },
         {
             "name": "symfony/monolog-bundle",
-            "version": "v3.11.1",
+            "version": "v4.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bundle.git",
-                "reference": "0e675a6e08f791ef960dc9c7e392787111a3f0c1"
+                "reference": "3b4ee2717ee56c5e1edb516140a175eb2a72bc66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/0e675a6e08f791ef960dc9c7e392787111a3f0c1",
-                "reference": "0e675a6e08f791ef960dc9c7e392787111a3f0c1",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/3b4ee2717ee56c5e1edb516140a175eb2a72bc66",
+                "reference": "3b4ee2717ee56c5e1edb516140a175eb2a72bc66",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.0",
-                "monolog/monolog": "^1.25.1 || ^2.0 || ^3.0",
-                "php": ">=8.1",
-                "symfony/config": "^6.4 || ^7.0",
-                "symfony/dependency-injection": "^6.4 || ^7.0",
-                "symfony/deprecation-contracts": "^2.5 || ^3.0",
-                "symfony/http-kernel": "^6.4 || ^7.0",
-                "symfony/monolog-bridge": "^6.4 || ^7.0",
+                "monolog/monolog": "^3.5",
+                "php": ">=8.2",
+                "symfony/config": "^7.3 || ^8.0",
+                "symfony/dependency-injection": "^7.3 || ^8.0",
+                "symfony/http-kernel": "^7.3 || ^8.0",
+                "symfony/monolog-bridge": "^7.3 || ^8.0",
                 "symfony/polyfill-php84": "^1.30"
             },
             "require-dev": {
-                "symfony/console": "^6.4 || ^7.0",
-                "symfony/phpunit-bridge": "^7.3.3",
-                "symfony/yaml": "^6.4 || ^7.0"
+                "phpunit/phpunit": "^11.5.41 || ^12.3",
+                "symfony/console": "^7.3 || ^8.0",
+                "symfony/yaml": "^7.3 || ^8.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -7100,7 +7183,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/monolog-bundle/issues",
-                "source": "https://github.com/symfony/monolog-bundle/tree/v3.11.1"
+                "source": "https://github.com/symfony/monolog-bundle/tree/v4.0.1"
             },
             "funding": [
                 {
@@ -7120,7 +7203,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-12-08T07:58:26+00:00"
+            "time": "2025-12-08T08:00:13+00:00"
         },
         {
             "name": "symfony/options-resolver",
