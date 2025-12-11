@@ -144,7 +144,10 @@ class ShortUrlController extends AbstractCrudController
     #[Override]
     protected function loadObject(Request $request): object
     {
-        $objectIdentifier = $request->get('object');
+        $objectIdentifier = $request->attributes->get('object')
+            ?? $request->query->get('object')
+            ?? $request->request->get('object');
+
         if ($objectIdentifier === null) {
             throw new RuntimeException('Object identifier is not set', 1715881423158);
         }

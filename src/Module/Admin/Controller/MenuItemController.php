@@ -49,7 +49,9 @@ final class MenuItemController extends AbstractCrudController
             };
         }
 
-        $type = $request->get('type');
+        $type = $request->attributes->get('type')
+            ?? $request->query->get('type')
+            ?? $request->request->get('type');
 
         return match ($type) {
             'page' => MenuItemPageType::class,
