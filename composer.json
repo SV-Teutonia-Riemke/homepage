@@ -6,7 +6,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": "^8.4",
+        "php": "^8.5",
         "ext-dom": "*",
         "antoligy/dom-string-iterators": "^1.0.1",
         "cweagans/composer-patches": "^2",

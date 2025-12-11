@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "28235b7cad04f36ecd9a0b7137359100",
+    "content-hash": "fe09388ab03b6281607752ef150a4ccc",
     "packages": [
         {
             "name": "antoligy/dom-string-iterators",
@@ -14625,7 +14625,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.4",
+        "php": "^8.5",
         "ext-dom": "*"
     },
     "platform-dev": {},
