@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Domain\EmbedArticle;
 use App\Domain\Role;
 use App\Storage\Entity\ExternalArticle;
@@ -82,7 +83,7 @@ final class ExternalArticleController extends AbstractController
         ]);
     }
 
-    private function saveUrl(string $url): Response
+    private function saveUrl(string $url): RedirectResponse
     {
         $article = new EmbedArticle($this->embed->get($url));
 
@@ -107,7 +108,7 @@ final class ExternalArticleController extends AbstractController
     public function changeEnabled(
         bool $enabled,
         ExternalArticle $object,
-    ): Response {
+    ): RedirectResponse {
         $object->setEnabled($enabled);
 
         $this->entityManager->flush();
@@ -118,7 +119,7 @@ final class ExternalArticleController extends AbstractController
     #[Route('/{object}/remove', name: 'remove')]
     public function remove(
         ExternalArticle $object,
-    ): Response {
+    ): RedirectResponse {
         $this->entityManager->remove($object);
         $this->entityManager->flush();
 

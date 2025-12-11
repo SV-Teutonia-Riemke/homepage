@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Module\Admin\Controller;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Domain\Role;
 use App\Module\Admin\Form\Type\Forms\DirectoryType;
 use App\Module\Admin\Form\Type\Forms\FileEditType;
@@ -122,7 +123,7 @@ final class FilesController extends AbstractController
     #[Route('/directory/{directory}/remove', name: 'directory_remove')]
     public function directoryRemove(
         Directory $directory,
-    ): Response {
+    ): RedirectResponse {
         $this->entityManager->remove($directory);
         $this->entityManager->flush();
 
@@ -226,7 +227,7 @@ final class FilesController extends AbstractController
     }
 
     #[Route('/file/{file}/remove', name: 'file_remove')]
-    public function fileRemove(File $file): Response
+    public function fileRemove(File $file): RedirectResponse
     {
         $this->defaultFilesystem->delete($file->getFilePath());
 
