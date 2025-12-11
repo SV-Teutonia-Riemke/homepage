@@ -19,6 +19,7 @@ parameters:
     tmpDir: ../../var/cache
 
     excludePaths:
+        - ../../config/packages/*
         - ../../src/Infrastructure/Migrations/*
         - ../../src/Infrastructure/PHPCodeSniffer/*
 
