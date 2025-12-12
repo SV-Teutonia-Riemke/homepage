@@ -39,7 +39,7 @@
                         <twig:bs:badge label="{{ tag }}" class="me-1"/>
                     {% endfor %}
                 </td>
-                <td>{{ object.visitsCount }}</td>
+                <td>{{ object.visitsSummary.nonBots }}</td>
                 <td>{{ object.dateCreated|format_datetime }}</td>
             </twig:crud:row>
         </twig:block>
