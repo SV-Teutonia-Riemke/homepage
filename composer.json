@@ -47,7 +47,7 @@
         "shapecode/twig-string-loader-bundle": "^3.0",
         "shlinkio/shlink-php-sdk": "^3.0.1",
         "spiriitlabs/form-filter-bundle": "^12.0.1",
-        "stof/doctrine-extensions-bundle": "^1.14",
+        "stof/doctrine-extensions-bundle": "^1.15",
         "symfony/apache-pack": "^1.0.1",
         "symfony/asset": "^7.4|^8.0",
         "symfony/cache-contracts": "^3.6",
@@ -123,6 +123,8 @@
             "symfony/flex": true,
             "symfony/runtime": true
         },
+        "update-with-minimal-changes": false,
+        "bump-after-update": true,
         "optimize-autoloader": true,
         "preferred-install": {
             "*": "dist"

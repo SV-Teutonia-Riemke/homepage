@@ -1,11 +1,3 @@
-#!/usr/bin/env zsh
-
-# Easier navigation: .., ..., ...., ....., ~ and -
-alias cd="z"
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
