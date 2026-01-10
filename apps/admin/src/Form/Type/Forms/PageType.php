@@ -1,0 +1,70 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Admin\Form\Type\Forms;
+
+use App\Storage\Entity\Page;
+use Override;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+
+/** @extends AbstractType<Page> */
+final class PageType extends AbstractType
+{
+    /** @inheritDoc */
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options,
+    ): void {
+        $builder
+            ->add('title', TextType::class, [
+                'label' => 'Titel',
+                'constraints' => [
+                    new NotBlank(),
+                ],
+            ])
+            ->add('subTitle', TextType::class, [
+                'label' => 'Untertitel',
+                'required' => false,
+            ])
+            ->add('enabled', CheckboxType::class, [
+                'label' => 'Aktiviert',
+                'required' => false,
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Inhalt',
+                'attr' => [
+                    'class' => 'monaco-editor',
+                    'data-language' => 'twig',
+                ],
+                'constraints' => [
+                    new NotBlank(),
+                ],
+            ]);
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class'  => Page::class,
+            'empty_data' => static fn (FormInterface $form): Page => new Page(
+                $form->get('title')->getData() ?? '',
+                $form->get('subTitle')->getData(),
+                $form->get('content')->getData() ?? '',
+            ),
+        ]);
+    }
+
+    #[Override]
+    public function getParent(): string
+    {
+        return AbstractForm::class;
+    }
+}

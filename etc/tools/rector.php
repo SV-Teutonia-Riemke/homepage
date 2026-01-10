@@ -12,6 +12,7 @@ return RectorConfig::configure()
         $projectDir . '/config',
         $projectDir . '/public',
         $projectDir . '/src',
+        $projectDir . '/apps',
         $projectDir . '/tests',
     ])
     ->withPHPStanConfigs([

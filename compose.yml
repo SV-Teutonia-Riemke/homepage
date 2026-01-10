@@ -7,6 +7,9 @@ services:
       - .:/app
       - ./etc/frankenphp:/etc/caddy
       - ./etc/docker/hooks/bootstrap/40-fix-home:/etc/hooks/bootstrap/40-fix-home
+    environment:
+      DEBUG: 1
+      PHP_MEMORY_LIMIT: 512M
     depends_on:
       - database
     networks:

@@ -2,6 +2,18 @@
 
 $ignoreErrors = [];
 $ignoreErrors[] = [
+	'message' => '#^PHPDoc tag @return contains unresolvable type\\.$#',
+	'identifier' => 'return.unresolvableType',
+	'count' => 1,
+	'path' => __DIR__ . '/../../apps/admin/src/Controller/AbstractCrudController.php',
+];
+$ignoreErrors[] = [
+	'message' => '#^Method App\\\\Admin\\\\Controller\\\\MenuItemController\\:\\:getFormType\\(\\) should return class\\-string\\<App\\\\Admin\\\\Form\\\\Type\\\\Forms\\\\MenuItemType\\> but returns string\\.$#',
+	'identifier' => 'return.type',
+	'count' => 2,
+	'path' => __DIR__ . '/../../apps/admin/src/Controller/MenuItemController.php',
+];
+$ignoreErrors[] = [
 	'message' => '#^Parameter \\#1 \\$start of static method App\\\\Domain\\\\YearGroup\\:\\:fromYears\\(\\) expects int, int\\|null given\\.$#',
 	'identifier' => 'argument.type',
 	'count' => 1,
@@ -12,18 +24,6 @@ $ignoreErrors[] = [
 	'identifier' => 'argument.type',
 	'count' => 1,
 	'path' => __DIR__ . '/../../src/Domain/YearGroup.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^PHPDoc tag @return contains unresolvable type\\.$#',
-	'identifier' => 'return.unresolvableType',
-	'count' => 1,
-	'path' => __DIR__ . '/../../src/Module/Admin/Controller/AbstractCrudController.php',
-];
-$ignoreErrors[] = [
-	'message' => '#^Method App\\\\Module\\\\Admin\\\\Controller\\\\MenuItemController\\:\\:getFormType\\(\\) should return class\\-string\\<App\\\\Module\\\\Admin\\\\Form\\\\Type\\\\Forms\\\\MenuItemType\\> but returns string\\.$#',
-	'identifier' => 'return.type',
-	'count' => 2,
-	'path' => __DIR__ . '/../../src/Module/Admin/Controller/MenuItemController.php',
 ];
 $ignoreErrors[] = [
 	'message' => '#^Method App\\\\Storage\\\\Entity\\\\Person\\:\\:getAnonymizedName\\(\\) should return string but returns string\\|null\\.$#',

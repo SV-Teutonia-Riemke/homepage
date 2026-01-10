@@ -1,0 +1,61 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Admin\Controller;
+
+use App\Admin\Crud\CrudConfigBuilder;
+use App\Admin\Crud\Handler\CRUDHandler;
+use App\Admin\Form\Type\Forms\UserType;
+use App\Domain\Role;
+use App\Storage\Entity\User;
+use Override;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+/** @template-extends AbstractCrudController<User, UserType, null> */
+#[IsGranted(Role::MANAGE_USERS->value)]
+#[Route('/user', name: 'user_')]
+final class UserController extends AbstractCrudController
+{
+    use CRUDHandler;
+
+    public function __construct(
+        private readonly UserPasswordHasherInterface $userPasswordHasher,
+    ) {
+    }
+
+    protected function configureCrudConfig(
+        CrudConfigBuilder $builder,
+        Request $request,
+    ): void {
+        $builder->setMandatory(
+            User::class,
+            'user',
+        );
+    }
+
+    protected function getFormType(
+        Request $request,
+        object|null $object = null,
+    ): string {
+        return UserType::class;
+    }
+
+    #[Override]
+    protected function doHandleValidForm(
+        Request $request,
+        FormInterface $form,
+        mixed $data,
+    ): void {
+        $password = $form->get(UserType::FIELD_PASSWORD)->getData();
+        if ($password !== null) {
+            $data->setPassword($this->userPasswordHasher->hashPassword($data, $password));
+        }
+
+        parent::doHandleValidForm($request, $form, $data);
+    }
+}

@@ -10,9 +10,5 @@ return App::config([
         'form_themes' => [
             'bootstrap_5_layout.html.twig',
         ],
-        'paths' => [
-            '%kernel.project_dir%/src/Module/Admin/Templates' => 'admin',
-            '%kernel.project_dir%/src/Module/Page/Templates' => 'page',
-        ],
     ],
 ]);

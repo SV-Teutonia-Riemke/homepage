@@ -1,8 +1,35 @@
 :80 {
     root * /app/public/
-	encode zstd br gzip
+    encode zstd br gzip
 
-	# Mailpit Web-UI Reverse Proxy
-	import mailpit_handler
-	import php_server
+    # Mailpit Web-UI Reverse Proxy
+    import mailpit_handler
+
+    @admin host admin.*.*
+
+    handle @admin {
+        php_server {
+            root /app/public/
+            worker {
+                file index.php
+                num 2
+                watch
+                env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+                env APP_ID admin
+            }
+        }
+    }
+
+    handle  {
+        php_server {
+            root /app/public/
+            worker {
+                file index.php
+                num 2
+                watch
+                env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+                env APP_ID website
+            }
+        }
+    }
 }

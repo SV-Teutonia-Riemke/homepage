@@ -6,7 +6,6 @@ use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle;
 use Eckinox\TinymceBundle\TinymceBundle;
 use EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle;
-use HWI\Bundle\OAuthBundle\HWIOAuthBundle;
 use Knp\Bundle\MenuBundle\KnpMenuBundle;
 use Knp\Bundle\PaginatorBundle\KnpPaginatorBundle;
 use Misd\PhoneNumberBundle\MisdPhoneNumberBundle;
@@ -19,7 +18,6 @@ use Spiriit\Bundle\FormFilterBundle\SpiriitFormFilterBundle;
 use Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\MonologBundle\MonologBundle;
-use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Bundle\WebProfilerBundle\WebProfilerBundle;
 use Symfony\UX\Autocomplete\AutocompleteBundle;
@@ -38,7 +36,6 @@ return [
     DoctrineMigrationsBundle::class => ['all' => true],
     TwigBundle::class => ['all' => true],
     TwigExtraBundle::class => ['all' => true],
-    SecurityBundle::class => ['all' => true],
     WebProfilerBundle::class => ['dev' => true, 'test' => true],
     OneupFlysystemBundle::class => ['all' => true],
     KnpPaginatorBundle::class => ['all' => true],
@@ -57,7 +54,6 @@ return [
     ShapecodeTwigStringLoaderBundle::class => ['all' => true],
     UXIconsBundle::class => ['all' => true],
     TinymceBundle::class => ['all' => true],
-    HWIOAuthBundle::class => ['all' => true],
     PentatrionViteBundle::class => ['all' => true],
     EWZRecaptchaBundle::class => ['all' => true],
 ];

@@ -41,10 +41,10 @@
         "psr/http-client": "^1.0.3",
         "psr/http-factory": "^1.1",
         "psr/http-message": "^2.0",
-        "runtime/frankenphp-symfony": "^0.2.0",
+        "runtime/frankenphp-symfony": "^1.0",
         "sentry/sentry-symfony": "^5.8.2",
         "shapecode/doctrine-dbal-datetimeutc": "^5.0",
-        "shapecode/twig-string-loader-bundle": "^3.0",
+        "shapecode/twig-string-loader-bundle": "^4.0",
         "shlinkio/shlink-php-sdk": "^3.0.1",
         "spiriitlabs/form-filter-bundle": "^12.0.1",
         "stof/doctrine-extensions-bundle": "^1.15",
@@ -94,7 +94,8 @@
         "twig/extra-bundle": "^3.22.1",
         "twig/intl-extra": "^3.22.1",
         "twig/string-extra": "^3.22.1",
-        "twig/twig": "^3.22.1"
+        "twig/twig": "^3.22.1",
+        "webmozart/assert": "^2.1"
     },
     "require-dev": {
         "doctrine/coding-standard": "^14.0",
@@ -134,6 +135,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/",
+            "App\\Admin\\": "apps/admin/src/",
+            "App\\Website\\": "apps/website/src/",
             "DoctrineMigrations\\": "migrations/"
         },
         "files": [
@@ -158,12 +161,14 @@
     },
     "scripts": {
         "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+            "cache:clear --id=website": "symfony-cmd",
+            "cache:clear --id=admin": "symfony-cmd",
+            "assets:install --id=website %PUBLIC_DIR%": "symfony-cmd",
+            "assets:install --id=admin %PUBLIC_DIR% --no-cleanup": "symfony-cmd"
         },
         "prepare-test": [
-            "php bin/console cache:clear --env=test --no-warmup --ansi",
-            "php bin/console cache:warmup --env=test --ansi --no-optional-warmers"
+            "php bin/console cache:clear --id=website --env=test --no-warmup --ansi",
+            "php bin/console cache:warmup --id=website --env=test --ansi --no-optional-warmers"
         ],
         "check": [
             "composer check-platform-reqs -n --ansi",
