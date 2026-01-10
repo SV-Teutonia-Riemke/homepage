@@ -27,6 +27,7 @@ return $config
         'symfony/http-client',
         'symfony/psr-http-message-bridge',
         'symfony/runtime',
+        'symfony/security-bundle',
         'symfony/security-csrf',
         'symfony/yaml',
         'twig/intl-extra',

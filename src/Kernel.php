@@ -63,6 +63,7 @@ class Kernel extends BaseKernel
         return $this->getProjectDir() . '/apps/' . $this->id . '/config';
     }
 
+    /** @inheritDoc */
     public function registerBundles(): iterable
     {
         $bundlesPath = [
@@ -174,7 +175,8 @@ class Kernel extends BaseKernel
             $routes->import($configDir . '/{routes}.php');
         }
 
-        if (($fileName = new ReflectionObject($this)->getFileName()) === false) {
+        $fileName = new ReflectionObject($this)->getFileName();
+        if ($fileName === false) {
             return;
         }
 
