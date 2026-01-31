@@ -3,8 +3,7 @@
 declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\App;
-
-use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
+use Symfony\Component\DependencyInjection\Loader\Configurator\EnvConfigurator;
 
 return App::config([
     'doctrine' => [
@@ -14,7 +13,7 @@ return App::config([
                 'default' => [
                     'dbname_suffix' => sprintf(
                         '_test%s',
-                        env('TEST_TOKEN')->default(''),
+                        new EnvConfigurator('TEST_TOKEN')->default(''),
                     ),
                 ],
             ],

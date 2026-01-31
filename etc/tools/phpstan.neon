@@ -21,6 +21,7 @@ parameters:
 
     excludePaths:
         - ../../config/packages/*
+        - ../../config/reference.php
         - ../../src/Infrastructure/Migrations/*
         - ../../src/Infrastructure/PHPCodeSniffer/*
 

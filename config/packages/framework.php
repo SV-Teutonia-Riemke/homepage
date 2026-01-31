@@ -3,9 +3,8 @@
 declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\App;
+use Symfony\Component\DependencyInjection\Loader\Configurator\EnvConfigurator;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler;
-
-use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
 return App::config([
     'framework' => [
@@ -17,7 +16,7 @@ return App::config([
             'x-forwarded-port',
             'x-forwarded-prefix',
         ],
-        'secret' => env('APP_SECRET')->string(),
+        'secret' => new EnvConfigurator('APP_SECRET')->string(),
         'csrf_protection' => true,
         'http_method_override' => false,
         'session' => [
@@ -32,7 +31,7 @@ return App::config([
     'services' => [
         PdoSessionHandler::class => [
             'arguments' => [
-                env('DATABASE_URL')->string(),
+                new EnvConfigurator('DATABASE_URL')->string(),
             ],
         ],
     ],

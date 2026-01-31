@@ -3,14 +3,13 @@
 declare(strict_types=1);
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\App;
-
-use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
+use Symfony\Component\DependencyInjection\Loader\Configurator\EnvConfigurator;
 
 return App::config([
     'framework' => [
         'cache' => [
             'app' => 'cache.adapter.redis',
-            'default_redis_provider' => env('REDIS_DSN')->string(),
+            'default_redis_provider' => new EnvConfigurator('REDIS_DSN')->string(),
         ],
     ],
 ]);

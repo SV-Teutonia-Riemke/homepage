@@ -6,8 +6,7 @@ use App\Infrastructure\Doctrine\DBAL\Types\Type\DateType;
 use App\Infrastructure\Doctrine\DBAL\Types\Type\YearGroupType;
 use Shapecode\Doctrine\DBAL\Types\DateTimeUTCType;
 use Symfony\Component\DependencyInjection\Loader\Configurator\App;
-
-use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
+use Symfony\Component\DependencyInjection\Loader\Configurator\EnvConfigurator;
 
 return App::config([
     'doctrine' => [
@@ -21,7 +20,7 @@ return App::config([
             ],
             'connections' => [
                 'default' => [
-                    'url' => env('DATABASE_URL')->resolve(),
+                    'url' => new EnvConfigurator('DATABASE_URL')->resolve(),
                     'charset' => 'utf8mb4',
                     'logging' => false,
                     'default_table_options' => [
