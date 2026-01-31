@@ -57,12 +57,12 @@ return App::config([
                 'roles' => 'PUBLIC_ACCESS',
             ],
             [
-                'path' => '^/',
-                'roles' => 'ROLE_USER',
+                'path' => '^/connect',
+                'roles' => 'PUBLIC_ACCESS',
             ],
             [
-                'path' => '^/oauth',
-                'roles' => 'PUBLIC_ACCESS',
+                'path' => '^/',
+                'roles' => 'ROLE_USER',
             ],
         ],
     ],
