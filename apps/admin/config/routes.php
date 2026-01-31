@@ -10,11 +10,11 @@ return static function (RoutingConfigurator $routingConfigurator): void {
             __DIR__ . '/../src/Controller/',
             'attribute',
         )
-        ->namePrefix('app_admin_');
+        ->namePrefix('admin_');
 
     $routingConfigurator
         ->add(
-            'app_admin_logout',
+            'admin_logout',
             '/logout',
         )
         ->methods([

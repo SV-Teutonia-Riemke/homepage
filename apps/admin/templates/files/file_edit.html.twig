@@ -2,7 +2,7 @@
 
 {% set pagePreTitle = 'Bearbeiten' %}
 {% set pageTitle = 'Files' %}
-{% set formCancelLink = file.directory is null ? path('app_admin_files_index') : path('app_admin_files_directory', { directory: file.directory.id }) %}
+{% set formCancelLink = file.directory is null ? path('admin_files_index') : path('admin_files_directory', { directory: file.directory.id }) %}
 
 {% block pageBody %}
     <div class="card">

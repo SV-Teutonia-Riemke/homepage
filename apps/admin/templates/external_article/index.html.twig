@@ -58,9 +58,9 @@
         <twig:block name="tableRow">
             <twig:pagination:row
                 enabled="{{ object.enabled }}"
-                enable="{{ path('app_admin_external_articles_enable', { object: object.id }) }}"
-                disable="{{ path('app_admin_external_articles_disable', { object: object.id }) }}"
-                remove="{{ path('app_admin_external_articles_remove', { object: object.id }) }}"
+                enable="{{ path('admin_external_articles_enable', { object: object.id }) }}"
+                disable="{{ path('admin_external_articles_disable', { object: object.id }) }}"
+                remove="{{ path('admin_external_articles_remove', { object: object.id }) }}"
             >
                 <td>{{ object.id }}</td>
                 <td>

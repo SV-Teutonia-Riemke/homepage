@@ -5,9 +5,9 @@
 
 {% block pageTitleActionsButtons %}
     <twig:bs:button:dropdown type="primary" title="Erstellen">
-        <twig:bs:button:dropdown:item href="{{ path('app_admin_menu_item_create', { type: 'main' }) }}" title="Funktion"/>
-        <twig:bs:button:dropdown:item href="{{ path('app_admin_menu_item_create', { type: 'url' }) }}" title="Url"/>
-        <twig:bs:button:dropdown:item href="{{ path('app_admin_menu_item_create', { type: 'page' }) }}" title="Seite"/>
+        <twig:bs:button:dropdown:item href="{{ path('admin_menu_item_create', { type: 'main' }) }}" title="Funktion"/>
+        <twig:bs:button:dropdown:item href="{{ path('admin_menu_item_create', { type: 'url' }) }}" title="Url"/>
+        <twig:bs:button:dropdown:item href="{{ path('admin_menu_item_create', { type: 'page' }) }}" title="Seite"/>
     </twig:bs:button:dropdown>
 {% endblock %}
 

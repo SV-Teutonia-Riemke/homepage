@@ -100,7 +100,7 @@ final class ExternalArticleController extends AbstractController
         $this->entityManager->persist($externalArticle);
         $this->entityManager->flush();
 
-        return $this->redirectToRoute('app_admin_external_articles_index');
+        return $this->redirectToRoute('admin_external_articles_index');
     }
 
     #[Route('/{object}/enable', name: 'enable', defaults: ['enabled' => true])]
@@ -113,7 +113,7 @@ final class ExternalArticleController extends AbstractController
 
         $this->entityManager->flush();
 
-        return $this->redirectToRoute('app_admin_external_articles_index');
+        return $this->redirectToRoute('admin_external_articles_index');
     }
 
     #[Route('/{object}/remove', name: 'remove')]
@@ -123,6 +123,6 @@ final class ExternalArticleController extends AbstractController
         $this->entityManager->remove($object);
         $this->entityManager->flush();
 
-        return $this->redirectToRoute('app_admin_external_articles_index');
+        return $this->redirectToRoute('admin_external_articles_index');
     }
 }

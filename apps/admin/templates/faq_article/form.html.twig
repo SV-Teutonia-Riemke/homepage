@@ -1,7 +1,7 @@
 {% extends '@admin/_layout/simple_form.html.twig' %}
 
 {% set pageTitle = 'FAQ Artikel' %}
-{% set formCancelLink = path('app_admin_faq_article_index', { category: app.request.attributes.get('category') }) %}
+{% set formCancelLink = path('admin_faq_article_index', { category: app.request.attributes.get('category') }) %}
 
 {% block pageBody %}
     <twig:bs:row cards>

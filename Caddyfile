@@ -10,14 +10,29 @@
 	root * /app/public/
 	encode zstd br gzip
 
-	php_server {
-	    root /app/public/
-        env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
-	    worker {
-	       file index.php
-           env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
-	    }
-	}
+    @admin host admin.*.*
+
+    handle @admin {
+        php_server {
+            root /app/public/
+            worker {
+                file index.php
+                env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+                env APP_ID admin
+            }
+        }
+    }
+
+    handle  {
+        php_server {
+            root /app/public/
+            worker {
+                file index.php
+                env APP_RUNTIME Runtime\FrankenPhpSymfony\Runtime
+                env APP_ID website
+            }
+        }
+    }
 }
 
 # import Caddyfile.d/*.caddyfile

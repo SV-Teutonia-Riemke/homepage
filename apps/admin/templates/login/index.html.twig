@@ -19,7 +19,7 @@
                         <twig:bs:button href="{{ path('hwi_oauth_service_redirect', {'service': 'azure' }) }}" variant="azure" class="w-100" icon="skill-icons:azure-light" title="Mit Microsoft anmelden"/>
                     </div>
                     <div class="hr-text">oder</div>
-                    <form class="card-body" action="{{ path('app_admin_login') }}" method="post" autocomplete="off">
+                    <form class="card-body" action="{{ path('admin_login') }}" method="post" autocomplete="off">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                         {% if error %}
                             <div class="alert alert-important alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>

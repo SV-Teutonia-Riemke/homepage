@@ -41,7 +41,7 @@ final class PasswordChangeController extends AbstractController
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_change_password');
+            return $this->redirectToRoute('admin_change_password');
         }
 
         return $this->render('@admin/password_change/index.html.twig', [

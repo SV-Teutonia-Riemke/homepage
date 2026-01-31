@@ -27,27 +27,27 @@ return App::config([
             ],
             'main' => [
                 'form_login' => [
-                    'login_path' => 'app_admin_login',
-                    'check_path' => 'app_admin_login',
+                    'login_path' => 'admin_login',
+                    'check_path' => 'admin_login',
                     'enable_csrf' => true,
-                    'default_target_path' => 'app_admin_index',
+                    'default_target_path' => 'admin_index',
                 ],
                 'oauth' => [
                     'resource_owners' => [
                         'azure' => 'azure_login',
                     ],
-                    'login_path' => 'app_admin_login',
+                    'login_path' => 'admin_login',
                     'use_forward' => false,
-                    'failure_path' => 'app_admin_login',
-                    'default_target_path' => 'app_admin_index',
+                    'failure_path' => 'admin_login',
+                    'default_target_path' => 'admin_index',
                     'oauth_user_provider' => [
                         'service' => UserProvider::class,
                     ],
                 ],
                 'entry_point' => 'form_login',
                 'logout' => [
-                    'path' => 'app_admin_logout',
-                    'target' => 'app_admin_login',
+                    'path' => 'admin_logout',
+                    'target' => 'admin_login',
                 ],
             ],
         ],

@@ -19,7 +19,7 @@ final readonly class AssetUrlGenerator
         bool $download = false,
     ): string {
         return $this->urlGenerator->generate(
-            'app_file',
+            'file',
             [
                 'uuid'      => $file->getUuid()->toRfc4122(),
                 'name'      => $file->getSafeName(),

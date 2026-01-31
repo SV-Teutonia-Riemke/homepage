@@ -85,8 +85,8 @@ final class FilesController extends AbstractController
             $this->entityManager->flush();
 
             return $directory === null
-                ? $this->redirectToRoute('app_admin_files_index')
-                : $this->redirectToRoute('app_admin_files_directory', [
+                ? $this->redirectToRoute('admin_files_index')
+                : $this->redirectToRoute('admin_files_directory', [
                     'directory' => $directory->getId(),
                 ]);
         }
@@ -109,8 +109,8 @@ final class FilesController extends AbstractController
             $this->entityManager->flush();
 
             return $directory->getParent() === null
-                ? $this->redirectToRoute('app_admin_files_index')
-                : $this->redirectToRoute('app_admin_files_directory', [
+                ? $this->redirectToRoute('admin_files_index')
+                : $this->redirectToRoute('admin_files_directory', [
                     'directory' => $directory->getParent()->getId(),
                 ]);
         }
@@ -128,12 +128,12 @@ final class FilesController extends AbstractController
         $this->entityManager->flush();
 
         if ($directory->getParent() !== null) {
-            return $this->redirectToRoute('app_admin_files_directory', [
+            return $this->redirectToRoute('admin_files_directory', [
                 'directory' => $directory->getParent()->getId(),
             ]);
         }
 
-        return $this->redirectToRoute('app_admin_files_index');
+        return $this->redirectToRoute('admin_files_index');
     }
 
     #[Route('/upload', name: 'upload')]
@@ -188,8 +188,8 @@ final class FilesController extends AbstractController
             $this->entityManager->flush();
 
             return $directory === null
-                ? $this->redirectToRoute('app_admin_files_index')
-                : $this->redirectToRoute('app_admin_files_directory', [
+                ? $this->redirectToRoute('admin_files_index')
+                : $this->redirectToRoute('admin_files_directory', [
                     'directory' => $directory->getId(),
                 ]);
         }
@@ -214,8 +214,8 @@ final class FilesController extends AbstractController
             $this->entityManager->flush();
 
             return $file->getDirectory() === null
-                ? $this->redirectToRoute('app_admin_files_index')
-                : $this->redirectToRoute('app_admin_files_directory', [
+                ? $this->redirectToRoute('admin_files_index')
+                : $this->redirectToRoute('admin_files_directory', [
                     'directory' => $file->getDirectory()->getId(),
                 ]);
         }
@@ -235,11 +235,11 @@ final class FilesController extends AbstractController
         $this->entityManager->flush();
 
         if ($file->getDirectory() !== null) {
-            return $this->redirectToRoute('app_admin_files_directory', [
+            return $this->redirectToRoute('admin_files_directory', [
                 'directory' => $file->getDirectory()->getId(),
             ]);
         }
 
-        return $this->redirectToRoute('app_admin_files_index');
+        return $this->redirectToRoute('admin_files_index');
     }
 }

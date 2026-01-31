@@ -5,22 +5,22 @@
 
 {% block pageTitleActionsButtons %}
     {% if directory is null %}
-        {% set createDirectoryPath = path('app_admin_files_directory_create') %}
-        {% set uploadFilePath = path('app_admin_files_upload') %}
+        {% set createDirectoryPath = path('admin_files_directory_create') %}
+        {% set uploadFilePath = path('admin_files_upload') %}
     {% else %}
-        {% set createDirectoryPath = path('app_admin_files_directory_create_parent', { directory: directory.id }) %}
-        {% set uploadFilePath = path('app_admin_files_upload_directory', { directory: directory.id }) %}
+        {% set createDirectoryPath = path('admin_files_directory_create_parent', { directory: directory.id }) %}
+        {% set uploadFilePath = path('admin_files_upload_directory', { directory: directory.id }) %}
     {% endif %}
     <a class="btn btn-primary" href="{{ createDirectoryPath }}">Ordner erstellen</a>
     <a class="btn btn-primary" href="{{ uploadFilePath }}">Datei hochladen</a>
 {% endblock %}
 
 {% block breadcrumbInner %}
-    <li class="breadcrumb-item"><a href="{{ path('app_admin_files_index') }}">Dateien</a></li>
+    <li class="breadcrumb-item"><a href="{{ path('admin_files_index') }}">Dateien</a></li>
     {% if directory is not null %}
         {% for parent in directory.parents|reverse %}
             <li class="breadcrumb-item{% if loop.last %} active{% endif %}"{% if loop.last %} aria-current="page"{% endif %}>
-                <a href="{{ path('app_admin_files_directory', { directory: parent.id }) }}">
+                <a href="{{ path('admin_files_directory', { directory: parent.id }) }}">
                     {{ parent.name }}
                 </a>
             </li>
@@ -58,9 +58,9 @@
                         <td colspan="3">
                             <a
                                     {% if directory.parent is not null %}
-                                        href="{{ path('app_admin_files_directory', { directory: directory.parent.id }) }}"
+                                        href="{{ path('admin_files_directory', { directory: directory.parent.id }) }}"
                                     {% else %}
-                                        href="{{ path('app_admin_files_index') }}"
+                                        href="{{ path('admin_files_index') }}"
                                     {% endif %}
                             >
                                 ..
@@ -76,16 +76,16 @@
                             <twig:ux:icon name="vscode-icons:default-folder" height="2em" width="2em"/>
                         </td>
                         <td colspan="3">
-                            <a href="{{ path('app_admin_files_directory', { directory: directory.id }) }}">
+                            <a href="{{ path('admin_files_directory', { directory: directory.id }) }}">
                                 {{ directory.name }}
                             </a>
                         </td>
                         <td class="text-end">
                             <div class="btn-group btn-group-sm">
-                                <a class="btn btn-outline-primary" href="{{ path('app_admin_files_directory_edit', { directory: directory.id }) }}">
+                                <a class="btn btn-outline-primary" href="{{ path('admin_files_directory_edit', { directory: directory.id }) }}">
                                     <twig:ux:icon name="fa6-solid:pencil"/>
                                 </a>
-                                <a class="btn btn-outline-danger" href="{{ path('app_admin_files_directory_remove', { directory: directory.id }) }}">
+                                <a class="btn btn-outline-danger" href="{{ path('admin_files_directory_remove', { directory: directory.id }) }}">
                                     <twig:ux:icon name="fa6-solid:trash"/>
                                 </a>
                             </div>
@@ -132,10 +132,10 @@
                                 <a class="btn btn-outline-primary" href="{{ file_url(file) }}" target="_blank">
                                     <twig:ux:icon name="fa6-solid:arrow-up-right-from-square"/>
                                 </a>
-                                <a class="btn btn-outline-primary" href="{{ path('app_admin_files_file_edit', { file: file.id }) }}">
+                                <a class="btn btn-outline-primary" href="{{ path('admin_files_file_edit', { file: file.id }) }}">
                                     <twig:ux:icon name="fa6-solid:pencil"/>
                                 </a>
-                                <a class="btn btn-outline-danger" href="{{ path('app_admin_files_file_remove', { file: file.id }) }}">
+                                <a class="btn btn-outline-danger" href="{{ path('admin_files_file_remove', { file: file.id }) }}">
                                     <twig:ux:icon name="fa6-solid:trash"/>
                                 </a>
                             </div>

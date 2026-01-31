@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Website\Controller;
+namespace App\Controller;
 
 use App\Infrastructure\Asset\AssetUrlGenerator;
 use App\Storage\Entity\File;

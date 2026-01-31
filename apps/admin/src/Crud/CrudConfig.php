@@ -105,7 +105,7 @@ final readonly class CrudConfig
 
     private function buildRouteName(string $suffix): string
     {
-        return sprintf('app_admin_%s_%s', $this->baseRouteName, $suffix);
+        return sprintf('admin_%s_%s', $this->baseRouteName, $suffix);
     }
 
     private function buildTemplateName(string $suffix): string

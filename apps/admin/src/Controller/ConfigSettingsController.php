@@ -42,7 +42,7 @@ class ConfigSettingsController extends AbstractController
 
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_admin_config_settings');
+            return $this->redirectToRoute('admin_config_settings');
         }
 
         return $this->render('@admin/config/settings.html.twig', [
