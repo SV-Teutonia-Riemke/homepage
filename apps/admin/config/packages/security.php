@@ -61,7 +61,7 @@ return App::config([
                 'roles' => 'ROLE_USER',
             ],
             [
-                'path' => '^/oauth/connect',
+                'path' => '^/oauth',
                 'roles' => 'PUBLIC_ACCESS',
             ],
         ],
